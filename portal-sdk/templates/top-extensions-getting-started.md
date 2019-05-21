@@ -28,19 +28,6 @@ The Azure Portal SDK includes everything you need to build extensions for the po
     a. `git checkout 5.0.302.19601` **Note** replace with version of SDK you which to checkout
 
 1. copy the content of `/src` to your own repo.
-1. [Optional] If you're development environment does not have a NuGet package source to msazure Official registry add the following.
-   a. add file `/src/NuGet.config` with the following content
-      ```xml
-        <?xml version="1.0" encoding="utf-8"?>
-	<configuration>
-	  <config>
-	    <add key="repositoryPath" value="./packages" />
-	  </config>
-	  <packageSources>
-	      <add key="internal official feed" value="https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json" />
-	  </packageSources>
-	</configuration>
-      ```
 1. Open `/src/Default.sln` in Visual Studio
 1. Use the `Ctl + F5 key to compile and run the new project extension in **IIS Express**.
 
