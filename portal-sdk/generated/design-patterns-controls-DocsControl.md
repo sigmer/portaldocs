@@ -23,7 +23,8 @@ Use the DocsControl to display your docs directly in the portal
 <a name="best-practices-do"></a>
 #### Do
 
-<!-- TODO need Do's -->
+* Do use a link to docs.microsoft.com site for content of docs control
+* Do use the context_chromeless to get just the content into the docs control
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
@@ -35,6 +36,8 @@ Use the DocsControl to display your docs directly in the portal
  
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
+
+* Links to the docs.microsoft.com site will not work when running your extension locally
 
 
 
