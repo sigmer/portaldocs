@@ -1,4 +1,4 @@
-# Breaking Changes since 1/21/2019 
+# Breaking Changes since 1/22/2019 
 * Additional Q&A about breaking changes can be found [here](./breaking-changes.md) 
 * To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  
 
@@ -14,6 +14,9 @@
 
 ## 5.0.302.15301
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3800421'>3800421</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3800421'>Fix errors in video control due to multiple instances</a><p></p><div style="margin:0px 0in;font-family:&quot;Segoe UI&quot;;">'canAutoplay' property is not available on the 'Options' interface of the Video control anymore.&nbsp;<span style="">This property had no affect on the widget and the extension simply needed to set/unset the 'autoplay' property. The 'canAutoPlay' property is still available on the 'Contract' interface of the Video control to track whether the current instance of the control supports autoplay or not based on the video URL that is provided.</span></div><p style="margin:0in;font-family:&quot;Segoe UI&quot;;"></p></td></tr><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3657227'>3657227</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3657227'>Fix ComponentGovernance warnings for msportalfx-ut update all deps incl gulp/karma.</a><p></p></td></tr></table>
+
+## 5.0.302.14701
+<table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3781217'>3781217</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3781217'>Deprecate embedded content support in SDK</a><p>No description available for this breaking change.</p></td></tr></table>
 
 ## 5.0.302.14601
 <table><tr><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3800421'>3800421</a></td><td><a href='https://msazure.visualstudio.com/DefaultCollection/One/_queries?id=3800421'>Fix errors in video control due to multiple instances</a><p></p><div style="margin:0px 0in;font-family:&quot;Segoe UI&quot;;">'canAutoplay' property is not available on the 'Options' interface of the Video control anymore.&nbsp;<span style="">This property had no affect on the widget and the extension simply needed to set/unset the 'autoplay' property. The 'canAutoPlay' property is still available on the 'Contract' interface of the Video control to track whether the current instance of the control supports autoplay or not based on the video URL that is provided.</span></div><p style="margin:0in;font-family:&quot;Segoe UI&quot;;"></p></td></tr></table>
