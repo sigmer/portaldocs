@@ -48,6 +48,14 @@ Use the NumericTextBox when the field represents a number
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
 
+* To display HTML in the infoBalloonContent use this code
+
+infoBalloonContent: {
+    htmlTemplate:"<b>Sample label</b><br>infoBalloonContent should explain concepts and <br>can include a link to learn more.<a>Learn 
+    more about infoBalloon</a>",
+    viewModel: {},
+}
+
 
 
 <a name="developer-tips-and-tricks-interactive-control-and-sample-source-code"></a>

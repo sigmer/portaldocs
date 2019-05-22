@@ -23,7 +23,7 @@ The ListView displays a simple list of items
 #### Do
 
 * Choose the appropriate ListView option - Simple, Template, Custom
-* Use the Template ListView galleryview option to show a card layout - aka card control
+* Use the Template ListView galleryview options (autofit, wrap) to show a card layout - aka card control
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
