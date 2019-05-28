@@ -3,7 +3,7 @@
  
 <a name="basics"></a>
 ### Basics
-The PricingControl enbles a 
+The PricingControl enables a 
 
 
 <!-- TODO get an IMAGE to embed here -->
