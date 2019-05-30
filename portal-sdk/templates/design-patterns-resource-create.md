@@ -109,7 +109,7 @@ Use the tabs & sections to organize content. The **Basics** tab should be the st
 ### Tabs
 Use the tabs & sections to organize content. The Basics tab should be the starting point for all creates and contain essential configuration info. The design should allow for quick resource creation at any time with unrestricted navigation between tabs. Enabling users to freely navigate the tabs reduces the friction for users looking to learn about your resource. The combination of quick creation and tab exploration can lead to additional resource deployments over time.
 
-Most creates should have a minimum of 3 tabs; **Basics**, **Tags**, `Review + create`.  All other tabs are optional.  Tab naming should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
+Most creates should have a minimum of 3 tabs; **Basics**, **Tags**, **Review + create**.  All other tabs are optional.  Tab naming should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
 
 <div style="max-width:800px">
 <img alttext="Tabs" src="../media/design-patterns-resource-create/Tabs.png"  />
@@ -163,12 +163,16 @@ The **Tags** tabs should have the following in the footer area
 ![alt-text](../media/top-extensions-create/Tags.png "Tags control")
 
 <a name="behavior-tabs-review-create"></a>
-#### Review + Create
-Allowing the user to verify all settings prior to submission ensures accuracy and reduces the need for user redeployments.  Use the summary control to help organize content from multiple tabs.  Disable the create button until validation succeeds.  The `Review + Create` tab is always the last tab.
+#### Review + create
+Allowing the user to verify all settings prior to submission ensures accuracy and reduces the need for user redeployments.  Use the summary control to help organize content from multiple tabs.  Disable the create button until validation succeeds.  The **Review + create** tab is always the last tab.
 
-![alt-text](../media/top-extensions-create/Review.png "Review + Create")
+![alt-text](../media/top-extensions-create/Review.png "Review + create")
 
 Validation
+Validation should occur when the user navigates to the last tab, **Review + create**, with the following behavior
+* Display an InfoBox at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid."
+* Mark each tab with an invalid field with a red dot after the tab name
+
 
 Footer navigation
 The **Review + create** tabs should have the following in the footer area
