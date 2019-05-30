@@ -133,6 +133,7 @@ If your resource comes in different sizes or SKUs, make sure to include the pric
 <!-- TODO UX add info on pricing tier using grid for easy comparison -->
 
 Footer navigation
+
 The **Basics** tab should have the following in the footer area
 * Review + create button with label "Review + create"
 * Previous button (disabled) with label "\< Previous"
@@ -143,6 +144,7 @@ The **Basics** tab should have the following in the footer area
 Additional tabs are used to organize optional settings specific to your resource.  All optional tabs should be after the **Basics** tab and before the **Tags** tab.  Tabs should have short names, typically a noun. Tab naming should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
 
 Footer navigation
+
 The optional tabs should have the following in the footer area
 * Review + create button with label "Review + create"
 * Previous button with label "\< Previous"
@@ -155,6 +157,7 @@ Many enterprises are starting to create subscription and resource group polices 
 * **Tags** - use the TagsByResource control to enable users to assign key value pairs to the selected Resource Types.	
 
 Footer navigation
+
 The **Tags** tabs should have the following in the footer area
 * Review + create button with label "Review + create"
 * Previous button with label "\< Previous"
@@ -169,12 +172,14 @@ Allowing the user to verify all settings prior to submission ensures accuracy an
 ![alt-text](../media/top-extensions-create/Review.png "Review + create")
 
 Validation
+
 Validation should occur when the user navigates to the last tab, **Review + create**, with the following behavior
 * Display an InfoBox at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid."
 * Mark each tab with an invalid field with a red dot after the tab name
 
 
 Footer navigation
+
 The **Review + create** tabs should have the following in the footer area
 * Create button with label "Create" that is in the same location and the same size as the "Review + create" button
 * Previous button with label "\< Previous"
