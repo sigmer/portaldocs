@@ -94,11 +94,11 @@ The footer nav contains the call to action (CTA) for creating the resource, as w
 The space between items in the footer area should be 12px
 
 The items that are typically in the footer area are
-* Review + create button - on all tabs except the last tab
-* Create button - only on the last tab - in the same location and the same size as the **Review + create** button
-* Previous button - on all tabs, disabled on the first tab - label is "\< Previoius" on all tabs
-* Next button - on all tabs, disabled on the last tab - label is "Next : *next_tab_name* \>" except on last tab where label is "Next \>"
-* Download a template for automation link - only on the last tab - label is "Download a template for automation"
+* Review + create button - on all tabs except the last tab - clicking the review and create button navigates the page to the last tab
+* Create button - only on the last tab in the same location and the same size as the **Review + create** button - clicking the create button submits the deployment job to ARM
+* Previous button - on all tabs, disabled on the first tab, label is "\< Previous" on all tabs - clicking the previous button navigates to the previous tab
+* Next button - on all tabs, disabled on the last tab, label is "Next : *next_tab_name* \>" except on last tab where label is "Next \>" - clicking the next button navigates to the next tab
+* Download a template for automation link - only on the last tab, label is "Download a template for automation" - clicking the download link opens the **Template** blade from where the user can download or save the template to library
 
 <a name="behavior"></a>
 ## Behavior
@@ -123,7 +123,7 @@ The **Basics** tab should contain the typical fields for Azure resources in the 
 * **Project details** - section that groups
     * **Subscription** - use the SubscriptionDropDown control
     * **Resource group** - use the ResourceGroupDropDown control
-    * The default text for Project Details is *Select the subscription to manage deployed resources and costs. Use resource groups like folders to organize and manage all your resources.*
+    * The default text for Project Details is "Select the subscription to manage deployed resources and costs. Use resource groups like folders to organize and manage all your resources."
 * **Instance details** - section that groups
     * **Name** - the name of the resource
     * **Region** - used to be referred to as Location - use the LocationDropDown control
@@ -174,7 +174,7 @@ Allowing the user to verify all settings prior to submission ensures accuracy an
 Validation
 
 Validation should occur when the user navigates to the last tab, **Review + create**, with the following behavior
-* Display an InfoBox at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid."
+* Display an error message at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid."
 * Mark each tab with an invalid field with a red dot after the tab name
 
 
