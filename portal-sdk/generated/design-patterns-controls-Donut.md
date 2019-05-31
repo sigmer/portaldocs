@@ -21,7 +21,7 @@ The SDK offers a set data visualization controls.  Choose the one that is most s
 * **LineChart** - displays a series of data points connected by straight line segments.
 * **Map** - displays data with longitude and latitude coordinates on a world map.
 * **Metrics** - displays a single value for a set of metrics
-* **MonitorChart** - displays the metrics for your resource and inherently knows how to fetch data for your resource.
+* **MonitorChartV2** - displays the metrics for your resource and inherently knows how to fetch data for your resource.
 * **QuotaGauge** - displays the current value relative to a quota (limit) and total.
 * **ScatterChart** - displays a plot of data points without any connecting lines
 * **SingleMetric** - displays a single value for a metric

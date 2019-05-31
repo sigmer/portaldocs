@@ -150,8 +150,6 @@ For the desired environment append the following feature flags.
 
 ```txt
     ?feature.showassettypes=MyNewAsset
-    &microsoft_azure_mynewextension=true
-    &feature.canmodifyextensions=true
 ```
 
 For example:

@@ -511,6 +511,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
 ## Get your extension building with tsconfig.json
 
 - Fully build your extension to get all of the code-generated files (eg. TypeScript files generated from PDL) generated.
+
 - Delete any generate d.ts files generated in `$(ProjectDir)Client\Definitions`. You do not have to do anything to files outside of the Client folder.
 - Add a tsconfig.json to the root of the project with the following content. '''Do not deviate unless you know what you are doing.
 
@@ -524,6 +525,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
       "forceConsistentCasingInFileNames": true,
       "inlineSources": true,
       "module": "amd",
+      "moduleResolution": "node",
       "noEmitHelpers": true,
       "noImplicitAny": true,
       "noImplicitThis": true,
@@ -633,7 +635,8 @@ The framework supports loading view models using dependency injection. If you mi
 ## Prerequistes
 
 - Migrate to V2 targets if you haven’t done so (See: [V2 targets](#v2-targets))
-- Ensure that the emitDecoratorMetadata compiler option is set to true in the tsconfig.json
+- Ensure that the `emitDecoratorMetadata` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `moduleResolution` compiler option is set to `node` in the tsconfig.json
 - Upgrade to at least SDK 3001+
 - Cleanup your extension project TypeScript code and remove all uses of export = Main.
   - Check this PR in the portal repo for an example: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1003495?_a=overview

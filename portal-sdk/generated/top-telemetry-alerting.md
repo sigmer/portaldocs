@@ -4,14 +4,14 @@
     * [Configuration](#performance-configuration)
     * [How often do they run](#performance-how-often-do-they-run)
 * [Availability](#availability)
-    * [Configuration](#availability-configuration)
-    * [When do the alerts trigger](#availability-when-do-the-alerts-trigger)
-    * [How often do they run](#availability-how-often-do-they-run)
+    * [Configuration](#availability-configuration-1)
+    * [When do the alerts trigger](#availability-when-do-the-alerts-trigger-1)
+    * [How often do they run](#availability-how-often-do-they-run-1)
 * [Client Error](#client-error)
-    * [Configuration](#client-error-configuration)
+    * [Configuration](#client-error-configuration-2)
     * [How often client error alerts run](#client-error-how-often-client-error-alerts-run)
 * [Create regression](#create-regression)
-    * [Configuration](#create-regression-configuration)
+    * [Configuration](#create-regression-configuration-3)
     * [How often do create alerts run](#create-regression-how-often-do-create-alerts-run)
 * [How do I onboard](#how-do-i-onboard)
 * [How do I know my extension's current configuration](#how-do-i-know-my-extension-s-current-configuration)
@@ -232,7 +232,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 
 The alerts can be configured for extension availability, blade availability and part availability on different environments including national clouds. 
 
-<a name="availability-configuration"></a>
+<a name="availability-configuration-1"></a>
 ### Configuration
 
 At a high level you define;
@@ -287,18 +287,18 @@ Per each of those, you can define a set of criteria like the below.
 
 > Only blade or part is required to have a namePath property or optionally to have an exclusion property.
 
-<a name="availability-configuration-what-is-environments"></a>
+<a name="availability-configuration-1-what-is-environments-1"></a>
 #### What is environments
 
 "environments" property is an array. Each of its elements represents a set of alerting critiera for an environment.
 
-<a name="availability-configuration-what-is-environment"></a>
+<a name="availability-configuration-1-what-is-environment-1"></a>
 #### What is environment
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
-<a name="availability-configuration-what-is-enabled"></a>
+<a name="availability-configuration-1-what-is-enabled-1"></a>
 #### What is enabled
 
 "enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
@@ -322,52 +322,52 @@ You can define N number of criteria like the below.
 }
 ```
 
-<a name="availability-configuration-what-is-severity"></a>
+<a name="availability-configuration-1-what-is-severity-1"></a>
 #### What is severity
 
 This is the severity value that an IcM alert would have when an alert is fired.
 
-<a name="availability-configuration-what-is-minavailability"></a>
+<a name="availability-configuration-1-what-is-minavailability"></a>
 #### What is minAvailability
 
 This is the minimum availability as a percentage. For example your extension fails to load 20 out of 100 times that would be 80% available.
 
-<a name="availability-configuration-what-is-minfailurecount"></a>
+<a name="availability-configuration-1-what-is-minfailurecount"></a>
 #### What is minFailureCount
 
 This is the minimum number of failures that have occurred, for example the above configuration requires 10 or more failures.
 
-<a name="availability-configuration-what-is-minfailureusercount"></a>
+<a name="availability-configuration-1-what-is-minfailureusercount"></a>
 #### What is minFailureUserCount
 
 This is the minimum number of unique users who have to encountered a failure before the threshold is surpassed.
 
-<a name="availability-configuration-what-is-namepath"></a>
+<a name="availability-configuration-1-what-is-namepath-1"></a>
 #### What is namePath
 
 This only applies to blades or parts and defines what blades or parts to alert on, you can either use an asterisk("*") sign to include
 all the blades or parts within your extension or specify a list of full blade or part names to alert on. The minAvailability, minFailureCount and minFailureUserCount specified in critiera are for individual blades or parts.
 
-<a name="availability-configuration-what-is-exclusion"></a>
+<a name="availability-configuration-1-what-is-exclusion-1"></a>
 #### What is exclusion
 
 This only applies to blades or parts and defines what blades or parts you wish to exclude.
 
-<a name="availability-configuration-what-is-safedeploymentstage"></a>
+<a name="availability-configuration-1-what-is-safedeploymentstage-1"></a>
 #### What is safeDeploymentStage
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
 Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages. 
 For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
-<a name="availability-configuration-what-is-datacentercode"></a>
+<a name="availability-configuration-1-what-is-datacentercode-1"></a>
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
 Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take datacenter into consideration. So you won't have availability, failureCount and failureUserCount per datacenter. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the datacenters.
 For the complete list of datacenter code names, go to [https://aka.ms/portalfx/alerting/datacenter-code-name][datacenter-code-name]
 
-<a name="availability-when-do-the-alerts-trigger"></a>
+<a name="availability-when-do-the-alerts-trigger-1"></a>
 ### When do the alerts trigger
 
 Alerts will only trigger for any blade in extension "Your_Extension_Name" except for blades "Extension/Your_Extension_Name/Blade/BladeNameA" and
@@ -375,7 +375,7 @@ Alerts will only trigger for any blade in extension "Your_Extension_Name" except
 minAvailability, minFailureCount and minFailureUserCount are met (AND). So the above critical configuration will only fire when 10 or more unique users encounter failures
 *AND* there are 10 or more failure occurences *AND* the total availability < 80%, all within the last hour. Only then will a severity 3 alert be opened.
 
-<a name="availability-how-often-do-they-run"></a>
+<a name="availability-how-often-do-they-run-1"></a>
 ### How often do they run
 
 Currently they run every 5 minutes assessing the previous hour of data.
@@ -388,7 +388,7 @@ There are two high level types of client error alerts, error percentage and erro
 1. Error percentage alerts fire when the percentage of users experiencing any error(s) is above the defined threshold.
 2. Error message alerts fire on specified error messages.
 
-<a name="client-error-configuration"></a>
+<a name="client-error-configuration-2"></a>
 ### Configuration
 
 At a high level you define:
@@ -440,18 +440,18 @@ At a high level you define:
 }
 ```
 
-<a name="client-error-configuration-what-is-environments"></a>
+<a name="client-error-configuration-2-what-is-environments-2"></a>
 #### What is environments
 
 "environments" property is an array. Each of its elements represents a set of alerting critiera for an environment.
 
-<a name="client-error-configuration-what-is-environment"></a>
+<a name="client-error-configuration-2-what-is-environment-2"></a>
 #### What is environment
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com 
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
-<a name="client-error-configuration-what-is-enabled"></a>
+<a name="client-error-configuration-2-what-is-enabled-2"></a>
 #### What is enabled
 
 "enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level 
@@ -459,7 +459,7 @@ depending on where it's located in customization json. For details, see "enabled
 
 > Among "message" and "percentage" types, you can choose to have one type or two types. Per each of those, you can define a set of criteria like the below. You can define N number of criteria.
 
-<a name="client-error-configuration-percentage"></a>
+<a name="client-error-configuration-2-percentage"></a>
 #### Percentage
 
 An example of a percentage error alert criteria
@@ -492,7 +492,7 @@ An example of a percentage error alert criteria
 ]
 ```
 
-<a name="client-error-configuration-message"></a>
+<a name="client-error-configuration-2-message"></a>
 #### Message
 
 An example of a message error alert criteria.
@@ -526,54 +526,54 @@ An example of a message error alert criteria.
 ]
 ```
 
-<a name="client-error-configuration-what-is-severity"></a>
+<a name="client-error-configuration-2-what-is-severity-2"></a>
 #### What is severity
 
 This is the severity value that an IcM alert would have when an alert is fired.
 
-<a name="client-error-configuration-what-is-minaffecteduserpercentage"></a>
+<a name="client-error-configuration-2-what-is-minaffecteduserpercentage"></a>
 #### What is minAffectedUserPercentage
 
 This is the minimum number of percentage of users affected by any client error.
 
-<a name="client-error-configuration-what-is-minaffectedusercount"></a>
+<a name="client-error-configuration-2-what-is-minaffectedusercount-1"></a>
 #### What is minAffectedUserCount
 
 This is the minimum number of users affected by any client error.
 
-<a name="client-error-configuration-what-is-checkallnullrefs"></a>
+<a name="client-error-configuration-2-what-is-checkallnullrefs"></a>
 #### What is checkAllNullRefs
 
 When it's true, alert checks all the null refs client errors. You can still specify message1, message2, etc. They're additional conditions. 'checkAllNullRefs' property is optional.
 
-<a name="client-error-configuration-what-is-message1-message2-message3-in-criteria-element-for-error-message-alerts"></a>
+<a name="client-error-configuration-2-what-is-message1-message2-message3-in-criteria-element-for-error-message-alerts"></a>
 #### What is message1, message2, message3 in criteria element for error message alerts
 
 This is the error string that error message alerts check if it existis in client error logs, specifically in [message] column at (Client|Ext)Events log table. They're logical AND relations. To count as an error, all the messages that specified in criteria element have to be present in a client error message([message] column at (Client|Ext)Events log table). You can specify up to 3 messages in one criteria.
 
-<a name="client-error-configuration-what-is-exclusion"></a>
+<a name="client-error-configuration-2-what-is-exclusion-2"></a>
 #### What is exclusion
 
 This specifies condition(s) that alerts do not count as a client error. You can specify it for both error percentage and error message alerts.
 
-<a name="client-error-configuration-what-is-message1-message2-message3-in-the-exclusion-property"></a>
+<a name="client-error-configuration-2-what-is-message1-message2-message3-in-the-exclusion-property"></a>
 #### What is message1, message2, message3 in the exclusion property
 
 This is the error string(s) that alerts would not count it as a client error when they're present in a client error message([message] column at (Client|Ext)Events log table). You can specify up to 3 messages in "exclusion" property.
 
-<a name="client-error-configuration-what-is-type-in-the-exclusion-property"></a>
+<a name="client-error-configuration-2-what-is-type-in-the-exclusion-property"></a>
 #### What is type in the exclusion property
 
 This is the logical operator for messages in "exclusion" property. Its supported value is "and" or "or". "and" means when all the messages specified in "exclusion" property are present in a client error message, error alerts would not count it as a client error. "or" means when any of the messages specified in "exclusion" property is present in a client error message, error alerts would not count it as a client error.
 
-<a name="client-error-configuration-what-is-safedeploymentstage"></a>
+<a name="client-error-configuration-2-what-is-safedeploymentstage-2"></a>
 #### What is safeDeploymentStage
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
 Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates affectedUserCount, affectedUserPercentage, it does not take safe deployment stage into consideration. So you won't have affectedUserCount or affectedUserPercentage per safe deployment stage. For such a case, minAffectedUserCount or minAffectedUserPercentage specified in critiera are for all(combined, overall) the safe deployment stages.
 For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
-<a name="client-error-configuration-what-is-datacentercode"></a>
+<a name="client-error-configuration-2-what-is-datacentercode-2"></a>
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
@@ -590,7 +590,7 @@ Currently error percentage alerts run every 15 minutes and error message alerts 
 
 The alerts can be configured for create blade extension on different environments including national clouds.
 
-<a name="create-regression-configuration"></a>
+<a name="create-regression-configuration-3"></a>
 ### Configuration
 
 At a high level you define;
@@ -634,18 +634,18 @@ At a high level you define;
 }
 ```
 
-<a name="create-regression-configuration-what-is-environments"></a>
+<a name="create-regression-configuration-3-what-is-environments-3"></a>
 #### What is environments
 
 "environments" property is an array. Each of its elements represents a set of alerting critiera for an environment.
 
-<a name="create-regression-configuration-what-is-environment"></a>
+<a name="create-regression-configuration-3-what-is-environment-3"></a>
 #### What is environment
 
 "environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
-<a name="create-regression-configuration-what-is-enabled"></a>
+<a name="create-regression-configuration-3-what-is-enabled-3"></a>
 #### What is enabled
 
 "enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
@@ -665,32 +665,32 @@ You can define N number of criteria like the below.
 }
 ```
 
-<a name="create-regression-configuration-what-is-severity"></a>
+<a name="create-regression-configuration-3-what-is-severity-3"></a>
 #### What is severity
 
 This is the severity value that an IcM alert would have when an alert is fired.
 
-<a name="create-regression-configuration-what-is-bladename"></a>
+<a name="create-regression-configuration-3-what-is-bladename"></a>
 #### What is bladeName
 
 The list of the create blade name.
 
-<a name="create-regression-configuration-what-is-minsuccessrateoverpast24hours"></a>
+<a name="create-regression-configuration-3-what-is-minsuccessrateoverpast24hours"></a>
 #### What is minSuccessRateOverPast24Hours
 
 This is the minimum create blade success rate over the past 24 hours.
 
-<a name="create-regression-configuration-what-is-minsuccessrateoverpasthour"></a>
+<a name="create-regression-configuration-3-what-is-minsuccessrateoverpasthour"></a>
 #### What is minSuccessRateOverPastHour
 
 This is the minimum create blade success rate over the past hour.
 
-<a name="create-regression-configuration-what-is-mintotalcountoverpast24hours"></a>
+<a name="create-regression-configuration-3-what-is-mintotalcountoverpast24hours"></a>
 #### What is minTotalCountOverPast24Hours
 
 This is the minimum number of create that gets kicked off over the past 24 hours.
 
-<a name="create-regression-configuration-what-is-mintotalcountoverpasthour"></a>
+<a name="create-regression-configuration-3-what-is-mintotalcountoverpasthour"></a>
 #### What is minTotalCountOverPastHour
 
 This is the minimum number of create that gets kicked off over the past hour.

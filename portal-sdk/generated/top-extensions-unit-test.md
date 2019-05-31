@@ -83,10 +83,8 @@ always-auth=true
   "description": "",
   "main": "index.js",
   "scripts": {
-    "init": "npm install --no-color --no-optional",
-    "prereq": "npm run init && gulp generateAmdModuleFromResx --no-color --gulpfile=./node_modules/msportalfx-ut/gulpfile.js --silent --cwd ./",
-    "build": "npm run prereq && tsc -p tsconfig.json",
-    "build-trace": "tsc -p tsconfig.json --diagnostics --listFiles --listEmittedFiles --traceResolution",
+    "restore": "npm install --silent --no-color --no-optional",
+    "build": "npm run restore && gulp generateAmdModuleFromResx --no-color --gulpfile=./node_modules/msportalfx-ut/gulpfile.js --silent --cwd ./ && tsc -p tsconfig.json",
     "test": "npm run build && karma start",
     "test-ci": "npm run build && karma start --single-run --no-colors"
   },
@@ -95,7 +93,8 @@ always-auth=true
   ],
   "author": "Microsoft",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@types/chai": "4.1.7",
     "@types/mocha": "5.2.5",
     "@types/nconf": "0.10.0",
@@ -119,8 +118,7 @@ always-auth=true
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
     "typescript": "3.2.1"
-  },
-  "devDependencies": {}
+  }
 }
 
 ```
@@ -328,6 +326,11 @@ describe("Resource Overview Blade Tests", () => {
             ]
         }
     },
+    "references": [
+        {
+            "path": "../Extension"
+        }
+    ],
     "exclude": [],
     "include": [
         "../Extension/Definitions/*",

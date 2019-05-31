@@ -69,7 +69,7 @@ If you are working on Internal / Microsoft extension but you are not sure that y
 
 Calling alternate services involves AAD Onboarding which can take 5 to 6 weeks so if your extension needs to invoke services other than ARM, we recommend extension developers to reach out to Azure portal team early in the design phase.
 
-<a name="calling-alternate-resources-from-client"></a>
+<a name="calling-alternate-resources-from-client-1"></a>
 #### From client
 
 Only ibiza has the authority to mint tokens so in order to call external resourses extension developers need to request Ibiza to create the AAD and register the resources with Ibiza.

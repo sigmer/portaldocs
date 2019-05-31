@@ -31,7 +31,7 @@
     * [FAQ](portalfx-forms.md#faq)
 
 
-* [Monitor Chart](portalfx-controls-monitor-chart.md#monitor-chart)
+* [Monitor Chart V2](portalfx-controls-monitor-chart-v2.md#monitor-chart-v2)
 
 
 * [Using Fx/Controls in EditScope backed forms](portalfx-fxcontrols-editscope-forms.md#using-fx-controls-in-editscope-backed-forms)

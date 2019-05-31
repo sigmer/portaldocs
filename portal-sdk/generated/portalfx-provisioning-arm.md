@@ -1,8 +1,8 @@
 * [ARM APIs](#arm-apis)
     * [Deploying ARM Templates](#arm-apis-deploying-arm-templates)
-    * [1. Deploying the Templates](#arm-apis-1-deploying-the-templates)
-    * [2. Polling for Updates](#arm-apis-2-polling-for-updates)
-    * [3. Samples](#arm-apis-3-samples)
+    * [1. Deploying the Templates](#arm-apis-deploying-the-templates)
+    * [2. Polling for Updates](#arm-apis-polling-for-updates)
+    * [3. Samples](#arm-apis-samples)
 
 
 <a name="arm-apis"></a>
@@ -22,7 +22,7 @@ If your request is accepted, ARM begins the deployment of the template. That mea
 
 We've added a couple of APIs to help you do that in your code. Generally you either only want to submit the request to ARM (only the first step), or you want to wait till the deployment is done. We take care of the notifications for you, but you can choose to suppress them if you need to.
 
-<a name="arm-apis-1-deploying-the-templates"></a>
+<a name="arm-apis-deploying-the-templates"></a>
 ### >
 <li>Deploying the Templates</li>
 <
@@ -59,7 +59,7 @@ The result returned when the promise resolves (and the progress) have the follow
 
 Polling is described in the next section. If you chose to do the polling yourself, set the `deploymentMode` to `RequestDeploymentOnly` and wait for ARM to accept the request and return a correlation id. You can use the correlation id to poll for deployment updates using the `MsPortalFx.Azure.ResourceManager.pollForDeployment` described in the next section, till ARM is done with provisioning the deployed resource(s). Check out sample #4 in the samples section. Please note that those calls aren't cached, so if the user abandons the session (by closing the browser or navigating away) before the request makes it to ARM, the call to this API will result in nothing. In the other two modes, if you have some UI that reflects the deployment progress, and if the request goes through and ARM responds back with the correlation id, it's still advisable to store it somewhere because the user can still abandon the session, and you'll need to continue reflecting progress on reload.
 
-<a name="arm-apis-2-polling-for-updates"></a>
+<a name="arm-apis-polling-for-updates"></a>
 ###  start="2">
 <li>Polling for Updates</li>
 <
@@ -81,12 +81,12 @@ Polling is done every ten seconds for the first minute, then every minute for th
 
 The result returned when the promise resolves (and the progress) is exactly like the one returned in the `deployTemplate` API. `operations` are returned only if `getAllOperations` is set to true.
 
-<a name="arm-apis-3-samples"></a>
+<a name="arm-apis-samples"></a>
 ###  start="3">
 <li>Samples</li>
 <
 
-<a name="arm-apis-3-samples-1-requesting-a-template-deployment"></a>
+<a name="arm-apis-samples-requesting-a-template-deployment"></a>
 ##### >
 <li>Requesting a template deployment</li>
 <
@@ -120,7 +120,7 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
     });
 ```
 
-<a name="arm-apis-3-samples-2-deploy-a-template-and-await-completion"></a>
+<a name="arm-apis-samples-deploy-a-template-and-await-completion"></a>
 #####  start="2">
 <li>Deploy a template and await completion</li>
 <
@@ -143,7 +143,7 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
     });
 ```
 
-<a name="arm-apis-3-samples-3-deploy-a-template-and-await-completion-while-getting-all-operations"></a>
+<a name="arm-apis-samples-deploy-a-template-and-await-completion-while-getting-all-operations"></a>
 #####  start="3">
 <li>Deploy a template and await completion (while getting all operations)</li>
 <
@@ -167,7 +167,7 @@ MsPortalFx.Azure.ResourceManager.deployTemplate(options)
     });
 ```
 
-<a name="arm-apis-3-samples-4-requesting-a-template-deployment-and-seperately-polling-for-updates-and-operations"></a>
+<a name="arm-apis-samples-requesting-a-template-deployment-and-seperately-polling-for-updates-and-operations"></a>
 #####  start="4">
 <li>Requesting a template deployment and seperately polling for updates (and operations)</li>
 <
