@@ -13,7 +13,7 @@ CdnIntegrationBlade allows customers to create and manage CDN endpoints for thei
 
 Through the simple integration explained in this document, your customers can enable CDN on their Azure resources within your extension without having to leave and go to the CDN extension. The CDN integration blade can be embedded in your own extension if you follow the below steps.
 
-<a name="getting-started-with-azure-cdn-1-importing-cdn-extension-nuget-package"></a>
+<a name="getting-started-with-azure-cdn-importing-cdn-extension-nuget-package"></a>
 ## >
 <li>Importing CDN Extension NuGet Package</li>
 <
@@ -26,7 +26,7 @@ For CoreXT based environemtns, you can add a reference to the package in your **
 
 *Note:* you will need to update the version with the latest from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.cdn)
 
-<a name="getting-started-with-azure-cdn-2-referencing-cdn-pde"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-pde"></a>
 ##  start="2">
 <li>Referencing CDN PDE</li>
 <
@@ -36,7 +36,7 @@ In your extension *.csproj file, you will need to add a reference to the Microso
 <ExtensionReference Include="$(PkgMicrosoft_Portal_Extensions_Cdn)\content\Client\_extensions\Cdn\Microsoft_Azure_Cdn.pde" />
 ```
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade"></a>
 ##  start="3">
 <li>Referencing CDN Integration Blade</li>
 <
@@ -82,7 +82,7 @@ this._container.selectable.selectedValue(<MsPortalFx.ViewModels.DynamicBladeSele
     });            
 ```
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-blade-inputs"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs"></a>
 ### Blade Inputs
 The CdnIntegrationBlade takes the following inputs:
 
@@ -97,7 +97,7 @@ The AzureLocation of your resource, like *"West US"*, *"East Asia"*, etc.
 The hostname of your service which is used as an origin for the created CDN endpoints. This shouldn't include any slashes or protocols, only the domain name, like *"storagetest1.blob.core.windows.net"* or *"webapptest2.azurewebsites.net"*.
 
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-notes-and-tips"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips"></a>
 ### Notes and Tips
 1.  Please use *"cdnIntegration"* for the resource menu item *id* because we use this id to track blade loads and create telemetry on CDN Integration Blade.
 2.  The *displayText* "Azure CDN" needs to be localized and should come from your Resources.resx.
@@ -107,7 +107,7 @@ The hostname of your service which is used as an origin for the created CDN endp
 	visible: ko.observable(MsPortalFx.isFeatureEnabled("cdnintegration"))
 	```
 
-<a name="getting-started-with-azure-cdn-4-telemetry-and-monitoring"></a>
+<a name="getting-started-with-azure-cdn-telemetry-and-monitoring"></a>
 ##  start="4">
 <li>Telemetry and Monitoring</li>
 <
@@ -121,7 +121,7 @@ We are tracking the usage and actions on CDN integration blade through following
 
 You shouldn't need to add any extra telemetry on your side.
 
-<a name="getting-started-with-azure-cdn-4-telemetry-and-monitoring-contact-us"></a>
+<a name="getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us"></a>
 ### Contact Us
 You can start development today! Create a code review and add "inzarif" and "cdneng" as reviewers.
 Don't hesitate to contact us for any questions, concerns, or bug reports.

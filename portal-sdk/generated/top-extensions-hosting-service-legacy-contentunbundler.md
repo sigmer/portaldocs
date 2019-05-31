@@ -2,6 +2,8 @@
 <a name="legacy-contentunbundler-step-by-step"></a>
 ## Legacy ContentUnbundler step-by-step
 
+**ContentUnbundler is no longer supported** , for migration instructions please see [https://aka.ms/portalfx/removecuvideo](https://aka.ms/portalfx/removecuvideo).
+
 <a name="legacy-contentunbundler-step-by-step-step-by-step-onboarding"></a>
 ### Step-by-Step Onboarding
 

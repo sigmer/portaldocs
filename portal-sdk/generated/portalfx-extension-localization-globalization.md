@@ -11,7 +11,7 @@
     * [Important references](#understanding-localization-important-references)
 * [Globalization API](#globalization-api)
     * [Implementation Details](#globalization-api-implementation-details)
-    * [Number Formatter](#globalization-api-number-formatter)
+    * [Number Formatter](#globalization-api-number-formatter-1)
 
 
 <a name="understanding-localization"></a>
@@ -267,7 +267,7 @@ Packages submitted to the Azure Marketplace must be localized as well.  For more
     * [Important references](#understanding-localization-important-references)
 * [Globalization API](#globalization-api)
     * [Implementation Details](#globalization-api-implementation-details)
-    * [Number Formatter](#globalization-api-number-formatter)
+    * [Number Formatter](#globalization-api-number-formatter-1)
 
 
 <a name="globalization-api"></a>
@@ -289,11 +289,11 @@ var formatCulture = Globalization.formatCulture;
 
 The Globalization API is a wrapper for the native [Javascript library Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl "Javascript library Intl").
 
-<a name="globalization-api-number-formatter"></a>
+<a name="globalization-api-number-formatter-1"></a>
 ### Number Formatter
 **Globalization.NumberFormat.create([options])**
 
-<a name="globalization-api-number-formatter-options"></a>
+<a name="globalization-api-number-formatter-1-options"></a>
 #### Options
 Optional. An object with some or all of the following properties:
 
@@ -336,7 +336,7 @@ Optional. An object with some or all of the following properties:
 
 - The maximum number of significant digits to use. Possible values are from 1 to 21; the default is minimumSignificantDigits.
 
-<a name="globalization-api-number-formatter-examples"></a>
+<a name="globalization-api-number-formatter-1-examples"></a>
 #### Examples
 
 **Example: Basic usage**
@@ -382,12 +382,12 @@ console.log(Globalization.NumberFormat.create({ maximumSignificantDigits: 3 }).f
 ```
 
 
-<a name="globalization-api-number-formatter-date-formatter"></a>
+<a name="globalization-api-number-formatter-1-date-formatter-1"></a>
 #### Date Formatter
 
 **Globalization.DateTimeFormat.create([options])**
 
-<a name="globalization-api-number-formatter-options"></a>
+<a name="globalization-api-number-formatter-1-options-1"></a>
 #### Options
 
 Optional. An object with some or all of the following properties:
@@ -436,7 +436,7 @@ Optional. An object with some or all of the following properties:
 
 > [WACOM.NOTE] The default value for each date-time component property is undefined, but if all component properties are undefined, then year, month, and day are assumed to be "numeric".
 
-<a name="globalization-api-number-formatter-examples"></a>
+<a name="globalization-api-number-formatter-1-examples-1"></a>
 #### Examples
 **Example: Using DateTimeFormat**
 

@@ -20,20 +20,18 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 <a name="getting-started-with-the-portal-sdk-creating-and-running-an-extension"></a>
 ### Creating and running an Extension
 
-1. Launch **Visual Studio 2017** and navigate to 
+1. Clone the template repo
 
-    a. `File -> New -> Project`. In the new project dialog, 
+    a. `git clone https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-TemplateExtension`
 
-    b. Select `Installed -> Visual C# -> Azure Portal`. 
+1. [Optional] To snap to a specific version of the template in this example SDK version 5.0.302.19601
+    
+    a. `git fetch --tags`
+    
+    a. `git checkout 5.0.302.19601` **Note** replace with version of SDK you which to checkout
 
-    c. Select the `Azure Portal Extension` project type, and give it a unique name. The name of the project typically matches the solution name and the extension name. 
-
-    d. Check the checkbox next to `Create directory for solution`. 
-
-    e. Click the OK button, as described in the following image.
-
-    ![alt-text](../media/top-extensions-getting-started/filenew.png "File New Azure Portal Extension")
-
+1. copy the content of `/src` to your own repo.
+1. Open `/src/Default.sln` in Visual Studio
 1. Use the `Ctl + F5 key to compile and run the new project extension in **IIS Express**.
 
 1. On first run, a request to install a certificate for localhost for IIS Express may be displayed. Accept the certificate to continue, as in the following image.

@@ -143,7 +143,7 @@ MsPortalFx.Services.getSettings().then(settings => {
 <a name="introduction-to-appblades-sending-and-receiving-messages-from-your-iframe"></a>
 #### Sending and Receiving messages from your IFrame
 
-<a name="introduction-to-appblades-sending-and-receiving-messages-from-your-iframe-listen-to-a-message"></a>
+<a name="introduction-to-appblades-sending-and-receiving-messages-from-your-iframe-listen-to-a-message-1"></a>
 ##### Listen to a message
 
 You can listen to incoming messages by adding an event listener to your window, as shown in the snippet below:
@@ -205,7 +205,7 @@ function receiveMessage(event) {
 
 ```
 
-<a name="introduction-to-appblades-sending-and-receiving-messages-from-your-iframe-post-a-message"></a>
+<a name="introduction-to-appblades-sending-and-receiving-messages-from-your-iframe-post-a-message-1"></a>
 ##### Post a message
 
 You can post messages back to the portal using **postMessage**. There is a required message that your IFrame needs to send back to the portal to indicate that it is ready to receive messages.

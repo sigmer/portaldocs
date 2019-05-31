@@ -100,12 +100,12 @@ GetCreateFunnelByDay(startDate, endDate)
 <a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins"></a>
 ## Create Flow Origins
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-overview"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-overview-1"></a>
 ### Overview
 
 This report gives you an overview of where your create blade is being linked to and launched from.
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-description-of-data-fields"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-description-of-data-fields-1"></a>
 ### Description of data fields
 
 - **Create Flow Launched** - The number of times your create blade has been opened by users.
@@ -114,10 +114,10 @@ This report gives you an overview of where your create blade is being linked to 
 - **Marketplace (%)** - The percentage representing how often your create blade is opened from the Marketplace.
 - **DeepLink (%)** - The percentage representing how often your create blade is opened from a internal or external link.
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-how-these-numbers-are-generated"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-how-these-numbers-are-generated-1"></a>
 ### How these numbers are generated
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-how-these-numbers-are-generated-create-flow-origins-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-origins-how-these-numbers-are-generated-1-create-flow-origins-kusto-query"></a>
 #### Create Flow Origins - Kusto Query
  
 ```js
@@ -162,7 +162,7 @@ selectedData
 <a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors"></a>
 ## Create Flow Errors
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-overview"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-overview-2"></a>
 ### Overview
 
 This report gives you an overview of create blades create errors, billing issues, and cancellations.
@@ -191,10 +191,10 @@ This report gives you an overview of create blades create errors, billing issues
     - If your experience's create deployments go through Arm but you are not using the Arm Provisioning then please refer to the Create Engine documentation
         - [Create Engine](portalfx-create-engine-sample.md)
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-how-these-numbers-are-generated"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-how-these-numbers-are-generated-2"></a>
 ### How these numbers are generated
 
-<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-how-these-numbers-are-generated-create-flow-errors-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-create-flow-errors-how-these-numbers-are-generated-2-create-flow-errors-kusto-query"></a>
 #### Create Flow Errors - Kusto Query
 
 ```js
@@ -288,7 +288,7 @@ errors
 <a name="ibiza-create-flow-powerbi-dashboard-error-distribution"></a>
 ## Error Distribution
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-overview"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-overview-3"></a>
 ### Overview
 
 This report gives an overview of the errors that have occured over the last week and including how they have changed since the week before, aka WoW (Week or Week).
@@ -300,10 +300,10 @@ This report gives an overview of the errors that have occured over the last week
 - Error Distribution By Extension - The number of create deployment error that occured by each extension over the last week.
 - Inner Error Distribution - Looking at the 'inner most error' inside of the error messages that is recorded for a create deployment failure. Error messages often become nested as they they reach different points of provisioning and have different stages record the failure reason. The 'inner most error' in theory should be the original reason why a create deployment failed.
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3"></a>
 ### How these numbers are generated
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-create-error-distribution-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3-create-error-distribution-kusto-query"></a>
 #### Create Error Distribution - Kusto Query
 
 ```js
@@ -323,7 +323,7 @@ ClientTelemetry
 | order by ["Error Count"] desc
 ```
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-create-error-distribution-by-extension-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3-create-error-distribution-by-extension-kusto-query"></a>
 #### Create Error Distribution By Extension - Kusto Query
 
 ```js
@@ -343,7 +343,7 @@ ClientTelemetry
 | order by ["Error Count"] desc
 ```
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-create-error-distribution-by-error-code-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3-create-error-distribution-by-error-code-kusto-query"></a>
 #### Create Error Distribution By Error Code - Kusto Query
 
 ```js
@@ -365,7 +365,7 @@ ClientTelemetry
 | order by ["Error Count"] desc 
 ```
 
-<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-create-inner-most-error-distribution-kusto-query"></a>
+<a name="ibiza-create-flow-powerbi-dashboard-error-distribution-how-these-numbers-are-generated-3-create-inner-most-error-distribution-kusto-query"></a>
 #### Create Inner Most Error Distribution - Kusto Query
 
 ```js

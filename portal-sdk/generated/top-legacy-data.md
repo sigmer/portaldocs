@@ -105,7 +105,7 @@ If you're creating a new Area one more step that needs to be done is to edit you
 extension is loaded. Find the `initializeDataContexts` method and then use the `setDataContextFactory` method to set the DataContext like so:
 
 ```typescript
-        this.viewModelFactories.V1$MasterDetail().setDataContextFactory<typeof MasterDetailV1>(
+        this.viewModelFactories.V1$$MasterDetail().setDataContextFactory<typeof MasterDetailV1>(
             "./V1/MasterDetail/MasterDetailArea",
             (contextModule) => new contextModule.DataContext());
 ```
@@ -380,7 +380,7 @@ From a code organization standpoint, you can think of an Area as little more tha
 Typically, the DataContext associated with a particular Area is instantiated from the '`initialize()`' method of '`\Client\Program.ts`', the entry point of your extension:
 
 ```typescript
-        this.viewModelFactories.V1$MasterDetail().setDataContextFactory<typeof MasterDetailV1>(
+        this.viewModelFactories.V1$$MasterDetail().setDataContextFactory<typeof MasterDetailV1>(
             "./V1/MasterDetail/MasterDetailArea",
             (contextModule) => new contextModule.DataContext());
 ```

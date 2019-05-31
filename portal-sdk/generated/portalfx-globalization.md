@@ -120,7 +120,7 @@ console.log(Globalization.NumberFormat.create({ maximumSignificantDigits: 3 }).f
 
 **Globalization.DateTimeFormat.create([options])**
 
-<a name="globalization-api-number-formatter-options"></a>
+<a name="globalization-api-number-formatter-options-1"></a>
 #### Options
 
 Optional. An object with some or all of the following properties:
@@ -169,7 +169,7 @@ Optional. An object with some or all of the following properties:
 
 > [WACOM.NOTE] The default value for each date-time component property is undefined, but if all component properties are undefined, then year, month, and day are assumed to be "numeric".
 
-<a name="globalization-api-number-formatter-examples"></a>
+<a name="globalization-api-number-formatter-examples-1"></a>
 #### Examples
 **Example: Using DateTimeFormat**
 

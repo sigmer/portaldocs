@@ -348,7 +348,7 @@ These dropdowns are, however, based on a new accessible control which no longer 
 - `viewModelValueChangesAreClean` - no alternative
 - `visible` - use the `visible` binding in your html template
 
-<a name="building-custom-create-forms-migrating-from-legacy-arm-dropdowns-to-accessible-versions-subscriptions-dropdown"></a>
+<a name="building-custom-create-forms-migrating-from-legacy-arm-dropdowns-to-accessible-versions-subscriptions-dropdown-1"></a>
 #### Subscriptions dropdown
 In your current EditScope-based form, your Subscription dropdown looks something like this:
 ```ts

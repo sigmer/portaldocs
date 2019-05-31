@@ -334,7 +334,7 @@ For an example of responsive resources, see the `<dir>Client\V1\ResourceTypes\De
 
 <!-- TODO:  FAQ Format is ###Link, ***title***, Description, Solution, 3 Asterisks -->
 
-<a name="the-resource-menu-frequently-asked-questions-the-resource-menu"></a>
+<a name="the-resource-menu-frequently-asked-questions-the-resource-menu-1"></a>
 ### The Resource menu
 
 ***What is the resource menu?***

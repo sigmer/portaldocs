@@ -35,7 +35,7 @@ import { DataContext } from "../../NavigationArea";
 import * as Resources from "ClientResources";
 import { ViewModel as HotspotViewModel } from "Fx/Controls/HotSpot";
 
-import Def = ViewModelDefinitions.V1$Navigation.OpenBladeApiSamplesViewModel;
+import Def = ViewModelDefinitions.V1$$Navigation.OpenBladeApiSamplesViewModel;
 import BladeContainer = FxCompositionBlade.Container;
 import Grid = MsPortalFx.ViewModels.Controls.Lists.Grid;
 import QueryView = MsPortalFx.Data.QueryView;

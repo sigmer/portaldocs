@@ -62,7 +62,7 @@ The browse resources pattern is full screen experience that usually contains:
 
 <a name="behavior-title"></a>
 ### Title
-The title of a browse page is generally a descriptive, plural noun that reflects the items on the grid. Examples: “All resources”, “Virtual machines”, “Storage accounts”.
+The title of a browse page is generally a descriptive, plural noun that reflects the items on the grid. Examples: “All resources", “Virtual machines", “Storage accounts".
 
 <a name="behavior-toolbar-commands"></a>
 ### Toolbar commands
@@ -147,9 +147,9 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-tips-and-tricks"></a>
 ## Tips and tricks
 
-* Set your icon - `AssetType` icon Icon=”{Resource CommonImages.snowmobile, Module=V1/ResourceTypes/Common/CommonLogos}”
-* Set your desription for use in empty browse - `AssetType` description Description=”{Resource AssetTypeNames.Snowmobile.linkTitle, Module=ClientResources}”
-* Empty message/link - `AssetType` link <Link Title=”{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}” Uri=”http://www.bing.com”/>
+* Set your icon - `AssetType` icon Icon="{Resource CommonImages.snowmobile, Module=V1/ResourceTypes/Common/CommonLogos}"
+* Set your desription for use in empty browse - `AssetType` description Description="{Resource AssetTypeNames.Snowmobile.linkTitle, Module=ClientResources}"
+* Empty message/link - `AssetType` link <Link Title="{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}" Uri="http://www.bing.com"/>
 
 
 <a name="for-developers-related-documentation"></a>
