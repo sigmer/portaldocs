@@ -1,5 +1,5 @@
 ## Monitor Chart V2
-The Monitor Chart V2 control is the newer version of [MonitorChart Control](portalfx-controls-monitor-chart.md). This allows you to plot the multi-dimensional metrics for your resource in Azure with support for dimension based grouping and filters . It is part of the Ibiza framework, and it inherently knows how to fetch data for your resource.
+This control allows you to plot the multi-dimensional metrics for your resource in Azure with support for dimension based grouping and filters. It is part of the Ibiza framework, and it inherently knows how to fetch data for your resource.
 
 ### Benefits
 - **Performance** - The charts are built to render quickly and make efficient network calls for data
@@ -61,8 +61,104 @@ Once you reference the monitor chart control in your overview blade, it will loo
 
 ![Monitor chart control overview blade][3]
 
+### Legacy blade usage
+### Using the control on a locked/unlocked blade
+If you are not using a template blade, you can reference the `MonitorChartPart` from the `HubsExtension` in your blade's pdl.
+
+> Ensure that you have the HubsExtension.pde added to your extension. You can get the HubsExtension.pde and the MonitorChartPart.d.ts file from Microsoft.Portal.Extensions.Hubs.<<Build#>>.nupkg
+
+**Example Blade PDL:**
+```xml
+<Definition xmlns="http://schemas.microsoft.com/aux/2013/pdl"
+            xmlns:azurefx="http://schemas.microsoft.com/aux/2013/pdl/azurefx"
+            Area="MyArea">
+
+  <AdaptedPart Name="MyMonitorChartPartAdapter"
+    AdapterViewModel="{ViewModel Name=MonitorChartPartAdapter, Module=./MonitorChartPartAdapter}">
+
+    <AdaptedPart.InputDefinitions>
+      <InputDefinition Name="id" Type="MsPortalFx.ViewModels.ResourceId" />
+    </AdaptedPart.InputDefinitions>
+
+    <PartReference Name="MyMonitorChartPart" Extension="HubsExtension" PartType="MonitorChartPart">
+      <PartReference.PropertyBindings>
+        <Binding Property="options" Source="{Adapter options}" />
+      </PartReference.PropertyBindings>
+    </PartReference>
+
+  </AdaptedPart>
+
+  <Blade Name="MyBlade"
+         ViewModel="{ViewModel Name=MyBladeViewModel, Module=./MyBlade}">
+    <Lens Name="MonitoringLens">
+
+      <PartReference Name="MyPart" PartType="MyMonitorChartPartAdapter" InitialSize="HeroWide">
+        <PartReference.PropertyBindings>
+            <Binding Property="id">
+                <BladeParameter Property="id"/>
+            </Binding>
+        </PartReference.PropertyBindings>
+      </PartReference>
+
+    </Lens>
+  </Blade>
+
+</Definition>
+```
+
+**Example Blade view model:**
+```typescript
+import * as Blade from "Fx/Composition/Pdl/Blade";
+
+export class MonitorChartTestBladeViewModel {
+    constructor(container: Blade.Container, initialState: any, dataContext: any) {
+    }
+
+    public onInputsSet(inputs: any): Q.Promise<void> {
+        return null;
+    }
+}
+```
+
+**Example Adapted part view model:**
+```typescript
+/// <reference path="../../_extensions/Hubs/Definitions/MonitorChartPart.d.ts />
+import AggregationType = HubsExtension.MonitorChartPart.Metrics.AggregationType;
+import MonitorChartPartOptions = HubsExtension.MonitorChartPart.Options;
+
+export class MonitorChartPartAdapter {
+    public options: KnockoutObservable<MonitorChartPartOptions>;
+
+    constructor(container: any, initialState: any, dataContext: any) {
+        this.options = ko.observable({
+            chart: {
+                title: "My chart title",
+                metrics: [
+                    {
+                        resourceMetadata: {
+                            id: "<resource id goes here>"
+                        },
+                        name: "<metric name goes here>",
+                        aggregationType: AggregationType.Avg
+                    }
+                ],
+                timespan: {
+                    relative: {
+                        duration: 1 * 24 * 60 * 60 * 1000 // 1 day in milliseconds
+                    }
+                }
+            }
+        });
+    }
+}
+```
+
+> To see a complete list of the options you can pass to the MonitorChartPart, look at the `MonitorChartPart.d.ts` file either in the Hubs Nuget package, or [directly in the Hubs repo][5].
+> For an easy way to generate the correct config for the part or control, go to the Monitoring Extension, open the Metrics blade, configure the metric chart you want, pin it to an empty dashboard, download the dashboard .json config file, look at the configuration generated for that pinned MonitorChartPart and use it for your own monitor chart part or control.
+
 <!-- References -->
 [1]: https://df.onecloud.azure-test.net/#blade/SamplesExtension/SDKMenuBlade/monitorchartv2
 [2]: ../media/portalfx-controls-monitor-chart-v2/monitor-chart-v2-control-sample.png
 [3]: ../media/portalfx-controls-monitor-chart-v2/monitor-chart-v2-control-overview-blade.png
 [4]: https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFX?path=%2Fsrc%2FSDK%2FFramework.Client%2FTypeScript%2FFx%2FControls%2FMonitorChartV2.ts&version=GBproduction&_a=contents
+[5]: https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-PortalFX?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FTypeScript%2FHubsExtension%2FForExport%2FMonitorChartPart.d.ts&_a=contents
