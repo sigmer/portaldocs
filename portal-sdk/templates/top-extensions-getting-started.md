@@ -29,13 +29,6 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 
 1. copy the content of `/src` to your own repo.
 1. Open `/src/Default.sln` in Visual Studio
-1. Use the `Ctl + F5 key to compile and run the new project extension in **IIS Express**.
-
-1. On first run, a request to install a certificate for localhost for IIS Express may be displayed. Accept the certificate to continue, as in the following image.
-	
-    ![alt-text](../media/top-extensions-getting-started/ssl1.png "accept ssl prompt")
-    ![alt-text](../media/top-extensions-getting-started/ssl2.png "accept sec warning")
-
 1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow. 
 
 **Note**: If you are not seeing the allow Untrusted Extensions dialog there are two common issues in the [FAQ](#faq).
