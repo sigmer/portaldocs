@@ -28,7 +28,7 @@ The Azure Portal SDK includes everything you need to build extensions for the po
     a. `git checkout 5.0.302.19601` **Note** replace with version of SDK you which to checkout
 
 1. copy the content of `/src` to your own repo.
-1. Open `/src/Default.sln` in Visual Studio
+1. Open `/src/Default.sln` in Visual Studio *as Admin*
 1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow. 
 
 **Note**: If you are not seeing the allow Untrusted Extensions dialog there are two common issues in the [FAQ](#faq).
