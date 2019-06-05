@@ -3,7 +3,7 @@ The ResourcePart is a part provided by the portal framework for the purpose of p
 
 Extensions can use this part for pinning their resource blades and parts with very little investment. There is the additional benefit that this reduces the amount of code that extensions need to maintain.
 
-![alt-text](../media/top-extensions-parts-resourcepart/resourcePart.png "Resource Part")
+![alt-text](../media/top-extensions-parts-resourcepart/resourcePart.PNG "Resource Part")
 
 ### Pinning resources from browse
 The browse experience can use this part for pinning resources.   This simply requires that the PartName in a AssetType in PDL be "{ResourcePart}".   
