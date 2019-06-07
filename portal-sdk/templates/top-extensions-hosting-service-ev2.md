@@ -131,7 +131,7 @@ Note: If using a non standard path for ServiceGroupRootReplacements set build pr
 
         1. The certificate that Ev2 will use to call the hosting service to initate a deployment.
 
-            **NOTE**: Azure ignores this certificate but it is still required. The extension is validated based on an allowed list of storage accounts and the storage credential you supply by using the   `PortalExtensionName`, `TargetStorageCredentialsKeyVaultUri` and `TargetContainerName` settings.
+            **NOTE**: You can use any valid certificate as Hosting Service EV2 extension ignores this certificate but it is still required by EV2 itself. The extension is validated based on an allowed list of storage accounts and the storage credential you supply by using the   `PortalExtensionName`, `TargetStorageCredentialsKeyVaultUri` and `TargetContainerName` settings.
 
         1. The credentials to the target storage account where the extension will be deployed. The format of the connection string is the default form `DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix={3}`, which is the format provided from `portal.azure.com`.
     
