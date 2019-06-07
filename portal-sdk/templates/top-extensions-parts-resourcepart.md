@@ -45,3 +45,60 @@ If this is a existing asset type for which the ResourcePart is replacing a custo
     <ResourcePart />
   </RedirectPart>
 ```
+## Displaying resource status
+The resource part queries the Azure Resource Graph (ARG) for resource status.  However status is calculated differently for each resource type.   Furthermore the status value is not localized.   The extension needs to provide a ARG query that contains the status property.  Furthermore the status column needs to be specified in the resource browse settings.
+
+### Authoring a ARG query
+In the portal SDK ARG queries are saved in text files with the .kml extension.  ARG queries are very similar Kusto queries.  The portal has a ARQ query blade which can be used to author and test the query.   
+
+https://portal.azure.com/#blade/HubsExtension/ARGQueryBlade
+
+Once you have a query which contains a status column create a .kml file and save it there.  Typically you would want to save this file in the same location where the pdl file which contains your AssetType is located.  A sample *unlocalized* query would look like this:
+
+```
+where type == 'microsoft.test/virtualservers' |
+extend status = properties.status
+```
+
+### Adding the ARG query to the resource type
+The ARG query needs to be added to the AssetType.   You need to specify four things.
+
+* The name of the file that contains your newly created query
+* The column(s) you to share with the new ARG browse experience
+* The default columns to display in browse
+* The name of the status column (for consumption by the resource part)
+
+Here is a sample AssetType which has these.   This sample is also included in the SDK samples
+
+```xml
+  <AssetType Name="VirtualServer"
+             ...
+             PartName="{ResourcePart}">
+    <Browse Type="ResourceType"
+            UseCustomConfig="true"
+            UseSupplementalData="true" 
+            Query="{Query File=./VirtualServerQuery.kml}"
+            DefaultColumns=" status">
+      <Summary StatusColumn="status" />
+      <Column Name="status"
+            DisplayName="{Resource Columns.VirtualServer.status, Module=ClientResources}"
+            Description="{Resource Columns.VirtualServer.statusDescription, Module=ClientResources}"
+            Format="String"
+            WidthInPixels="80" />
+    </Browse>
+```
+
+### Localizing strings in the query
+ARG does not return localized strings.   However at compile time the Portal SDK has the ability to replace values in the query with localized strings contained in the extensions resx file. The syntax for referencing a localized string in the query is similar to the syntax used in PDL.   Here is a sample query that uses the [case()](https://kusto.azurewebsites.net/docs/query/casefunction.html) operator to convert strings to localized values.
+
+```
+where type == 'microsoft.test/printers'
+| extend model = properties.model
+| extend status = case(
+    tolower(properties.status) == 'working', '{{Resource Status.Printer.working, Module=ClientResources}}',
+    tolower(properties.status) == 'jammed', '{{Resource Status.Printer.jammed, Module=ClientResources}}',
+    tolower(properties.status) == 'damaged', '{{Resource Status.Printer.damaged, Module=ClientResources}}',
+    tolower(properties.status) == 'out-of-paper', '{{Resource Status.Printer.outOfPaper, Module=ClientResources}}',
+    'Unknown')
+```
+    
