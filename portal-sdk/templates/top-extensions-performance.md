@@ -693,6 +693,7 @@ The frameworks supports a new extension load contract that can improve extension
 
 ## Pull Request Samples
 
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753
 - https://dev.azure.com/msazure/One/_git/Mgmt-RecoverySvcs-Portal/pullrequest/1423720
 - https://msazure.visualstudio.com/One/_git/MGMT-AppInsights-InsightsPortal/pullrequest/1426564
-- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753?_a=files
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753
