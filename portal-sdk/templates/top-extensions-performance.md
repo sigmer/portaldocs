@@ -554,6 +554,7 @@ The framework supports loading view models using dependency injection. If you mi
 
 - Migrate to V2 targets if you haven’t done so (See: [V2 targets](#v2-targets))
 - Ensure that the `emitDecoratorMetadata` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `forceConsistentCasingInFileNames` compiler option is set to `true` in the tsconfig.json
 - Ensure that the `moduleResolution` compiler option is set to `node` in the tsconfig.json
 - Upgrade to at least SDK 3001+
 - Cleanup your extension project TypeScript code and remove all uses of export = Main.
