@@ -164,7 +164,7 @@ const onCreateButtonClick = () => {
             // IMPORTANT: If you decide to log your TemplateDeploymentResults, particularly the parameters
             // property, make sure you do *NOT* log any secure strings or secure objects (e.g. passwords).
             // This is a security compliance issue.
-            MsPortalFx.Base.Diagnostics.Telemetry.trace({
+            FxBase.Diagnostics.Telemetry.trace({
                 source: "CreateEngineSample",
                 action: "TemplateDeploymentResult",
                 data: {

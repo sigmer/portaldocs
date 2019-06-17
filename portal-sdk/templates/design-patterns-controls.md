@@ -16,6 +16,9 @@ Controls are the building blocks of the Azure UX. They allow users to view, edit
 * [RadioButtons](design-patterns-controls-RadioButtons.md)
 * [RangeSlider](design-patterns-controls-RangeSlider.md)
 * [Slider](design-patterns-controls-Slider.md)
+* [SubscriptionDropDown](design-pattern-controls-SubscriptionDropDown.md)
+* [ResourceGroupDropDown](design-pattern-controls-ResourceGroupDropDown.md)
+* [LocationDropDown](design-pattern-controls-LocationDropDown.md)
 
 ## Pickers
 * [DatePicker](design-patterns-controls-DatePicker.md)
