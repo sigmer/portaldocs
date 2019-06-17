@@ -24,7 +24,7 @@ You can read more [here](portalfx-telemetry-kusto-databases.md) about Kusto and 
 
 ### Tracked Actions
 
-{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}
+[top-telemetry.md](top-telemetry#overview-viewing-telemetry-custom-queries-tracked-actions)
 
 ## Logging
 

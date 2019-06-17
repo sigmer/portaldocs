@@ -36,13 +36,13 @@ When there are more than 5 items in any panes, only first 5 items in each panes 
 <br>
 
 <a name="essentialsProperties"></a>
-<a name="essentials-control-types"></a>
+<a name="essentials-control-types-1"></a>
 ### Types
 
-<a name="essentials-control-types-type-of-properties"></a>
+<a name="essentials-control-types-1-type-of-properties"></a>
 #### Type of Properties
 
-<a name="essentials-control-types-type-of-properties-text"></a>
+<a name="essentials-control-types-1-type-of-properties-text"></a>
 ##### Text
 ```typescript
 {
@@ -50,7 +50,7 @@ When there are more than 5 items in any panes, only first 5 items in each panes 
     value: "Sample Value"
 }
 ```
-<a name="essentials-control-types-type-of-properties-link"></a>
+<a name="essentials-control-types-1-type-of-properties-link"></a>
 ##### Link
 ```typescript
 {
@@ -59,7 +59,7 @@ When there are more than 5 items in any panes, only first 5 items in each panes 
     onClick: new ClickableLink(ko.observable("http://www.bing.com"))
 }
 ```
-<a name="essentials-control-types-type-of-properties-customlink"></a>
+<a name="essentials-control-types-1-type-of-properties-customlink"></a>
 ##### CustomLink
 ```typescript
 {
@@ -71,11 +71,11 @@ When there are more than 5 items in any panes, only first 5 items in each panes 
 }
 ```
 
-<a name="essentials-control-types-type-of-properties-built-in-builtinproperties"></a>
+<a name="essentials-control-types-1-type-of-properties-built-in-builtinproperties"></a>
 ##### <a href="#builtInProperties">Built-In</a>
 <br>
 <a name="builtInProperties"></a>
-<a name="essentials-control-types-built-in-properties"></a>
+<a name="essentials-control-types-1-built-in-properties"></a>
 #### Built-In Properties
 
 ```typescript
@@ -141,10 +141,10 @@ A label with multiple [properties](#essentialsProperties)
 }
 ```
 
-<a name="essentials-control-options"></a>
+<a name="essentials-control-options-1"></a>
 ### Options
 <a name="defaultEssentials"></a>
-<a name="essentials-control-options-default"></a>
+<a name="essentials-control-options-1-default"></a>
 #### Default
 
 To use the essentials, compose a template blade that hosts the essentials control, then use it from your extension.
@@ -288,12 +288,12 @@ public onInitialize(): Q.Promise<void> {
  */
 private _initializeControl(): void {
     const bladeLink: BladeLink = {
-        bladeReference: ko.observable(BladeReferences.forBlade("NoParameterChildBlade").createReference()),
+        bladeReference: BladeReferences.forBlade("NoParameterChildBlade").createReference(),
     };
     const resourceLink: ResourceLink = {
         resourceId: "/subscriptions/sub123/resourceGroups/accounts/providers/Microsoft.test/accounts/Peter",
     };
-    this.essentials =  Essentials.create(this.context.container, {
+    this.essentials =  Essentials.createDefaultResourceLayout(this.context.container, {
         resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
         includeTags: true,
         additionalRight: [{
@@ -356,7 +356,7 @@ private _initializeControl(): void {
 ```
 
 <a name="customLayoutEssentials"></a>
-<a name="essentials-control-options-custom-layout"></a>
+<a name="essentials-control-options-1-custom-layout"></a>
 #### Custom Layout
 
 To use the essentials, compose a template blade that hosts the essentials control, then use it from your extension.
@@ -447,7 +447,7 @@ public onInitialize(): Q.Promise<void> {
  */
 private _initializeControl(): void {
     let clickCounter = 0;
-    this.essentials =  Essentials.create(this.context.container, {
+    this.essentials =  Essentials.createCustomResourceLayout(this.context.container, {
         resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
         left: [
             Essentials.BuiltInType.Status,
@@ -504,7 +504,7 @@ private _initializeControl(): void {
 ```
 
 <a name="nonResourceEssentials"></a>
-<a name="essentials-control-options-non-resource"></a>
+<a name="essentials-control-options-1-non-resource"></a>
 #### Non-Resource
 
 To use the essentials, compose a template blade that hosts the essentials control, then use it from your extension.
@@ -600,7 +600,7 @@ public onInitialize(): Q.Promise<void> {
  */
 private _initializeControl(): void {
     let clickCounter = 0;
-    this.essentials = Essentials.create(this.context.container, {
+    this.essentials = Essentials.createNonResourceLayout(this.context.container, {
         left: [
             {
                 label: ClientResources.essentialsItem,
@@ -656,11 +656,11 @@ private _initializeControl(): void {
 
 ```
 
-<a name="essentials-control-features"></a>
+<a name="essentials-control-features-1"></a>
 ### Features
 
 <a name="essentialsCallbacks"></a>
-<a name="essentials-control-features-resource-blade-open-close-callbacks"></a>
+<a name="essentials-control-features-1-resource-blade-open-close-callbacks"></a>
 #### Resource Blade Open/Close Callbacks
 
 Resource blade open/close callback functions are provided and can be used for logging telemetry or some other needed tasks.
@@ -695,7 +695,7 @@ onBladeClose: (origin: Essentials.BuiltInType) => {
 ```
 
 <a name="essentialsDynamicProps"></a>
-<a name="essentials-control-features-add-dynamic-properties"></a>
+<a name="essentials-control-features-1-add-dynamic-properties"></a>
 #### Add Dynamic Properties
 
 `\Client\V2\Controls\Essentials\EssentialsDefaultBlade.ts`
@@ -742,68 +742,3 @@ const items: ((Essentials.Item | Essentials.MultiLineItem)[]) = results.map((dat
 ```
 
 As the above code shows, the sample AJAX response contains 4 properties. First 2 items are added to left pane and last 2 items are added to right pane.
-
-<a name="responsiveEssentials"></a>
-<a name="essentials-control-features-responsive-columns"></a>
-#### Responsive Columns
-
-`\Client\V2\Controls\Essentials\EssentialsResponsiveBlade.ts`
-
-```typescript
-
-this.essentials =  Essentials.create(this.context.container, {
-    responsiveColumns: true,
-    resourceId: "/subscriptions/sub123/resourcegroups/servertest/providers/Microsoft.test/virtualservers/default1",
-    additionalRight: [{
-        label: ClientResources.essentialsItem,
-        value: ClientResources.essentialsSampleString,
-    }, {
-        label: ClientResources.essentialsItem,
-        value: "Bing.com",
-        onClick: new ClickableLink(ko.observable("http://www.bing.com")),
-        icon: {
-            image: MsPortalFx.Base.Images.SmileyHappy(),
-            position: Essentials.IconPosition.Right,
-        },
-    }, {
-        label: ClientResources.essentialsMultiLineItem,
-        lines: [{
-            value: ClientResources.essentialsSampleString,
-        }, {
-            value: "Bing.com",
-            onClick: new ClickableLink(ko.observable("http://www.bing.com")),
-            icon: {
-                image: MsPortalFx.Base.Images.SmileyHappy(),
-                position: Essentials.IconPosition.Left,
-            },
-        }],
-    }],
-    onBladeOpen: (origin: Essentials.BuiltInType) => {
-        switch (origin) {
-            case Essentials.BuiltInType.ResourceGroup:
-                this.essentials.modifyStatus(ClientResources.essentialsResourceGroupOpened);
-                break;
-            case Essentials.BuiltInType.SubscriptionName:
-                this.essentials.modifyStatus(ClientResources.essentialsSubscriptionOpened);
-                break;
-        }
-    },
-    onBladeClose: (origin: Essentials.BuiltInType) => {
-        switch (origin) {
-            case Essentials.BuiltInType.ResourceGroup:
-                this.essentials.modifyStatus(ClientResources.essentialsResourceGroupClosed);
-                break;
-            case Essentials.BuiltInType.SubscriptionName:
-                this.essentials.modifyStatus(ClientResources.essentialsSubscriptionClosed);
-                break;
-        }
-    },
-});
-
-```
-
-The optional `boolean` property `responsiveColumns` can be specified to `true` to use responsive columns feature.
-
-`Small` sized blade will contain single column and full screen will contain multiple number of columns depends on the blade's width.
-
-[essentials-sample]: ../media/portalfx-controls/essentials.png

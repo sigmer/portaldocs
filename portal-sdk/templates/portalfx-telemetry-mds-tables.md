@@ -33,9 +33,3 @@
 - AuxWebUiSvcWarnings - All server warnings logged (ex: `Trace.Warning`)
 - AuxWebUiSvcUnauthorized - Information about users denied access
 - AuxWebUiWindowsEvents - Windows event logs
-
-## Details
-
-### AuxwebUiClientTelemetry
-
-{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}

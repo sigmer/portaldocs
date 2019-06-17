@@ -42,7 +42,7 @@ The information associated with each part provides the following information.
 
 * **The name and owning extension**: Displays the name of the blade or part and the name of the extension that is the parent of the blade or part. Clicking on this logs debugging information to the console including the composition instance, view model and definition.
 
-* **Revealed**: The revealed time and all other performance information that is logged by that part, as specified in [portalfx-telemetry-actions.md](portalfx-telemetry-actions.md).
+* **Revealed**: The revealed time and all other performance information that is logged by that part, as specified in [top-telemetry.md](top-telemetry#overview-viewing-telemetry-custom-queries-tracked-actions).
 
 * **ViewModel**: Contains the following functionality.
     * **Dump**: Dumps the view model to the console for debugging purposes. Displays its name, parent extension and load time. Click on the div to log more information such as the part definition, view model name and inputs.

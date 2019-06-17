@@ -16,13 +16,15 @@ const templatesDir = path.resolve(sdkDir, 'templates');
 /**  
  * generates docs for gallery team
  */
-gulp.task('gallery', function () {
+function gallery() {
     if (!fs.existsSync(generatedDir)) {
         fs.mkdirSync(generatedDir);
     }
     return gulpCommon.processFile(path.resolve(templatesDir, "index-gallery.md"), generatedDir, {}, true).then(function () {
-        if (process.argv.indexOf("--verify") > 0) {
+        if (process.argv.indexOf("--verifyurl") > 0) {
             return gulpCommon.checkLinks(path.resolve(generatedDir, "index-gallery.md"));
         }
     });
-});
+}
+
+exports.gallery = gallery;

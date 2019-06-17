@@ -1,4 +1,4 @@
-<properties title="" pageTitle="Gallery Item Specificiations" description="" authors="adwest" />
+<properties title="" pageTitle="Gallery Item Specificiations" description="" authors="ansud" />
 
 {"gitdown": "include-file", "file": "./includes/gallery-header.md"}
 
@@ -228,6 +228,15 @@ To upload the package run the following command.
 ```bat
 > AzureGallery.exe upload -p ..\path\to\package.azpkg
 ```
+
+Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints: 
+```
+https://df.gallery.azure-test.net/Microsoft.Gallery/Galleryitems/<galleryItemId>?api-version=2015-04-01
+```
+```
+https://df.catalogrp.azure-test.net/view/offers/<galleryItemId>?api-version=2018-08-01-beta
+```
+Make sure to update the "**galleryItemId**" in the URI that you received when you uploaded the package. If you have added a hidekey, Please add an additional query parameter  `"HideKeys[0]=<your hidekey>"`
 
 #### Publishing a Azure Gallery Package to National Clouds (Fairfax/Mooncake)
 

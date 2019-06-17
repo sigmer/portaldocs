@@ -228,16 +228,3 @@ Note that this feature is not available in `NonResource` essentials.
 {"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V2/Controls/Essentials/EssentialsDefaultBlade.ts","section":"essentials#addDynamicProps"}
 
 As the above code shows, the sample AJAX response contains 4 properties. First 2 items are added to left pane and last 2 items are added to right pane.
-
-<a name="responsiveEssentials"></a>
-#### Responsive Columns
-
-`\Client\V2\Controls\Essentials\EssentialsResponsiveBlade.ts`
-
-{"gitdown":"include-section","file":"../Samples/SamplesExtension/Extension/Client/V2/Controls/Essentials/EssentialsResponsiveBlade.ts","section":"essentials#responsive"}
-
-The optional `boolean` property `responsiveColumns` can be specified to `true` to use responsive columns feature.
-
-`Small` sized blade will contain single column and full screen will contain multiple number of columns depends on the blade's width.
-
-[essentials-sample]: ../media/portalfx-controls/essentials.png

@@ -151,7 +151,7 @@ This will asynchronously return a result from the source.
 > [WACOM.NOTE] Extensions in the portal will often need to be loaded into memory to perform an RPC call. It is often more predictable when both extensions are projecting UI.
 
 
-<a name="the-pde-file"></a>
+<a name="the-pde-file-1"></a>
 ## The PDE File
 
 You may not have noticed, but every time you build your project you're generating a .PDE file inside of the `\Client\_generated` directory. The PDE file contains a list of the parts which are exposed in the global scope, along with a few other pieces of metadata:
@@ -190,7 +190,7 @@ You may not have noticed, but every time you build your project you're generatin
 
 To share parts, blades, or asset types with another extension, **both extensions must be running in the same portal**. The sharing of parts occurs at runtime, which requires that both extensions be present within the shell for this technique to work.
 
-<a name="importing-the-pde-file"></a>
+<a name="importing-the-pde-file-1"></a>
 ## Importing the PDE file
 
 After you've generated the PDE file, it needs to be added to the project of the extension that wishes to consume your parts. First, add the file to your project. Next, you need to make a manual change to your .csproj file. Instead of using the `<Content>` compile action, you need to change it to `<ExtensionReference>`. Right click on your project file, and choose 'Unload Project'. Next, right click the project file again, and choose 'Edit'. Find the PDE file reference, and change the compile action:

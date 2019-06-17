@@ -92,7 +92,7 @@ $>npm run docs
 
 To verify all links work use
 ```
-$>npm run docs -- --verify
+$>npm run docs -- --verifyurl
 ```
 
 If you have added new links that internal or authenticated or dummy then you can exclude checks for them by including them in  urlsToSkip array on line 250 of gulpcommon.js.

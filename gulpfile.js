@@ -6,10 +6,11 @@
  * top level gulp that can be used to aggregate tasks across N SDK gulp files
  */
 var gulp = require('gulp');
-var gulpFile = require('./portal-sdk/gulpfile.js');
-var gulpFile = require('./gallery-sdk/gulpfile.js');
+var { dynamicdocs, portal, ux } = require('./portal-sdk/gulpfile.js');
+var { gallery } = require('./gallery-sdk/gulpfile.js');
 
-//default gulp task to run both new and old legacy content
-gulp.task('default', ['portal']);
-
-gulp.task('docs', ['portal', 'gallery']);
+gulp.task("default", portal);
+gulp.task("docs", gulp.series(portal, gallery));
+gulp.task("dynamicdocs", dynamicdocs);
+gulp.task("ux", ux);
+gulp.task("gallery", gallery);

@@ -45,7 +45,7 @@ These emails have clickable Kusto links within the reported numbers. Clicking on
 #### Action 
 This represents an event in the Portal.
 
-{"gitdown": "include-file", "file": "portalfx-telemetry-actions.md"}
+[top-telemetry.md](top-telemetry#overview-viewing-telemetry-custom-queries-tracked-actions)
 
 #### ActionModifier
 This is used in tandem with the Action field. This represents a status of a particular Action. So for BladeReady for eg., you will see ActionModifier values of start, complete & cancel

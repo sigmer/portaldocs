@@ -5,7 +5,7 @@
 
 **NOTE**: This section is only relevant to extension developers who are using WARM and EV2 for deployment, or who plan to migrate to WARM and EV2 for deployment.
 
-<a name="ev2-integration-with-hosting-service"></a>
+<a name="ev2-integration-with-hosting-service-1"></a>
 ## EV2 Integration with hosting service
 
 If you are not familiar with WARM and EV2, it is recommended that you read the documentation provided by their teams. If you have any questions about these systems please reach out to the respective teams.
@@ -17,7 +17,7 @@ Deploying an extension with hosting requires extension developers to upload the 
 
 Since EV2 does not provide an API to upload the zip file, setting up the deployment infrastructure can become an unmanageable task. The deployment process is simplified  by leveraging the EV2 extension that was developed by the Ibiza team. The EV2 extension allows the upload of the zip file to a storage account in a way that is compliant.
 
-<a name="ev2-integration-with-hosting-service-configuring-builds-for-ev2-based-deployments"></a>
+<a name="ev2-integration-with-hosting-service-1-configuring-builds-for-ev2-based-deployments"></a>
 ### Configuring Builds for Ev2 based deployments
 
 In the basic scenario Microsoft.Portal.Tools.v2.targets will generate Ev2 templates. This includes the rollout spec, service model schema and parameter files. The procedure is as follows. 
@@ -165,7 +165,7 @@ Note: If using a non standard path for ServiceGroupRootReplacements set build pr
     
     To perform a production deployment as specified in [https://aka.ms/portalfx/howtodeploy](https://aka.ms/portalfx/howtodeploy), or deployment by using the Warm UX that is specified in [https://warm/newrelease/ev2](https://warm/newrelease/ev2), we assume that you have already onboarded to WARM. If not please see the Ev2 WARM onboarding guidance located at [https://aka.ms/portalfx/warmonboarding](https://aka.ms/portalfx/warmonboarding). For questions please reach out to  <a href="mailto:ev2sup@microsoft.com?subject=Ev2 WARM onboarding">ev2sup@microsoft.com</a>.
 
-<a name="ev2-integration-with-hosting-service-what-output-is-generated"></a>
+<a name="ev2-integration-with-hosting-service-1-what-output-is-generated"></a>
 ### What output is generated?
 
 The preceding  configuration will result in a build output as required by Ev2 and the hosting service. The following  is a sample of the output that gets generated.
@@ -184,7 +184,7 @@ The preceding  configuration will result in a build output as required by Ev2 an
                   \Production.friendlyname_3.json
   ```
 
-<a name="ev2-integration-with-hosting-service-specify-ev2-bake-time"></a>
+<a name="ev2-integration-with-hosting-service-1-specify-ev2-bake-time"></a>
 ### Specify Ev2 bake time
 
 The EV2 template files that are shipped are now formatted to accept customized monitor durations, which is the time to wait between each stage of a deployment, also known as bake time. To accommodate this, the files have been renamed from `Blackforest.RolloutParameters.PT6H.json` to 
@@ -211,7 +211,7 @@ The monitor duration can be specified by updating the  `ServiceGroupRootReplacem
 
 If no monitor durations are specified, then the EV2 generation will default to 6 hours (PT6H) and 1 day (P1D).
 
-<a name="ev2-integration-with-hosting-service-skipping-safe-deployment"></a>
+<a name="ev2-integration-with-hosting-service-1-skipping-safe-deployment"></a>
 ### Skipping safe deployment
 
 EV2 templates now support generating deployment files that do not include a delay between stages.  This can be enabled by adding the key/value pair `"SkipSafeDeployment": "true" ` in the corresponding environment in the `ServiceGroupRootReplacements.json` file.  The following example adds the SkipSafeDeployment key/value pair to the extension named `Microsoft_MyExtension` in the **MOONCAKE** environment.
@@ -233,12 +233,12 @@ EV2 templates now support generating deployment files that do not include a dela
     }
   ```
 
-<a name="ev2-integration-with-hosting-service-friendly-name-removal"></a>
+<a name="ev2-integration-with-hosting-service-1-friendly-name-removal"></a>
 ### Friendly name removal
 
 To remove a friendly name, just run an EV2 deployment with the `Rolloutspec.RemoveFriendlyName.<friendlyName>.json` file.
 
-<a name="ev2-integration-with-hosting-service-warm-integration-with-hosting-service"></a>
+<a name="ev2-integration-with-hosting-service-1-warm-integration-with-hosting-service"></a>
 ### WARM Integration with hosting service
 
   It is assumed that you have already onboarded to WARM if you will be deploying to production, or deploying by using the WARM UX. The production deployment instructions are    specified in the site located at  [https://aka.ms/portalfx/warmproduction](https://aka.ms/portalfx/warmproduction), and the WARM UX deployment instructions are specified in the site located at [https://warm/newrelease/ev2](https://warm/newrelease/ev2).  

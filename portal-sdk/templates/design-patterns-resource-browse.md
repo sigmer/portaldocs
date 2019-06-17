@@ -51,7 +51,7 @@ The browse resources pattern is full screen experience that usually contains:
 ## Behavior 
 
 ### Title
-The title of a browse page is generally a descriptive, plural noun that reflects the items on the grid. Examples: “All resources”, “Virtual machines”, “Storage accounts”.
+The title of a browse page is generally a descriptive, plural noun that reflects the items on the grid. Examples: “All resources", “Virtual machines", “Storage accounts".
 
 ### Toolbar commands
 The toolbar for the browse pattern contains actions that operate against a grid, i.e. 'Add' or 'Delete' a resource, as well as resource-specific actions (for a limited set of resource types). 
@@ -124,9 +124,9 @@ Developers can use the following information to get started implementing this pa
 
 ## Tips and tricks 
 
-* Set your icon - `AssetType` icon Icon=”{Resource CommonImages.snowmobile, Module=V1/ResourceTypes/Common/CommonLogos}”
-* Set your desription for use in empty browse - `AssetType` description Description=”{Resource AssetTypeNames.Snowmobile.linkTitle, Module=ClientResources}”
-* Empty message/link - `AssetType` link <Link Title=”{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}” Uri=”http://www.bing.com”/>
+* Set your icon - `AssetType` icon Icon="{Resource CommonImages.snowmobile, Module=V1/ResourceTypes/Common/CommonLogos}"
+* Set your desription for use in empty browse - `AssetType` description Description="{Resource AssetTypeNames.Snowmobile.linkTitle, Module=ClientResources}"
+* Empty message/link - `AssetType` link <Link Title="{Resource AssetTypeNames.Snowmobile.linkTitle, Mobile=ClientResources}" Uri="http://www.bing.com"/>
 
 
 ## Related documentation

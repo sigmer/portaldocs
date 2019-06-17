@@ -2,6 +2,7 @@
     * [OnBoarding to the Gallery](#gallery-overview-onboarding-to-the-gallery)
     * [Gallery Experience](#gallery-overview-gallery-experience)
     * [Gallery Service](#gallery-overview-gallery-service)
+    * [New Process](#gallery-overview-new-process)
 * [Gallery Item Specificiations](#gallery-item-specificiations)
     * [Marketplace Search ##](#gallery-item-specificiations-marketplace-search)
     * [Gallery Package Search Metadata ##](#gallery-item-specificiations-gallery-package-search-metadata)
@@ -81,7 +82,54 @@ The entire gallery in the portal is driven by the gallery service. The gallery s
 
 [gallery-items]: ../media/gallery-overview/gallery-items.png
 
-<properties title="" pageTitle="Gallery Item Specificiations" description="" authors="adwest" />
+<properties title="" pageTitle="Updated Azure Package Publishing Process (May 2019 Onwards)" description="" authors="ansud" />
+
+<div class="wa-documentationArticle-meta">
+  <p class="wa-linkArray">
+    Related documents:
+    <a href="/documentation/articles/gallery-overview">Overview</a>
+    <a href="/documentation/articles/gallery-release-notes">Release Notes</a>
+    <a href="/documentation/articles/gallery-items">Gallery Items</a>
+    <a href="/documentation/articles/gallery-metadata">Gallery Metadata</a>
+    <a href="/documentation/articles/gallery-development">Gallery Package Development and Debugging </a>
+    <a href="/documentation/articles/gallery-icon-guidelines">Icon Guidelines</a>
+    <a href="/documentation/articles/gallery-add-to-resource">Add To Resource</a>
+    <a href="/documentation/articles/gallery-faq">FAQ</a>
+  </p>
+</div>
+
+<a name="gallery-overview-new-process"></a>
+## New Process
+
+Starting <b>1st May 2019</b>, Gallery is switching the process of publishing to Azure Production. Packages would only be received via ICM for making updates to Azure Production Clouds. If you publish a product to Microsoft Azure directly without going through Cloud Partner Portal, these changes impact you.
+
+<a name="gallery-overview-new-process-package-update-slas"></a>
+### Package Update SLAs
+The following SLAs would be provided for these incidents:
+
+* Regular Package Update	- 48 business hours
+* Urgent Package Updates	- 24 business hours
+* Live Site - Case by Case basis, please email 1storehot after opening ICM.
+
+<a name="gallery-overview-new-process-steps-to-update"></a>
+### Steps to Update
+-  Go through the gallery documentation here to create your package: https://aka.ms/GalleryDocs 
+-  Log onto ICM and use the template here to create an incident: https://aka.ms/UpdateGalleryPackage 
+-  Create an incident for each cloud and ensure the correct package is attached to each incident.
+-  You may attach multiple packages to 1 incident as long as you are updating the same cloud (Public/Fairfax/Blackforest/Mooncake)
+-  Ensure the right cloud instance is selected and environment is PROD.
+-  Select deployment priority and submit the incident. No need to fill the fields for ‘service category azure’
+-  Once your update is processed, the incident will be updated with confirmation of the changes and closed. You may reactivate the incident with information if you see any issues.
+
+<a name="gallery-overview-new-process-other-important-points"></a>
+### Other Important Points
+
+-	Business justifications must be provided for expedited requests and will be tracked at SHR level. Enter N/A for normal priority. 
+-	For events such as Build, Inspire etc. , the SLAs may be suspended due to package volume. Hence we recommend pushing your packages much in advance.
+-	The process to update packages in dogfood is fully self service and remains the same.
+
+
+<properties title="" pageTitle="Gallery Item Specificiations" description="" authors="ansud" />
 
 <div class="wa-documentationArticle-meta">
   <p class="wa-linkArray">
@@ -337,6 +385,15 @@ To upload the package run the following command.
 ```bat
 > AzureGallery.exe upload -p ..\path\to\package.azpkg
 ```
+
+Provisioning your package to all the regions and Cache refresh might take up to 30 minutes to show up in Azure Marketplace. You can verify this using a public endpoints: 
+```
+https://df.gallery.azure-test.net/Microsoft.Gallery/Galleryitems/<galleryItemId>?api-version=2015-04-01
+```
+```
+https://df.catalogrp.azure-test.net/view/offers/<galleryItemId>?api-version=2018-08-01-beta
+```
+Make sure to update the "**galleryItemId**" in the URI that you received when you uploaded the package. If you have added a hidekey, Please add an additional query parameter  `"HideKeys[0]=<your hidekey>"`
 
 <a name="gallery-item-specificiations-gallery-package-management-publishing-a-azure-gallery-package-to-national-clouds-fairfax-mooncake"></a>
 #### Publishing a Azure Gallery Package to National Clouds (Fairfax/Mooncake)
@@ -936,3 +993,4 @@ To access hidden gallery items in the portal, append "microsoft_azure_marketplac
 Check to make sure you aren't running fiddler or any other tool that may interfere with HTTP traffic. This is usually the cause of this problem.
 
 [plus-new]: ../media/gallery-faq/plus-new.png
+

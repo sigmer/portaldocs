@@ -2,20 +2,19 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
-var gulpCommon = require('../gulpcommon.js');
-var fs = require('fs');
-var storage = require('azure-storage');
-var Q = require('q');
-var gulp = require('gulp');
-var path = require('path');
-var util = require('util');
-var dir = require('node-dir');
-var chalk = require('chalk');
+var gulpCommon = require("../gulpcommon.js");
+var fs = require("fs");
+var storage = require("azure-storage");
+var Q = require("q");
+var path = require("path");
+var util = require("util");
+var dir = require("node-dir");
+var chalk = require("chalk");
 
 //directories have to work within both AzureUx-PortalFx and portalfx-docs-pr repos.
 const sdkDir = __dirname;
-const generatedDir = path.resolve(sdkDir, 'generated');
-const templatesDir = path.resolve(sdkDir, 'templates');
+const generatedDir = path.resolve(sdkDir, "generated");
+const templatesDir = path.resolve(sdkDir, "templates");
 const fourMonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 4));
 
 const vstfrdWorkItemUrl = "http://vstfrd:8080/Azure/RD/_workitems#_a=edit&id=";
@@ -24,17 +23,17 @@ const msazureWorkItemUrl = "https://msazure.visualstudio.com/DefaultCollection/O
 /**  
  * generates docs for ux design team
  */
-gulp.task('ux', function () {
+function ux() {
     if (!fs.existsSync(generatedDir)) {
         fs.mkdirSync(generatedDir);
     }
     return gulpCommon.processFile(path.resolve(templatesDir, "index-portalfx-ux.md"), generatedDir, {}, true);
-});
+};
 
 /**  
  * generates all documentation for both legacy auxdocs.azurewebsites.net and new github documentation
  */
-gulp.task('portal', function () {
+function portal() {
     //required for short path to SamplesExtension
     gulpCommon.createSymlink("portal-sdk/samples/SamplesExtension", "../src/SDK/AcceptanceTests/Extensions/SamplesExtension");
     gulpCommon.createSymlink("portal-sdk/samples/SampleAzExtension", "../src/SDK/AcceptanceTests/Extensions/SampleAzExtension");
@@ -48,10 +47,10 @@ gulp.task('portal', function () {
 
     console.log("templates Dir " + templatesDir);
 
-    return Q.ninvoke(dir, "paths", templatesDir, true).then(function(paths) {
+    return Q.ninvoke(dir, "paths", templatesDir, true).then(function (paths) {
         try {
             var filePromises = [Q()];
-            
+
             var dirs = paths.filter(function (file) {
                 return file.endsWith(".md");
             });
@@ -70,59 +69,58 @@ gulp.task('portal', function () {
             return Q.all(filePromises);
         }
         catch (err) {
-           console.log("An error occured: " + err);
+            console.log("An error occured: " + err);
 
-           throw err;
+            throw err;
         }
     }).then(function () {
         try {
             var checkLinkPromises = [Q()];
-            if (process.argv.indexOf("--verify") !== -1) {
+            if (process.argv.indexOf("--verifyurl") !== -1) {
                 return Q.ninvoke(dir, "paths", generatedDir, true)
-                .then(function(generatedFiles) {
-                    console.log("Verifying urls are valid... (This may take a a couple of minutes)");
-                    checkLinkPromises = generatedFiles.filter(function (fileName) {
-                        var filesToSkip = [
-                            "breaking-changes.md",
-                            "release-notes.md",
-                        ]
-                        
-                        return !filesToSkip.some(function(p) { return fileName.toUpperCase().endsWith(p.toUpperCase()) })
-                    }).map(function (fileName) {
-                        return gulpCommon.checkLinks(path.resolve(generatedDir, fileName));
+                    .then(function (generatedFiles) {
+                        console.log("Verifying urls are valid... (This may take a a couple of minutes)");
+                        checkLinkPromises = generatedFiles.filter(function (fileName) {
+                            var filesToSkip = [
+                                "breaking-changes.md",
+                                "release-notes.md",
+                            ]
+
+                            return !filesToSkip.some(function (p) { return fileName.toUpperCase().endsWith(p.toUpperCase()) })
+                        }).map(function (fileName) {
+                            return gulpCommon.checkLinks(path.resolve(generatedDir, fileName));
+                        });
+                        return Q.allSettled(checkLinkPromises);
+                    }).then(function (brokenLinks) {
+                        console.log(JSON.stringify("broken links are: " + brokenLinks));
+                        brokenLinks.forEach(function (l) {
+                            if (l.state === "fulfilled" && l.value && l.value.length > 0) {
+                                l.value.forEach(function (v) {
+                                    if (!v.url) {
+                                        console.log(chalk.bgRed("Broken link/fragment found: " + JSON.stringify(v)));
+                                    }
+                                    console.log(chalk.bgRed("Broken link/fragment found in " + v.inputFile + " for url: " + v.url + " reason: " + v.reason));
+                                });
+                            }
+                            else if (l.state === "rejected") {
+                                console.log(chalk.bgCyan("Rejected Broken link/fragment found: " + JSON.stringify(l)));
+                            }
+                        });
                     });
-                    return Q.allSettled(checkLinkPromises);
-                }).then(function (brokenLinks) {
-                    //console.log(chalk.red(brokenLinks.length + " broken links/fragments found.  Please fix them!"));
-                    brokenLinks.forEach(function(l) {
-                        if (l.state === "fulfilled" && l.value && l.value.length > 0) {
-                            l.value.forEach(function(v) {
-                                if (!v.url)
-                                {
-                                    console.log(chalk.bgRed("Broken link/fragment found: " + JSON.stringify(v)));
-                                }
-                                console.log(chalk.bgRed("Broken link/fragment found in " + v.inputFile + " for url: " + v.url + " reason: " + v.reason));
-                            });
-                        }
-                        else if (l.state === "rejected") {
-                            console.log(chalk.bgCyan("Rejected Broken link/fragment found: " + JSON.stringify(l)));
-                        }
-                    });
-                });
             }
-            
+
             return Q.defer().resolve();
         }
         catch (err) {
-           console.log("An error occured: " + err);
+            console.log("An error occured: " + err);
 
-           throw err;
+            throw err;
         }
     });
-});
+};
 
 //gulp task to generate auxdocs website content that was dynamic to static markdown docs 
-gulp.task('dynamicdocs', function () {
+function dynamicdocs() {
     const prodSdkVersionMapIdx = process.argv.indexOf("--prodSdkMap");
     let prodSdkVersionTags = {};
     if (prodSdkVersionMapIdx !== -1 && process.argv.length - 1 >= prodSdkVersionMapIdx + 1) {
@@ -139,7 +137,7 @@ gulp.task('dynamicdocs', function () {
             console.log("generating docs for %s commit logs", results.length);
             return generateDynamicDocs(results, generatedDir, prodSdkVersionTags);
         });
-});
+};
 
 /**
  * Generates breaking-changes.md document from content written table storage from the SDK pipeline tools.
@@ -286,7 +284,7 @@ function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
     let perCloudDownloadLinks = "";
 
     sortedProdSdkVersionTag.forEach(function (version) {
-        var cloudDownloadVersionLinks = aggregate[version].downloadUrl 
+        var cloudDownloadVersionLinks = aggregate[version].downloadUrl
             ? util.format("<a href=\"%s\">%s</a> : %s", aggregate[version].downloadUrl, version, prodSdkVersionTags[version].join(","))
             : util.format("%s : %s", version, prodSdkVersionTags[version].join(","));
         perCloudDownloadLinks += util.format("<br/> Download %s", cloudDownloadVersionLinks);
@@ -394,3 +392,7 @@ function versioncompare(a, b) {
     }
     return 0;
 };
+
+exports.ux = ux;
+exports.portal = portal;
+exports.dynamicdocs = dynamicdocs;

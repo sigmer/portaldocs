@@ -215,7 +215,7 @@ Sure! Book in some time in the Azure performance office hours.
 
 ## Checklist
 
-- Migrate to the [hosting service](portalfx-extension-hosting-service.md#extension-hosting-service)
+- Migrate to the [hosting service](top-extensions-hosting-service.md#extension-hosting-service)
 - Enable [prewarming](http://aka.ms/portalfx/docs/prewarming), running your extension in a web worker
 - Ensure your extension isn't using [shims](#extension-load-shim-dependencies-removing-shims)
 - Migrate your extension to [dependency injection](#dependency-injected-view-models)
@@ -287,6 +287,40 @@ Sure! Book in some time in the Azure performance office hours.
   - Don't aggressively update UI-bound observables
     - Accumulate the changes and then update the observable
     - Manually throttle or use `.extend({ rateLimit: 250 });` when initializing the observable
+
+# Using the Portals ARM Token
+
+This request is a blocking call before your extension can start loading. This drastically hurts performance and even more so at the higher percentiles.
+
+If you're migrating to use the Portals ARM Token please verify if you are relying on server side validation of the token first.
+
+Below is an example PR of another team making this change.
+[Example PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/867497?_a=overview)
+
+Ensure you verify:
+
+- If you do not require your own token, and you currently aren’t relying on server side validation of the token you should be able to make the change easily.
+- If you do require your own token, assess if that is necessary and migrate to the Portal’s token if possible.
+- If you’re relying on server side validation, please update that validation to validate the Portal App Id instead – if that is sufficient for you.
+
+To fix this it is a simple change to the Portal’s config here: [extensions.prod.json](http://aka.ms/portalfx/extensionsprodjson)
+See below for further details.
+
+Please send a pull request to the portal’s config with your change. Unfortunately, we don’t like to make config changes on behalf of extensions.
+
+- To send a pull request first [create a work item](https://aka.ms/portalfx/configtask)
+- Then create a new branch from that work item via the ‘create a new branch’ link
+- Make your required changes in the correct files
+- Send the PR and include GuruA and SanSom as the reviewers.
+
+Please make this change in all applicable environments, dogfood, PROD, FF, BF, and MC.
+The config files follow the naming convention of `Extension.*.json` – where * is the environment.
+
+## Changes required
+
+You need to move the oAuthClientId and oAuthClientCertificate properties to be defined on the non-arm resourceAccess.
+See the PR below for an example of these changes.
+[Example PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/867497?_a=overview)
 
 # Extension load shim dependencies (removing shims)
 
@@ -401,6 +435,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
 ## Get your extension building with tsconfig.json
 
 - Fully build your extension to get all of the code-generated files (eg. TypeScript files generated from PDL) generated.
+
 - Delete any generate d.ts files generated in `$(ProjectDir)Client\Definitions`. You do not have to do anything to files outside of the Client folder.
 - Add a tsconfig.json to the root of the project with the following content. '''Do not deviate unless you know what you are doing.
 
@@ -414,6 +449,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
       "forceConsistentCasingInFileNames": true,
       "inlineSources": true,
       "module": "amd",
+      "moduleResolution": "node",
       "noEmitHelpers": true,
       "noImplicitAny": true,
       "noImplicitThis": true,
@@ -517,7 +553,9 @@ The framework supports loading view models using dependency injection. If you mi
 ## Prerequistes
 
 - Migrate to V2 targets if you haven’t done so (See: [V2 targets](#v2-targets))
-- Ensure that the emitDecoratorMetadata compiler option is set to true in the tsconfig.json
+- Ensure that the `emitDecoratorMetadata` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `forceConsistentCasingInFileNames` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `moduleResolution` compiler option is set to `node` in the tsconfig.json
 - Upgrade to at least SDK 3001+
 - Cleanup your extension project TypeScript code and remove all uses of export = Main.
   - Check this PR in the portal repo for an example: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1003495?_a=overview
@@ -655,5 +693,7 @@ The frameworks supports a new extension load contract that can improve extension
 
 ## Pull Request Samples
 
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753
 - https://dev.azure.com/msazure/One/_git/Mgmt-RecoverySvcs-Portal/pullrequest/1423720
 - https://msazure.visualstudio.com/One/_git/MGMT-AppInsights-InsightsPortal/pullrequest/1426564
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753

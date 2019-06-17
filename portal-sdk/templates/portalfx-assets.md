@@ -117,11 +117,19 @@ If you’re using the hosting service, you can do this by updating your domainna
 
 ```json
     {
-      "features": {
         "hideassettypes": "AzureContainerService,ContainerGroup,ManagedClusters,VirtualWan"
-      }
     }
 ```
+
+Alternatively, you can hide all your assets in a specific environment by specifying:
+
+```json
+    {
+        "hideassettypes": "*"
+    }
+```
+
+Note, wildcard expressions are NOT supported, e.g: "AzureContainer*" will not hide all assets beginning with AzureContainer.
 
 ###### Testing your hidden asset
 

@@ -90,7 +90,7 @@ To share your PDE with other teams please follow these guidelines:
 * [Pre-selecting Members](#pre-selecting-members)
 * [Installation](#installation)
 * [Consumption](#consumption)
-* [Installation](#installation)
+* [Installation](#installation-1)
 * [Parts](#parts)
     * [ResourceTagsPart](#parts-resourcetagspart)
     * [ResourceFilterPart](#parts-resourcefilterpart)
@@ -130,34 +130,34 @@ To share your PDE with other teams please follow these guidelines:
 * [Commands](#commands)
     * [MoveResourceCommand](#commands-moveresourcecommand)
     * [Getting started with Azure Insights](#commands-getting-started-with-azure-insights)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-2)
+    * [Consumption](#commands-consumption-1)
     * [Getting started with Azure Monitoring](#commands-getting-started-with-azure-monitoring)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-3)
+    * [Consumption](#commands-consumption-2)
     * [Getting started with the KeyVault picker blades](#commands-getting-started-with-the-keyvault-picker-blades)
     * [What are the KeyVault picker blades](#commands-what-are-the-keyvault-picker-blades)
-    * [Downloading the PDE](#commands-downloading-the-pde)
+    * [Downloading the PDE](#commands-downloading-the-pde-1)
     * [KeyVault Picker](#commands-keyvault-picker)
         * [Inputs/Outputs](#commands-keyvault-picker-inputs-outputs)
         * [Config](#commands-keyvault-picker-config)
         * [Constructor](#commands-keyvault-picker-constructor)
-        * [PDL Changes](#commands-keyvault-picker-pdl-changes)
+        * [PDL Changes](#commands-keyvault-picker-pdl-changes-1)
     * [Key/Secret Pickers](#commands-key-secret-pickers)
-        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs)
-        * [Config](#commands-key-secret-pickers-config)
-        * [Constructor](#commands-key-secret-pickers-constructor)
-        * [PDL Changes](#commands-key-secret-pickers-pdl-changes)
+        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs-1)
+        * [Config](#commands-key-secret-pickers-config-1)
+        * [Constructor](#commands-key-secret-pickers-constructor-1)
+        * [PDL Changes](#commands-key-secret-pickers-pdl-changes-2)
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-1-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-2-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade)
-        * [Blade Inputs](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-blade-inputs)
-        * [Notes and Tips](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-4-telemetry-and-monitoring)
-        * [Contact Us](#getting-started-with-azure-cdn-4-telemetry-and-monitoring-contact-us)
+    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+        * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
+        * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
+    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+        * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
 <tags
@@ -341,7 +341,7 @@ Install-Package Microsoft.Portal.Extensions.Billing -Source https://msazure.pkgs
 * [Pre-selecting Members](#pre-selecting-members)
 * [Installation](#installation)
 * [Consumption](#consumption)
-* [Installation](#installation)
+* [Installation](#installation-1)
 * [Parts](#parts)
     * [ResourceTagsPart](#parts-resourcetagspart)
     * [ResourceFilterPart](#parts-resourcefilterpart)
@@ -381,37 +381,37 @@ Install-Package Microsoft.Portal.Extensions.Billing -Source https://msazure.pkgs
 * [Commands](#commands)
     * [MoveResourceCommand](#commands-moveresourcecommand)
     * [Getting started with Azure Insights](#commands-getting-started-with-azure-insights)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-2)
+    * [Consumption](#commands-consumption-1)
     * [Getting started with Azure Monitoring](#commands-getting-started-with-azure-monitoring)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-3)
+    * [Consumption](#commands-consumption-2)
     * [Getting started with the KeyVault picker blades](#commands-getting-started-with-the-keyvault-picker-blades)
     * [What are the KeyVault picker blades](#commands-what-are-the-keyvault-picker-blades)
-    * [Downloading the PDE](#commands-downloading-the-pde)
+    * [Downloading the PDE](#commands-downloading-the-pde-1)
     * [KeyVault Picker](#commands-keyvault-picker)
         * [Inputs/Outputs](#commands-keyvault-picker-inputs-outputs)
         * [Config](#commands-keyvault-picker-config)
         * [Constructor](#commands-keyvault-picker-constructor)
-        * [PDL Changes](#commands-keyvault-picker-pdl-changes)
+        * [PDL Changes](#commands-keyvault-picker-pdl-changes-1)
     * [Key/Secret Pickers](#commands-key-secret-pickers)
-        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs)
-        * [Config](#commands-key-secret-pickers-config)
-        * [Constructor](#commands-key-secret-pickers-constructor)
-        * [PDL Changes](#commands-key-secret-pickers-pdl-changes)
+        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs-1)
+        * [Config](#commands-key-secret-pickers-config-1)
+        * [Constructor](#commands-key-secret-pickers-constructor-1)
+        * [PDL Changes](#commands-key-secret-pickers-pdl-changes-2)
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-1-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-2-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade)
-        * [Blade Inputs](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-blade-inputs)
-        * [Notes and Tips](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-4-telemetry-and-monitoring)
-        * [Contact Us](#getting-started-with-azure-cdn-4-telemetry-and-monitoring-contact-us)
+    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+        * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
+        * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
+    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+        * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
-<a name="installation"></a>
+<a name="installation-1"></a>
 ## Installation
 
 From nuget package manager console
@@ -676,7 +676,7 @@ To use this command contact Guruprasad Airy <ibiza-hubs@microsoft.com>.
 <a name="commands-getting-started-with-azure-insights"></a>
 ## Getting started with Azure Insights
 
-<a name="commands-installation"></a>
+<a name="commands-installation-2"></a>
 ## Installation
 
 From nuget package manager console
@@ -687,7 +687,7 @@ Install-Package Microsoft.Portal.Extensions.Insights -Source https://msazure.pkg
 
 *Note:* you will need to update the version snippet with the latest from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.insights)
 
-<a name="commands-consumption"></a>
+<a name="commands-consumption-1"></a>
 ## Consumption
 
 - ETA for the consumption docs is 8/12/2016. In the interim please reach out to [Ibiza Activity Logs](mailto:ibiza-activity-logs@microsoft.com) for consumption guidelines.
@@ -704,7 +704,7 @@ Install-Package Microsoft.Portal.Extensions.Insights -Source https://msazure.pkg
 <a name="commands-getting-started-with-azure-monitoring"></a>
 ## Getting started with Azure Monitoring
 
-<a name="commands-installation"></a>
+<a name="commands-installation-3"></a>
 ## Installation
 
 From nuget package manager console
@@ -715,7 +715,7 @@ Install-Package Microsoft.Portal.Extensions.Monitoring -Source https://msazure.p
 
 *Note:* you will need to update the version snippet with the latest from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.monitoring)
 
-<a name="commands-consumption"></a>
+<a name="commands-consumption-2"></a>
 ## Consumption
 
 - ETA for the consumption docs is 8/12/2016. In the interim please reach out to Rajesh Ramabathiran rajram@microsoft.com;thompham@microsoft.com; for consumption guidelines.
@@ -731,7 +731,7 @@ Install-Package Microsoft.Portal.Extensions.Monitoring -Source https://msazure.p
 * [Pre-selecting Members](#pre-selecting-members)
 * [Installation](#installation)
 * [Consumption](#consumption)
-* [Installation](#installation)
+* [Installation](#installation-1)
 * [Parts](#parts)
     * [ResourceTagsPart](#parts-resourcetagspart)
     * [ResourceFilterPart](#parts-resourcefilterpart)
@@ -771,34 +771,34 @@ Install-Package Microsoft.Portal.Extensions.Monitoring -Source https://msazure.p
 * [Commands](#commands)
     * [MoveResourceCommand](#commands-moveresourcecommand)
     * [Getting started with Azure Insights](#commands-getting-started-with-azure-insights)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-2)
+    * [Consumption](#commands-consumption-1)
     * [Getting started with Azure Monitoring](#commands-getting-started-with-azure-monitoring)
-    * [Installation](#commands-installation)
-    * [Consumption](#commands-consumption)
+    * [Installation](#commands-installation-3)
+    * [Consumption](#commands-consumption-2)
     * [Getting started with the KeyVault picker blades](#commands-getting-started-with-the-keyvault-picker-blades)
     * [What are the KeyVault picker blades](#commands-what-are-the-keyvault-picker-blades)
-    * [Downloading the PDE](#commands-downloading-the-pde)
+    * [Downloading the PDE](#commands-downloading-the-pde-1)
     * [KeyVault Picker](#commands-keyvault-picker)
         * [Inputs/Outputs](#commands-keyvault-picker-inputs-outputs)
         * [Config](#commands-keyvault-picker-config)
         * [Constructor](#commands-keyvault-picker-constructor)
-        * [PDL Changes](#commands-keyvault-picker-pdl-changes)
+        * [PDL Changes](#commands-keyvault-picker-pdl-changes-1)
     * [Key/Secret Pickers](#commands-key-secret-pickers)
-        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs)
-        * [Config](#commands-key-secret-pickers-config)
-        * [Constructor](#commands-key-secret-pickers-constructor)
-        * [PDL Changes](#commands-key-secret-pickers-pdl-changes)
+        * [Inputs/Outputs](#commands-key-secret-pickers-inputs-outputs-1)
+        * [Config](#commands-key-secret-pickers-config-1)
+        * [Constructor](#commands-key-secret-pickers-constructor-1)
+        * [PDL Changes](#commands-key-secret-pickers-pdl-changes-2)
         * [Secret Picker](#commands-key-secret-pickers-secret-picker)
     * [Contact](#commands-contact)
 * [Getting started with Azure CDN](#getting-started-with-azure-cdn)
-    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-1-importing-cdn-extension-nuget-package)
-    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-2-referencing-cdn-pde)
-    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade)
-        * [Blade Inputs](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-blade-inputs)
-        * [Notes and Tips](#getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-notes-and-tips)
-    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-4-telemetry-and-monitoring)
-        * [Contact Us](#getting-started-with-azure-cdn-4-telemetry-and-monitoring-contact-us)
+    * [1. Importing CDN Extension NuGet Package](#getting-started-with-azure-cdn-importing-cdn-extension-nuget-package)
+    * [2. Referencing CDN PDE](#getting-started-with-azure-cdn-referencing-cdn-pde)
+    * [3. Referencing CDN Integration Blade](#getting-started-with-azure-cdn-referencing-cdn-integration-blade)
+        * [Blade Inputs](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs)
+        * [Notes and Tips](#getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips)
+    * [4. Telemetry and Monitoring](#getting-started-with-azure-cdn-telemetry-and-monitoring)
+        * [Contact Us](#getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us)
 
 
 <tags
@@ -823,7 +823,7 @@ A typical flow for partner teams to follow if they need a key identifier or secr
 - User opens vault selector and picks (or creates) a vault from the KeyVault picker.
 - Key selector is unlocked, and user picks (or creates) a key that is then returned to the calling extension.
 
-<a name="commands-downloading-the-pde"></a>
+<a name="commands-downloading-the-pde-1"></a>
 ## Downloading the PDE
 
 The .pde you need to reference can be found by downloading the Microsft.Portal.Extensions.KeyVault.nuget from \\\wanuget\nugetpackages\official and extracting the contents. (the .pde will be found under /Content/_extensions/KeyVault). Please see [This link](https://msazure.visualstudio.com/One/_packaging?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.keyvault&packageVersion=1.0.30&_a=view) for the latest nuget version.
@@ -904,7 +904,7 @@ The .pde you need to reference can be found by downloading the Microsft.Portal.E
 	      });
 
 
-<a name="commands-keyvault-picker-pdl-changes"></a>
+<a name="commands-keyvault-picker-pdl-changes-1"></a>
 ### PDL Changes
 
 The following is an example of the PDL changes needed to use the blade. 
@@ -921,7 +921,7 @@ The following is an example of the PDL changes needed to use the blade.
 ## Key/Secret Pickers
 
 
-<a name="commands-key-secret-pickers-inputs-outputs"></a>
+<a name="commands-key-secret-pickers-inputs-outputs-1"></a>
 ### Inputs/Outputs
 	export interface KeyPickerInputsOutputs {
 	    key: KnockoutObservable<Key>; // The key that was picked, or created.
@@ -943,14 +943,14 @@ The following is an example of the PDL changes needed to use the blade.
 	    updated: KnockoutObservable<number>;
 	}
 
-<a name="commands-key-secret-pickers-config"></a>
+<a name="commands-key-secret-pickers-config-1"></a>
 ### Config
 	export interface KeyPickerConfig {
 	    vaultId: string; // the resource id of the vault to display keys from (Optional if the id of the vault was supplied in the KeyPickerInputsOutputs)
 	    showCreateNew?: boolean; // Whether the picker will give the option to create a new key.
 	    requiredKeyOperations?: string[]; // Required key operations for selected keys. Supported key_ops are "sign", "verify", "wrapKey", "unwrapKey", "encrypt" & "decrypt". When a key doesn't have all required key_ops, it is readonly and cannot be selected.
 	}
-<a name="commands-key-secret-pickers-constructor"></a>
+<a name="commands-key-secret-pickers-constructor-1"></a>
 ### Constructor
 	this.keyPickerCollector = new MsPortalFx.ViewModels.ParameterCollector<KeyPickerInputsOutputs>(_container, {
 	          supplyInitialData: () => {
@@ -973,7 +973,7 @@ The following is an example of the PDL changes needed to use the blade.
 	          }
 	      });
 
-<a name="commands-key-secret-pickers-pdl-changes"></a>
+<a name="commands-key-secret-pickers-pdl-changes-2"></a>
 ### PDL Changes
 	<BladeAction Blade ="{BladeReference KeyPicker, ExtensionName=Microsoft_Azure_KeyVault}"
 	                   ParameterCollector ="keyPickerCollector">
@@ -1005,7 +1005,7 @@ CdnIntegrationBlade allows customers to create and manage CDN endpoints for thei
 
 Through the simple integration explained in this document, your customers can enable CDN on their Azure resources within your extension without having to leave and go to the CDN extension. The CDN integration blade can be embedded in your own extension if you follow the below steps.
 
-<a name="getting-started-with-azure-cdn-1-importing-cdn-extension-nuget-package"></a>
+<a name="getting-started-with-azure-cdn-importing-cdn-extension-nuget-package"></a>
 ## >
 <li>Importing CDN Extension NuGet Package</li>
 <
@@ -1018,7 +1018,7 @@ For CoreXT based environemtns, you can add a reference to the package in your **
 
 *Note:* you will need to update the version with the latest from [here](https://msazure.visualstudio.com/DefaultCollection/One/_apps/hub/ms.feed.feed-hub?feedName=Official&protocolType=NuGet&packageName=microsoft.portal.extensions.cdn)
 
-<a name="getting-started-with-azure-cdn-2-referencing-cdn-pde"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-pde"></a>
 ##  start="2">
 <li>Referencing CDN PDE</li>
 <
@@ -1028,7 +1028,7 @@ In your extension *.csproj file, you will need to add a reference to the Microso
 <ExtensionReference Include="$(PkgMicrosoft_Portal_Extensions_Cdn)\content\Client\_extensions\Cdn\Microsoft_Azure_Cdn.pde" />
 ```
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade"></a>
 ##  start="3">
 <li>Referencing CDN Integration Blade</li>
 <
@@ -1074,7 +1074,7 @@ this._container.selectable.selectedValue(<MsPortalFx.ViewModels.DynamicBladeSele
     });            
 ```
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-blade-inputs"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade-blade-inputs"></a>
 ### Blade Inputs
 The CdnIntegrationBlade takes the following inputs:
 
@@ -1089,7 +1089,7 @@ The AzureLocation of your resource, like *"West US"*, *"East Asia"*, etc.
 The hostname of your service which is used as an origin for the created CDN endpoints. This shouldn't include any slashes or protocols, only the domain name, like *"storagetest1.blob.core.windows.net"* or *"webapptest2.azurewebsites.net"*.
 
 
-<a name="getting-started-with-azure-cdn-3-referencing-cdn-integration-blade-notes-and-tips"></a>
+<a name="getting-started-with-azure-cdn-referencing-cdn-integration-blade-notes-and-tips"></a>
 ### Notes and Tips
 1.  Please use *"cdnIntegration"* for the resource menu item *id* because we use this id to track blade loads and create telemetry on CDN Integration Blade.
 2.  The *displayText* "Azure CDN" needs to be localized and should come from your Resources.resx.
@@ -1099,7 +1099,7 @@ The hostname of your service which is used as an origin for the created CDN endp
 	visible: ko.observable(MsPortalFx.isFeatureEnabled("cdnintegration"))
 	```
 
-<a name="getting-started-with-azure-cdn-4-telemetry-and-monitoring"></a>
+<a name="getting-started-with-azure-cdn-telemetry-and-monitoring"></a>
 ##  start="4">
 <li>Telemetry and Monitoring</li>
 <
@@ -1113,7 +1113,7 @@ We are tracking the usage and actions on CDN integration blade through following
 
 You shouldn't need to add any extra telemetry on your side.
 
-<a name="getting-started-with-azure-cdn-4-telemetry-and-monitoring-contact-us"></a>
+<a name="getting-started-with-azure-cdn-telemetry-and-monitoring-contact-us"></a>
 ### Contact Us
 You can start development today! Create a code review and add "inzarif" and "cdneng" as reviewers.
 Don't hesitate to contact us for any questions, concerns, or bug reports.

@@ -3,27 +3,25 @@
 //------------------------------------------------------------
 
 //workaround no support for Visual Studio Online url format
-var fs = require('fs');
-var utilFilePath = process.cwd() + '\\node_modules\\gitinfo\\dist\\utils.js';
+const fs = require("fs");
+var utilFilePath = process.cwd() + "\\node_modules\\gitinfo\\dist\\utils.js";
 if (fs.existsSync(utilFilePath)) {
-    var utilContent = fs.readFileSync(utilFilePath, { 'encoding': 'utf8' });
-    var result = utilContent.replace(/url.length !== 2/g, 'url.length < 2');
-    fs.writeFileSync(utilFilePath, result, { 'encoding': 'utf8' });
+    var utilContent = fs.readFileSync(utilFilePath, { "encoding": "utf8" });
+    var result = utilContent.replace(/url.length !== 2/g, "url.length < 2");
+    fs.writeFileSync(utilFilePath, result, { "encoding": "utf8" });
 }
 
-var gitdownIncludeHelper = require('gitdown/dist/helpers/include.js');
-var fs = require('fs');
-var gitdown = require('gitdown');
-var path = require('path');
-var Q = require('q');
-var util = require('util');
-var chalk = require('chalk');
-var urlExt = require('url-extractor');
-var fetch = require('node-fetch');
-var findup = require('findup');
-var gitPath = findup.sync(process.cwd(), '.git\\HEAD');
-var MarkdownContents = require('markdown-contents');
-var eol = require('eol');
+const gitdownIncludeHelper = require("gitdown/dist/helpers/include.js");
+const gitdown = require("gitdown");
+const path = require("path");
+const Q = require("q");
+const util = require("util");
+const mdUrlExtractor = require("markdown-link-extractor");
+const fetch = require("node-fetch");
+const findup = require("findup");
+const gitPath = findup.sync(process.cwd(), ".git\\HEAD");
+const MarkdownContents = require("markdown-contents");
+const eol = require("eol");
 
 var self = module.exports = {
     /**
@@ -244,12 +242,10 @@ var self = module.exports = {
      */
     checkLinks: function (inputFile) {
         var links = [];
-        var docs = [];
         var brokenLinks = [];
         return Q.ninvoke(fs, 'readFile', inputFile, 'utf8').then(function (result) {
-            //console.log("checking links in " + inputFile);
-            var urls = urlExt.extractUrls(result, urlExt.SOURCE_TYPE_MARKDOWN);
 
+            var urls = mdUrlExtractor(result);
             // Make sure to comment why the url is being skipped
             // Do not include http:// or https:// as they get trimmed when matching
             var urlsToSkip = [
@@ -266,6 +262,7 @@ var self = module.exports = {
                 "mailto:", // email link
                 "myaccess", //cert 
                 "management.azure.com/api/invoke",  // returns a bad request since 
+                "ms.portal.azure.com",
                 "msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute(v=vs.110", // Bug in url extractor where its not capturing the entire url
                 "msdn.microsoft.com/en-us/library/system.reflection.assemblyinformationalversionattribute(v=vs.110", // Bug in url extractor where its not capturing the entire url
                 "myextension.cloudapp.net",  // fake url
@@ -273,8 +270,11 @@ var self = module.exports = {
                 "onenote", // onenote link
                 "onestb.cloudapp.net",  // fake url
                 "perf.demo.ext.azure.com",  // fake url
+                "portal.azure.com",
                 "ramweb",  // returns a certificate not trusted error
+                "rc.portal.azure.com",
                 "servicetree.msftcloudes.com",  // returns 302 Unauthorized (invalid)
+                "sometest.vault.azure.net",
                 "technet.microsoft.com/en-us/library/cc730629(v=ws.10", // Bug in url extractor where its not capturing the entire url
                 "www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;", // Bug in url extractor where it captured extra characters after the url
                 "&#x6d;", // html encoding for mailto: some reason there are multiple encodings
@@ -284,7 +284,6 @@ var self = module.exports = {
                 "qe" //internal
             ];
 
-            var count = 0;
             urls.forEach(function (url) {
                 // Trim the http:// or https://
                 var regex = new RegExp("(^HTTPS://|HTTP://)", "i");
@@ -306,7 +305,6 @@ var self = module.exports = {
                         if (!(result.includes("name=\"" + fragment + "\"") || matchFragment.exec(result))) {
                             //console.log(chalk.red("\tHyperlink " + url  + " does not refer to a valid link in the document.  Input file: " + inputFile));
                             brokenLinks.push({ "url": url, "inputFile": inputFile });
-                            count++;
                         }
                         break;
                     case "/":
@@ -315,7 +313,6 @@ var self = module.exports = {
                         if (!fs.existsSync(file)) {
                             //console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. Input file: " + inputFile));
                             brokenLinks.push({ "url": url, "inputFile": inputFile });
-                            count++;
                         }
                         break;
                     case "h":
@@ -328,7 +325,6 @@ var self = module.exports = {
                         if (!(fs.existsSync(file) && fs.statSync(file).isFile())) {
                             //console.log(chalk.red("\tLink : " + url + " does not resolve to valid path. Resolved path " + file + "does not exist. Input file: " + inputFile));
                             brokenLinks.push({ "url": url, "inputFile": inputFile, "reason": "Does not exist or is not a file." });
-                            count++;
                         }
                         break;
                 }
@@ -339,7 +335,7 @@ var self = module.exports = {
                 return prev.then(() => {
                     return fetch(curr, {
                         method: "HEAD",
-                        timeout: 10*1000 // 10 second timeout
+                        timeout: 10 * 1000 // 10 second timeout
                     }).then((response) => {
                         if (!response.ok) {
                             if (response.status === 401 /* Unauthorized */ ||
@@ -351,7 +347,7 @@ var self = module.exports = {
                                 // Retry possibly unsupported HEAD requests
                                 return fetch(curr, {
                                     method: "GET",
-                                    timeout: 10*1000 // 10 second timeout
+                                    timeout: 10 * 1000 // 10 second timeout
                                 }).then((response) => {
                                     if (!response.ok) {
                                         throw new Error(response.statusText);

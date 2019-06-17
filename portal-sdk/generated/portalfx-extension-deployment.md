@@ -5,15 +5,15 @@
         * [Portal](#deploy-overview-portal)
         * [Portal deployment schedule](#deploy-overview-portal-deployment-schedule)
     * [Before deploying extension](#deploy-before-deploying-extension)
-        * [1. For extensions onboarding Ibiza: Enable/disable extensions](#deploy-before-deploying-extension-1-for-extensions-onboarding-ibiza-enable-disable-extensions)
-        * [2. Extension "stamps"](#deploy-before-deploying-extension-2-extension-stamps)
-        * [3. Understand extension runtime compatibility](#deploy-before-deploying-extension-3-understand-extension-runtime-compatibility)
+        * [1. For extensions onboarding Ibiza: Enable/disable extensions](#deploy-before-deploying-extension-for-extensions-onboarding-ibiza-enable-disable-extensions)
+        * [2. Extension "stamps"](#deploy-before-deploying-extension-extension-stamps)
+        * [3. Understand extension runtime compatibility](#deploy-before-deploying-extension-understand-extension-runtime-compatibility)
     * [Deploying extension UI](#deploy-deploying-extension-ui)
     * [Deploying extension controllers](#deploy-deploying-extension-controllers)
     * [Legacy/DIY deployments](#deploy-legacy-diy-deployments)
     * [Resiliency and failover](#deploy-resiliency-and-failover)
     * [National/sovereign clouds](#deploy-national-sovereign-clouds)
-        * [Overview](#deploy-national-sovereign-clouds-overview)
+        * [Overview](#deploy-national-sovereign-clouds-overview-1)
     * [Per-cloud information](#deploy-per-cloud-information)
         * [Common gotchas](#deploy-per-cloud-information-common-gotchas)
         * [AllowedParentFrame](#deploy-per-cloud-information-allowedparentframe)
@@ -61,7 +61,7 @@ release, including bug fixes, new features, and a log of breaking changes.
 1. Extension "stamps"
 1. Understand extension runtime compatibility
 
-<a name="deploy-before-deploying-extension-1-for-extensions-onboarding-ibiza-enable-disable-extensions"></a>
+<a name="deploy-before-deploying-extension-for-extensions-onboarding-ibiza-enable-disable-extensions"></a>
 ### >
 <li>For extensions onboarding Ibiza: Enable/disable extensions</li>
 <
@@ -81,7 +81,7 @@ to enable both the extension and the Gallery item:
 
 To permanently enable an extension (e.g. if it's ready for general use), please contact the portal team.
 
-<a name="deploy-before-deploying-extension-2-extension-stamps"></a>
+<a name="deploy-before-deploying-extension-extension-stamps"></a>
 ###  start="2">
 <li>Extension &quot;stamps&quot;</li>
 <
@@ -110,7 +110,7 @@ of your extension as registered in the portal. For instance,
 `https://perf.devtest.ext.azure.com`). Note that you must specify the flag `feature.canmodifystamps=true` in order to
 override the stamp.
 
-<a name="deploy-before-deploying-extension-3-understand-extension-runtime-compatibility"></a>
+<a name="deploy-before-deploying-extension-understand-extension-runtime-compatibility"></a>
 ###  start="3">
 <li>Understand extension runtime compatibility</li>
 <
@@ -196,7 +196,7 @@ This document has moved to [Extension Hosting Service](top-extensions-hosting-se
 
 <a name="deploy-national-sovereign-clouds"></a>
 ## National/sovereign clouds
-<a name="deploy-national-sovereign-clouds-overview"></a>
+<a name="deploy-national-sovereign-clouds-overview-1"></a>
 ### Overview
 
 Sovereign clouds (aka "national clouds") are instances of Azure restricted to a particular group of users. This group may consist of one geopolitical boundary (e.g. country) or legal boundary (e.g. public sector).

@@ -303,7 +303,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * [Map]
 * [Markdown]
 * [Menu]
-* [Monitor Chart](portalfx-controls-monitor-chart.md)
+* [Monitor Chart V2](portalfx-controls-monitor-chart-v2.md)
 * [Textbox](portalfx-controls-textbox.md)
     * [Textbox]
     * [Numeric Textbox]

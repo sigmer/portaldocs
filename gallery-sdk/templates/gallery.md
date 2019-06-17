@@ -1,5 +1,7 @@
 {"gitdown": "include-file", "file": "../templates/gallery-overview.md"}
 
+{"gitdown": "include-file", "file": "../templates/gallery-new-publishing-process.md"}
+
 {"gitdown": "include-file", "file": "../templates/gallery-items.md"}
 
 {"gitdown": "include-file", "file": "../templates/gallery-search.md"}

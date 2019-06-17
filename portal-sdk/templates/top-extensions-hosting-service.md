@@ -121,7 +121,7 @@ In order to load your extension in a specific environments you will need to prov
 - The files need to be placed under `\Content\Config`
 - The file should have its build action set to `Content`, otherwise the file will not be included in the generated zip file.
 - The files need to be named with the following convention: <host>.<domain>.json (e.g. portal.azure.com.json, ms.portal.azure.com.json)
-- a default.json file is required. It will contain environment values that will be made available to the client.  default.json is common to all cloud specific configs.  If the same key is found in a cloud specific config it will get overridden by the value from the cloud specific config.
+- a default.json file is required. It will contain environment values that will be made available to the client.  default.json is common to all cloud specific configs.  If the same key is found in a cloud specific config it will get overridden by the value from the cloud specific config.  If you are migrating off the old ContentUnbundler build process see [aka.ms/portalfx/removecuvideo](https://aka.ms/portalfx/removecuvideo) for detauls of how to author your default.json.
 	
 Here are example for each environment. For now, just add this empty file with a build action of content:
 1. **Default** configuration file should be named `default.json`.
@@ -374,22 +374,30 @@ To minimize the probability of regression, use the following procedure to migrat
 
 1. Change the uri format to use the hosting service in the PROD environment. An example of a pull request for modifying the uriFormat parameter is located [here](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/c22b81463cab1d0c6b2c1abc803bc25fb2836aad?refName=refs%2Fheads%2Fdev).
 
-1. Enable flighting in MPAC. The Azure Portal provides the ability to flight to MPAC customers multiple editions of an extension. Traffic will be equally distributed between all registered configurations, or stamps. An example of a pull request is [here](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/be95cabcf7098c45927e3bb7aff9b5e0f65de341?refName=refs%2Fheads%2Fdev).
-    - Hosting service `extension.pdl` file. To flight traffic to multiple stamps, register other stamps in `flightUri`. For example, the friendly name `MPACFlight` is used to flight traffic to another edition of an extension, as in the following example.
+    ```json
+    { 
+        name: "Microsoft_Azure_MyExtension", 
+        uri: "//selfhost.net/myextension", 
+        uriFormat: "//myextension.hosting.portal.azure.net/myextension/{0}", 
+        feedbackEmail: "azureux-myextension@microsoft.com", 
+    }
+    ```
+
+1. Migrate your extension's configuration to hosting service format in dogfood: Example pull request for this change is located [here](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1606743?_a=overview) for Microsoft_Azure_AD extension.
 
     ```json
     { 
         name: "Microsoft_Azure_MyExtension", 
-        uri: "//myextension.hosting.portal.azure.net/myextension", 
-        uriFormat: "//myextension.hosting.portal.azure.net/myextension/{0}", 
+        hostingServiceName: "myextension",
         feedbackEmail: "azureux-myextension@microsoft.com", 
-        flightUris: [
-            "//myextension.hosting.portal.azure.net/myextension/MPACFlight",
-        ],
     }
     ```
 
-1. Enable 100% traffic in MPAC and PROD. An example of a pull request that enables 100% traffic without flighting for `MicrosoftAzureClassicStorageExtension`, and 100% traffic with flighting for `Microsoft_Azure_Storage` is located [here](https://msazure.visualstudio.com/One/Azure%20Portal/_git/AzureUX-PortalFx/commit/b81b415411f54ad83f93d43d37bcad097949a4e3?refName=refs%2Fheads%2Fdev&discussionId=-1&_a=summary&fullScreen=false).
+1. Make the same change for your production config into Portal's dev branch. This change will deploy to rc.portal.azure.com and ms.portal.azure.com automatically. Monitor these environments for any issues while it bakes there.
+
+1. Once everything is stable, cherry-pick the changes to Portal's production branch to make the change live in production (portal.azure.com).
+
+1. [Optional] Make the same changes in the various other clouds Fairfax, Mooncake, etc.
 
 ### Deploying a new version of an extension
 

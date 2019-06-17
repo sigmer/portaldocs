@@ -18,6 +18,8 @@
     * [Operational best practices](#performance-best-practices-operational-best-practices)
     * [Coding best practices](#performance-best-practices-coding-best-practices)
     * [General best practices](#performance-best-practices-general-best-practices)
+* [Using the Portals ARM Token](#using-the-portals-arm-token)
+    * [Changes required](#using-the-portals-arm-token-changes-required)
 * [Extension load shim dependencies (removing shims)](#extension-load-shim-dependencies-removing-shims)
     * [How to fix shim usage](#extension-load-shim-dependencies-removing-shims-how-to-fix-shim-usage)
         * [Converting your shim to an AMD module](#extension-load-shim-dependencies-removing-shims-how-to-fix-shim-usage-converting-your-shim-to-an-amd-module)
@@ -37,9 +39,9 @@
     * [Migration steps](#dependency-injected-view-models-migration-steps)
     * [Pull Request Samples](#dependency-injected-view-models-pull-request-samples)
 * [Fast extension load](#fast-extension-load)
-    * [Prerequistes](#fast-extension-load-prerequistes)
-    * [Migration steps](#fast-extension-load-migration-steps)
-    * [Pull Request Samples](#fast-extension-load-pull-request-samples)
+    * [Prerequistes](#fast-extension-load-prerequistes-1)
+    * [Migration steps](#fast-extension-load-migration-steps-1)
+    * [Pull Request Samples](#fast-extension-load-pull-request-samples-1)
 
 
 <a name="performance-overview"></a>
@@ -274,7 +276,7 @@ Sure! Book in some time in the Azure performance office hours.
 <a name="performance-best-practices-checklist"></a>
 ## Checklist
 
-- Migrate to the [hosting service](portalfx-extension-hosting-service.md#extension-hosting-service)
+- Migrate to the [hosting service](top-extensions-hosting-service.md#extension-hosting-service)
 - Enable [prewarming](http://aka.ms/portalfx/docs/prewarming), running your extension in a web worker
 - Ensure your extension isn't using [shims](#extension-load-shim-dependencies-removing-shims)
 - Migrate your extension to [dependency injection](#dependency-injected-view-models)
@@ -349,6 +351,42 @@ Sure! Book in some time in the Azure performance office hours.
   - Don't aggressively update UI-bound observables
     - Accumulate the changes and then update the observable
     - Manually throttle or use `.extend({ rateLimit: 250 });` when initializing the observable
+
+<a name="using-the-portals-arm-token"></a>
+# Using the Portals ARM Token
+
+This request is a blocking call before your extension can start loading. This drastically hurts performance and even more so at the higher percentiles.
+
+If you're migrating to use the Portals ARM Token please verify if you are relying on server side validation of the token first.
+
+Below is an example PR of another team making this change.
+[Example PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/867497?_a=overview)
+
+Ensure you verify:
+
+- If you do not require your own token, and you currently aren’t relying on server side validation of the token you should be able to make the change easily.
+- If you do require your own token, assess if that is necessary and migrate to the Portal’s token if possible.
+- If you’re relying on server side validation, please update that validation to validate the Portal App Id instead – if that is sufficient for you.
+
+To fix this it is a simple change to the Portal’s config here: [extensions.prod.json](http://aka.ms/portalfx/extensionsprodjson)
+See below for further details.
+
+Please send a pull request to the portal’s config with your change. Unfortunately, we don’t like to make config changes on behalf of extensions.
+
+- To send a pull request first [create a work item](https://aka.ms/portalfx/configtask)
+- Then create a new branch from that work item via the ‘create a new branch’ link
+- Make your required changes in the correct files
+- Send the PR and include GuruA and SanSom as the reviewers.
+
+Please make this change in all applicable environments, dogfood, PROD, FF, BF, and MC.
+The config files follow the naming convention of `Extension.*.json` – where * is the environment.
+
+<a name="using-the-portals-arm-token-changes-required"></a>
+## Changes required
+
+You need to move the oAuthClientId and oAuthClientCertificate properties to be defined on the non-arm resourceAccess.
+See the PR below for an example of these changes.
+[Example PR](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/867497?_a=overview)
 
 <a name="extension-load-shim-dependencies-removing-shims"></a>
 # Extension load shim dependencies (removing shims)
@@ -473,6 +511,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
 ## Get your extension building with tsconfig.json
 
 - Fully build your extension to get all of the code-generated files (eg. TypeScript files generated from PDL) generated.
+
 - Delete any generate d.ts files generated in `$(ProjectDir)Client\Definitions`. You do not have to do anything to files outside of the Client folder.
 - Add a tsconfig.json to the root of the project with the following content. '''Do not deviate unless you know what you are doing.
 
@@ -486,6 +525,7 @@ Below are the steps to switch to the V2 targets. A video of the migration steps 
       "forceConsistentCasingInFileNames": true,
       "inlineSources": true,
       "module": "amd",
+      "moduleResolution": "node",
       "noEmitHelpers": true,
       "noImplicitAny": true,
       "noImplicitThis": true,
@@ -595,7 +635,8 @@ The framework supports loading view models using dependency injection. If you mi
 ## Prerequistes
 
 - Migrate to V2 targets if you haven’t done so (See: [V2 targets](#v2-targets))
-- Ensure that the emitDecoratorMetadata compiler option is set to true in the tsconfig.json
+- Ensure that the `emitDecoratorMetadata` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `moduleResolution` compiler option is set to `node` in the tsconfig.json
 - Upgrade to at least SDK 3001+
 - Cleanup your extension project TypeScript code and remove all uses of export = Main.
   - Check this PR in the portal repo for an example: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1003495?_a=overview
@@ -682,7 +723,7 @@ MsPortalFx.require("Fx/DependencyInjection")
 
 The frameworks supports a new extension load contract that can improve extension load performance by one second at the 95th percentile by deprecating Program.ts and the classic extension initialization code path. Once your extension uses the new contract, the portal will no longer download and execute Program.ts and _generated/Manifest.ts. _generated/ExtensionDefinition.ts will be bundled with your blades.
 
-<a name="fast-extension-load-prerequistes"></a>
+<a name="fast-extension-load-prerequistes-1"></a>
 ## Prerequistes
 
 - Remove all requireJS shims.
@@ -692,7 +733,7 @@ The frameworks supports a new extension load contract that can improve extension
   - $(ExtensionPageVersion) breaking change notes: https://msazure.visualstudio.com/One/_workitems/edit/3276047
 - Prewarming / Web Workers is not a pre-requisite. If an extension onboards to both Prewarming and FastExtensionLoad, the framework will eliminate an additional 500 ms postMessage call, allowing an extension to reach sub-second extension load time.
 
-<a name="fast-extension-load-migration-steps"></a>
+<a name="fast-extension-load-migration-steps-1"></a>
 ## Migration steps
 
 - Since the new extension load contract will no longer execute Program.ts, your extension's Program.ts should only contain the bare minimum scaffolding. Refer to the following Program.ts for an example: https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1320194?_a=files&path=%2Fsrc%2FSDK%2FAcceptanceTests%2FExtensions%2FInternalSamplesExtension%2FExtension%2FClient%2FProgram.ts
@@ -736,7 +777,7 @@ The frameworks supports a new extension load contract that can improve extension
 - You can verify whether the migration was completed successfully by sideloading your extension in MPAC and checking whether the expression `FxImpl.Extension.isFastExtensionLoadEnabled()` returns `true` in the iframe/webworker of your extension.
 
 
-<a name="fast-extension-load-pull-request-samples"></a>
+<a name="fast-extension-load-pull-request-samples-1"></a>
 ## Pull Request Samples
 
 - https://dev.azure.com/msazure/One/_git/Mgmt-RecoverySvcs-Portal/pullrequest/1423720

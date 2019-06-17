@@ -7,10 +7,10 @@
     * [Constructor](#keyvault-picker-constructor)
     * [PDL Changes](#keyvault-picker-pdl-changes)
 * [Key/Secret Pickers](#key-secret-pickers)
-    * [Inputs/Outputs](#key-secret-pickers-inputs-outputs)
-    * [Config](#key-secret-pickers-config)
-    * [Constructor](#key-secret-pickers-constructor)
-    * [PDL Changes](#key-secret-pickers-pdl-changes)
+    * [Inputs/Outputs](#key-secret-pickers-inputs-outputs-1)
+    * [Config](#key-secret-pickers-config-1)
+    * [Constructor](#key-secret-pickers-constructor-1)
+    * [PDL Changes](#key-secret-pickers-pdl-changes-1)
     * [Secret Picker](#key-secret-pickers-secret-picker)
 * [Contact](#contact)
 
@@ -135,7 +135,7 @@ The following is an example of the PDL changes needed to use the blade.
 ## Key/Secret Pickers
 
 
-<a name="key-secret-pickers-inputs-outputs"></a>
+<a name="key-secret-pickers-inputs-outputs-1"></a>
 ### Inputs/Outputs
 	export interface KeyPickerInputsOutputs {
 	    key: KnockoutObservable<Key>; // The key that was picked, or created.
@@ -157,14 +157,14 @@ The following is an example of the PDL changes needed to use the blade.
 	    updated: KnockoutObservable<number>;
 	}
 
-<a name="key-secret-pickers-config"></a>
+<a name="key-secret-pickers-config-1"></a>
 ### Config
 	export interface KeyPickerConfig {
 	    vaultId: string; // the resource id of the vault to display keys from (Optional if the id of the vault was supplied in the KeyPickerInputsOutputs)
 	    showCreateNew?: boolean; // Whether the picker will give the option to create a new key.
 	    requiredKeyOperations?: string[]; // Required key operations for selected keys. Supported key_ops are "sign", "verify", "wrapKey", "unwrapKey", "encrypt" & "decrypt". When a key doesn't have all required key_ops, it is readonly and cannot be selected.
 	}
-<a name="key-secret-pickers-constructor"></a>
+<a name="key-secret-pickers-constructor-1"></a>
 ### Constructor
 	this.keyPickerCollector = new MsPortalFx.ViewModels.ParameterCollector<KeyPickerInputsOutputs>(_container, {
 	          supplyInitialData: () => {
@@ -187,7 +187,7 @@ The following is an example of the PDL changes needed to use the blade.
 	          }
 	      });
 
-<a name="key-secret-pickers-pdl-changes"></a>
+<a name="key-secret-pickers-pdl-changes-1"></a>
 ### PDL Changes
 	<BladeAction Blade ="{BladeReference KeyPicker, ExtensionName=Microsoft_Azure_KeyVault}"
 	                   ParameterCollector ="keyPickerCollector">

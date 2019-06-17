@@ -130,11 +130,11 @@ When using HTML and framework controls you have some control over styling. These
 
 * [Styling and theming](/portal-sdk/generated/top-extensions-styling.md)
 
-* [HTML, CSS, and SVG sanitization](/portal-sdk/generated/top-extensions-styling.md#html-and-css-sanitization)
+* [HTML, CSS, and SVG sanitization](/portal-sdk/generated/top-extensions-styling.md#html-css-and-svg-sanitization)
 
 * [Adding custom CSS](/portal-sdk/generated/top-extensions-styling.md#adding-custom-css)
 
-* [Layout classes](/portal-sdk/generated/top-extensions-styling.md#layout-classes)
+* [Blade Layout patterns](/portal-sdk/generated/top-extensions-styling.md#blade-layout-patterns)
 
 * [Theming](/portal-sdk/generated/top-extensions-styling.md#theming)
 
@@ -253,6 +253,8 @@ The Azure portal supports multiple languages and locales. You will need to local
 * [Setting up localization for your gallery package](/portal-sdk/generated/top-extensions-localization-globalization.md#marketplace)
 
 * [Testing localization with side-loading](/portal-sdk/generated/top-extensions-localization-globalization.md#testing-localization)
+
+* [Handling localization for links to documentation](/portal-sdk/generated/top-extensions-localization-globalization.md#handling-localization-for-links-to-documentation)
 
 * [Formatting numbers, currencies and dates](/portal-sdk/generated/top-extensions-localization-globalization.md#formatting-numbers-currencies-and-dates)
 

@@ -8,20 +8,20 @@
 Azure portal extension development is supported on the Microsoft Windows 8, Windows Server 2012 R2, and Windows 10.
 
 
-<a name="azure-portal-extension-development-documentation-1-1-installation"></a>
+<a name="azure-portal-extension-development-documentation-installation"></a>
 ### 1.1 Installation
 
 * [Option 1 - MSI Installer](/portal-sdk/generated/downloads.md)
 * [Option 2 - Nuget packages](portalfx-nuget-overview.md)
 
-<a name="azure-portal-extension-development-documentation-1-2-getting-set-up-in-an-ide-typescript-version-compile-on-save"></a>
+<a name="azure-portal-extension-development-documentation-getting-set-up-in-an-ide-typescript-version-compile-on-save"></a>
 ### 1.2 Getting Set up in an IDE - <em>Typescript version / Compile on save</em>
 
 * [Visual Studio](portalfx-ide-setup.md) *(with Extension project template)*
 * VS Code (Coming Soon....)
 * [Need Help with setup?](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate)
 
-<a name="azure-portal-extension-development-documentation-1-3-running-and-debugging-hello-world-extension"></a>
+<a name="azure-portal-extension-development-documentation-running-and-debugging-hello-world-extension"></a>
 ### 1.3 Running and Debugging Hello World Extension
 
 * [Architecture Overview](portalfx-howitworks.md)
@@ -36,7 +36,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * Open Context pane from your Hello World Blade
 
 
-<a name="azure-portal-extension-development-documentation-1-4-extension-development-resources"></a>
+<a name="azure-portal-extension-development-documentation-extension-development-resources"></a>
 ### 1.4 Extension development resources
 
 * [Start Onboarding]
@@ -46,7 +46,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * [Understand what it takes to build great extension](portalfx-onboarding-exitcriteria.md#exit-criteria-quality-metrics)
 * [Need Help with onboarding?](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding)
 
-<a name="azure-portal-extension-development-documentation-1-4-deploying-your-extension"></a>
+<a name="azure-portal-extension-development-documentation-deploying-your-extension"></a>
 ### 1.4 Deploying your extension
 
 * [Deploy your extension using hosting service](portalfx-extension-hosting-service.md)
@@ -55,7 +55,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * [SLA for registering extension with hosting service]
 * [Need Help with hosting service?](https://stackoverflow.microsoft.com/questions/tagged/ibiza-deployment)
 
-<a name="azure-portal-extension-development-documentation-1-5-registering-your-extension"></a>
+<a name="azure-portal-extension-development-documentation-registering-your-extension"></a>
 ### 1.5 Registering your extension
 
 * [Understanding how registeration works](portalfx-extension-onboarding-developer-guide.md)
@@ -68,7 +68,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * [Reducing SLA for registering your extension]
 * [Need Help with hosting service?](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding)
 
-<a name="azure-portal-extension-development-documentation-1-6-enabling-extension-for-public-preview-ga"></a>
+<a name="azure-portal-extension-development-documentation-enabling-extension-for-public-preview-ga"></a>
 ### 1.6 Enabling extension for Public Preview/ GA
 
 * [Understand the crtieria for Public Preview in public cloud](portalfx-onboarding-exitcriteria.md#exit-criteria-quality-metrics)
@@ -328,7 +328,7 @@ Azure portal extension development is supported on the Microsoft Windows 8, Wind
 * [Map]
 * [Markdown]
 * [Menu]
-* [Monitor Chart](portalfx-controls-monitor-chart.md)
+* [Monitor Chart V2](portalfx-controls-monitor-chart-v2.md)
 * [Textbox](portalfx-controls-textbox.md)
     * [Textbox]
     * [Numeric Textbox]

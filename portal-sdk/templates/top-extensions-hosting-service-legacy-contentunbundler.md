@@ -1,6 +1,8 @@
 
 ## Legacy ContentUnbundler step-by-step
 
+**ContentUnbundler is no longer supported** , for migration instructions please see [https://aka.ms/portalfx/removecuvideo](https://aka.ms/portalfx/removecuvideo).
+
 ### Step-by-Step Onboarding
 
 #### Step 1: Verify build output is in the correct format

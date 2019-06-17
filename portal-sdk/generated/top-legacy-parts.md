@@ -408,7 +408,7 @@ The following is the TypeScript code that reads and writes settings. It is also 
 import ClientResources = require("ClientResources");
 import ExtensionDefinition = require("_generated/ExtensionDefinition");
 
-import Def = ExtensionDefinition.ViewModels.V1$Parts.GeneralGalleryPart;
+import Def = ExtensionDefinition.ViewModels.V1$$Parts.GeneralGalleryPart;
 import FxViewModels = MsPortalFx.ViewModels;
 import PartContainerContract = FxViewModels.PartContainerContract;
 import FxConfiguration = MsPortalFx.Composition.Configuration;
@@ -864,7 +864,7 @@ The following procedure to remove a part from a blade  layout.
 <a name="parts-overview-improving-part-responsiveness"></a>
 ### Improving Part responsiveness
 
-<a name="parts-overview-improving-part-responsiveness-overview"></a>
+<a name="parts-overview-improving-part-responsiveness-overview-1"></a>
 #### Overview
 
 As a Part loads, by default, the user is presented with a *blocking* loading indicator:
@@ -1038,7 +1038,7 @@ public onInputsSet(inputs: MyPartInputs): Promise {
 }
 ```
 
-<a name="parts-best-practices-handling-part-errors"></a>
+<a name="parts-best-practices-handling-part-errors-1"></a>
 ### Handling part errors
 
 The sad cloud UX is displayed when there is no meaningful error to display to the user. Typically this occures when the error is unexpected and the only option the user has is to try again.
