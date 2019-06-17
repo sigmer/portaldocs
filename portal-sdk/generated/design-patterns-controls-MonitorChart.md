@@ -3,7 +3,7 @@
  
 <a name="basics"></a>
 ### Basics
-The MonitorChart control plots the metrics for your resource in Azure. It inherently knows how to fetch data for your resource.
+The MonitorChartV2 control plots the metrics for your resource in Azure. It inherently knows how to fetch data for your resource.
 
 
 <!-- TODO get an IMAGE to embed here -->
@@ -20,7 +20,7 @@ The SDK offers a set data visualization controls.  Choose the one that is most s
 * **LineChart** - displays a series of data points connected by straight line segments.
 * **Map** - displays data with longitude and latitude coordinates on a world map.
 * **Metrics** - displays a single value for a set of metrics
-* **MonitorChart** - displays the metrics for your resource and inherently knows how to fetch data for your resource.
+* **MonitorChartV2** - displays the metrics for your resource and inherently knows how to fetch data for your resource.
 * **QuotaGauge** - displays the current value relative to a quota (limit) and total.
 * **ScatterChart** - displays a plot of data points without any connecting lines
 * **SingleMetric** - displays a single value for a metric
@@ -31,7 +31,7 @@ The SDK offers a set data visualization controls.  Choose the one that is most s
  
 <a name="best-practices"></a>
 ### Best practices
-Use the MonitorChart to plot metrics for your resource.
+Use MonitorChartV2 to plot metrics for your resource.
 
 <a name="best-practices-do"></a>
 #### Do
@@ -51,7 +51,7 @@ Use the MonitorChart to plot metrics for your resource.
 <a name="developer-tips-and-tricks"></a>
 ### Developer tips and tricks
 
-* <a href="https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SDKMenuBlade/monitorchartv2" target="_blank">MonitorChart in the samples extension</a>
+* <a href="https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SDKMenuBlade/monitorchartv2" target="_blank">MonitorChartV2 in the samples extension</a>
 
 
 

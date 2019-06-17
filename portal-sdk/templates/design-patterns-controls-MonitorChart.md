@@ -1,16 +1,16 @@
 ﻿# MonitorChart
 
-{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChart.md", "section": "control#basics"}
+{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChartv2.md", "section": "control#basics"}
 
 <!-- TODO get an IMAGE to embed here -->
 
 <!-- TODO get an SAMPLE CODE to embed here -->
 
-{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChart.md", "section": "control#when"}
+{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChartv2.md", "section": "control#when"}
 
-{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChart.md", "section": "control#design"}
+{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChartv2.md", "section": "control#design"}
 
-{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChart.md", "section": "control#devtips"}
+{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChartv2.md", "section": "control#devtips"}
 
 #### Interactive control and sample source code
 Go to the playground site to use the latest control and get source code for your project.  [Learn more about playground](./top-extensions-controls-playground.md).
@@ -19,4 +19,4 @@ Go to the playground site to use the latest control and get source code for your
 
  
 
-{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChart.md", "section": "control#reldocs"}
+{"gitdown": "include-section", "file": "../Samples/PlaygroundExtension/Client/Controls/Guidance/MonitorChartv2.md", "section": "control#reldocs"}
