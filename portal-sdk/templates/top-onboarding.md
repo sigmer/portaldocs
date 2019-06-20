@@ -120,9 +120,9 @@ Azure portal onboarding steps listed below assumes that all new services have co
 
 4) Partners must validate all changes deployed in RC or Mpac thoroughly before cherry-picking the commit to Production branch.
 
-**NOTE:** *Partner must cherry-pick changes from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
+**NOTE:** *Partner must cherry-pick changes from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for completing the PR and cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
 
-**IMPORTANT** *Partners must ensure PR has the required approvals and all the policies are met and PR is complete. PRs may get delayed due to merge validation expiry or other policy checks*
+**IMPORTANT** *Partners must ensure PR has the required approvals and all the policies are met and PR is complete. PRs may get delayed due to merge validation expiry or other policy checks. Partners can re-trigger any policy that expired or failed.*
 
 5) Understand the deployment schedules and [SLAs](top-extensions-svc-lvl-agreements.md) for Portal framework and Hosting service repositories. 
 
