@@ -30,12 +30,12 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 1. copy the content of `/src` to your own repo.
 1. Open `/src/Default.sln` in Visual Studio *as Admin*. Optionally you can use VS Code instead of Visual Studio.
 1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow. 
-![alt-text](../media/top-extensions-getting-started/untrustedextension.png "acceptuntrusted extension")
-
 	**Note**: If you are not seeing authentication issues coming from npm you need to perform the one time authentication step as follows:
 	-  click 'connect to feed' [button on this page](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortalNpmRegistry)
 	- select npm in the left nav of the dialog that opens
 	- follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\your\alias\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
+	
+![alt-text](../media/top-extensions-getting-started/untrustedextension.png "acceptuntrusted extension")
 		
 Congratulations! You've just created your first extension.
 You will find that the project template has implemented many of the key components of an extension.
