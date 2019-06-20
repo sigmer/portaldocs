@@ -173,21 +173,32 @@ When you are ready for all users to see your experience, you will enable your en
 Azure portal onboarding steps listed below assumes that all new services have completed the onboarding meeting with [ibiza-onboarding@microsoft.com](mailTo:ibiza-onboarding@microsoft.com) team and that you have downloaded the Azure portal SDK to start the development of your extension. If you have not had either the onboarding meeting or have developed the extension, please discuss with the Azure portal team on the requirements.
 
 <a name="steps-to-portal-onboarding-pre-onboarding-checks"></a>
-## Pre-Onboarding Checks
 
-1) As a partner team, please take a moment time to understand the different branches we have in Azure portal. 
+## Pre-Onboarding Checks - Must Do's
 
-2) Understand the deployment schedules and [SLAs](top-extensions-svc-lvl-agreements.md) for Portal framework and Hosting service repositories. 
+1) As a partner team, please take a moment to understand the different branches we have in Azure portal.
 
-3) Portal team has a process of freezing deployments during special events like //build //Ignite //Inspire etc. Any changes to Production branch will NOT be honored during this freeze time. Please plan your Preview/Release of your service accordingly.
+2) Portal has Dev, Dogfood and Production Branches. All changes to config files must be raised to Dev branch only.
 
-4) Portal team does an automatic merge from Dogfood branch to Mpac and Mpac to Production during special events like conferences. During all other times, partners MUST always cherry-pick the changes from Dev branch to Production branch for the respective changes to go live.
+3) Once a PR completes in Dev branch, the change gets deployed to Dogfood branch automatically and from Dogfood branch, the change is deployed to RC and Mpac stamps.
 
-5) National cloud deployments take 2 weeks more than Production branch.
+4) Partners must validate all changes deployed in RC or Mpac thoroughly before cherry-picking the commit to Production branch.
 
-6) Always work with Azure portal onboarding contact about your release dates before you commit timelines to release the product or any Marketing communications.
+**NOTE:** *Partner must cherry-pick changes from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
 
-7) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval. 
+**IMPORTANT** *Partners must ensure PR has the required approvals and all the policies are met and PR is complete. PRs may get delayed due to merge validation expiry or other policy checks*
+
+5) Understand the deployment schedules and [SLAs](top-extensions-svc-lvl-agreements.md) for Portal framework and Hosting service repositories. 
+
+6) Portal team has a process of freezing deployments during special events like //build //Ignite //Inspire etc. Any changes to Production branch will NOT be honored during this freeze time. Please plan your Preview/Release of your service accordingly.
+
+7) Portal team does an automatic merge from Dogfood branch to Mpac and Mpac to Production during special events like conferences. During all other times, partners MUST always cherry-pick the changes from Dev branch to Production branch for the respective changes to go live.
+
+8) National cloud deployments take 2 weeks more than Production branch.
+
+9) Always work with Azure portal onboarding contact about your release dates before you commit timelines to release the product or any Marketing communications.
+
+10) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval.  
 
 ![storage container](./../media/portalfx-extensions-onboarding/onboarding-instructions.png)
 
