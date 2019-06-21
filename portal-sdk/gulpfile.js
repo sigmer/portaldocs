@@ -317,7 +317,7 @@ function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
             result.dateInProd && result.dateInProd.toLocaleDateString("en-US") || "",
             result.prodSdkVersionTags && result.prodSdkVersionTags.join(", ") || "",
             util.format("%d Breaking Changes, %d Features added and %d Bugs Fixed", result.breakingCount, result.featureCount, result.bugFixCount),
-            util.format("<a href=\"./release-notes.md#%s\">more details...</a>", versionFragment),
+            util.format("<a href=\"./breaking-changes.md#%s\">more details...</a>", versionFragment),
             result.breakingChanges.titles.length > 0
                 ? result.breakingChanges.titles.reduce(function (content, item) {
                     return content.concat(util.format("%s", item));
