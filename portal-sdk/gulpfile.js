@@ -290,7 +290,7 @@ function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
         perCloudDownloadLinks += util.format("<br/> Download %s", cloudDownloadVersionLinks);
     });
 
-    downloadsDoc.write(util.format("# Download Portal SDK \n %s \n\n Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that. \n\n <table><tr><th>Download</th><th>Detail</th><th>Breaking Changes</th></tr>", perCloudDownloadLinks || downloadLinks));
+    downloadsDoc.write(util.format("# Download Portal SDK \n %s \n\n Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that.  \n\n As of SDK 5.0.302.204101 the Portal SDK MSI is no longer shipped.  To update your SDK simply udpate your referenced NuGet packages and node modules to the desired version. Azure Portal NuGet packages and node modules are available at the new [AzurePortal Registry](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal). Breaking changes by version are available at [https://aka.ms/portalf/breaking](https://aka.ms/portalf/breaking) \n\n", perCloudDownloadLinks || downloadLinks));
 
     sortedVersions.forEach(function (version) {
         var result = aggregate[version];
