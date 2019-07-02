@@ -824,7 +824,7 @@
     },
     "concat-map": {
       "version": "0.0.1",
-      "resolved": "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz",
+      "resolved": "",
       "integrity": "sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=",
       "dev": true
     },
@@ -1301,9 +1301,9 @@
       }
     },
     "eslint": {
-      "version": "6.0.0",
-      "resolved": "https://registry.npmjs.org/eslint/-/eslint-6.0.0.tgz",
-      "integrity": "sha512-SrrIfcd4tOgsspOKTSwamuTOAMZOUigHQhVMrzNjz4/B9Za6SHQDIocMIyIDfwDgx6MhS15nS6HC8kumCV2qBQ==",
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/eslint/-/eslint-6.0.1.tgz",
+      "integrity": "sha512-DyQRaMmORQ+JsWShYsSg4OPTjY56u1nCjAmICrE8vLWqyLKxhFXOthwMj1SA8xwfrv0CofLNVnqbfyhwCkaO0w==",
       "dev": true,
       "requires": {
         "@babel/code-frame": "^7.0.0",
@@ -1811,9 +1811,9 @@
       }
     },
     "flatted": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/flatted/-/flatted-2.0.0.tgz",
-      "integrity": "sha512-R+H8IZclI8AAkSBRQJLVOsxwAoHd6WC40b4QTNWIjzAa6BXOBfQcM587MXDTVPeYaopFNWHUFLx7eNmHDSxMWg==",
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/flatted/-/flatted-2.0.1.tgz",
+      "integrity": "sha512-a1hQMktqW9Nmqr5aktAux3JMNqaucxGcjtjWnZLHX7yyPCmlSV3M54nGYbqT8K+0GhF3NBgmJCc3ma+WOgX8Jg==",
       "dev": true
     },
     "flush-write-stream": {
