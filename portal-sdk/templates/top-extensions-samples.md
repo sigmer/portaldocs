@@ -25,6 +25,7 @@ For help you can ask a question in the internal StackOverflow tool located at [h
     a. `git checkout 5.0.302.19601` **Note** replace with version of the framework you which to snap to.
 
 1. Open `/src/SamplesExtension.sln` in Visual Studio.
+1. In solution explorer, right click on `SamplesExtension.Server` and select `Set as StartUp Project`.
 1. Run your extension. In Visual Studio press F5.
 1. Note at this point check if your browser has blocked popups and enable for localhost.
 1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow and you will be redirected to the samples extension.
