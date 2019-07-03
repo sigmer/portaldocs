@@ -824,7 +824,7 @@
     },
     "concat-map": {
       "version": "0.0.1",
-      "resolved": "",
+      "resolved": false,
       "integrity": "sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=",
       "dev": true
     },

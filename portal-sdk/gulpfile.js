@@ -166,7 +166,7 @@ function queryPortalFxLogs(query, continuationToken, mergedResults) {
 }
 
 /** 
- * Generates release-notes.md, breaking-changes.md and downloads.md docs given an array of portalFxLogs
+ * Generates breaking-changes.md and downloads.md docs given an array of portalFxLogs
  */
 function generateDynamicDocs(portalFxLogs, outputDir, prodSdkVersionTags) {
     const blobSvc = storage.createBlobService();
@@ -262,10 +262,9 @@ function generateDynamicDocs(portalFxLogs, outputDir, prodSdkVersionTags) {
 }
 
 /**
- * Takes the aggregate content for all versions and writes it to release-notes.md, breaking-changes.md and downloads.md
+ * Takes the aggregate content for all versions and writes it to breaking-changes.md and downloads.md
  */
 function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
-    var releaseNotesFile = fs.createWriteStream(path.resolve(outputDir, "release-notes.md"));
     var breakingChangesFile = fs.createWriteStream(path.resolve(outputDir, "breaking-changes.md"));
     var downloadsDoc = fs.createWriteStream(path.resolve(outputDir, "downloads.md"));
     var latestDownloadableSdkVersion = "";
@@ -277,7 +276,6 @@ function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
         return !!aVersion.downloadUrl;
     });
 
-    releaseNotesFile.write(util.format("# Release Notes since %s", fourMonthsAgo.toLocaleDateString("en-US")));
     breakingChangesFile.write(util.format("# Breaking Changes since %s \n* Additional Q&A about breaking changes can be found [here](./breaking-changes.md) \n* To ask a question about breaking changes [use this](https://aka.ms/ask/ibiza-breaking-change)  \n", fourMonthsAgo.toLocaleDateString("en-US")));
     const downloadLinks = util.format("Download Latest Release: <a href=\"%s\">%s</a>", aggregate[latestDownloadableSdkVersion].downloadUrl, latestDownloadableSdkVersion);
     const sortedProdSdkVersionTag = Object.keys(prodSdkVersionTags).sort(versioncompare).reverse();
@@ -290,44 +288,20 @@ function writeDocsToFile(aggregate, outputDir, prodSdkVersionTags) {
         perCloudDownloadLinks += util.format("<br/> Download %s", cloudDownloadVersionLinks);
     });
 
-    downloadsDoc.write(util.format("# Download Portal SDK \n %s \n\n Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that.  \n\n **As of SDK 5.0.302.204101 the Portal SDK MSI is no longer shipped**.  To update your SDK simply udpate your referenced NuGet packages and node modules to the desired version. Azure Portal NuGet packages and node modules are available at the new [AzurePortal Registry](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal). Breaking changes by version are available at [https://aka.ms/portalf/breaking](https://aka.ms/portalf/breaking) \n\n", perCloudDownloadLinks || downloadLinks));
+    downloadsDoc.write(util.format("# Download Portal SDK \n %s \n\n Each version of the SDK is supported for 120 days. Extensions must upgrade to a newer version of the SDK within 120 days from the release of the SDK version they are currently using as runtime backward compatibility is not supported beyond that.  \n\n **As of SDK 5.0.302.207001 the Portal SDK MSI is no longer shipped**.  To update your SDK simply update your referenced NuGet packages and node modules to the desired version.\n\n - Azure Portal NuGet packages and node modules are available at the new [AzurePortal Registry](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal).\n - Breaking changes by version are available at [https://aka.ms/portalf/breaking](https://aka.ms/portalf/breaking)\n - Samples Extension is available from the new [AzureUX-SamplesExtension repo](top-extensions-samples.md#clone-build-and-run-your-local-samples-extension)\n - Getting started template is available at the new [AzureUX-TemplateExtension repo](top-extensions-getting-started.md#creating-and-running-an-extension)", perCloudDownloadLinks || downloadLinks));
 
     sortedVersions.forEach(function (version) {
         var result = aggregate[version];
-        var versionFragment = version.replace(/\./g, '');
-
-        releaseNotesFile.write(util.format("\n\n## %s\n%d Breaking Changes, %d Features added and %d Bugs Fixed\n<table>%s</table>",
-            version,
-            result.breakingCount,
-            result.featureCount,
-            result.bugFixCount,
-            result.releaseNotes));
 
         if (result.breakingCount > 0) {
             breakingChangesFile.write(util.format("\n\n## %s\n<table>%s</table>",
                 version,
                 result.breakingChanges.rows));
         }
-
-        downloadsDoc.write(util.format("<tr><td name=\"%s\">%s<br/>%s<br/>%s</td><td>%s<br/>%s</td><td>%s</td></tr>",
-            versionFragment,
-            result.downloadUrl
-                ? util.format("<a href=\"%s\">%s</a>", result.downloadUrl, version)
-                : version,
-            result.dateInProd && result.dateInProd.toLocaleDateString("en-US") || "",
-            result.prodSdkVersionTags && result.prodSdkVersionTags.join(", ") || "",
-            util.format("%d Breaking Changes, %d Features added and %d Bugs Fixed", result.breakingCount, result.featureCount, result.bugFixCount),
-            util.format("<a href=\"./breaking-changes.md#%s\">more details...</a>", versionFragment),
-            result.breakingChanges.titles.length > 0
-                ? result.breakingChanges.titles.reduce(function (content, item) {
-                    return content.concat(util.format("%s", item));
-                }).concat(util.format("<br/><a href='./breaking-changes.md#%s'>more details...</a>", versionFragment)) : ""
-        ));
     });
-    //write results to release-notes.md, breaking-changes.md and downloads.md
-    releaseNotesFile.end("");
+    //write results to breaking-changes.md and downloads.md
     breakingChangesFile.end("");
-    downloadsDoc.end("</table>");
+    downloadsDoc.end("");
 }
 
 /**
