@@ -7,12 +7,12 @@
     * [Marketplace Search ##](#gallery-item-specificiations-marketplace-search)
     * [Gallery Package Search Metadata ##](#gallery-item-specificiations-gallery-package-search-metadata)
     * [Marketplace Suggest ##](#gallery-item-specificiations-marketplace-suggest)
-    * [Localization ##](#gallery-item-specificiations-localization)
+    * [Localization ##](#gallery-item-specificiations-localization-1)
     * [FAQs and Notes ##](#gallery-item-specificiations-faqs-and-notes)
 * [Gallery Item Metadata](#gallery-item-metadata)
     * [Identity Information](#gallery-item-metadata-identity-information)
     * [Metadata](#gallery-item-metadata-metadata)
-    * [Images](#gallery-item-metadata-images)
+    * [Images](#gallery-item-metadata-images-1)
     * [Component Metadata](#gallery-item-metadata-component-metadata)
     * [Categories](#gallery-item-metadata-categories)
     * [Links](#gallery-item-metadata-links)
@@ -443,7 +443,11 @@ To delete a azure gallery package run the following command.
 
 <a name="gallery-item-specificiations-gallery-package-management-configuring-the-azure-package-loader-tool"></a>
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can <a href="https://auxdocs.azurewebsites.net/en-us/Downloads/DownloadGallery" target="_blank">download the test certificate here</a>. In order to publish to production, you must contact the [1store team](mailto:1store@microsoft.com).
+In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can download the test certificate [here](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/fe40acd4ea7741f6b5d626a5f0520327) and the required Password [here](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Secret/https://gallerypackagedeployment.vault.azure.net/secrets/GalleryPackageDeploymentCertifiace-Password/281c3c84a3d54a6db6c0213903e4d4c1). 
+
+If you are a Microsoft FTE and do not have permissions to access the certificates, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
+
+In order to publish to production, you must contact the [1store team](mailto:1store@microsoft.com).
 
 ```xml
 <appSettings>
@@ -504,7 +508,7 @@ Customers can search for Marketplace items in two locations:
 
 When a user searches via the +New search box, they will be taken to the Marketplace "Everything" menu which displays all possible search results.
 
-<a name="gallery-item-specificiations-marketplace-search-marketplace-search"></a>
+<a name="gallery-item-specificiations-marketplace-search-marketplace-search-1"></a>
 ### Marketplace Search ###
 ![Marketplace Search][Marketplace_Search]
 
@@ -529,7 +533,7 @@ Example: In general, a gallery item with display name "Azure Package" will be ra
 ## Marketplace Suggest ##
 Suggestions in the Marketplace search boxes only suggest item display names and publisher names. The API finds the closest matching query string and does not prioritize any titles or publishers.
 
-<a name="gallery-item-specificiations-localization"></a>
+<a name="gallery-item-specificiations-localization-1"></a>
 ## Localization ##
 Marketplace is fully localized, but not all gallery items in the Marketplace are localized. To accommodate this, Marketplace will use a customer's search query to perform an English query as well as a query under the customer's current locale. If the customer's query matches the English or localized fields of a package, the localized package will be returned to the customer.
 
@@ -599,7 +603,7 @@ Below you will find a list of all metadata that is collected with a gallery item
 
 
 
-<a name="gallery-item-metadata-images"></a>
+<a name="gallery-item-metadata-images-1"></a>
 ## Images
 Below is the list of icons used in the gallery.
 

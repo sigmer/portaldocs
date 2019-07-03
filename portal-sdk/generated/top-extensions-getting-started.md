@@ -31,23 +31,17 @@ The Azure Portal SDK includes everything you need to build extensions for the po
     a. `git checkout 5.0.302.19601` **Note** replace with version of SDK you which to checkout
 
 1. copy the content of `/src` to your own repo.
-1. Open `/src/Default.sln` in Visual Studio
-1. Use the `Ctl + F5 key to compile and run the new project extension in **IIS Express**.
+1. Open `/src/Default.sln` in Visual Studio *as Admin*. Optionally you can use VS Code instead of Visual Studio.
+1. Run your extension. In Visual Studio press F5. In Visual Studio Code: `Ctl+Shift+P > Tasks: Run Task > npm: start`
+1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow.
 
-1. On first run, a request to install a certificate for localhost for IIS Express may be displayed. Accept the certificate to continue, as in the following image.
-	
-    ![alt-text](../media/top-extensions-getting-started/ssl1.png "accept ssl prompt")
-    ![alt-text](../media/top-extensions-getting-started/ssl2.png "accept sec warning")
-
-1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow. 
-
-**Note**: If you are not seeing the allow Untrusted Extensions dialog there are two common issues in the [FAQ](#faq).
-
-- please see [popup blocker](#the-portal-is-never-loaded-so-the-extension-has-not-sideloaded)
-- localhost cert is not installed git a [this site is not secure error](#i-receive-a-this-site-is-not-secure-or-your-connection-is-not-private-error-when-running-the-extension)
+	**Note**: If you are not seeing authentication issues coming from npm you need to perform the one time authentication step as follows:
+	-  click 'connect to feed' [button on this page](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortalNpmRegistry)
+	- select npm in the left nav of the dialog that opens
+	- follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\your\alias\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
 	
 ![alt-text](../media/top-extensions-getting-started/untrustedextension.png "acceptuntrusted extension")
-	
+		
 Congratulations! You've just created your first extension.
 You will find that the project template has implemented many of the key components of an extension.
 

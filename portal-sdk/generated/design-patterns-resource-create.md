@@ -120,7 +120,7 @@ Use the tabs & sections to organize content. The **Basics** tab should be the st
 
 ![alt-text](../media/top-extensions-create/Tabs.png "Create experience with Tabs")
 <a name="behavior-tabs"></a>
-<a name="behavior-tabs"></a>
+<a name="behavior-tabs-1"></a>
 ### Tabs
 Use the tabs & sections to organize content. The Basics tab should be the starting point for all creates and contain essential configuration info. The design should allow for quick resource creation at any time with unrestricted navigation between tabs. Enabling users to freely navigate the tabs reduces the friction for users looking to learn about your resource. The combination of quick creation and tab exploration can lead to additional resource deployments over time.
 
@@ -131,7 +131,7 @@ Most creates should have a minimum of 3 tabs; **Basics**, **Tags**, **Review + c
 </div>
 
 <a name="behavior-tabs-basics"></a>
-<a name="behavior-tabs-basics"></a>
+<a name="behavior-tabs-1-basics"></a>
 #### Basics
 The first tab contains fields required for creating the resource. Set default values when possible to eliminate additional time spent on create.
 
@@ -156,7 +156,7 @@ The **Basics** tab should have the following in the footer area
 * Next button with label "Next : *next_tab_name* \>"
 
 <a name="behavior-tabs-optional-tabs"></a>
-<a name="behavior-tabs-optional-tabs"></a>
+<a name="behavior-tabs-1-optional-tabs"></a>
 #### Optional tabs
 Additional tabs are used to organize optional settings specific to your resource.  All optional tabs should be after the **Basics** tab and before the **Tags** tab.  Tabs should have short names, typically a noun. Tab naming should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
 
@@ -168,7 +168,7 @@ The optional tabs should have the following in the footer area
 * Next button with label "Next : *next_tab_name* \>"
 
 <a name="behavior-tabs-tags"></a>
-<a name="behavior-tabs-tags"></a>
+<a name="behavior-tabs-1-tags"></a>
 #### Tags
 Many enterprises are starting to create subscription and resource group polices that require tagging resources at create time.  Not including the **Tags** tab will block those users from deploying resources using the portal.  The **Tags** tab is always the penultimate tab.  
 
@@ -184,7 +184,7 @@ The **Tags** tabs should have the following in the footer area
 ![alt-text](../media/top-extensions-create/Tags.png "Tags control")
 
 <a name="behavior-tabs-review-create"></a>
-<a name="behavior-tabs-review-create"></a>
+<a name="behavior-tabs-1-review-create"></a>
 #### Review + create
 Allowing the user to verify all settings prior to submission ensures accuracy and reduces the need for user redeployments.  Use the summary control to help organize content from multiple tabs.  Disable the create button until validation succeeds.  The **Review + create** tab is always the last tab.
 

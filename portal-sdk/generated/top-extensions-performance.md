@@ -636,6 +636,7 @@ The framework supports loading view models using dependency injection. If you mi
 
 - Migrate to V2 targets if you haven’t done so (See: [V2 targets](#v2-targets))
 - Ensure that the `emitDecoratorMetadata` compiler option is set to `true` in the tsconfig.json
+- Ensure that the `forceConsistentCasingInFileNames` compiler option is set to `true` in the tsconfig.json
 - Ensure that the `moduleResolution` compiler option is set to `node` in the tsconfig.json
 - Upgrade to at least SDK 3001+
 - Cleanup your extension project TypeScript code and remove all uses of export = Main.
@@ -729,7 +730,7 @@ The frameworks supports a new extension load contract that can improve extension
 - Remove all requireJS shims.
 - Complete the dependency injected view models migration.
 - Upgrade to at least SDK 14401.
-  - The MSI can be found at this location [\\\\reddog\Builds\branches\git_azureux_portalfx_production_sdk\5.0.302.14401\retail-amd64\src\RDPackages\SdkInstallerPackage\Portal](\\\\reddog\Builds\branches\git_azureux_portalfx_production_sdk\5.0.302.14401\retail-amd64\src\RDPackages\SdkInstallerPackage\Portal)
+  - The SDK can be updated from the [internal package feeds](top-extension-packages.md).
   - $(ExtensionPageVersion) breaking change notes: https://msazure.visualstudio.com/One/_workitems/edit/3276047
 - Prewarming / Web Workers is not a pre-requisite. If an extension onboards to both Prewarming and FastExtensionLoad, the framework will eliminate an additional 500 ms postMessage call, allowing an extension to reach sub-second extension load time.
 
@@ -780,5 +781,7 @@ The frameworks supports a new extension load contract that can improve extension
 <a name="fast-extension-load-pull-request-samples-1"></a>
 ## Pull Request Samples
 
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753
 - https://dev.azure.com/msazure/One/_git/Mgmt-RecoverySvcs-Portal/pullrequest/1423720
 - https://msazure.visualstudio.com/One/_git/MGMT-AppInsights-InsightsPortal/pullrequest/1426564
+- https://msazure.visualstudio.com/One/_git/AzureUX-Monitoring/pullrequest/1514753

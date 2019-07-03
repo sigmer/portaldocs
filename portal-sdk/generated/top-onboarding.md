@@ -172,9 +172,8 @@ When you are ready for all users to see your experience, you will enable your en
 
 Azure portal onboarding steps listed below assumes that all new services have completed the onboarding meeting with [ibiza-onboarding@microsoft.com](mailTo:ibiza-onboarding@microsoft.com) team and that you have downloaded the Azure portal SDK to start the development of your extension. If you have not had either the onboarding meeting or have developed the extension, please discuss with the Azure portal team on the requirements.
 
-<a name="steps-to-portal-onboarding-pre-onboarding-checks"></a>
-
-## Pre-Onboarding Checks - Must Do's
+<a name="steps-to-portal-onboarding-pre-onboarding-checks-must-do-s"></a>
+## Pre-Onboarding Checks - Must Do&#39;s
 
 1) As a partner team, please take a moment to understand the different branches we have in Azure portal.
 
@@ -198,7 +197,7 @@ Azure portal onboarding steps listed below assumes that all new services have co
 
 9) Always work with Azure portal onboarding contact about your release dates before you commit timelines to release the product or any Marketing communications.
 
-10) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval.  
+10) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval. 
 
 ![storage container](./../media/portalfx-extensions-onboarding/onboarding-instructions.png)
 
