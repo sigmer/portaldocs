@@ -282,7 +282,11 @@ To delete a azure gallery package run the following command.
 ```
 
 #### Configuring the Azure Package Loader Tool
-In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can <a href="https://auxdocs.azurewebsites.net/en-us/Downloads/DownloadGallery" target="_blank">download the test certificate here</a>. In order to publish to production, you must contact the [1store team](mailto:1store@microsoft.com).
+In order to use the gallery loader you will need to set some values in the AzureGallery.exe.config file. You can download the test certificate [here](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Certificate/https://gallerypackagedeployment.vault.azure.net/certificates/GalleryPackageDeploymentCertificate/fe40acd4ea7741f6b5d626a5f0520327) and the required Password [here](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/asset/Microsoft_Azure_KeyVault/Secret/https://gallerypackagedeployment.vault.azure.net/secrets/GalleryPackageDeploymentCertifiace-Password/281c3c84a3d54a6db6c0213903e4d4c1). 
+
+If you are a Microsoft FTE and do not have permissions to access the certificates, please join the right groups following instructions [here](../../portal-sdk/generated/top-onboarding.md#join-dls-and-request-permissions). If you are an external partner, request permissions through the Microsoft team you are collaborating with to light up your extension.
+
+In order to publish to production, you must contact the [1store team](mailto:1store@microsoft.com).
 
 ```xml
 <appSettings>
