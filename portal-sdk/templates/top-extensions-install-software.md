@@ -48,8 +48,8 @@ Install the following software. Your team should be aware of the most current do
       
       * select the following components 
 
-      ![Console](../media/top-extensions-install-software/VS2017-1.PNG)
+      ![alt-text](../media/top-extensions-install-software/vs20171.png "VS step 1")
 
-      ![Console](../media/top-extensions-install-software/VS2017-2.PNG)
+      ![alt-text](../media/top-extensions-install-software/vs20172.png "VS step 2")
 
 To validate that your dev machine is ready for Azure Portal Extension development start with the template extension in the [Getting Started Guide](top-extensions-getting-started.md)
