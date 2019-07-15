@@ -208,7 +208,7 @@ The package will contain 1 or more ARM template stored in the DeploymentTemplate
 ### Gallery Package Management
 
 #### Getting the Gallery Tools
-You can find the latest version (5.2.1.569 or above) of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the official NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official).
+You can find the latest version (5.2.1.569 or above) of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the official NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official). Please only use packages with major version 5. Do not use major version 10, i.e., use 5.*.*.* and do not use 10.*.*.*
 
 
 #### Creating an Azure Gallery Package
