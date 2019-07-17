@@ -14,7 +14,7 @@ Updating your extensions version of the Azure Portal SDK simply involves updatin
 1. Build and fix any breaking changes, as described in [Breaking changes](https://aka.ms/portalfx/breaking).
 
 * In Visual Studio Code
-1. If you want to be specific about what packges and versions to update
+1. If you want to be specific about what packages and versions to update
    * update your /Extension/packages.config to contain the target versions you want to consume
    * delete your /packages folder that contains the old versions expanded packages
    * in vs code run `npm run restore` task run
