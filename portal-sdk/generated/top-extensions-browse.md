@@ -9,6 +9,9 @@ The Favorites in the left nav and the 'All services' menu are the primary ways t
 There are 2 ways you can be surfaced in Browse:
 
 1. [Browse](#browse-for-arm-resources) for ARM resources
+
+    - Upgrading your browse to utilise [Azure Resource Graph](#browse-with-azure-resource-graph)
+
 1. [Custom blade](#custom-blade) if you have a single instance and not a list of resources
 
 <a name="browse-building-browse-experiences-browse-for-arm-resources"></a>
@@ -467,7 +470,267 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 Now, you should have supplemental data getting populated. Great! Let's add context menu commands...
 
-<a name="browse-building-browse-experiences-adding-context-menu-commands"></a>
+<a name="browse-browse-with-azure-resource-graph"></a>
+## Browse with Azure Resource Graph
+
+If you aren’t familiar Azure Resource Graph, it’s a new service which provides a query-able caching layer over ARM.
+This gives us the capability to sort, filter, and search server side which is a vast improvement on what we have today.
+
+What that does mean though is we won’t be loading extensions to gather the extra, supplemental, column data. Instead that will all be served via ARG.
+
+Due to which there the following required from extension authors to onboard.
+
+- Define the columns which you wish to expose
+- Craft the query to power your data set
+  - To craft the query you can use the in portal advanced query editor [Azure Resource Graph Explorer](https://rc.portal.azure.com#blade/hubsextension/argqueryblade)
+  - Ensure the query projects all the framework and extension expected columns
+- Onboard your given asset via PDL
+  - If you haven't created an Asset follow the previous documentation on how to do that
+- Choose how to expose the ARG experience
+
+**Note:** the below contains the PDL, Columns definitions, and Query required to match to an existing AppServices browse experience.
+
+<a name="browse-onboarding-an-asset-to-arg"></a>
+## Onboarding an asset to ARG
+
+Firstly you'll need to craft a KQL query which represents all possible data for your desired browse view, this includes the required framework columns.
+
+<a name="browse-onboarding-an-asset-to-arg-expected-framework-columns"></a>
+### Expected Framework columns
+
+| Display name | Expected Column Name | PDL Reference |
+| ------------ | -------------------- | ------------- |
+| Name | name | N/A - Injected as the first column |
+| Resource Id | id | FxColumn.ResourceId |
+| Subscription | N/A | FxColumn.Subscription |
+| SubscriptionId | subscriptionId | FxColumn.SubscriptionId |
+| Resource Group | resourceGroup | FxColumn.ResourceGroup |
+| Resource Group Id | N/A | FxColumn.ResourceGroupId |
+| Location | location | FxColumn.Location |
+| Location Id | N/A | FxColumn.LocationId |
+| Resource Type | N/A | FxColumn.ResourceType |
+| Type | type | FxColumn.AssetType |
+| Kind | kind | FxColumn.Kind |
+| Tags | tags | FxColumn.Tags |
+| Tenant Id | tenantId | N/A |
+
+<a name="browse-onboarding-an-asset-to-arg-kql-query"></a>
+### KQL Query
+
+For those who are not familar with KQL you can use the public documentation as reference. https://docs.microsoft.com/en-us/azure/kusto/query/
+
+Given the framework columns are required we can use the below as a starting point.
+
+1. Go to the [Azure Resource Graph explorer](https://rc.portal.azure.com#blade/hubsextension/argqueryblade)
+1. Copy and paste the below query
+1. Update the `where` filter to your desire type
+
+```kql
+where type =~ 'microsoft.web/sites'
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
+```
+
+That query is the bare minimum required to populate ARG browse.
+
+As you decide to expose more columns you can do so by using the logic available via the KQL language to `extend` and then `project` them in the query.
+One common ask is to convert ARM property values to user friendly display strings, the best practice to do that is to use the `case` statement in combination
+with extending the resulting property to a given column name.
+
+In the below example we're using a `case` statement to rename the `state` property to a user friendly display string under the column `status`.
+We're then including that column in our final project statement. We can then replace those display strings with client references once we migrate it over to 
+PDL in our extension providing localised display strings.
+
+```kql
+where type =~ 'microsoft.web/sites'
+| extend status = case(
+tolower(properties.state) == 'stopped',
+'Stopped',
+tolower(properties.state) == 'running',
+'Running',
+'Other')
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
+, status
+```
+
+As an example the below query can be used to replicate the 'App Services' ARM based browse experience in ARG.
+
+```kql
+where type =~ 'microsoft.web/sites'
+| extend appServicePlan = extract('serverfarms/([^/]+)', 1, tostring(properties.serverFarmId))
+| extend appServicePlanId = properties.serverFarmId
+| extend pricingTier = case(
+tolower(properties.sku) == 'free',
+'Free',
+tolower(properties.sku) == 'shared',
+'Shared',
+tolower(properties.sku) == 'dynamic',
+'Dynamic',
+tolower(properties.sku) == 'isolated',
+'Isolated',
+tolower(properties.sku) == 'premiumv2',
+'PremiumV2',
+tolower(properties.sku) == 'premium',
+'Premium',
+'Standard')
+| extend status = case(
+tolower(properties.state) == 'stopped',
+'Stopped',
+tolower(properties.state) == 'running',
+'Running',
+'Other')
+| extend appType = case(
+kind contains 'botapp',
+'Bot Service',
+kind contains 'api',
+'Api App',
+kind contains 'functionapp',
+'Function App',
+'Web App')
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
+, appServicePlanId, pricingTier, status, appType
+```
+
+<a name="browse-pdl-definition"></a>
+## PDL Definition
+
+In your extension you'll have a `<Asset>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
+
+<a name="browse-pdl-definition-query-for-pdl"></a>
+### Query for PDL
+
+Create a new file, we'll use `AppServiceQuery.kml`, and save your query in it.
+You can update any display strings with references to resource files using following syntax `'{{Resource name, Module=ClientResources}}'`.
+
+The following is an example using the resource reference syntax.
+
+```kql
+where type == 'microsoft.web/sites'
+| extend appServicePlanId = properties.serverFarmId
+| extend pricingTier = case(
+    tolower(properties.sku) == 'free',
+    '{{Resource pricingTier.free, Module=BrowseResources}}',
+    tolower(properties.sku) == 'shared',
+    '{{Resource pricingTier.shared, Module=BrowseResources}}',
+    tolower(properties.sku) == 'dynamic',
+    '{{Resource pricingTier.dynamic, Module=BrowseResources}}',
+    tolower(properties.sku) == 'isolated',
+    '{{Resource pricingTier.isolated, Module=BrowseResources}}',
+    tolower(properties.sku) == 'premiumv2',
+    '{{Resource pricingTier.premiumv2, Module=BrowseResources}}',
+    tolower(properties.sku) == 'premium',
+    '{{Resource pricingTier.premium, Module=BrowseResources}}',
+    '{{Resource pricingTier.standard, Module=BrowseResources}}')
+| extend status = case(
+    tolower(properties.state) == 'stopped',
+    '{{Resource status.stopped, Module=BrowseResources}}',
+    tolower(properties.state) == 'running',
+    '{{Resource status.running, Module=BrowseResources}}',
+    '{{Resource status.other, Module=BrowseResources}}')
+| extend appType = case(
+    kind contains 'botapp',
+    '{{Resource appType.botapp, Module=BrowseResources}}',
+    kind contains 'api',
+    '{{Resource appType.api, Module=BrowseResources}}',
+    kind contains 'functionapp',
+    '{{Resource appType.functionapp, Module=BrowseResources}}',
+    '{{Resource appType.webapp, Module=BrowseResources}}')
+| project name,resourceGroup,kind,location,id,type,subscriptionId,tags
+, appServicePlanId, pricingTier, status, appType
+```
+
+<a name="browse-pdl-definition-custom-columns"></a>
+### Custom columns
+
+To define a custom column you will need to create a `Column` tag in PDL within your `Browse` tag.
+
+A column tag has 5 properties.
+
+```xml
+<Column Name="status"
+      DisplayName="{Resource Columns.status, Module=ClientResources}"
+      Description="{Resource Columns.statusDescription, Module=ClientResources}"
+      Format="String"
+      WidthInPixels="90" />
+```
+
+- Name: The identifier which is used to uniquely refer to your column
+- DisplayName: A display string, this should be a reference to a resource
+- Description: A description string, this should also be a reference to a resource
+- Format: See below table for possible format
+- WidthInPixels: String, which respresents the default width of the column in pixels (e.g. "120")
+
+| Format option | Description |
+| ------------- | ----------- |
+| String | String rendering of your column |
+| Resource | If the returned column is a ARM resource id, this column format will render the cell as the resources name and a link to the respective blade |
+
+<a name="browse-pdl-definition-default-columns"></a>
+### Default columns
+
+To specify default columns you need to declare a property `DefaultColumns` on your `Browse` `PDL` tag.
+Default columns is a comma separated list of column names, a mix of custom columns and framework defined columns from the earlier table. All framework columns are prefixed with `FxColumn.`.
+
+For example `DefaultColumns="status, appType, appServicePlanId, FxColumn.location"`.
+
+<a name="browse-pdl-definition-full-asset-definition"></a>
+### Full Asset definition
+
+In the above query example there are 4 custom columns, the below Asset `PDL` declares the custom column meta data which each map to a column in the query above.
+
+It also declares the default columns and their ordering for what a new user of the browse experience should see.
+
+```xml
+<AssetType>
+    <Browse
+        Query="{Query File=./AppServiceQuery.kml}"
+        DefaultColumns="status, appType, appServicePlanId, FxColumn.location">
+            <Column Name="status"
+                  DisplayName="{Resource Columns.status, Module=ClientResources}"
+                  Description="{Resource Columns.statusDescription, Module=ClientResources}"
+                  Format="String"
+                  WidthInPixels="90" />
+            <Column Name="appType"
+                  DisplayName="{Resource Columns.appType, Module=ClientResources}"
+                  Description="{Resource Columns.appTypeDescription, Module=ClientResources}"
+                  Format="String"
+                  WidthInPixels="90" />
+            <Column Name="appServicePlanId"
+                  DisplayName="{Resource Columns.appServicePlanId, Module=ClientResources}"
+                  Description="{Resource Columns.appServicePlanIdDescription, Module=ClientResources}"
+                  Format="Resource"
+                  WidthInPixels="90" />
+            <Column Name="pricingTier"
+                  DisplayName="{Resource Columns.pricingTier, Module=ClientResources}"
+                  Description="{Resource Columns.pricingTierDescription, Module=ClientResources}"
+                  Format="String"
+                  WidthInPixels="90" />
+    </Browse>
+</AssetType>
+```
+
+<a name="browse-pdl-definition-releasing-the-azure-resource-graph-experience"></a>
+### Releasing the Azure Resource Graph experience
+
+Per Asset you can configure extension side feature flags to control the release of your assets Azure Resource Graph browse experience.
+
+Within your extension config, either hosting service or self hosted, you will need to specify config for your assets with one of the following:
+
+```json
+{
+    "argbrowseoptions": {
+        "YOUR_ASSET_NAME": "OPTION_FROM_THE_TABLE_BELOW",
+    }
+}
+```
+
+| Option | Definition |
+| ------ | ---------- |
+| AllowOptIn | Allows users to opt in/out of the new experience but will default to the old experience. This will show a 'Try preview' button on the old browse blade and an 'Opt out of preview' button on the ARG browse blade. |
+| ForceOptIn | Allows users to opt in/out of the new experience but will default to the new experience. This will show a 'Try preview' button on the old browse blade and an 'Opt out of preview' button on the ARG browse blade |
+| Force | This will force users to the new experience. There wil be no 'Opt out of preview' button on the ARG browse blade |
+| Disable | This will force users to the old experience. This is the default experience if not flags are set. There wil be no 'Try preview' button on the ARG browse blade |
+
+<a name="browse-pdl-definition-adding-context-menu-commands"></a>
 ### Adding context menu commands
 
 Context menu commands in Browse must take a single `id` input parameter that is the resource id of the specific resource. To specify commands, add the name of the command group defined in PDL to Browse config:
@@ -498,7 +761,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 If you need to expose different commands based on some other metadata, you can also specify the the command group in `SupplementalData.contextMenu` in the same way.
 
-<a name="browse-building-browse-experiences-adding-context-menu-commands-adding-an-informational-message-link"></a>
+<a name="browse-pdl-definition-adding-context-menu-commands-adding-an-informational-message-link"></a>
 #### Adding an informational message/link
 
 If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
@@ -522,7 +785,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
                 uri: "http://microsoftpress.com"
 
                 // NOTE: Blade is preferred over link, if both are specified.
-            },
+           },
             ...
         });
     }
@@ -531,7 +794,7 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 }
 ```
 
-<a name="browse-building-browse-experiences-custom-blade"></a>
+<a name="browse-pdl-definition-custom-blade"></a>
 ### Custom blade
 
 If you don't have a list of resources and simply need to add a custom blade to Browse, you can define an asset type with a `Browse` type of `AssetTypeBlade`. This tells Browse to launch the blade associated with the asset type. Note that the asset type doesn't actually refer to an instance of a resource in this case. This is most common for services that are only provisioned once per directory or horizontal services (Cost Management, Monitoring, Azure Advisor etc...). In this case, the `PluralDisplayName` is used in the 'All services' menu, but the other display names are ignored. Feel free to set them to the same value.
@@ -554,12 +817,4 @@ In order to get your 'Asset' correctly categorized you will need to make a reque
 
 For the portal to correct curate your 'Asset' we will need the 'ExtensionName' and 'AssetName' as defined in your extension.
 
-Please contact [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with the following template:
-
-* Subject: 'Browse curation requestion - YourAssetName'
-* Body:
-  * 'ExtensionName - YourExtensionName'
-  * 'AssetName - YourAssetName'
-  * 'KindName - YourKindName' (If applicable)
-  * 'Category - DesiredCategory'
-  * 'Portal environment - portal.azure.com (etc...)'
+Please contact [ibizafxpm@microsoft.com](mailto:ibiz
