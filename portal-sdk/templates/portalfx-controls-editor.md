@@ -63,7 +63,7 @@ export class CustomLanguageEditorPartViewModel {
         initialState: any,
         dataContext: ControlsArea.DataContext) {
 
-        // Initialize the editor view model.  If we were getting the data from teh data context, we would pass it in here.
+        // Initialize the editor view model.  If we were getting the data from the data context, we would pass it in here.
         this.editor = new CustomLanguageEditorViewModel(container);
 
         // create the initial markers
