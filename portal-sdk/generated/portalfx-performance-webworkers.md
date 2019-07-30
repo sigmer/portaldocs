@@ -19,7 +19,7 @@ Webworkers might also differ from Iframes in other subtle ways and expose bugs i
 
 With those two things in mind, to actually run your extension in a webworker, you should use the feature flag `?feature.prewarming=true,your_extension_name`. This will force your extension to be run as a webworker. We recommend running through your entire test suite with this flag on. Also, make sure to step through and try this yourself by loading the portal in a browser and validating your core scenarios.
 
-To onboard to prewarming, please ensure you are on an SDK greater than or equal to '5.0.302.21301'
+To onboard to prewarming, please ensure you are on an SDK greater than or equal to '5.0.302.25301'
 
 <a name="web-workers-how-to-test-opt-into-web-workers"></a>
 ## How to test/opt into web workers
