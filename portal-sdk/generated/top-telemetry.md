@@ -203,6 +203,7 @@ Follows the same format as ClientTelemetry but also includes:
 | -------- | ------ | ------- |
 | Blade | BladeLoadErrored | Triggered when loading a blade failed. **This event is used to track blade errors in our reliability metrics.** |
 | Blade | BladeFullReady | The blade's constructor, onInitialize/onInputsSet have resolved and if the blade contains any parts, all part's constructor and onInputsSet have also resolved. |
+| Blade | BladeClosed | Fired when the blade is disposed, logs the `TotalTimeBladeOpen` in milliseconds under the action's data column |
 | Blade | CommandExecuted | When any of the Commands on a blade is clicked - like start, stop, etc. |
 | Part | PartClick | Triggered when a part is clicked. |
 | Part | PartErrored | Triggered when loading a part failed. **This event is used to track part errors in our reliability metrics.** |

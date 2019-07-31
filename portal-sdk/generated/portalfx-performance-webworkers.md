@@ -19,7 +19,7 @@ Webworkers might also differ from Iframes in other subtle ways and expose bugs i
 
 With those two things in mind, to actually run your extension in a webworker, you should use the feature flag `?feature.prewarming=true,your_extension_name`. This will force your extension to be run as a webworker. We recommend running through your entire test suite with this flag on. Also, make sure to step through and try this yourself by loading the portal in a browser and validating your core scenarios.
 
-To onboard to prewarming, please ensure you are on an SDK greater than or equal to '5.0.302.25301'
+To onboard to prewarming, please ensure you are on an SDK greater than or equal to '5.0.302.19301'
 
 <a name="web-workers-how-to-test-opt-into-web-workers"></a>
 ## How to test/opt into web workers
@@ -27,7 +27,7 @@ To onboard to prewarming, please ensure you are on an SDK greater than or equal 
 You can opt into this experience today via the below methods;
 
 1. Test locally using [https://portal.azure.com?feature.prewarming=true,your_extension_name](https://portal.azure.com?feature.prewarming=true,your_extension_name)
-1. Add the property "TestPrewarming" with a value of true to the csproj file of your extension.
+1. Add the property "testPrewarming" with a value of true to the csproj file of your extension.
 1. Deploy the change to your production deployment, and prewarming will be enabled for your extension in RC and MPAC.
 1. Monitor for any problems.
-1. Rename the property "TestPrewarming" to "EnablePrewarming" and deploy the change, this will enable prewarming in PROD.
+1. Rename the property "testPrewarming" to "enablePrewarming" and deploy the change, this will enable prewarming in PROD.

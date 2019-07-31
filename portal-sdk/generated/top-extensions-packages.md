@@ -16,6 +16,17 @@ Updating your extensions version of the Azure Portal SDK simply involves updatin
 1. Copy over `/Content` files to get latest `*.d.ts` and `*.pde` files.
 1. Build and fix any breaking changes, as described in [Breaking changes](https://aka.ms/portalfx/breaking).
 
+* In Visual Studio Code
+1. If you want to be specific about what packages and versions to update
+   * update your /Extension/packages.config to contain the target versions you want to consume
+   * delete your /packages folder that contains the old versions expanded packages
+   * in vs code run `npm run restore` task run
+   * update your \*.csproj with references to the new package path where you are referencing them. (this is required as versions are in the folder names).
+1. If you want to update everything and have your \*.csproj automatically updated
+   * run `nuget.exe update ./Extension/packages.config` supplying the path to your package config. NuGet CLI details are [here](https://docs.microsoft.com/en-us/nuget/tools/cli-ref-update)
+1. Copy over `/Content` files to get latest `*.d.ts` and `*.pde` files.
+1. Build and fix any breaking changes, as described in [Breaking changes](https://aka.ms/portalfx/breaking).
+
 * In CoreXT
 1. Find the latest SDK version number for your target environment from the SDK [downloads document](https://aka.ms/portalfx/downloads).
 1. Update your `package.config` to the latest version of the SDK.

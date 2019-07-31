@@ -2,22 +2,15 @@
 # Unit Test Framework
 Covered in this document:
 
-- File > New Project scaffolding
-- Creating a project from scratch
+- Creating a project from the template repository.
+- Creating a project from scratch.
 - CI: test results output to CI accepted formats JUNIT, TRX, other.
-- Code Coverage: where to find your code coverage output
+- Code Coverage: where to find your code coverage output.
 
-<a name="unit-test-framework-getting-started-with-the-visual-studio-project-template"></a>
-## Getting Started with the Visual Studio Project Template
+<a name="unit-test-framework-getting-started-with-the-azureux-templateextension"></a>
+## Getting Started with the AzureUX-TemplateExtension
 
-1. Install [Node LTS](https://nodejs.org/en/download/)
-1. To support the Unit Test project in Visual Studio you must first install the `Node Tools for Visual Studio` [from here](https://github.com/Microsoft/nodejstools/releases/tag/v1.3.1) then
-1. Launch Visual Studio and click `File > New > Project > Visual C# > Azure Portal`. It will scaffold a Solution with two projects Extension.csproj and Extension.UnitTest.csproj.  
-    
-    Note: If you do not see the `Azure Portal` project template ensure you have already installed the [Portal SDK](https://aka.ms/portalfx/download) and are using VS2015 (at the time of writing the vsix only targets VS2015).
-
-1. Build the solution `Ctl + Shift + B`
-1. run `npm run test` or `npm run test-ci` from the command line
+1.  Follow the [getting started guide](https://aka.ms/portalfx/gettingstarted).
 
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code"></a>
 ## Creating a project from scratch with Visual Studio Code
