@@ -11,7 +11,7 @@ From a 10,000-foot perspective, you will be integrating your web UI as one or mo
 
 ```typescript
 
-import Az = require("Az");
+import * as Az from "Az";
 
 ```
 
