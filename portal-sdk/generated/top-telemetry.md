@@ -5,6 +5,7 @@
         * [Custom queries](#overview-viewing-telemetry-custom-queries)
     * [Logging telemetry](#overview-logging-telemetry)
         * [Onboarding to ExtTelemetry/ExtEvents tables](#overview-logging-telemetry-onboarding-to-exttelemetry-extevents-tables)
+        * [On Hosting Service](#overview-logging-telemetry-on-hosting-service)
         * [Logging telemetry to ExtTelemetry table](#overview-logging-telemetry-logging-telemetry-to-exttelemetry-table)
         * [Logging errors/warnings to ExtEvents table](#overview-logging-telemetry-logging-errors-warnings-to-extevents-table)
         * [Verifying live telemetry](#overview-logging-telemetry-verifying-live-telemetry)
@@ -236,7 +237,7 @@ ClientTelemetry
 | where action == "ExtensionLoad"
 | where actionModifier == "complete"
 | where name == "HubsExtension"
-| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d) 
+| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d)
 ```
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries-blade-performance-and-usage"></a>
@@ -253,7 +254,7 @@ ClientTelemetry
 | where action == "BladeFullReady"
 | where actionModifier == "complete"
 | where name == "Extension/HubsExtension/Blade/Resources"
-| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d) 
+| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d)
 ```
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries-part-performance-and-usage"></a>
@@ -270,7 +271,71 @@ ClientTelemetry
 | where action == "PartReady"
 | where actionModifier == "complete"
 | where name == "Extension/HubsExtension/StartboardPartInstance/Browse"
-| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d) 
+| summarize Loads = count(), Users = dcount(userId, 4), percentiles(duration, 50, 80, 95) by bin(PreciseTimeStamp, 1d)
+```
+
+<a name="overview-viewing-telemetry-custom-queries-common-queries-extension-load-reliability"></a>
+##### Extension load reliability
+
+Ensure to replace the `name` filter with your extension.
+
+[Link to query](https://dataexplorer.azure.com/clusters/azportalpartner/databases/AzurePortal?query=H4sIAAAAAAAAA5WRXUvDMBSG7/srDr1qXcEVdltBRFHYRGz9AWlyqgfyUZIUrfjjTTbWleJEL5Pz8eR9ciMJtW9QokJvx+QL3t/QIjxZ5OSwIYW1Z6qHqwrYq8nKjcinpsGhbcYe70l7qCpI06nEuCej95e3Hx61C6etYeLUoZlC4EZ7RtpBuhunvsdQiX1uUIpZ+kSoB87RuW6QcYeDKgwO2lOXHTg7I6gjtHseN6qX6DHNC7hjJFH8ZYhpjjLNk2IGewn53HFYHKdj6gdRwG/oAjYTPW7515LDU+KKBNoRWtLZ8jsKKEUARIdBFEZzAp5REmtJkh/r7XWgZd4IM7QSs4XAHC7hXA1Wc2t5DhdQrtc/UmKy86STvTO4md7V0tWM64z10cMiHnP8GxeLizG9AgAA)
+
+```txt
+ClientTelemetry
+| where PreciseTimeStamp >= ago(14d)
+| where userTypeHint == ""
+| where action == "ExtensionLoad"
+| where name contains "MyExtensionName"
+| summarize SuccessfulLoads = countif(actionModifier == "complete"), FailedLoads = countif(actionModifier == "cancel")
+, SuccessfulUsersLoads = dcountif(userId, actionModifier == "complete", 4), FailedUserLoads = dcountif(userId, actionModifier == "cancel", 4)
+ by bin(PreciseTimeStamp, 1d), name
+| extend ReliabilitySLA = (todouble(SuccessfulLoads) / todouble(SuccessfulLoads + FailedLoads)) * 100
+| extend ReliabilityUserSLA = (todouble(SuccessfulUsersLoads) / todouble(SuccessfulUsersLoads + FailedUserLoads)) * 100
+| sort by ReliabilitySLA asc
+```
+
+
+<a name="overview-viewing-telemetry-custom-queries-common-queries-blade-load-reliability"></a>
+##### Blade load reliability
+
+Ensure to replace the `name` filter with your extension.
+
+[Link to query](https://dataexplorer.azure.com/clusters/azportalpartner/databases/AzurePortal?query=H4sIAAAAAAAAA42RXUvDMBSG7/crXnrVasENdltBZUNhimzzB6TNmR5Ik5EPtOKPN0G31WLR2/PxPjlPbhST9ltS1JK33eQDry9kCY+WGna05ZY2XrR7XFYQzyafzWVxHAqO7Lbb0y1rj6pClh1bWrSExmgvWDtk993izZN2bPRD7JzmRONjDayRZ9dKSFoGpdYkZJeV+KqsjJALa40lmSW2C20rLL8TNqFpyLldUGnGoYrEoD3v8u/Y9KZBalFiKViR/GvlJ7bswZ7i2e6wLg/7ScadLDGOLjE/0lPGvyP6T0khE9Qdatb58JdKzGREJPlRFCXlEmtSLGpW7LvN6irycm+kCbWifCCwwAXGejjveysKnGE2nf5KSbeNk072RnA9vedDWz2uM9YnD4PzhGs+AWwXMmfUAgAA)
+
+```txt
+ClientTelemetry
+| where PreciseTimeStamp >= ago(14d)
+| where userTypeHint == ""
+| where name contains "MyExtensionName"
+| where action in ("BladeFullReady", "BladeLoadErrored")
+| summarize SuccessfulLoads = countif(action == "BladeFullReady"), FailedLoads = countif(action == "BladeLoadErrored")
+, SuccessfulUsersLoads = dcountif(userId, action == "BladeFullReady", 4), FailedUserLoads = dcountif(userId, action == "BladeLoadErrored", 4)
+ by bin(PreciseTimeStamp, 1d), name
+| extend ReliabilitySLA = (todouble(SuccessfulLoads) / todouble(SuccessfulLoads + FailedLoads)) * 100
+| extend ReliabilityUserSLA = (todouble(SuccessfulUsersLoads) / todouble(SuccessfulUsersLoads + FailedUserLoads)) * 100
+| sort by ReliabilitySLA asc
+```
+
+<a name="overview-viewing-telemetry-custom-queries-common-queries-part-load-reliability"></a>
+##### Part load reliability
+
+Ensure to replace the `name` filter with your extension.
+
+[Link to query](https://dataexplorer.azure.com/clusters/azportalpartner/databases/AzurePortal?query=H4sIAAAAAAAAA42R0UrDMBSG7/cUP71qXcEVdltBZKIwZWzzAdLmTA+kyUhStOLDm4hbS1nRy+Sc/3w5X+4Uk/Z7UtSQt93sC+9vZAkbSzU72nNDOy+aI25KiFeTFkuZnZtaR3bfHemBtUdZIknOJS0aQm20F6wdkqdu9eFJOzb6OVT6PlH7cAfWSJONsH5LQnZJjp/DylpjSSaR6NqmEZY/Cbu2rsm5Q6vWRkiHMnBa7fmQ/g6LL+lnZTnuBSuSf3T3sHyAeAkrulNSnqJx8UeZ4yIwx/LMjPH/pk8PiPkZqg4V63T8DzkKGaZHvUEKRakSW1IsKlbsu936NqBSb6RpK0XpSFaGa0zVMB+KyjJcoVgsLlLiWtOk3tkEbiB1PhY14DpjffQwWk+4+hsx2fOFtgIAAA==)
+
+```txt
+ClientTelemetry
+| where PreciseTimeStamp >= ago(14d)
+| where userTypeHint == ""
+| where name contains "MyExtensionName"
+| where action in ("PartReady", "PartErrored")
+| summarize SuccessfulLoads = countif(action == "PartReady"), FailedLoads = countif(action == "PartErrored")
+, SuccessfulUsersLoads = dcountif(userId, action == "PartReady", 4), FailedUserLoads = dcountif(userId, action == "PartErrored", 4)
+ by bin(PreciseTimeStamp, 1d), name
+| extend ReliabilitySLA = (todouble(SuccessfulLoads) / todouble(SuccessfulLoads + FailedLoads)) * 100
+| extend ReliabilityUserSLA = (todouble(SuccessfulUsersLoads) / todouble(SuccessfulUsersLoads + FailedUserLoads)) * 100
+| sort by ReliabilitySLA asc
 ```
 
 <a name="overview-viewing-telemetry-custom-queries-common-queries-per-extension-feedback"></a>
@@ -285,7 +350,7 @@ ClientTelemetry
 | where userTypeHint == ""
 | where action == "GenericFeedback"
 | where data contains "Extension/HubsExtension/"
-| extend dataJson = parsejson(['data']) 
+| extend dataJson = parsejson(['data'])
 | extend comments = dataJson.comments
 | extend emotion = dataJson.emotion
 | extend env = tostring(split(requestUri, '/', 2)[0])
@@ -304,7 +369,22 @@ There are two options for collecting telemetry and error/warning logs. You can e
 
 <a name="overview-logging-telemetry-onboarding-to-exttelemetry-extevents-tables"></a>
 ### Onboarding to ExtTelemetry/ExtEvents tables
+To start using the built-in controller provided by Framework for collecting telemetry and error/warning logs, set the enablePortalLogging flag.
 
+<a name="overview-logging-telemetry-on-hosting-service"></a>
+### On Hosting Service
+Update your extensions `Content/Config/default.json` to set enablePortalLogging.
+
+```json
+{
+  ...
+  "enablePortalLogging": true,
+  ...
+}
+```
+
+<a name="overview-logging-telemetry-on-hosting-service-legacy-selfhost-approach"></a>
+#### Legacy selfhost approach
 To start using the built-in controller provided by Framework for collecting telemetry and error/warning logs, just add `this.EnablePortalLogging = true;` in the constructor of your extension definition class:
 
 ```cs

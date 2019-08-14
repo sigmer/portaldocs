@@ -52,13 +52,13 @@ Note:
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-npmrc"></a>
 #### Add ./.npmrc
 
-msportalfx-ut is available from the internal AzurePortalNpmRegistry.  To configure your project to use this registry add the following:
+msportalfx-ut is available from the internal AzurePortal Registry.  To configure your project to use this registry add the following:
 
 Add a ./.npmrc file 
 
 ```
 
-registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortalNpmRegistry/npm/registry/
+registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
 always-auth=true
 
 ```
@@ -129,7 +129,7 @@ always-auth=true
     ```
 
 Note:
-* If you receive auth errors against the internal NPM feed see the "Connect to feed" instructions [here](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortalNpmRegistry&_a=feed)
+* If you receive auth errors against the internal NPM feed see the "Connect to feed" instructions [here](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortal&_a=feed)
 
 <a name="unit-test-framework-creating-a-project-from-scratch-with-visual-studio-code-dev-build-time-configuration-add-msportalfx-ut-config-json"></a>
 #### add ./msportalfx-ut.config.json
@@ -781,17 +781,17 @@ add
     ...
     ```
 
-<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportalnpmregistry-npm-registry-because"></a>
-# I can&#39;t use the internal npm registry <a href="https://msazure.pkgs.visualstudio.com/_packaging/AzurePortalNpmRegistry/npm/registry/">https://msazure.pkgs.visualstudio.com/_packaging/AzurePortalNpmRegistry/npm/registry/</a> because ...
+<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportal-npm-registry-because"></a>
+# I can&#39;t use the internal npm registry <a href="https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/">https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/</a> because ...
 
-<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportalnpmregistry-npm-registry-because-i-can-t-authenticate"></a>
+<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportal-npm-registry-because-i-can-t-authenticate"></a>
 ## I can&#39;t authenticate
 
 Try the following:
-1. If you receive auth errors against the internal NPM feed see the "Connect to feed" instructions [here](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortalNpmRegistry&_a=feed)
-1. If your not a member of any of the Groups on https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortalNpmRegistry&_a=settings&view=permissions please join `Azure Portal Partner Contributors – 19668` in https://myaccess .
+1. If you receive auth errors against the internal NPM feed see the "Connect to feed" instructions [here](https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortal&_a=feed)
+1. If your not a member of any of the Groups on https://msazure.visualstudio.com/One/Azure%20Portal/_packaging?feed=AzurePortal&_a=settings&view=permissions please join `Azure Portal Partner Contributors – 19668` in https://myaccess .
 
-<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportalnpmregistry-npm-registry-because-my-build-nodes-are-completely-disconnected-from-the-internet"></a>
+<a name="i-can-t-use-the-internal-npm-registry-https-msazure-pkgs-visualstudio-com-_packaging-azureportal-npm-registry-because-my-build-nodes-are-completely-disconnected-from-the-internet"></a>
 ## My build nodes are completely disconnected from the internet
 
 * you can commit your version of msportalfx-ut.zip into your repo and install it directly using relative file path syntax
