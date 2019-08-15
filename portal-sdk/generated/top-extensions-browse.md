@@ -711,6 +711,8 @@ It also declares the default columns and their ordering for what a new user of t
 <a name="browse-pdl-definition-releasing-the-azure-resource-graph-experience"></a>
 ### Releasing the Azure Resource Graph experience
 
+Ensure the SDK version that you use is `5.0.302.27001` or later.
+
 Per Asset you can configure extension side feature flags to control the release of your assets Azure Resource Graph browse experience.
 
 Within your extension config, either hosting service or self hosted, you will need to specify config for your assets with one of the following:
@@ -729,6 +731,9 @@ Within your extension config, either hosting service or self hosted, you will ne
 | ForceOptIn | Allows users to opt in/out of the new experience but will default to the new experience. This will show a 'Try preview' button on the old browse blade and an 'Opt out of preview' button on the ARG browse blade |
 | Force | This will force users to the new experience. There wil be no 'Opt out of preview' button on the ARG browse blade |
 | Disable | This will force users to the old experience. This is the default experience if not flags are set. There wil be no 'Try preview' button on the ARG browse blade |
+
+To test these variants you can use:
+    `https://portal.azure.com/?YOUR_EXTENSION_NAME_argbrowseoptions={“assetTypeName”:”OPTION_FROM_TABLE_ABOVE”}`
 
 <a name="browse-pdl-definition-adding-context-menu-commands"></a>
 ### Adding context menu commands
