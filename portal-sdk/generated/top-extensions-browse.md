@@ -14,8 +14,8 @@ There are 2 ways you can be surfaced in Browse:
 
 1. [Custom blade](#custom-blade) if you have a single instance and not a list of resources
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources"></a>
-### Browse for ARM resources
+<a name="browse-for-arm-resources"></a>
+# Browse for ARM resources
 
 ARM Browse automatically queries ARM for resources of a specific type and displays them in a paged grid.
 
@@ -47,8 +47,8 @@ All asset types have the following requirements:
 1. The asset id **_must_** be the string resource id
 1. The ARM RP manifest should include a RP, resource type, and resource kind metadata
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-defining-your-asset-type"></a>
-#### Defining your asset type
+<a name="browse-for-arm-resources-defining-your-asset-type"></a>
+## Defining your asset type
 To define your asset type, simply add the following snippet to PDL:
 
 ```xml
@@ -109,8 +109,8 @@ Remember, your part and blade should both have a single `id` input parameter, wh
 
 If your asset type is in preview, set the `IsPreview="true"` property. If the asset type is GA, simply remove the property (the default is `false`).
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-how-to-hide-your-asset-in-different-environments"></a>
-#### How to hide your asset in different environments
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments"></a>
+### How to hide your asset in different environments
 
 You can hide your asset in different environments by setting the hideassettypes feature flag in your config to a comma-separated list of asset type names.
 
@@ -119,8 +119,8 @@ You can hide your asset in different environments by setting the hideassettypes 
   <img src="../media/portalfx-assets/hidingassettypes.png" />
 </a>
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-how-to-hide-your-asset-in-different-environments-self-hosted"></a>
-##### Self hosted
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-self-hosted"></a>
+#### Self hosted
 
 Replace '*' with the desired environment, for documentation regarding enabling feature flags in self hosted extensions [click here.](portalfx-extension-flags.md#feature-flags)
 
@@ -132,8 +132,8 @@ Replace '*' with the desired environment, for documentation regarding enabling f
         }" />
 ```
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-how-to-hide-your-asset-in-different-environments-hosting-service"></a>
-##### Hosting service
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-hosting-service"></a>
+#### Hosting service
 
 If you’re using the hosting service, you can do this by updating your domainname.json (e.g. portal.azure.cn.json file)
 
@@ -143,8 +143,8 @@ If you’re using the hosting service, you can do this by updating your domainna
 }
 ```
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-how-to-hide-your-asset-in-different-environments-testing-your-hidden-asset"></a>
-##### Testing your hidden asset
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-testing-your-hidden-asset"></a>
+#### Testing your hidden asset
 
 To test enable your hidden asset for testing purposes, you will need to update the hide asset feature flag to exclude the asset you want to show and ensure you have feature.canmodifyextensions set.
 
@@ -160,8 +160,8 @@ https://rc.portal.azure.com/?feature.showassettypes=VirtualMachine&microsoft_azu
 
 or testing the hiding of an asset can be acheived with https:///rc.portal.azure.com/?microsoft_azure_support_hideassettypes=HelpAndSupport
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-handling-arm-kinds"></a>
-#### Handling ARM kinds
+<a name="browse-for-arm-resources-defining-your-asset-type-handling-arm-kinds"></a>
+### Handling ARM kinds
 
 If the resource you wish to expose does not have kinds then please skip to the next topic.
 
@@ -264,8 +264,8 @@ There are two options you can use group your kinds:
   </AssetType>
 ```
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-add-command"></a>
-#### Add command
+<a name="browse-for-arm-resources-defining-your-asset-type-add-command"></a>
+### Add command
 
 To allow people to create new resources from Browse, you can associate your asset type with a Marketplace item or category:
 
@@ -282,8 +282,8 @@ To allow people to create new resources from Browse, you can associate your asse
 
 The Browse blade will launch the Marketplace item, if specified; otherwise, it will launch the Marketplace category blade for the specific menu item id (e.g. `gallery/virtualMachines/recommended` for Virtual machines > Recommended). To determine the right Marketplace category, contact the <a href="mailto:1store?subject=Marketplace menu item id">Marketplace team</a>. If neither is specified, the Add command won't be available.
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-handling-empty-browse"></a>
-#### Handling empty browse
+<a name="browse-for-arm-resources-defining-your-asset-type-handling-empty-browse"></a>
+### Handling empty browse
 
 The framework offers the ability to display a description and links in the case that the users filters return no results.
 
@@ -305,8 +305,8 @@ To opt in to this experience you need to provide a `description` and a `link`, t
   </AssetType>
 ```
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-customizing-columns"></a>
-#### Customizing columns
+<a name="browse-for-arm-resources-defining-your-asset-type-customizing-columns"></a>
+### Customizing columns
 
 By default, ARM Browse only shows the resource name, group, location, and subscription. To customize the columns, add a view-model to the `AssetType` and indicate that you have custom Browse config:
 
@@ -381,8 +381,8 @@ Notice that the genre column actually renders 2 properties: genre and subgenre. 
 
 At this point, you should be able to compile and see your columns show up in your Browse blade. Of course, you still need to populate your supplemental data. Let's do that now...
 
-<a name="browse-building-browse-experiences-browse-for-arm-resources-providing-supplemental-data"></a>
-#### Providing supplemental data
+<a name="browse-for-arm-resources-defining-your-asset-type-providing-supplemental-data"></a>
+### Providing supplemental data
 
 In order to specify supplemental data to display on top of the standard resource columns, you'll need to opt in to specifying supplemental data in PDL:
 
@@ -470,8 +470,71 @@ class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.Book
 
 Now, you should have supplemental data getting populated. Great! Let's add context menu commands...
 
-<a name="browse-browse-with-azure-resource-graph"></a>
-## Browse with Azure Resource Graph
+<a name="browse-for-arm-resources-adding-context-menu-commands"></a>
+## Adding context menu commands
+
+Context menu commands in Browse must take a single `id` input parameter that is the resource id of the specific resource. To specify commands, add the name of the command group defined in PDL to Browse config:
+
+```xml
+<CommandGroup Name="BrowseBookCommands">
+  ...
+</CommandGroup>
+```
+
+```ts
+class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
+
+    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+        return Q.resolve({
+            // NOTE: Extension (commandGroupOwner) only required if from another extension
+            contextMenu: {
+                commandGroup: "BrowseBookCommands",
+                commandGroupOwner: "<extension name>"
+            },
+            ...
+        });
+    }
+
+    ...
+}
+```
+
+If you need to expose different commands based on some other metadata, you can also specify the the command group in `SupplementalData.contextMenu` in the same way.
+
+<a name="browse-for-arm-resources-adding-context-menu-commands-adding-an-informational-message-link"></a>
+### Adding an informational message/link
+
+If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
+
+```ts
+class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
+
+    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
+        return Q.resolve({
+            infoBox: {
+                image: MsPortalFx.Base.Images.Info(),
+                text: resx.browseBookInfoBoxText,
+
+                // optionally specify a blade to launch when the infobox is clicked
+                blade: <MsPortalFx.ViewModels.DynamicBladeSelection>{
+                    detailBlade: "BookInfoBlade",
+                    detailBladeInputs: null
+                },
+
+                // ...or link to an external web page
+                uri: "http://microsoftpress.com"
+
+                // NOTE: Blade is preferred over link, if both are specified.
+           },
+            ...
+        });
+    }
+
+    ...
+}
+```
+<a name="browse-with-azure-resource-graph"></a>
+# Browse with Azure Resource Graph
 
 If you aren’t familiar Azure Resource Graph, it’s a new service which provides a query-able caching layer over ARM.
 This gives us the capability to sort, filter, and search server side which is a vast improvement on what we have today.
@@ -490,12 +553,12 @@ Due to which there the following required from extension authors to onboard.
 
 **Note:** the below contains the PDL, Columns definitions, and Query required to match to an existing AppServices browse experience.
 
-<a name="browse-onboarding-an-asset-to-arg"></a>
+<a name="browse-with-azure-resource-graph-onboarding-an-asset-to-arg"></a>
 ## Onboarding an asset to ARG
 
 Firstly you'll need to craft a KQL query which represents all possible data for your desired browse view, this includes the required framework columns.
 
-<a name="browse-onboarding-an-asset-to-arg-expected-framework-columns"></a>
+<a name="browse-with-azure-resource-graph-onboarding-an-asset-to-arg-expected-framework-columns"></a>
 ### Expected Framework columns
 
 | Display name | Expected Column Name | PDL Reference |
@@ -514,8 +577,8 @@ Firstly you'll need to craft a KQL query which represents all possible data for 
 | Tags | tags | FxColumn.Tags |
 | Tenant Id | tenantId | N/A |
 
-<a name="browse-onboarding-an-asset-to-arg-kql-query"></a>
-### KQL Query
+<a name="browse-with-azure-resource-graph-kql-query"></a>
+## KQL Query
 
 For those who are not familar with KQL you can use the public documentation as reference. https://docs.microsoft.com/en-us/azure/kusto/query/
 
@@ -590,12 +653,12 @@ kind contains 'functionapp',
 , appServicePlanId, pricingTier, status, appType
 ```
 
-<a name="browse-pdl-definition"></a>
+<a name="browse-with-azure-resource-graph-pdl-definition"></a>
 ## PDL Definition
 
 In your extension you'll have a `<Asset>` tag declared in PDL which represents your ARM resource. In order to enable Azure Resource Graph (ARG) support for that asset we'll need to update the `<Browse>` tag to include a reference to the `Query`, `DefaultColumns`, and custom column meta data - if you have any.
 
-<a name="browse-pdl-definition-query-for-pdl"></a>
+<a name="browse-with-azure-resource-graph-pdl-definition-query-for-pdl"></a>
 ### Query for PDL
 
 Create a new file, we'll use `AppServiceQuery.kml`, and save your query in it.
@@ -638,7 +701,7 @@ where type == 'microsoft.web/sites'
 , appServicePlanId, pricingTier, status, appType
 ```
 
-<a name="browse-pdl-definition-custom-columns"></a>
+<a name="browse-with-azure-resource-graph-pdl-definition-custom-columns"></a>
 ### Custom columns
 
 To define a custom column you will need to create a `Column` tag in PDL within your `Browse` tag.
@@ -664,7 +727,7 @@ A column tag has 5 properties.
 | String | String rendering of your column |
 | Resource | If the returned column is a ARM resource id, this column format will render the cell as the resources name and a link to the respective blade |
 
-<a name="browse-pdl-definition-default-columns"></a>
+<a name="browse-with-azure-resource-graph-pdl-definition-default-columns"></a>
 ### Default columns
 
 To specify default columns you need to declare a property `DefaultColumns` on your `Browse` `PDL` tag.
@@ -672,7 +735,7 @@ Default columns is a comma separated list of column names, a mix of custom colum
 
 For example `DefaultColumns="status, appType, appServicePlanId, FxColumn.location"`.
 
-<a name="browse-pdl-definition-full-asset-definition"></a>
+<a name="browse-with-azure-resource-graph-pdl-definition-full-asset-definition"></a>
 ### Full Asset definition
 
 In the above query example there are 4 custom columns, the below Asset `PDL` declares the custom column meta data which each map to a column in the query above.
@@ -708,8 +771,8 @@ It also declares the default columns and their ordering for what a new user of t
 </AssetType>
 ```
 
-<a name="browse-pdl-definition-releasing-the-azure-resource-graph-experience"></a>
-### Releasing the Azure Resource Graph experience
+<a name="browse-with-azure-resource-graph-releasing-the-azure-resource-graph-experience"></a>
+## Releasing the Azure Resource Graph experience
 
 Ensure the SDK version that you use is `5.0.302.27001` or later.
 
@@ -732,75 +795,8 @@ Within your extension config, either hosting service or self hosted, you will ne
 | Force | This will force users to the new experience. There wil be no 'Opt out of preview' button on the ARG browse blade |
 | Disable | This will force users to the old experience. This is the default experience if not flags are set. There wil be no 'Try preview' button on the ARG browse blade |
 
-To test these variants you can use:
-    `https://portal.azure.com/?YOUR_EXTENSION_NAME_argbrowseoptions={“assetTypeName”:”OPTION_FROM_TABLE_ABOVE”}`
-
-<a name="browse-pdl-definition-adding-context-menu-commands"></a>
-### Adding context menu commands
-
-Context menu commands in Browse must take a single `id` input parameter that is the resource id of the specific resource. To specify commands, add the name of the command group defined in PDL to Browse config:
-
-```xml
-<CommandGroup Name="BrowseBookCommands">
-  ...
-</CommandGroup>
-```
-
-```ts
-class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
-
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
-        return Q.resolve({
-            // NOTE: Extension (commandGroupOwner) only required if from another extension
-            contextMenu: {
-                commandGroup: "BrowseBookCommands",
-                commandGroupOwner: "<extension name>"
-            },
-            ...
-        });
-    }
-
-    ...
-}
-```
-
-If you need to expose different commands based on some other metadata, you can also specify the the command group in `SupplementalData.contextMenu` in the same way.
-
-<a name="browse-pdl-definition-adding-context-menu-commands-adding-an-informational-message-link"></a>
-#### Adding an informational message/link
-
-If you need to display an informational message and/or link above the list of resources, add an `infoBox` to your Browse config:
-
-```ts
-class BookViewModel implements ExtensionDefinition.ViewModels.ResourceTypes.BookViewModel.Contract {
-
-    public getBrowseConfig(): PromiseV<MsPortalFx.Assets.BrowseConfig> {
-        return Q.resolve({
-            infoBox: {
-                image: MsPortalFx.Base.Images.Info(),
-                text: resx.browseBookInfoBoxText,
-
-                // optionally specify a blade to launch when the infobox is clicked
-                blade: <MsPortalFx.ViewModels.DynamicBladeSelection>{
-                    detailBlade: "BookInfoBlade",
-                    detailBladeInputs: null
-                },
-
-                // ...or link to an external web page
-                uri: "http://microsoftpress.com"
-
-                // NOTE: Blade is preferred over link, if both are specified.
-           },
-            ...
-        });
-    }
-
-    ...
-}
-```
-
-<a name="browse-pdl-definition-custom-blade"></a>
-### Custom blade
+<a name="custom-blade"></a>
+# Custom blade
 
 If you don't have a list of resources and simply need to add a custom blade to Browse, you can define an asset type with a `Browse` type of `AssetTypeBlade`. This tells Browse to launch the blade associated with the asset type. Note that the asset type doesn't actually refer to an instance of a resource in this case. This is most common for services that are only provisioned once per directory or horizontal services (Cost Management, Monitoring, Azure Advisor etc...). In this case, the `PluralDisplayName` is used in the 'All services' menu, but the other display names are ignored. Feel free to set them to the same value.
 
@@ -814,12 +810,21 @@ If you don't have a list of resources and simply need to add a custom blade to B
 </AssetType>
 ```
 
-<a name="browse-curating-browse-assets"></a>
-## Curating browse assets
+<a name="curating-browse-assets"></a>
+# Curating browse assets
 
 When adding a new 'Asset' to your extension and exposing it through the 'All services' menu, by default it will be grouped in the 'Other' category.
 In order to get your 'Asset' correctly categorized you will need to make a request to the Portal Framework to curate your 'Asset'.
 
 For the portal to correct curate your 'Asset' we will need the 'ExtensionName' and 'AssetName' as defined in your extension.
 
-Please contact [ibizafxpm@microsoft.com](mailto:ibiz
+Please contact [ibizafxpm@microsoft.com](mailto:ibizafxpm@microsoft.com) with the following template:
+
+Subject: 'Browse curation requestion - YourAssetName'
+Body:
+
+- 'ExtensioName - YourExtensionName'
+- 'AssetName - YourAssetName'
+- 'KindName - YourKindName' (If applicable)
+- 'Category - DesiredCategory'
+- 'Portal environment - portal.azure.com (etc...)'
