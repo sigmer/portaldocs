@@ -65,7 +65,6 @@ Here is an example of a very simple template blade, represented by a single TpeS
 
 import * as ClientResources from "ClientResources";
 import * as TemplateBlade from "Fx/Composition/TemplateBlade";
-import * as BladesArea from "../BladesArea";
 
 //docs#DecoratorReference
 @TemplateBlade.Decorator({
@@ -74,14 +73,13 @@ htmlTemplate: "" +
     "  <div>This is a Template Blade.</div>" +
     "</div>",
 })
-@TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 //docs#DecoratorReference
 export class SimpleTemplateBlade {
 public title = ClientResources.simpleTemplateBlade;
 public subtitle: string;
 
 //docs#Context
-public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+public context: TemplateBlade.Context<void>;
 //docs#Context
 
 public onInitialize() {
@@ -101,7 +99,6 @@ htmlTemplate: "" +
     "  <div>This is a Template Blade.</div>" +
     "</div>",
 })
-@TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 
 ```
 
@@ -109,7 +106,7 @@ Additionally, the No-PDL programming model introduces (and requires) a context p
 
 ```typescript
 
-public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+public context: TemplateBlade.Context<void>;
 
 ```
 
@@ -222,7 +219,7 @@ Declaring the type of this property can be a little tricky, and the declaration 
 
 ```typescript
 
-public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+public context: TemplateBlade.Context<void>;
 
 ```
 

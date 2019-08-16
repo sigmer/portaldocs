@@ -14,7 +14,6 @@ To create a template blade you create a single TypeScript file inside one of you
 
 import * as ClientResources from "ClientResources";
 import * as TemplateBlade from "Fx/Composition/TemplateBlade";
-import * as BladesArea from "../BladesArea";
 
 //docs#DecoratorReference
 @TemplateBlade.Decorator({
@@ -23,14 +22,13 @@ htmlTemplate: "" +
     "  <div>This is a Template Blade.</div>" +
     "</div>",
 })
-@TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 //docs#DecoratorReference
 export class SimpleTemplateBlade {
 public title = ClientResources.simpleTemplateBlade;
 public subtitle: string;
 
 //docs#Context
-public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+public context: TemplateBlade.Context<void>;
 //docs#Context
 
 public onInitialize() {
@@ -56,7 +54,7 @@ This class has three public properties.
 
   ```typescript
 
-public context: TemplateBlade.Context<void, BladesArea.DataContext>;
+public context: TemplateBlade.Context<void>;
 
 ```
 

@@ -54,7 +54,7 @@ Go to the playground site to use the latest control and get source code for your
 <a name="related-info"></a>
 ### Related info
 
-<!-- TODO link to Figma -->
+* [InfoBox design specifications (Figma)](https://www.figma.com/file/PASyBiBq72G54ckrtgs86uE7/Azure-Framework-Design-Specs?node-id=248%3A1137)
 
 * [Azure design guidance](http://aka.ms/portalfx/design)
 
