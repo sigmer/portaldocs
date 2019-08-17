@@ -32,11 +32,17 @@ Install the following software. Your team should be aware of the most current do
 <a name="install-prerequisite-software-for-extension-development-ide-specific-visual-studio-code-or-other-similar-ide"></a>
 ### Visual Studio Code (or other similar IDE)
 
-1. Install [.NET 4.5.2](https://www.microsoft.com/en-us/download/details.aspx?id=42642)
+1. 1. Install [Build Tools for Visual Studio 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15)
 
-1. Install [Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159)
+      * select the following components 
 
-      * Add it to your environmental path by running the following command from an administrative command prompt `setx PATH "%PATH%;C:\Program Files (x86)\MSBuild\14.0\Bin\"`
+      ![alt-text](../media/top-extensions-install-software/buildtools20171.png "BuildTools step 1")
+
+      * Select .NET Framework 4.6.2 SDK and targeting pack from the *Individual components* tab:
+
+      ![alt-text](../media/top-extensions-install-software/buildtools20172.png "BuildTools step 2")
+
+      * Add it to your environmental path by running the following command from an administrative command prompt `setx PATH "%PATH%;%ProgramFiles(x86)%\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"`
 
 1. Install [Visual Studio Code](https://code.visualstudio.com/download)
     
@@ -54,6 +60,8 @@ Install the following software. Your team should be aware of the most current do
       * select the following components 
 
       ![alt-text](../media/top-extensions-install-software/vs20171.png "VS step 1")
+
+      * Select .NET Framework 4.6.2 SDK and targeting pack from the *Individual components* tab:
 
       ![alt-text](../media/top-extensions-install-software/vs20172.png "VS step 2")
 
