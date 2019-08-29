@@ -605,10 +605,11 @@ PDL in our extension providing localised display strings.
 
 ```kql
 where type =~ 'microsoft.web/sites'
+| extend state = tolower(properties.state)
 | extend status = case(
-tolower(properties.state) == 'stopped',
+state == 'stopped',
 'Stopped',
-tolower(properties.state) == 'running',
+state == 'running',
 'Running',
 'Other')
 | project name,resourceGroup,kind,location,id,type,subscriptionId,tags
@@ -621,24 +622,26 @@ As an example the below query can be used to replicate the 'App Services' ARM ba
 where type =~ 'microsoft.web/sites'
 | extend appServicePlan = extract('serverfarms/([^/]+)', 1, tostring(properties.serverFarmId))
 | extend appServicePlanId = properties.serverFarmId
+| extend state = tolower(properties.state)
+| extend sku = tolower(properties.sku)
 | extend pricingTier = case(
-tolower(properties.sku) == 'free',
+sku == 'free',
 'Free',
-tolower(properties.sku) == 'shared',
+sku == 'shared',
 'Shared',
-tolower(properties.sku) == 'dynamic',
+sku == 'dynamic',
 'Dynamic',
-tolower(properties.sku) == 'isolated',
+sku == 'isolated',
 'Isolated',
-tolower(properties.sku) == 'premiumv2',
+sku == 'premiumv2',
 'PremiumV2',
-tolower(properties.sku) == 'premium',
+sku == 'premium',
 'Premium',
 'Standard')
 | extend status = case(
-tolower(properties.state) == 'stopped',
+state == 'stopped',
 'Stopped',
-tolower(properties.state) == 'running',
+state == 'running',
 'Running',
 'Other')
 | extend appType = case(
@@ -669,24 +672,26 @@ The following is an example using the resource reference syntax.
 ```kql
 where type == 'microsoft.web/sites'
 | extend appServicePlanId = properties.serverFarmId
+| extend state = tolower(properties.state)
+| extend sku = tolower(properties.sku)
 | extend pricingTier = case(
-    tolower(properties.sku) == 'free',
+    sku == 'free',
     '{{Resource pricingTier.free, Module=BrowseResources}}',
-    tolower(properties.sku) == 'shared',
+    sku == 'shared',
     '{{Resource pricingTier.shared, Module=BrowseResources}}',
-    tolower(properties.sku) == 'dynamic',
+    sku == 'dynamic',
     '{{Resource pricingTier.dynamic, Module=BrowseResources}}',
-    tolower(properties.sku) == 'isolated',
+    sku == 'isolated',
     '{{Resource pricingTier.isolated, Module=BrowseResources}}',
-    tolower(properties.sku) == 'premiumv2',
+    sku == 'premiumv2',
     '{{Resource pricingTier.premiumv2, Module=BrowseResources}}',
-    tolower(properties.sku) == 'premium',
+    sku == 'premium',
     '{{Resource pricingTier.premium, Module=BrowseResources}}',
     '{{Resource pricingTier.standard, Module=BrowseResources}}')
 | extend status = case(
-    tolower(properties.state) == 'stopped',
+    state == 'stopped',
     '{{Resource status.stopped, Module=BrowseResources}}',
-    tolower(properties.state) == 'running',
+    state == 'running',
     '{{Resource status.running, Module=BrowseResources}}',
     '{{Resource status.other, Module=BrowseResources}}')
 | extend appType = case(
