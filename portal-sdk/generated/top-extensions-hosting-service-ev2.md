@@ -171,17 +171,17 @@ Note: If using a non standard path for ServiceGroupRootReplacements set build pr
 The preceding  configuration will result in a build output as required by Ev2 and the hosting service. The following  is a sample of the output that gets generated.
 
   ```
-  out\retail-amd64\ServiceGroupRoot
-                  \HostingSvc\1.2.1.0.zip
-                  \Production.Parameters\*.json
-                  \buildver.txt
-                  \Production.RolloutSpec.6h.json
-                  \Production.RolloutSpec.24h.json
-                  \Production.ServiceModel.6h.json
-                  \Production.ServiceModel.1D.json
-                  \Production.friendlyname_1.json
-                  \Production.friendlyname_2.json
-                  \Production.friendlyname_3.json
+    out\retail-amd64\ServiceGroupRoot
+    \HostingSvc\1.2.1.0.zip
+    \Production.Parameters\*.json
+    \buildver.txt
+    \Production.RolloutSpec.6h.json
+    \Production.RolloutSpec.24h.json
+    \Production.ServiceModel.6h.json
+    \Production.ServiceModel.1D.json
+    \Production.friendlyname_1.json
+    \Production.friendlyname_2.json
+    \Production.friendlyname_3.json
   ```
 
 <a name="ev2-integration-with-hosting-service-1-specify-ev2-bake-time"></a>
@@ -194,17 +194,17 @@ The monitor duration can be specified by updating the  `ServiceGroupRootReplacem
 
   ```json
     { 
-    "production": { 
+        "production": { 
             "ServiceGroupRootReplacementsVersion": 2, 
-        "AzureSubscriptionId": "<SubscriptionId>", 
-        "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate", 
-        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>", 
-        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey>", 
-        "TargetContainerName": "hostingservice", 
-        "ContactEmail": "youremail@microsoft.com", 
-        "PortalExtensionName": "Microsoft_Azure_Monitoring", 
-        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ], 
-        "MonitorDuration": [ "P30M", "PT1H" ], 
+            "AzureSubscriptionId": "<SubscriptionId>", 
+            "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate", 
+            "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>", 
+            "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey>", 
+            "TargetContainerName": "hostingservice", 
+            "ContactEmail": "youremail@microsoft.com", 
+            "PortalExtensionName": "Microsoft_Azure_Monitoring", 
+            "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ], 
+            "MonitorDuration": [ "P30M", "PT1H" ], 
         }
     }
   ```
@@ -214,21 +214,21 @@ If no monitor durations are specified, then the EV2 generation will default to 6
 <a name="ev2-integration-with-hosting-service-1-skipping-safe-deployment"></a>
 ### Skipping safe deployment
 
-EV2 templates now support generating deployment files that do not include a delay between stages.  This can be enabled by adding the key/value pair `"SkipSafeDeployment": "true" ` in the corresponding environment in the `ServiceGroupRootReplacements.json` file.  The following example adds the SkipSafeDeployment key/value pair to the extension named `Microsoft_MyExtension` in the **MOONCAKE** environment.
+EV2 templates now support generating deployment files that do not include a delay between stages.  This can be enabled by adding the key/value pair `"SkipSafeDeployment": "true" ` in the corresponding environment in the `ServiceGroupRootReplacements.json` file.  The following example adds the SkipSafeDeployment key/value pair to the extension named `Microsoft_MyExtension` in the **Production** environment.
 
-  ```
+  ```json
     { 
         "production": {
-        "ServiceGroupRootReplacementsVersion": 2, 
-        "AzureSubscriptionId": "<SubscriptionId>", 
-        "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate", 
-        "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>", 
-        "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey>", 
-        "TargetContainerName": "hostingservice", 
-        "ContactEmail": "youremail@microsoft.com", 
-        "PortalExtensionName": "Microsoft_Azure_Monitoring", 
-        "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ], 
-        "SkipSafeDeployment": "true" 
+            "ServiceGroupRootReplacementsVersion": 2, 
+            "AzureSubscriptionId": "<SubscriptionId>", 
+            "CertKeyVaultUri": "https://sometest.vault.azure.net/secrets/PortalHostingServiceDeploymentCertificate", 
+            "StorageAccountCredentialsType": "<ConnectionString | AccountKey | SASToken>", 
+            "TargetStorageCredentialsKeyVaultUri": "<https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageConnectionString | https://sometest.vault.azure.net/secrets/PortalHostingServiceStorageAccountKey>", 
+            "TargetContainerName": "hostingservice", 
+            "ContactEmail": "youremail@microsoft.com", 
+            "PortalExtensionName": "Microsoft_Azure_Monitoring", 
+            "FriendlyNames": [ "friendlyname_1", "friendlyname_2", "friendlyname_3" ], 
+            "SkipSafeDeployment": "true" 
         } 
     }
   ```
