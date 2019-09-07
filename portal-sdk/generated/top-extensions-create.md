@@ -125,14 +125,14 @@ Include the `tagMap` of a resource from the `TagsByResource` control when constr
 ```typescript
 
 const parameters = {
-    primaryenginename: primaryEngineName,
-    secondaryenginename: this._secondaryEngineName(),
-    backupenginename: this._backupEngineName(),
+    primaryEngineName: primaryEngineName,
+    secondaryEngineName: this._secondaryEngineName(),
+    backupEngineName: this._backupEngineName(),
     displacement: this._displacement(),
     location: location.name,
     rgName: MsPortalFx.isFeatureEnabled("SubscriptionLevel") ? resourceGroupName : undefined,
-    primaryenginetags: this._getTagMapForResource(tagResources[0]),
-    secondaryenginestags: this._getTagMapForResource(tagResources[1]),
+    primaryEngineTags: this._getTagMapForResource(tagResources[0]),
+    secondaryEnginesTags: this._getTagMapForResource(tagResources[1]),
 };
 
 ```

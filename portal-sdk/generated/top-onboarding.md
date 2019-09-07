@@ -24,18 +24,19 @@ There are lots of docs here. We recommend you send mail to [ibiza-onboarding@mic
 <a name="phase-1-onboarding-onboard-with-related-teams"></a>
 ## Onboard with related teams
 
-Onboarding to Azure all up is a big task that spans many teams. The doc you are reading will help you onboard to the portal, but there are many other teams you will need to work with to get your entire service up and running. These include, but are not limited to the following teams:
+Onboarding to Azure all up is a big task that spans many teams. The doc you are reading will help you onboard to the portal, but there are many other teams you will need to work with to get your entire service up and running. These include, but are not limited to the following teams.
 
-1. Azure Resource Manager Team - Vlad Joanovic
+**NOTE:**  Contact information for these teams is [available here](https://aka.ms/portalfx/onboarding/partners) 
 
-     Reach out to this team to onboard your resource provider.
+1. Azure Resource Manager Team
+    
+    Reach out to this team to onboard your resource provider.
     <!--TODO: Locate distribution list for this purpose.  -->
 
-1. Azure Marketing Team – Hamid Mahmood
+1. Azure Marketing Team
 
-   To ensure that the business goals of the new extension or service are aligned with Azure's business strategy, please reach out to the Integrated Marketing Team or the L&R - Operations - GD&F team at <a href="mailto:ibiza-bmr@microsoft.com?subject=Azure Business Model Review">ibiza-bmr@microsoft.com</a>. Brian Hillger’s team and Stacey Ellingson’s team will guide you through the business model review process. The extension or service is not ready to be onboarded to Azure until its business model has received approval from those teams. Do not proceed with the next step until the business model has received approval.
 
-1. Support Team  – Michael Fosmire
+1. Support Team 
 
    For integrating with the support system and UX integration.
 
@@ -43,7 +44,7 @@ Onboarding to Azure all up is a big task that spans many teams. The doc you are 
    
    For a presence on the marketing site.
 
-1. Billing team – Vikram Desai
+1. Billing team 
    
    To register meters and other billing related activities.
    
@@ -51,11 +52,11 @@ Onboarding to Azure all up is a big task that spans many teams. The doc you are 
 
    Reach out to AAD onboarding if the new extension service needs special permissions besides just calling your own resource provider servers.  If the extension requires additional built-in support for standard Graph or ARM APIs, submit a partner request at the site located at [https://aka.ms/portalfx/uservoice](https://aka.ms/portalfx/uservoice). 
 
-1. Azure fundamentals and compliance  – Angie Wilson
+1. Azure fundamentals and compliance  
 
     The Azure Fundamentals are a set of tenets to which each Azure service is expected to adhere. The Azure Fundamentals program is described in the document located at [https://aka.ms/azurefundamentals](https://aka.ms/azurefundamentals). The document also identifies the stakeholders and contacts for each of the tenets.
 
-1. Security and privacy reviews  – Paul Mattson
+1. Security and privacy reviews  
 
 1. Start the CSS onboarding process with the CSS team at least three months previous to public preview. This process may coincide with the following step. For more information about development phases, see [top-extensions-developmentPhases.md](top-extensions-developmentPhases.md).
 
@@ -170,6 +171,8 @@ When you are ready for all users to see your experience, you will enable your en
 
 Azure portal onboarding steps listed below assumes that all new services have completed the onboarding meeting with [ibiza-onboarding@microsoft.com](mailTo:ibiza-onboarding@microsoft.com) team and that you have downloaded the Azure portal SDK to start the development of your extension. If you have not had either the onboarding meeting or have developed the extension, please discuss with the Azure portal team on the requirements.
 
+**NOTE: Azure portal Onboarding process is common for all clouds including LX.**
+
 <a name="steps-to-portal-onboarding-pre-onboarding-checks-must-do-s"></a>
 ## Pre-Onboarding Checks - Must Do&#39;s
 
@@ -181,21 +184,35 @@ Azure portal onboarding steps listed below assumes that all new services have co
 
 4) Partners must validate all changes deployed in RC or Mpac thoroughly before cherry-picking the commit to Production branch.
 
+5) Partners must onboard to all public and sovereign clouds at the same time and update the respective configs. 
+
+6) **[Hide all assets](portalfx-assets.md#how-to-hide-your-asset-in-different-environments)** in sovereign clouds if you do not intend to show your experiences in those clouds.
+
+<a name="steps-to-portal-onboarding-service-or-feature-deprecation-checks-must-do-s"></a>
+## Service or Feature Deprecation Checks - Must Do&#39;s
+
+1) Ensure that the users are given advance notice about the deprecation of a feature or service when removing the corresponding experience from Azure portal.
+
+2) Notify users via Azure blog, Azure status updates or email about the intended deprecation plan and provide migration to alternative features or service.
+
+3) Users will continue to see the currently loaded extension version until their browser is refreshed. Hence it is advised that you monitor the telemetry for usage before turning off service or feature.
+ 
+
 **NOTE:** *Partner must cherry-pick changes from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for completing the PR and cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
 
 **IMPORTANT** *Partners must ensure PR has the required approvals and all the policies are met and PR is complete. PRs may get delayed due to merge validation expiry or other policy checks. Partners can re-trigger any policy that expired or failed.*
 
-5) Understand the deployment schedules and [SLAs](top-extensions-svc-lvl-agreements.md) for Portal framework and Hosting service repositories.
+1) Understand the deployment schedules and **[SLAs](top-extensions-svc-lvl-agreements.md)** for Portal framework and Hosting service repositories.
 
-6) Portal team has a process of freezing deployments during special events like //build //Ignite //Inspire etc. Any changes to Production branch will NOT be honored during this freeze time. Please plan your Preview/Release of your service accordingly.
+2) Portal team has a process of freezing deployments during special events like //build //Ignite //Inspire etc. Any changes to Production branch will NOT be honored during this freeze time. Please plan your Preview/Release of your service accordingly.
 
-7) Portal team does an automatic merge from Dogfood branch to Mpac and Mpac to Production during special events like conferences. During all other times, partners MUST always cherry-pick the changes from Dev branch to Production branch for the respective changes to go live.
+3) Portal team does an automatic merge from Dogfood branch to Mpac and Mpac to Production during special events like conferences. During all other times, partners MUST always cherry-pick the changes from Dev branch to Production branch for the respective changes to go live.
 
-8) National cloud deployments take 2 weeks more than Production branch.
+4) National cloud deployments take 2 weeks more than Production branch.
 
-9) Always work with Azure portal onboarding contact about your release dates before you commit timelines to release the product or any Marketing communications.
+5) Always work with Azure portal onboarding contact about your release dates before you commit timelines to release the product or any Marketing communications.
 
-10) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval.
+6) All exceptions to bypass SLAs and fasttrack deployments will require Partner level approval on both sides. All exception during major events will require VP level approval.
 
 ![storage container](./../media/portalfx-extensions-onboarding/onboarding-instructions.png)
 
@@ -238,7 +255,7 @@ Note:  Incorrect or insufficient information in the workitem could delay the onb
 <a name="steps-to-portal-onboarding-how-to-verify-if-hosting-service-onboarding-is-complete"></a>
 ## How to verify if hosting service onboarding is complete?
 
-1. Check Hosting Service API Diagnostics log for [Dogfood](https://hosting.onecloud.azure-test.net/api/diagnostics) or [Production](https://hosting.portal.azure.net/api/diagnostics) or [Mooncake](https://hosting.azureportal.chinacloudapi.cn/api/diagnostics) or [Fairfax](https://hosting.azureportal.usgovcloudapi.net/api/diagnostics) or [Blackforest](https://hosting.azure-api.de/api/diagnostics) in web browser.
+1. Check Hosting Service API Diagnostics log for [Dogfood](https://hosting.onecloud.azure-test.net/api/diagnostics) or [Production](https://hosting.portal.azure.net/api/diagnostics) or [Mooncake](https://hosting.azureportal.chinacloudapi.cn/api/diagnostics) or [Fairfax](https://hosting.azureportal.usgovcloudapi.net/api/diagnostics) or [Blackforest](https://hosting.azure-api.de/api/diagnostics) in web browser. For LX deployments, partners are required to engage their dedicated LX resource to hit the corresponding LX endpoints to validate.
 2. Press Ctrl+F to find your extension routeprefix that registered for your service. Eg: storage
 
 ![storage](./../media/portalfx-extensions-onboarding/validate-hostingsvc-onboarding.png)
@@ -273,7 +290,7 @@ Note : Extension name cannot be changed once onboarding is complete. It will req
 
 1. Add a comment in the workitem associated with the pull request to get notified of deployment.
 2. Check [Commit Search](https://aka.ms/portalfx/commitsearch) with the commit id and [deployment pipeline](http://simonp-sites/pipeline).
-3. If the changes are deployed you should find them in the API diagnostics log in respective branches [DF](https://df.onecloud.azure-test.net/api/diagnostics), [RC](https://rc.portal.azure.com/api/diagnostics), [MPAC](https://ms.portal.azure.com/api/diagnostics) or [PROD](https://portal.azure.com/api/diagnostics)
+3. If the changes are deployed you should find them in the API diagnostics log in respective branches [DF](https://df.onecloud.azure-test.net/api/diagnostics), [RC](https://rc.portal.azure.com/api/diagnostics), [MPAC](https://ms.portal.azure.com/api/diagnostics) or [PROD](https://portal.azure.com/api/diagnostics). For LX deployments, partners are required to engage their dedicated LX resource to hit the corresponding LX endpoints to validate.
 
 ![DF](./../media/portalfx-extensions-onboarding/validate-framework-config-df.png)
 
@@ -284,12 +301,22 @@ Note : Please DO NOT get the pull request approved, bypassed or completed withou
 <a name="steps-to-portal-onboarding-step-3-aad-onboarding"></a>
 <a name="steps-to-portal-onboarding-step-3-aad-onboarding"></a>
 ## Step 3 - AAD Onboarding
-1) For teams that require Graph access and AAD app for per extension tokens, please create a [workitem](http://aka.ms/portalfx/newextension)
-2) Any changes to the AAD app to add more permissions or reply URLs will require an additional workitem. Please schedule a meeting to go over the changes along with the onboarding
-2) Send email to [ibiza-onboarding@microsoft.com](mailTo:ibiza-onboarding@microsoft.com) with the workitem details and extension details.
 
-Here is the list of [graph endpoints](https://msft.spoppe.com/sites/Identity/MSODS/SitePages/AAD%20Environments.aspx) for different clouds
+1) Join the **[Ibiza AAD App Partners](https://aka.ms/portalfx/joinaadapppartners)** security group.
 
+2) Once the request is approved, you should be part of the security group that has access to the public certificate that is required to be added to the AAD apps in 1st party AAD apps in each environment
+
+3) Register your 1st party AAD app from **[First Party Portal](https://firstpartyportal.msidentity.com/RegisterApp)**
+
+4) **[Download the certificate](https://aka.ms/portalfx/aadapps/certs)** required to add in the authentication tab in the 1st party AAD app.
+
+5) Go to **Credentials** tab and under **Public Keys**, add the certificate downloaded in the previous step.
+
+6) Go to Provisioning tab and in the **"Provide more detail"** section, add **"This app will be used by Azure portal extension to call graph and other backend services"**.
+
+7) Go to the **Owners** tab and use **redmond\ibizaaadapppartners** as the **Owners Security Group**
+
+**IMPORTANT NOTE: *Partners are responsible for making sure the AAD app has all the required permissions and pre-authorization to access intended resources.***
 <!--
 TODO - Add an example after the feature is ready (ETA is March or April )
 -->
