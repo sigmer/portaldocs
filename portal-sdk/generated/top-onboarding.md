@@ -264,6 +264,8 @@ Note:  Incorrect or insufficient information in the workitem could delay the onb
 
 <a name="steps-to-portal-onboarding-step-2-portal-framework"></a>
 
+3. Check [Commit Search](https://aka.ms/portalfx/commits) with the commit id and [Hosting Service Release Dashboard](https://dev.azure.com/msazure/One/_dashboards/dashboard/25be4cd4-4fbd-45c9-b257-79baf530abbe).
+
 <a name="steps-to-portal-onboarding-step-2-portal-framework"></a>
 ## Step 2 - Portal Framework
 1) Register your extension with Azure portal framework by raising a pull request to the appropriate extension config json. eg: [extensions.dogfood.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.dogfood.json&version=GBdev), [extensions.prod.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.prod.json&version=GBdev), [extensions.ff.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ff.json&version=GBdev), [extensions.mc.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.mc.json&version=GBdev), [extensions.bf.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.bf.json&version=GBdev), [extensions.usnat.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.usnat.json&version=GBdev), [extensions.ussec.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ussec.json&version=GBdev) etc,. If you are disabling the extension in the given environment(eg: "flags": "Disabled"), you do not have to increment the extension count.
@@ -289,8 +291,8 @@ Note : Extension name cannot be changed once onboarding is complete. It will req
 ## How to verify if portal framework onboarding is complete?
 
 1. Add a comment in the workitem associated with the pull request to get notified of deployment.
-2. Check [Commit Search](https://aka.ms/portalfx/commitsearch) with the commit id and [deployment pipeline](http://simonp-sites/pipeline).
-3. If the changes are deployed you should find them in the API diagnostics log in respective branches [DF](https://df.onecloud.azure-test.net/api/diagnostics), [RC](https://rc.portal.azure.com/api/diagnostics), [MPAC](https://ms.portal.azure.com/api/diagnostics) or [PROD](https://portal.azure.com/api/diagnostics). For LX deployments, partners are required to engage their dedicated LX resource to hit the corresponding LX endpoints to validate.
+
+2. If the changes are deployed you should find them in the API diagnostics log in respective branches [DF](https://df.onecloud.azure-test.net/api/diagnostics), [RC](https://rc.portal.azure.com/api/diagnostics), [MPAC](https://ms.portal.azure.com/api/diagnostics) or [PROD](https://portal.azure.com/api/diagnostics). For LX deployments, partners are required to engage their dedicated LX resource to hit the corresponding LX endpoints to validate.
 
 ![DF](./../media/portalfx-extensions-onboarding/validate-framework-config-df.png)
 
@@ -299,6 +301,9 @@ Note : Extension name cannot be changed once onboarding is complete. It will req
 Note : Please DO NOT get the pull request approved, bypassed or completed without hosting service onboarding complete and required DNS entries created.
 
 <a name="steps-to-portal-onboarding-step-3-aad-onboarding"></a>
+
+3. Check [Commit Search](https://aka.ms/portalfx/commits) with the commit id and [Portal Framework Release Dashboard](https://dev.azure.com/msazure/One/_dashboards/dashboard/adf2732d-f4a9-476d-a7a7-7ab7aab4a2ad).
+
 <a name="steps-to-portal-onboarding-step-3-aad-onboarding"></a>
 ## Step 3 - AAD Onboarding
 
