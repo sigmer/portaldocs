@@ -163,7 +163,6 @@ Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to 
 
 ```typescript
     
-import { DataContext } from "Resource/ResourceArea";
 import { CreateBlade } from "Resource/Create/ViewModels/CreateBlade";
 import * as sinon from "sinon";
 import { TemplateBladeHarness } from "msportalfx-ut/Harness";
@@ -183,7 +182,7 @@ describe("Create Blade Tests", () => {
   it("Verify initial state of CreateBlade", () => {
     return TemplateBladeHarness.initializeBlade(CreateBlade, {
       parameters: null,
-      dataContext: new DataContext,
+      blade: new CreateBlade(),
       provisioningContext: {
         initialValues: { locationNames: [], subscriptionIds: [] },
         telemetryId: "",
@@ -218,7 +217,6 @@ Add a TemplateBlade test to ./test/ResourceOverviewBlade.test.ts.  You can modif
 ```typescript
     
 import { assert } from "chai"; // type issues with node d.ts and require js d.ts so using chai
-import { DataContext } from "Resource/ResourceArea";
 import { Parameters, ResourceOverviewBlade } from "Resource/Blades/Overview/ResourceOverviewBlade";
 import ClientResources = require("ClientResources");
 import * as sinon from "sinon";
@@ -268,7 +266,7 @@ describe("Resource Overview Blade Tests", () => {
     // get blade instance with context initialized and onInitialized called
     return TemplateBladeHarness.initializeBlade(ResourceOverviewBlade, {
       parameters: bladeParameters,
-      dataContext: new DataContext(),
+      blade: new ResourceOverviewBlade(),
       afterOnInitializeCalled: (blade) => {
         console.log("after on init called");
       },
