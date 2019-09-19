@@ -1,9 +1,9 @@
-﻿# Accordion
+﻿# SubscriptionDropDown
 
  
 <a name="basics"></a>
 ### Basics
-Accordion control provides multiple collapsible sections of information to be displayed on a page.  The accordion has options to control whether only a single section can be expanded at a time or whether all sections can be expanded or collapsed.
+SubscriptionDropDown control provides a choice among a user's subscriptions in a DropDown control.
 
 
 <!-- TODO get an IMAGE to embed here -->
@@ -13,28 +13,35 @@ Accordion control provides multiple collapsible sections of information to be di
  
 <a name="when-to-use"></a>
 ### When to use
-Formatting pages in Azure can be done with several controls.  Choose the one best suited to your needs
-* **Accordion** - use the accordion when some of the information can be hidden in a collapsed area of the page
-* **Section** - use the section to group information and when all information on the page is shown without hidden, collapsed areas.  Sections are used throughout the page.  Sections is the only control that can cause its child controls to display their label on the same line as their data input field.  This **leftLabelPosition** option is used in the new creation forms and other wide forms
-* **Splitter** - use the Spitter to display an area of the page split into 2 sections
-* **TabControl** - use tabs to separate content on a page and ensure the user can see the available categories of information at the top of the page.  Tabs are typically used near the top of the page.  Tabs are used in the portal wizard experiences as "steps".
-
+Selectors let the user choose options from a set of existing values.  Choose the control best suited to your needs
+* **CheckBox** - a choice to opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
+* **TriStateCheckBox** - can be checked, not checked or partially checked to indicate the checked state of children items in a hierarchy.
+* **DropDown** - a single choice between a large number of options.  The DropDown control is also used on a smaller set of options where the default option is recommended for most users.  The DropDown control can also be used to make multiple selections from a set of options.
+* **OptionsGroup** - a single choice between 2-4 equally weighted options where the options names are short.  For example, if the choices are On/Off, Yes/No, or None/Basic/Advanced an option group will work well.  
+* **RadioButtons** - a single choice between 2-7 equally weighted options where the option names are long.   
+* **LocationDropDown** - a single choice between Azure regions
+* **SubscriptionDropDown** - a single choice between subscriptions for the current user
+* **ResourceGroupDropDown** - a single choice between resource groups for the current user.  Also enables creating a new resource group.
 
 
  
 <a name="best-practices"></a>
 ### Best practices
+The SubscriptionDropDown should be used in resource creation and editing pages where the user is selecting a resource group.  The SubscriptionDropDown is typically used with the ResourceGroupDropDown.
 
 <a name="best-practices-do"></a>
 #### Do
 
-* Progressively disclose sections of information on a page
-* Enable the user to collapse sections in order to focus on other parts of the page
+* Use the SubscriptionDropDown in the **Project details** section of the **Basics** tab of the create a resource experience.
+
+<!-- TODO need Do's -->
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
 
-* Don't use the accordion to organize information that does not need to be collapsed.
+* Don't write your own code for a selector among subscriptions, use this control
+
+<!-- TODO need Don'ts -->
 
 
 
@@ -44,20 +51,11 @@ Formatting pages in Azure can be done with several controls.  Choose the one bes
 
 
 
-<a name="developer-tips-and-tricks-interactive-control-and-sample-source-code"></a>
-#### Interactive control and sample source code
-Go to the playground site to use the latest control and get source code for your project.  [Learn more about playground](./top-extensions-controls-playground.md).
-
-*  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/Accordion_create_Playground" target="_blank">SubscriptionDropDown in the interactive controls playground</a>
-
- 
-
-
  
 <a name="related-info"></a>
 ### Related info
 
-* <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3410%3A7557" target="_blank">Accordion in Azure Portal Toolkit (Figma)</a>
+<!-- TODO link to Figma -->
 
 * [Azure design guidance](http://aka.ms/portalfx/design)
 

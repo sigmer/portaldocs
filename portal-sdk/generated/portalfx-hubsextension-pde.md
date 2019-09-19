@@ -5,8 +5,6 @@
     * [PricingTierLauncherV3](#parts-pricingtierlauncherv3)
     * [SpecPickerListViewPartV3](#parts-specpickerlistviewpartv3)
     * [PricingTierLauncher](#parts-pricingtierlauncher)
-    * [ServicesHealthPart](#parts-serviceshealthpart)
-    * [AzureServiceHealthPart](#parts-azureservicehealthpart)
     * [SpecPickerListViewPart](#parts-specpickerlistviewpart)
     * [DiagnosticsTile](#parts-diagnosticstile)
     * [FeedbackTile](#parts-feedbacktile)
@@ -78,16 +76,6 @@ To use this part contact Sam Armstrong <ibiza-hubs@microsoft.com>.
 ## PricingTierLauncher
 
 To use this part contact Sam Armstrong <ibiza-hubs@microsoft.com>.
-
-<a name="parts-serviceshealthpart"></a>
-## ServicesHealthPart
-
-To use this part contact Ifeanyi Echeruo <ibiza-hubs@microsoft.com>.
-
-<a name="parts-azureservicehealthpart"></a>
-## AzureServiceHealthPart
-
-To use this part contact Ifeanyi Echeruo <ibiza-hubs@microsoft.com>.
 
 <a name="parts-specpickerlistviewpart"></a>
 ## SpecPickerListViewPart

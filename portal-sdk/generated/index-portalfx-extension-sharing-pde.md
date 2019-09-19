@@ -24,8 +24,6 @@
     * [PricingTierLauncherV3](portalfx-hubsextension-pde.md#pricingtierlauncherv3)
     * [SpecPickerListViewPartV3](portalfx-hubsextension-pde.md#specpickerlistviewpartv3)
     * [PricingTierLauncher](portalfx-hubsextension-pde.md#pricingtierlauncher)
-    * [ServicesHealthPart](portalfx-hubsextension-pde.md#serviceshealthpart)
-    * [AzureServiceHealthPart](portalfx-hubsextension-pde.md#azureservicehealthpart)
     * [SpecPickerListViewPart](portalfx-hubsextension-pde.md#specpickerlistviewpart)
     * [DiagnosticsTile](portalfx-hubsextension-pde.md#diagnosticstile)
     * [FeedbackTile](portalfx-hubsextension-pde.md#feedbacktile)
