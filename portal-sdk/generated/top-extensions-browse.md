@@ -294,7 +294,7 @@ The framework offers the ability to display a description and links in the case 
 To opt in to this experience you need to provide a `description` and a `link`, these are properties that you provide on your Asset.
 
 ```xml
-<AssetType  
+<AssetType
     Name="MyAsset"
     ...
     Description="{Resource MyAsset.description, Module=ClientResources}">
@@ -600,7 +600,7 @@ One common ask is to convert ARM property values to user friendly display string
 with extending the resulting property to a given column name.
 
 In the below example we're using a `case` statement to rename the `state` property to a user friendly display string under the column `status`.
-We're then including that column in our final project statement. We can then replace those display strings with client references once we migrate it over to 
+We're then including that column in our final project statement. We can then replace those display strings with client references once we migrate it over to
 PDL in our extension providing localised display strings.
 
 ```kql
