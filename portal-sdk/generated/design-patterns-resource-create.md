@@ -1,5 +1,5 @@
 ﻿# Create a resource
-The "create a resource" pattern provides a simple, intuitive and quick experience for creating resources by requiring a minimum number of fields and providing default values. The pattern also enables users to walk through detailed configuration options in order to set many resource options. The experience uses a fullscreen page with tabs to separate  configuration steps and guide the user.
+The "create a resource" pattern provides a simple, intuitive and quick experience for creating resources by requiring a minimum number of fields and providing default values. The pattern also enables users to walk through detailed configuration options in order to set additional configuration options. The experience uses a fullscreen page with tabs to separate configuration steps and guide the user.
 
 <a name="context"></a>
 <a name="context"></a>
@@ -39,12 +39,12 @@ The resource create pattern enables quick configuration of a new resource by req
 <a name="example-image-example-uses"></a>
 <a name="example-image-example-uses"></a>
 ### Example uses
-These Azure resources are good examples of this design pattern 
+These create experiences are good examples of this design pattern 
 
 <ul>
-<li>Create a <a href="https://rc.portal.azure.com/#create/microsoft.freeaccountvirtualmachine" target="_blank">Free account virtual machine</a></li>
-<li>Create an <a href="https://rc.portal.azure.com/#create/Microsoft.IotHub" target="_blank">IoT hub</a></li>
-<li>Create a <a href="https://rc.portal.azure.com/#create/microsoft.aks" target="_blank">Kubernetes service</a></li>
+<li>Create a <a href="https://portal.azure.com/#create/microsoft.freeaccountvirtualmachine" target="_blank">Free account virtual machine</a></li>
+<li>Create a <a href="https://portal.azure.com/#create/Microsoft.ContainerInstances" target="_blank">Container instance</a></li>
+<li>Create a <a href="https://portal.azure.com/#create/microsoft.aks" target="_blank">Kubernetes cluster</a></li>
 </ul>
 
 
@@ -63,10 +63,10 @@ Creating a resource in Azure
 </a>
 </div>
 
-The resource create experience contains:
-* Tabs with descriptive and supportive text and learn more links to switch between logical input steps
-* Sections that group input fields into a logical area.   
-* Input fields divided into logical sections with concise, instructional text for each section
+The create a resource experience contains:
+* Tabs to provide logical steps and provide descriptive and supportive text and learn more links about each step
+* Sections to logically group input fields and provide concise, instructional text for each grouping of fields
+* Input fields to gather user input and provide information about each field
 * Footer navigation with buttons to navigate to previous and next tabs and submit the form
 
 <a name="anatomy-tab-layout"></a>
@@ -75,17 +75,23 @@ The resource create experience contains:
 
 Tabs separate the creation into logical steps. 
 
-Each tab should include a brief description about the content to follow. When possible include **Learn more** links to relevant docs.
+Each tab should include a brief description. When possible include **Learn more** links to relevant docs.
 
 <a name="anatomy-sections-that-group-input-fields"></a>
 <a name="anatomy-sections-that-group-input-fields"></a>
 ### Sections that group input fields
-When creating a form that includes several fields pertaining to a certain subject, you can group them into a section with a header that gives the user a clear indication of what they’re being asked for. You can also add explanatory text just below the group header if the task may not be immediately clear to the user.
+When creating a form that includes several fields pertaining to a certain subject, you can group them into a section with a header that gives the user a clear indication of what they’re being asked. You can also add explanatory text just below the group header if the task may not be immediately clear to the user.
 Section headers should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
 
-* Alignment: Label and controls should be on the same line.  When resolution is less than 700px, stack labels above controls.  The **smartAlignLabels** option for Tab and Section controls will enable this behavior
-	
+* Alignment: The **smartAlignLabels** option for Tab and Section controls will enable the proper label and input alignment
+
+<a name="anatomy-input-fields"></a>
+### Input fields
+
+* Alignment: Label and controls should be on the same line.  The **smartAlignLabels** option for Tab and Section controls will enable this behavior
 * Info Bubbles: If you have input fields that may not be immediately familiar to users, include an info bubble that shows more information.
+* Required values: Fields should indicate whether the input is required
+* Validation: Individual fields should perform vaklidation in real-time to provide immediate feedback regarding user input at the field level. The entire form will validate when the user navigates to the Review + create tab.  This validation will handle any missing required values in addition to server-side validation logic. 
 
 <div style="max-width:800px">
 <img alttext="Tabs" src="../media/design-patterns-resource-create/Grouped-input-fields.png" />
@@ -96,15 +102,13 @@ Section headers should follow sentence case, with only the first letter capitali
 ### Sub create in a context pane
 Context panes can be used for sub creates within the create flow. The sub create allows users to configure services or to create resources that are related to the main resource that's being created, without losing the overall context.
 <div style="max-width:800px">
-<img alttext="Tabs" src="../media/design-patterns-resource-create/subcreate.png"  />
+<img alttext="Sub create" src="../media/top-extensions-create/SubCreates.png"  />
 </div>
 
 <a name="anatomy-footer-navigation"></a>
 <a name="anatomy-footer-navigation"></a>
 ### Footer navigation
-The footer nav contains the call to action (CTA) for creating the resource, as well as two buttons used for navigating between tabs. If your resource supports created templates, you can include an affordance for that in the footer nav.  
-
-The space between items in the footer area should be 12px
+The footer area contains the call to action (CTA) for creating the resource, as well as two buttons used for navigating between tabs. If your resource supports templates, you will also have a download template link in the footer of the Review + create tab.  
 
 The items that are typically in the footer area are
 * Review + create button - on all tabs except the last tab - clicking the review and create button navigates the page to the last tab
@@ -155,6 +159,8 @@ The **Basics** tab should have the following in the footer area
 * Previous button (disabled) with label "\< Previous"
 * Next button with label "Next : *next_tab_name* \>"
 
+![alt-text](../media/design-patterns-resource-create/Footer-basics.png "Basics tab footer")
+
 <a name="behavior-tabs-optional-tabs"></a>
 <a name="behavior-tabs-1-optional-tabs"></a>
 #### Optional tabs
@@ -167,12 +173,16 @@ The optional tabs should have the following in the footer area
 * Previous button with label "\< Previous"
 * Next button with label "Next : *next_tab_name* \>"
 
+![alt-text](../media/design-patterns-resource-create/Footer-optional.png "Options tabs footer")
+
 <a name="behavior-tabs-tags"></a>
 <a name="behavior-tabs-1-tags"></a>
 #### Tags
 Many enterprises are starting to create subscription and resource group polices that require tagging resources at create time.  Not including the **Tags** tab will block those users from deploying resources using the portal.  The **Tags** tab is always the penultimate tab.  
 
 * **Tags** - use the TagsByResource control to enable users to assign key value pairs to the selected Resource Types.	
+
+![alt-text](../media/top-extensions-create/Tags.png "Tags control")
 
 Footer navigation
 
@@ -181,7 +191,8 @@ The **Tags** tabs should have the following in the footer area
 * Previous button with label "\< Previous"
 * Next button with label "Next : Review + create \>"
 
-![alt-text](../media/top-extensions-create/Tags.png "Tags control")
+![alt-text](../media/design-patterns-resource-create/Footer-tags.png "Tags tab footer")
+
 
 <a name="behavior-tabs-review-create"></a>
 <a name="behavior-tabs-1-review-create"></a>
@@ -194,7 +205,7 @@ Validation
 
 Validation should occur when the user navigates to the last tab, **Review + create**, with the following behavior
 * Display an error message at the top of the page using the error icon and the text "Validation failed. Required information is missing or not valid."
-* Mark each tab with an invalid field with a red dot after the tab name
+* Mark each tab which contains an invalid field with a red dot after the tab name
 
 
 Footer navigation
@@ -205,6 +216,7 @@ The **Review + create** tabs should have the following in the footer area
 * Next button (disabled) with label "Next \>"
 * Download a template for automation link with label "Download a template for automation"
 
+![alt-text](../media/design-patterns-resource-create/Footer-review.png "Review + create tab footer")
 
 <a name="post-create"></a>
 <a name="post-create"></a>
@@ -217,7 +229,7 @@ The post create page provides realtime deployment status, help with troubleshoot
 <a name="do"></a>
 <a name="do"></a>
 ## Do
--   Include a brief description at the  of each tab about the tab content. When possible include `Learn more` links to relevant docs.
+-   Include a brief description at the of each tab about the tab content. When possible include `Learn more` links to relevant docs.
 
 -   Include a brief description for each section on a tab.
 
@@ -225,15 +237,17 @@ The post create page provides realtime deployment status, help with troubleshoot
 
 -   Mark required fields with the red asterisk
 
- - Include info bubbles if there are input fields that may not be immediately familiar
+-   Include info bubbles if there are input fields that may not be immediately familiar
 
- 
+
 <a name="don-t"></a>
 <a name="don-39-t"></a>
 ## Don&#39;t
--   Don’t just map your existing create experience to separate tabs.
+-   Don’t just map your old create experience to separate tabs.
 
 -   Don't include lengthy and unclear explanatory text. It should be used to clarify and set expectations in a few short sentences
+
+-   Don't show the required indicator on the tabs - this was in an older design and has been dropped
 
 <a name="related-design-guidelines"></a>
 <a name="related-design-guidelines"></a>
@@ -272,9 +286,11 @@ Developers can use the following information to get started implementing this pa
 <a name="for-developers-tips-and-tricks"></a>
 ## Tips and tricks
 
--   Set a maximimum width of 600px for the page area that contains input fields
--   Screen resolution - If screen resolution is less than 700px, set left aligned = false
+-   Set a maximimum width of 700px for the page area that contains input fields
 -   To include the visual connector between Subscription and resource group, set `Nested = True` on the resource group control.  
+-   The spacing between the items in the footer is 12px
+
+
 
 <a name="for-developers-related-documentation"></a>
 <a name="for-developers-related-documentation"></a>

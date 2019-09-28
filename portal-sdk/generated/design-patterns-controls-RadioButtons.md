@@ -15,11 +15,12 @@ The RadioButtons control lets users select one option from two or more choices. 
 <a name="when-to-use"></a>
 ### When to use
 To select a **single option** among existing values.  Choose the control best suited to your needs
-* **CheckBox** - a choice to opt in to a single choice.  For example, use a CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
+* **CheckBox** - a choice to switch between 2 mutually exclusive options (on/off, enable/disable) or to indicate a subordinate setting (I agree to terms) when paired with another control
+opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
 * **TriStateCheckBox** - can be checked, not checked or partially checked to indicate the checked state of children items in a hierarchy.
 * **DropDown** - a single choice between a large number of options.  The DropDown control is also used on a smaller set of options where the default option is recommended for most users.  The DropDown control can also be used to make multiple selections from a set of options.
-* **OptionsGroup** - a single choice between 2-4 equally weighted options where the options names are short.  For example, if the choices are On/Off, Yes/No, or None/Basic/Advanced an option group will work well.  
-* **RadioButtons** - a single choice between 2-7 equally weighted options where the option names are long.   
+* **OptionsGroup** - No longer recommended.  
+* **RadioButtons** - a single choice between 2-7 equally weighted options.   
 
 
 
@@ -35,16 +36,14 @@ To select a **single option** among existing values.  Choose the control best su
 * List the options in a logical order, such as most likely to be selected to least, simplest operation to most complex, or least risk to most. Alphabetical ordering is not recommended because it is language dependent and therefore not localizable.
 * If none of the options is a valid choice, add another option to reflect this choice, such as "None" or "Does not apply".
 * Select the safest (to prevent loss of data or system access) and most secure and private option as the default. If safety and security aren't factors, select the most likely or convenient option.
-* Align RadioButtons vertically instead of horizontally, if possible. horizontal alignment is harder to read and localize.
+* Align RadioButtons vertically instead of horizontally, if possible. horizontal alignment is harder to read, dependent on localization and may change/wrap when the page reflows.
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
 
-* Don't use if there are 2-4 options with short names, use the OptionsGroup instead
 * Don't use when the options are numbers that have fixed steps, like 10, 20, 30. Use a Slider component instead.
 * Don't use if there are more than 7 options, use a DropDown instead.
-* Don't nest with other RadioButtons, OptionsGroups or CheckBoxes. If possible, keep all the options at the same level.
-* Don't use when the option names are short, use OptionsGroup instead.
+* Don't nest with other RadioButtons or CheckBoxes. If possible, keep all the options at the same level.
 
 
 

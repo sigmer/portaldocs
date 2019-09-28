@@ -3,7 +3,7 @@
  
 <a name="basics"></a>
 ### Basics
-A CheckBox is a UI element that allows users to switch between two mutually exclusive options (checked or unchecked, on or off) through a single click or tap. It can also be used to indicate a subordinate setting or preference when paired with another control.
+A CheckBox is a UI element that allows users to switch between two mutually exclusive options (on/off, enable/disable) through a single click or tap. It can also be used to indicate a subordinate setting or preference when paired with another control.
 
 
 
@@ -15,34 +15,39 @@ A CheckBox is a UI element that allows users to switch between two mutually excl
 <a name="when-to-use"></a>
 ### When to use
 Selectors let the user choose options from a set of existing values.  Choose the control best suited to your needs
-* **CheckBox** - a choice to opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
+* **CheckBox** - a choice to switch between 2 mutually exclusive options (on/off, enable/disable) or to indicate a subordinate setting (I agree to terms) when paired with another control
+opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
 * **TriStateCheckBox** - can be checked, not checked or partially checked to indicate the checked state of children items in a hierarchy.
 * **DropDown** - a single choice between a large number of options.  The DropDown control is also used on a smaller set of options where the default option is recommended for most users.  The DropDown control can also be used to make multiple selections from a set of options.
-* **OptionsGroup** - a single choice between 2-4 equally weighted options where the options names are short.  For example, if the choices are On/Off, Yes/No, or None/Basic/Advanced an option group will work well.  
-* **RadioButtons** - a single choice between 2-7 equally weighted options where the option names are long.   
+* **OptionsGroup** - No longer recommended  
+* **RadioButtons** - a single choice between 2-7 equally weighted options 
+* **LocationDropDown** - a single choice between Azure regions
+* **SubscriptionDropDown** - a single choice between subscriptions for the current user
+* **ResourceGroupDropDown** - a single choice between resource groups for the current user.  Also enables creating a new resource group. 
 
 
 
  
 <a name="best-practices"></a>
 ### Best practices
-A CheckBox is used to select or deselect action items. It can be used for a single item or for a list of multiple items that a user can choose from. The control has two selection states: unselected and selected.
+A CheckBox is used to select or deselect action items. It can be used for a single item or for a list of multiple items. The control has two selection states: unselected and selected.
 
 Use multiple CheckBoxes for multi-select scenarios in which a user chooses one or more items from a group of choices that are not mutually exclusive.  A DropDown may also be considered for multi-select.
 
 <a name="best-practices-do"></a>
 #### Do
 
-* Allow users to choose any combination of options when several CheckBoxes are grouped together.
-* Use a single CheckBox for a subordinate setting, such as with a "Remember me?" login scenario or with a terms of service agreement.
+* Use a descriptive label to indicate the option, worded positively (Enable, Allow, etc) 
+* Group in a list with other CheckBoxes to easily allow a user to choose among a list of options
+* Pair with another control to use as a subordinate setting, such as with a "Remember me?" login scenario or agree with a terms of service agreement.
 
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
 
-* Don't use a CheckBox as an on/off control. Instead use a toggle switch.
+* Don't use a CheckBox as an on/off switch that requires no confirming action. Instead use a toggle switch.
 * Don’t use a CheckBox when the user can choose only one option from the group, use radio buttons instead.
-* Don't put two groups of CheckBoxes next to each other. Separate the two groups with labels.
+* Don't put two separate groups of CheckBoxes next to each other. Separate the two groups into sections.
 
 
 

@@ -3,7 +3,7 @@
  
 <a name="basics"></a>
 ### Basics
-The PricingControl enbles a 
+The PricingControl enables the user to see the current pricing information and navigate to a separate experience to change pricing options.
 
 
 <!-- TODO get an IMAGE to embed here -->
@@ -32,7 +32,7 @@ Use the PricingControl so the user can understand the currently selected pricing
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
 
-* Don't use the PricingControl if the pricing selection is a simple choice among a few options.  Consider DropDown, RadioButtons or OptionsGroup for simple pricing choices.
+* Don't use the PricingControl if the pricing selection is a simple choice among a few options.  Consider DropDown or RadioButtons for simple pricing choices.
 
 
 

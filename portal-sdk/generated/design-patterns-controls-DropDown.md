@@ -15,11 +15,12 @@ A DropDown is a list in which the selected item is always visible, and the other
 <a name="when-to-use"></a>
 ### When to use
 To select a **single option** among existing values.  Choose the control best suited to your needs
-* **CheckBox** - a choice to opt in to a single choice.  For example, use a CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
+* **CheckBox** - a choice to switch between 2 mutually exclusive options (on/off, enable/disable) or to indicate a subordinate setting (I agree to terms) when paired with another control
+opt in to a single choice.  For example, use a single CheckBox for "I agree" instead of a different control where the user chooses between "I agree" and "I don't agree".
 * **TriStateCheckBox** - can be checked, not checked or partially checked to indicate the checked state of children items in a hierarchy.
 * **DropDown** - a single choice between a large number of options.  The DropDown control is also used on a smaller set of options where the default option is recommended for most users.  The DropDown control can also be used to make multiple selections from a set of options.
-* **OptionsGroup** - a single choice between 2-4 equally weighted options where the options names are short.  For example, if the choices are On/Off, Yes/No, or None/Basic/Advanced an option group will work well.  
-* **RadioButtons** - a single choice between 2-7 equally weighted options where the option names are long.   
+* **OptionsGroup** - No longer recommended.  
+* **RadioButtons** - a single choice between 2-7 equally weighted options.   
 
 
 
@@ -43,7 +44,7 @@ DropDown offers the following options:
 
 <a name="best-practices-don-t"></a>
 #### Don&#39;t
-* Don't use DropDown when there are 2-7 equally weighted options that the user needs to see, use RadioButtons or OptionsGroup instead.
+* Don't use DropDown when there are 2-7 equally weighted options that the user needs to see, use RadioButtons instead.
 
 
 
