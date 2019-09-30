@@ -1,7 +1,7 @@
 <a name="design-guidelines"></a>
 # Design Guidelines
 
-These design guidelines provide solutions for common scenarios in Azure.  We formalize these best practices once several teams have a similar problem, use a well researched shared approach, and see successful real-world usage of the common solution. Azure teams should leverage these design guidelines to accelerate extension development and to provide users with a familiar experience so that users can easily adopt new Azure services.
+These design guidelines provide solutions for common scenarios in Azure.  We formalize these best practices once several teams solve a similar problem using a well-researched approach and see successful real-world usage of the common solution. Azure teams should leverage these design guidelines to accelerate extension development and to provide users with a familiar experience so that users can easily adopt new Azure services.
 
 <a name="design-guidelines-controls-design-guidance"></a>
 ## Controls design guidance
@@ -11,11 +11,19 @@ Controls are the building blocks of the Azure UX. They allow users to view, edit
 
 <a name="design-guidelines-design-patterns"></a>
 ## Design patterns
-Design patterns provide guidance for common Azure scenarios.
+Design patterns provide solutions for common Azure scenarios.
+
+<a name="design-guidelines-design-patterns-portal-patterns"></a>
+### Portal patterns
+Common navigation and interaction models across the portal
+
+* [Full screen navigation](design-patterns-page-fullscreen.md) ensures the portal behaves like a website with full screen pages and no horizontal scrolling
+
+* [Guidance and feedback](design-patterns-page-notifications.md) provide in-line guidance, feedback, validations, errors and portal notifications to users
 
 <a name="design-guidelines-design-patterns-resource-management-patterns"></a>
 ### Resource management patterns
-The resource management patterns provide guidance for managing the full lifecycle of Azure resources.
+UX to manage the full lifecycle of Azure resources.
 
 * [Create a resource](design-patterns-resource-create.md)
 
@@ -25,19 +33,21 @@ The resource management patterns provide guidance for managing the full lifecy
 
 <a name="design-guidelines-design-patterns-page-design-patterns"></a>
 ### Page design patterns
-The page patterns provide guidance for common page layouts in Azure.
+Page layouts for common Azure scenarios including guidance on where commands, tabs, fields and buttons should be placed
 
-* [Full screen navigation](design-patterns-page-fullscreen.md)
+* [Overview pages](design-patterns-page-overview.md) provide get started, overview, configuration, monitoring and other information for a service or resource
 
 * [Responsive pages](design-patterns-page-responsive-design.md)
 
-* [Page with lists](design-patterns-page-grid.md)
+* [Lists and grids](design-patterns-page-grid.md)
 
-* [Forms](design-patterns-page-forms.md)
+* [Forms](design-patterns-page-forms.md) gather, validate and submit user input
 
 * [Filtering](design-patterns-page-filtering.md)
 
-* Quick tips on page design 
+
+<a name="design-guidelines-design-patterns-page-design-patterns-quick-tips-on-page-design"></a>
+#### Quick tips on page design
     * Pages should be full screen so that we avoid partial pages and avoid horizontal scrolling
     * Content on a page should be constrained to a maximum width of 700px
     * Each page that is displaying data should have a **Refresh** command
@@ -46,11 +56,14 @@ The page patterns provide guidance for common page layouts in Azure.
 ## Design templates, toolkits and resources
 Design templates, toolkits and resources are available so that you can easily create designs that leverage these patterns.
 
-* [Design templates and toolkits](design-patterns-toolkits.md)
+* Design templates and toolkits
+    * <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3002%3A373291" target="_blank">Portal design toolkit in Figma</a>
+    * List of all [design templates and toolkits](design-patterns-toolkits.md)
+
+* [Icons and illustrations](design-patterns-icons.md)
 
 * [Style guide](design-patterns-style-guide.md)
 
-* [Icons](design-patterns-icons.md)
 
 <a name="design-guidelines-writing-guides"></a>
 ## Writing guides

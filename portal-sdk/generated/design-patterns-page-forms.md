@@ -29,14 +29,14 @@ The portal offers several variations of forms with consistent field layout and f
 <img alttext="Forms example - dialog" src="../media/design-patterns-page-forms/forms-dialog.png"  />
 </div>
 
-<a name="examples-context-pane-narrow"></a>
-### Context Pane (narrow)
+<a name="examples-context-pane-read-only"></a>
+### Context Pane (read only)
 <div style="max-width:800px">
 <img alttext="Forms example - narrow context pane" src="../media/design-patterns-page-forms/forms-context-pane-narrow.png"  />
 </div>
 
-<a name="examples-context-pane-wide"></a>
-### Context Pane (wide)
+<a name="examples-context-pane-with-input-form"></a>
+### Context Pane (with input form)
 <div style="max-width:800px">
 <img alttext="Forms example - wide context pane" src="../media/design-patterns-page-forms/forms-context-pane.png"  />
 </div>
@@ -65,7 +65,7 @@ The portal offers several variations of forms with consistent field layout and f
 * Context pane: Tagging a VM
 * Full screen page: Moving a VM to a different resource group
 * Full screen page from resource menu: Editing VM diagnostic settings
-* Wizard: Creating a VM [Free account virtual machine](https://rc.portal.azure.com/#create/microsoft.freeaccountvirtualmachine)
+* Wizard: Creating a VM [Free account virtual machine](https://portal.azure.com/#create/microsoft.freeaccountvirtualmachine)
 
 <a name="use-when"></a>
 ## Use when
@@ -86,7 +86,7 @@ Choose among these available options when designing experiences for the user to 
 
 A form can contain:
 1. Labels and corresponding input fields
-2. Command buttons or another call to action
+2. Buttons or another call to action
 3. Error messaging
 4. Field and Form validation
 
@@ -132,8 +132,8 @@ Provide highly visible and specific error messages.
 Visit the control guidance to help you in selecting the right control for your page
 * Controls guidance [design-patterns-controls.md](design-patterns-controls.md)
 
-<a name="behavior-command-button-recommendations"></a>
-### Command button recommendations
+<a name="behavior-button-recommendations"></a>
+### Button recommendations
 The buttons for submitting and canceling a form should follow these recommendations.  The sections for each type of form follow this list and call out any special casing for that form type.  Sometimes a forms blade is invoked from multiple places.  For example, the `Tag resource` blade is invoked from a resource menu on most Azure resource and also invoked in a context pane from the essentials control.  In this case, the `Tag resource` blade is designed as a fullscreen blade form opened from a resource menu and does not follow the recommendations of a typical context blade form.
 
 * Buttons are at the bottom of the page in a non-scrollable docked area
@@ -146,32 +146,32 @@ The buttons for submitting and canceling a form should follow these recommendati
 <!-- TODO Edit columns uses `Apply` and `Reset`, no close button -->
 <!-- TODO Tag resource uses toolbar, no close button -->
 
-<a name="behavior-command-button-recommendations-dialog-command-buttons"></a>
+<a name="behavior-button-recommendations-dialog-command-buttons"></a>
 #### Dialog - command buttons
 Follow the button recommendations above
 <!-- TODO Should clicking away from dialog cause it to close?  It does for Stop/Delete VM (Yes, No) but not the Attach/Detach nic example -->
 
-<a name="behavior-command-button-recommendations-context-pane-command-buttons"></a>
+<a name="behavior-button-recommendations-context-pane-command-buttons"></a>
 #### Context pane - command buttons
 * Use buttons at the bottom. Follow button recommendations above
 * Don't use a toolbar at the top
     * If context pane contains a grid, attach grid actions to the grid with a grid-level toolbar
 
-<a name="behavior-command-button-recommendations-fullscreen-blade-form-command-buttons"></a>
+<a name="behavior-button-recommendations-fullscreen-blade-form-command-buttons"></a>
 #### Fullscreen blade form - command buttons
 * Use buttons at the bottom. Follow button recommendations above
 * Use a toolbar at the top only if page represents a more fully featured management experience like the Manage alert rules experience ( `VM > Alerts > Manage alert rules` )
     * All buttons go in the toolbar using the naming conventions above
     * No `Close` button, the blade has an `X` in the upper right corner to close it
 
-<a name="behavior-command-button-recommendations-fullscreen-blade-from-opened-from-a-resource-menu-command-buttons"></a>
+<a name="behavior-button-recommendations-fullscreen-blade-from-opened-from-a-resource-menu-command-buttons"></a>
 #### Fullscreen blade from opened from a resource menu - command buttons
 * Use a toolbar at the top of the page when the form is opened from a resource menu like the Tags experience ( `VM > Tags` ) and the VM diagnostic settings experience ( `VM > Diagnostics settings` )
 * All actions go in the toolbar using the naming conventions above
 * No `Close` button, the blade has an `X` in the upper right corner to close it
 
 
-<a name="behavior-command-button-recommendations-create-wizard-command-buttons-see-the-resource-create-pattern-design-patterns-resource-create-md-for-details"></a>
+<a name="behavior-button-recommendations-create-wizard-command-buttons-see-the-resource-create-pattern-design-patterns-resource-create-md-for-details"></a>
 #### Create wizard command buttons - see the <a href="design-patterns-resource-create.md">resource create pattern</a> for details
 
 

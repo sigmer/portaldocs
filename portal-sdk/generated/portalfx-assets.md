@@ -107,7 +107,7 @@ If your asset type is in preview, set the `IsPreview="true"` property. If the as
 <a name="assets-defining-your-asset-type-how-to-hide-your-asset-in-different-environments"></a>
 #### How to hide your asset in different environments
 
-You can hide your asset in different environments by setting the hideassettypes feature flag in your config to a comma-separated list of asset type names.
+You can hide your asset in different environments by setting the hideassettypes extension feature flag in your config to a comma-separated list of asset type names.
 
 <a href="https://msit.microsoftstream.com/video/7399869a-4f8f-415e-9346-5b77f069b567?st=50" target="_blank">
   Watch the Hiding Asset Types video here
@@ -154,16 +154,16 @@ Note, wildcard expressions are NOT supported, e.g: "AzureContainer*" will not hi
 To test enable your hidden asset for testing purposes, you will need to update the hide asset feature flag to exclude the asset you want to show and ensure you have feature.canmodifyextensions set.
 
 For the desired environment append the following feature flags.
-> If you want to test showing all hidden assets, you can specify all the assets as a comma seperated list to the 'showassettypes' feature flag.
+> If you want to test showing all hidden assets, you can specify all the assets as a comma separated list to the 'showassettypes' extension feature flag.
 
 ```txt
-    ?feature.showassettypes=MyNewAsset
+    ?microsoft_azure_mynewextension_showassettypes=MyNewAsset,MySecondNewAsset
     &microsoft_azure_mynewextension=true
     &feature.canmodifyextensions=true
 ```
 
 For example:
-https://rc.portal.azure.com/?feature.showassettypes=VirtualMachine&microsoft_azure_compute=true&feature.canmodifyextensions=true
+https://rc.portal.azure.com/?microsoft_azure_compute_showassettypes=VirtualMachine&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
 <a name="assets-defining-your-asset-type-handling-empty-browse"></a>
 #### Handling empty browse

@@ -1,63 +1,76 @@
-<!-- This is the template to use when creating a new design pattern document -->
 <a name="overview-page"></a>
 # Overview Page
-<!-- Fill in the name above and then write a short description of the design pattern.  For example
-"Forms are the manner in which we gather and validate user input."
--->
-The home page for each service and resource should enable users to easily understand and operate it.
+Enable users to quickly and easily understand what value an Azure service offers and to easily realize that value.
 
 <a name="overview-page-context"></a>
 ## Context
-<!-- Short description of the context.  For example, "Users input information when managing Azure resources." -->
-Each service and resource has a home page in the Azure portal.
+As users navigate the portal, they open services and resources and expect information on how to use the service and resource to their benefit.
 
 <a name="overview-page-problem"></a>
 ## Problem
-<!-- Short description of the problem.  For example, 
-"Users want to input information to create, deploy and configure resources."
--->
-Users need a home page for a service and resource that enable them to understand and operate it.
+Azure has a huge surface area of services and resources.  New services and resources are brought online while new features are added to existing services and resources.  Whether encountering a new or familiar service or resource, users need to quickly understand the purpose of services and resources so that they can easily get more value from Azure.
 
 <a name="overview-page-solution"></a>
 ## Solution
-<!-- Short description of the solution For example 
-"The portal offers several input methods with consistent field and form validation to ensure users can easily input information and understand whether that info is valid.  " 
--->
-The overview page is the home page for a service or resource. The overview page provides key information and actions.  
-
+The overview page is the home page for a service or resource. The overview page provides the purpose, top actions and key information so that users can quickly get value from Azure.
 
 <a name="overview-page-solution-also-known-as"></a>
 ### Also known as
-<!-- Bulleted list of other terms used to describe the solution, if any -->
+
+- Landing page
+- Service home page
+- Resource home page
+- Getting started
 
 <a name="overview-page-examples"></a>
 ## Examples
 
 <a name="overview-page-examples-example-images"></a>
 ### Example images
-<!-- Include example image of the solution in the portal -->
+
+<a name="overview-page-examples-example-images-service-overview-page"></a>
+#### Service overview page
 <div style="max-width:800px">
-<img alttext="Resource overview page" src="../media/design-patterns-resource-manage/overview.png"  />
+<img alttext="Azure Monitor overview page" src="../media/design-patterns-page-overview/monitor.png"  />
+</div>
+
+<a name="overview-page-examples-example-images-resource-overview-page"></a>
+#### Resource overview page
+<div style="max-width:800px">
+<img alttext="Overview page anatomy" src="../media/design-patterns-page-overview/resource-overview-page.png"  />
 </div>
 
 <a name="overview-page-examples-example-uses"></a>
 ### Example uses
-<!-- Descriptions and ideally deep links into the portal for running examples -->
 <ul>
-<li>Virtual machine overview page</li>
 <li><a href="https://ms.portal.azure.com/#blade/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/overview" target="_blank">Azure Monitor</a></li>
+<li><a href="https://ms.portal.azure.com/#blade/Microsoft_Azure_CostManagement/Menu/overview" target="_blank">Cost Management</a></li>
+
 </ul>
 
 <a name="overview-page-use-when"></a>
 ## Use when
-<!-- Description of when to use this solution.  For example "User is creating a resource" -->
+Use the overview page pattern when you are designing the home page for your service or resource.
 
 <a name="overview-page-anatomy"></a>
 ## Anatomy
-<!-- Image demonstrating the solution with numerical callouts to the solution components.
-     Bulleted list of the callouts with explanations of each
--->
-The overview page should contain a toolbar, essentials panel, and content area.  See more details on overview page layout in the [overview page design pattern](portalfx-design-page-overview.md)
+The overview page for a service should contain a toolbar and content area.
+<div style="max-width:800px">
+<img alttext="Overview page anatomy" src="../media/design-patterns-page-overview/overview-page-anatomy.png"  />
+</div>
+
+The overview page for resources should contain a toolbar, essentials panel, and content area.  See more details on resource overview page layout in the [manage a resource design pattern](portalfx-design-resource-manage.md)
+<!-- NEED anatomy for resource or a frameless anatomy that is just the content area but still show variance if illustrations and icons -->
+
+<a name="overview-page-anatomy-elements-of-a-overview-page"></a>
+### Elements of a overview page
+* **Tabs** at the top allow for extensibility of the design and provide access to other overview page content
+* **Hero text** centered at the top of the content area concisely communicates the offerings value in action-oriented language.
+* **Body text** a more verbose description of the offering that should include a **Learn more** link to docs
+* **Cardless card** communicate 3 scenarios using concise action-oriented language that avoids delving into Azure resource taxonomies.
+    * Service - the card has an **illustration** on the top, a short scenario description, long description, learn more link and call to action
+    * Resource - the card has an **icon** on the top, a short scenario description, long description, learn more link and call to action
+* **Call to action** each card can have up to 3 calls to action "CTAs" with the most important using a primary button and the others a link.
 
 <a name="overview-page-behavior"></a>
 ## Behavior
@@ -65,16 +78,25 @@ The overview page should contain a toolbar, essentials panel, and content area. 
 
 <a name="overview-page-do"></a>
 ## Do
-<!-- Bulleted list of reminders for best practices-->
+* Use concise action-oriented, value-centric language to describe your offering
+* Provide only 3 scenarios using action-oriented language.  The overview page is not an exhaustive list of all features, it highlights the 3 primary scenarios/features.
+* Within each scenario, provide up to 3 calls to action that will enable the user to realize the scenario
+* Get illustrations by following the Azure portal illustration request process
+* Limit button text to 1 or 2 words, use links for longer CTAs
+* Strive to make the text length across the cards similar so the page looks balanced
 * Ensure your overview page designs can be rendered within the performance bar
+
 
 <a name="overview-page-don-t"></a>
 ## Don&#39;t
-<!-- Bulleted list of things to avoid -->
+* Don't assume the user will know anything about your service or resource
+* Don't use long paragraphs for the body text or content of a card
+* Don't put any extra content at the bottom of the page, especially a "link farm"
+* Don't include more than 3 cards with illustrations.  Determine the top 3 scenarios for the customer to get started with your service.
 
 <a name="overview-page-related-design-guidelines"></a>
 ## Related design guidelines
-<!-- Links to Related design guidelines.  Always include the link to the readme -->
+
 * Design guidelines [top-design.md](top-design.md)
 
 <a name="overview-page-research-and-usability"></a>

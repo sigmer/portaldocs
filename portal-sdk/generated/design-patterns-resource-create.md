@@ -47,7 +47,6 @@ These create experiences are good examples of this design pattern 
 <li>Create a <a href="https://portal.azure.com/#create/microsoft.aks" target="_blank">Kubernetes cluster</a></li>
 </ul>
 
-
 <a name="use-when"></a>
 <a name="use-when"></a>
 ## Use when
@@ -126,7 +125,7 @@ Use the tabs & sections to organize content. The **Basics** tab should be the st
 <a name="behavior-tabs"></a>
 <a name="behavior-tabs-1"></a>
 ### Tabs
-Use the tabs & sections to organize content. The Basics tab should be the starting point for all creates and contain essential configuration info. The design should allow for quick resource creation at any time with unrestricted navigation between tabs. Enabling users to freely navigate the tabs reduces the friction for users looking to learn about your resource. The combination of quick creation and tab exploration can lead to additional resource deployments over time.
+Tabs organize input content into visible "pages". The Basics tab should be the starting point for all creates and contain essential configuration info. The design should allow for quick resource creation at any time with unrestricted navigation between tabs. Enabling users to freely navigate the tabs reduces the friction for users looking to learn about your resource. The combination of quick creation and tab exploration can lead to additional resource deployments over time.
 
 Most creates should have a minimum of 3 tabs; **Basics**, **Tags**, **Review + create**.  All other tabs are optional.  Tab naming should follow sentence case, with only the first letter capitalized unless the words are proper nouns, acronyms or brand names.
 
@@ -258,6 +257,7 @@ The post create page provides realtime deployment status, help with troubleshoot
 -   Full screen [design-patterns-page-fullscreen.md](design-patterns-page-fullscreen.md)
 -   Browse Resources [design-patterns-resource-browse.md](design-patterns-resource-browse.md)
 -   Manage a Resource [design-patterns-resource-manage.md](design-patterns-resource-manage.md)
+-   Guidance and feedback [design-patterns-page-notifications.md](design-patterns-page-notifications.md)
 -   Design guidelines [top-design.md](top-design.md)
 
 <a name="research-and-usability"></a>
@@ -289,8 +289,6 @@ Developers can use the following information to get started implementing this pa
 -   Set a maximimum width of 700px for the page area that contains input fields
 -   To include the visual connector between Subscription and resource group, set `Nested = True` on the resource group control.  
 -   The spacing between the items in the footer is 12px
-
-
 
 <a name="for-developers-related-documentation"></a>
 <a name="for-developers-related-documentation"></a>
