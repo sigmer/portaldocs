@@ -128,6 +128,7 @@ const parameters = {
     primaryEngineName: primaryEngineName,
     secondaryEngineName: this._secondaryEngineName(),
     backupEngineName: this._backupEngineName(),
+    adminPassword: this._adminPassword(),
     displacement: this._displacement(),
     location: location.name,
     rgName: MsPortalFx.isFeatureEnabled("SubscriptionLevel") ? resourceGroupName : undefined,
@@ -176,7 +177,12 @@ const onCreateButtonClick = () => {
         .catch(err => {
             // This should only occur if there was a network issue when trying to call ARM, since validation has already succeeded.
             showError(MsPortalFx.getLogFriendlyMessage(err), () => {
-                // container.openContextPane(getHubsErrorsBlade(err)); // #2618165 saarmstr: [Create SDK] Create new API for retrieving the correct ARM Errors blade reference from Hubs
+                // Display the arm errors blade with results from arm
+                container.openContextPane(this.context.provisioning.getArmErrorsBladeReference({
+                    errors: err,
+                    subscriptionId: this._subscription().subscriptionId,
+                    troubleshootingLinks: [TemplateBlade.DoesProvisioning.TroubleshootingLinks.CommonDeploymentErrors, TemplateBlade.DoesProvisioning.TroubleshootingLinks.CreateArmTemplateDocs],
+                }));
             });
             createButton.disabled(false);
         });
