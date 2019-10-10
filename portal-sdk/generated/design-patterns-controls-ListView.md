@@ -38,9 +38,9 @@ The ListView displays a simple list of items
 Learn how to use ListView in the SDK samples
 
 - Simple ListView - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/SimpleListViewBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade
-- Template ListView - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/TemplateListViewBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade 
-- Template ListView GalleryView (aka Card control) - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/TemplateListViewGalleryModeBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade 
-- Custom ListView - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/CustomListViewBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade 
+- Template ListView - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/TemplateListViewBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade
+- Template ListView GalleryView (aka Card control) - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/TemplateListViewGalleryModeBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade
+- Custom ListView - https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/ListViewIndexBlade/CustomListViewBlade/selectedItem/ListViewIndexBlade/selectedValue/ListViewIndexBlade
 
 
 
