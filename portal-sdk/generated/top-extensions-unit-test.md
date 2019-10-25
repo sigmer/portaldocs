@@ -95,7 +95,7 @@ always-auth=true
     "chai": "4.2.0",
     "gulp": "4.0.0",
     "gulp-concat": "2.6.1",
-    "karma": "4.0.0",
+    "karma": "^4.0.1",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.2",
