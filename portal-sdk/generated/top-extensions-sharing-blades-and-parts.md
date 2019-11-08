@@ -87,7 +87,7 @@ declare namespace SamplesExtension {
            parameter1?: string;
        }
    }
-
+   
 ```
 
 Notice that you'll partition your types using TypeScript namespaces, following a structure that reflects `<YourExtensionName>.<YourBladeOrPartName>.Parameters`.  This makes your types discoverable to teams that make use of this `.d.ts` file.  It also allows you to cleanly add new types as you export more Blades and Parts in the future.
