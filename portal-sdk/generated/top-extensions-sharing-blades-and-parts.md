@@ -13,8 +13,7 @@ When developing your Blades and Parts, it's fairly simply to mark Blades/Parts t
 
 ```typescript
 
-import { ExportedBladeReference } from "_generated/SamplesExtension/BladeReferences";
-import { ExportedPartReference } from "_generated/SamplesExtension/PartReferences";
+import { BladeReferences, PartReferences } from "Fx/Composition";
 
 ```
 
@@ -22,11 +21,13 @@ import { ExportedPartReference } from "_generated/SamplesExtension/PartReference
 
 public onOpenImportedBladeClick() {
     const { container } = this.context;
-    container.openBlade(new ExportedBladeReference({ parameter1: "42" }));
+    container.openBlade(BladeReferences.forExtension("SamplesExtension").forBlade("ExportedBlade").createReference({
+        parameters: { parameter1: "42" },
+    }));
 }
 
 public onPinImportedPartClick() {
-    pin([ new ExportedPartReference({ parameter1: "42" }) ]);
+    pin([PartReferences.forExtension("SamplesExtension").forPart("ExportedPart").createReference({ parameters: { parameter1: "42" } })]);
 }
 
 ```
@@ -126,8 +127,7 @@ Now, partner team's UI can make use of these new `BladeReferences`/`PartReferenc
 
 ```typescript
 
-import { ExportedBladeReference } from "_generated/SamplesExtension/BladeReferences";
-import { ExportedPartReference } from "_generated/SamplesExtension/PartReferences";
+import { BladeReferences, PartReferences } from "Fx/Composition";
 
 ```
 
@@ -135,11 +135,13 @@ import { ExportedPartReference } from "_generated/SamplesExtension/PartReference
 
 public onOpenImportedBladeClick() {
     const { container } = this.context;
-    container.openBlade(new ExportedBladeReference({ parameter1: "42" }));
+    container.openBlade(BladeReferences.forExtension("SamplesExtension").forBlade("ExportedBlade").createReference({
+        parameters: { parameter1: "42" },
+    }));
 }
 
 public onPinImportedPartClick() {
-    pin([ new ExportedPartReference({ parameter1: "42" }) ]);
+    pin([PartReferences.forExtension("SamplesExtension").forPart("ExportedPart").createReference({ parameters: { parameter1: "42" } })]);
 }
 
 ```
