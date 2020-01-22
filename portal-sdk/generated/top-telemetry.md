@@ -424,6 +424,8 @@ Telemetry logs go to ExtTelemetry table, which is available in Kusto in both Azu
 The recommended format for `name` column is 'Extension/Microsoft_Azure_NewExtension/Blade/NewBladeName', if the event is related to a blade.
 Do not stringify the `data` and `context` columns passed to the logs as the trace function does so automatically. Passing stringified versions of these parameters will result in hard to parse double-encoded strings in the back-end logs.
 
+> Every 60 seconds, when an extension's telemetry logs reach above 200 events per user per browser tab, we stop logging ExtTelemetry events utill the next 60 seconds window is started. In addition a telemetry throttled IcM alert is triggered to notify the extension partner.
+
 <a name="overview-logging-telemetry-logging-errors-warnings-to-extevents-table"></a>
 ### Logging errors/warnings to ExtEvents table
 
