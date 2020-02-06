@@ -194,11 +194,9 @@ Blades are the main unit of UX that can be built using the SDK. They are basical
 Now that your blade successfully compiles lets provide a means for users to navigate to it in the portal. Recall the Resource Overview Blade had a Resource Menu. Lets update the resource menu to open the HelloWorldBlade when `Item1` in the menu is clicked.
 
 - Open `Client\Resource\MyResourceViewModel.ts` and locate the `getMenuConfig` function we previously explored.
-- Locate `mRSG_item1` and update the supplyBladeReference to return the HelloWorldBladeReference
+- Locate `mRSG_item1` and update the supplyBladeReference to return the `HelloWorldBlade` reference instead of ResourceKeysBlade.
 
-    ![alt-text](../media/top-extensions-getting-started/updatebladeopen.png "update blade open")
-
-Note: that if HellowWorldBladeReference is not available on BladeReferences then you need to ensure the solution has compiled correctly as the blade references are generated as part of build.
+Note: if the `HelloWorldBlade` string (and full typing definition) is not available on the BladeReferences API as a valid value for the `forBlade(...)` method, then you need to ensure the solution has compiled correctly as the blade references are generated as part of build.
 
 Now that you have finished adding your blade and have provided a means to navigate to it lets try it out.
 

@@ -13,31 +13,40 @@ For more information about the legacy declarative API's, see [top-legacy-blades-
 
 It is recommended that extensions use the container APIs. Typically, each of these methods returns a `promise` that returns `true`.  If a blade on the screen contains  unsaved edits to a form, the Framework will issue a prompt that allows the user to keep the unsaved blade open.  If the user chooses to continue working on their unsaved edits, then the `promise` that is returned when the blade closes will return `false`.
 
-<a name="container-apis-strongly-typed-blade-reference-classes"></a>
-### Strongly typed blade reference classes
+<a name="container-apis-strongly-typed-blade-reference-types"></a>
+### Strongly typed blade reference types
 
-A strongly typed blade reference class is auto-generated for each blade in the project when the extension is compiled.  For example, if the blade is named 'MyBlade', then a **TypeScript** class named  'MyBladeReference' will be generated in the `_generated` folder.  These blade reference classes are used to open blades programmatically. Blade references for `parameterProviders` have a different signature that is similar to the options that are provided to the `ParameterCollector` class.
+A strongly typed blade reference type is auto-generated for each blade in the project when the extension is compiled.  For example, if the blade is named 'MyBlade', then a **TypeScript** definition for 'MyBlade' will be generated and automatically show up in IntelliSense when using the `BladeReferences.forBlade("blade_name")` API in the `Fx/Composition` module.  These blade reference types are used to open blades programmatically. Blade references for `parameterProviders` have a different signature that is similar to the options that are provided to the `ParameterCollector` class.
  
-In the following example, the `BladeReference` constructor accepts parameters and callback functions that allow the child blade to communicate with the parent blade. In this instance, the `BladeReference` that is instantiated represents a Website blade.
+In the following example, the `WebsiteBlade` accepts parameters and callback functions that allow the child blade to communicate with the parent blade. In this instance, the `BladeReference` that is instantiated represents a Website blade, and is fully type checked, including the string for the blade name.
 
-```javascript 
-import { WebsiteBladeReference } from "../_generated/BladeReferences"; 
+```javascript
+import { BladeReferences } from "Fx/Composition"; 
 …
-var bladeRef = new WebsiteBladeReference({
+var bladeRef = BladeReferences.forBlade("WebsiteBlade").createReference({
     parameters: { id: "_ARM_ID_HERE" }
 });
 ```
 
-Blade references are also generated for external extensions. The compiler creates a  `BladeReferences` module for every PDE file that is included.
+Blade references are also generated for external extensions. The compiler creates a blade references definition file for every PDE file that is included, which will automatically show up in IntelliSense when using the `BladeReferences.forExtension("extension_name")` API in the `Fx/Composition` module.
 
 Perform the following steps to open a blade from  a different extension.
 
 1. Ensure the project references the external extension's PDE file. 
 
-1. Import the blade reference from `../../_generated/<ExtensionName>/BladeReference`, as in the following example. 
+1. Import `Fx/Composition` module, as in the following example. 
 
     ```javascript
-    import { LocationPickerV3BladeReference } from "../../_generated/HubsExtension/BladeReferences"
+    import { BladeReferences } from "Fx/Composition"
+    ```
+
+1. Create the blade reference using the strongly typed parameters, as in the following example. 
+
+    ```javascript
+    const bladeReference = BladeReferences.forExtension("HubsExtension").forBlade("LocationPickerV3Blade").createReference({
+        supplyInitialData: () => { ... }
+        receiveResult: () => { ... }
+    });
     ```
 
 <a name="container-apis-open-blade-methods"></a>
@@ -111,7 +120,7 @@ The following examples open blades when controls are clicked.
     var button = new Button.create({
         // … skipping over other button options
         onClick: () => {
-            container.openBlade(new SomeBladeReference(…));
+            container.openBlade(BladeReferences.forBlade("SomeBlade").createReference());
         }
     });
     ```
@@ -127,6 +136,6 @@ The following examples open blades when controls are clicked.
      
     // Your template blade or part view model
     public myOnClick(): void {
-        container.openBlade(new SomeBladeReference(…));
+        container.openBlade(BladeReferences.forBlade("SomeBlade").createReference());
     }
     ```

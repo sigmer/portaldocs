@@ -36,7 +36,7 @@ Now create your viewmodel and then add a 'getMenuConfig' method. This method is 
 Below is a simple menu with three items and two groups; specifying an overview item, a custom group with an item, and adding an item to a framework group. See [Resource Menu APIs][resourcemenuapis] for a full list of the APIs.
 
 ``` ts
-import BladeReferences = require("../../_generated/BladeReferences");
+import { BladeReferences } from "Fx/Composition");
 import * as FxMenuBlade from "MsPortalFx/Composition/MenuBlade";
 import * as ClientResources from "ClientResources";
 
@@ -75,9 +75,10 @@ export class MyResourceViewModel
                 keywords: ["keyword1","keyword2"],
                 icon: MsPortalFx.Base.Images.Polychromatic.MyResourceImage(),
                 supplyBladeReference: () => {
-                    return new BladeReferences.MyResourceOverviewBladeReference({
-                        id: resourceInfo.resourceId
-                    });
+                    return BladeReferences.forBlade("MyResourceOverviewBlade").createReference({
+                        parameters: {
+                            id: resourceInfo.resourceId
+                    }});
                 }
             },
             options: <MsPortalFx.Assets.ResourceMenuOptions>{
@@ -99,9 +100,10 @@ export class MyResourceViewModel
                             keywords: ["keyword1","keyword2"],
                             icon: MsPortalFx.Base.Images.Polychromatic.MyPropertiesImage(),
                             supplyBladeReference: () => {
-                                return new BladeReferences.MyResourcePropertiesBladeReference({
-                                    resourceGroup: resourceInfo.resourceId
-                                });
+                                return BladeReferences.forBlade("MyResourcePropertiesBlade").createReference({
+                                    parameters: {
+                                        resourceGroup: resourceInfo.resourceId
+                                }});
                             },
                             enabled: ko.observable(true)
                         }

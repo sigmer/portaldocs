@@ -8,7 +8,7 @@ Now, rather than perceiving each service like an island, Azure users value the a
 <a name="sharing-blades-and-parts-across-extensions-the-effect-cross-team-reuse-of-blades-parts"></a>
 ### The effect - Cross-team reuse of Blades/Parts
 
-When developing your Blades and Parts, it's fairly simply to mark Blades/Parts to be "exported" for reuse by other teams.  Once a team "imports" Blades and Parts from another team and rebuilds their extension, they'll find code-generated `BladeReferences` and `PartReferences` corresponding to the newly imported Blades and Parts.  These `BladeReferences` and `PartReferences` work with Azure Portal FX APIs just like those generated for internally developed Blades/Parts:
+When developing your Blades and Parts, it's fairly simple to mark Blades/Parts to be "exported" for reuse by other teams.  Once a team "imports" Blades and Parts from another team and rebuilds their extension, they'll find code-generated Blade and Part reference definitions corresponding to the newly imported Blades and Parts.  These Blade and Part reference types work with Azure Portal FX APIs just like those generated for internally developed Blades/Parts:
 
 
 ```typescript
@@ -115,15 +115,15 @@ For this next step, follow the instructions in [this doc](/portal-sdk/generated/
 <a name="sharing-blades-and-parts-across-extensions-the-process-of-exporting-and-importing-step-3-partner-team-applies-the-nuget-package-and-rebuilds-their-extension"></a>
 #### Step 3 - Partner team applies the NuGet package and rebuilds their extension
 
-Once a partner team applies your NuGet package to their extension and rebuilds, they can verify that new `BladeReference` and `PartReferences` are now generated for the newly imported Blades/Parts. The generated TypeScript for this resides in:
+Once a partner team applies your NuGet package to their extension and rebuilds, they can verify that new  Blade and Part reference types are now generated for the newly imported Blades/Parts. The generated TypeScript for this resides in:
 
-- <TheirExtensionProjectRootFolder>/Client/_generated/<YourExtensionName>/BladeReferences.ts
-- <TheirExtensionProjectRootFolder>/Client/_generated/<YourExtensionName>/PartReferences.ts
+- <TheirExtensionProjectRootFolder>/Client/_generated/<YourExtensionName>/BladeReferenceTypes.d.ts
+- <TheirExtensionProjectRootFolder>/Client/_generated/<YourExtensionName>/PartReferenceTypes.d.ts
 
 <a name="sharing-blades-and-parts-across-extensions-the-process-of-exporting-and-importing-step-4-partner-team-integrates-the-imported-blades-parts-into-their-ui"></a>
 #### Step 4 - Partner team integrates the imported Blades/Parts into their UI
 
-Now, partner team's UI can make use of these new `BladeReferences`/`PartReferences` in their code, repeated from above:
+Now, partner team's UI can make use of these new Blade / Part references in their code, repeated from above:
 
 ```typescript
 

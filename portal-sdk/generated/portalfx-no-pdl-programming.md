@@ -118,96 +118,111 @@ Below is an example of a menu blade build using decorators.  It uses the `@MenuB
 1.  It makes the public `viewModel` property required.  The property is of type `MenuBlade.ViewModel2` and provides you with APIs to setup the menu.
 2.  It makes the public 'context' property required.  The property is of type `MenuBlade.Context`.
 
-```ts
 /// <reference path="../../../TypeReferences.d.ts" />
 
-import BladesArea = require("../BladesArea");
-import ClientResources = require("ClientResources");
-import BladeReferences = require("../../../_generated/BladeReferences");
-import MenuBlade = require("Fx/Composition/MenuBlade");
+import * as ClientResources from "ClientResources";
+import { BladeReferences } from "Fx/Composition";
+import * as MenuBlade from "Fx/Composition/MenuBlade";
 
-export = Main;
+@MenuBlade.Decorator()
+export class TemplateBladesBlade {
+    public title = ClientResources.templateBladesBladeTitle;
+    public subtitle = ClientResources.samples;
 
-module Main {
-    "use strict";
+    public context: MenuBlade.Context<void>;
 
-    @MenuBlade.Decorator()
-    export class TemplateBladesBlade {
-        public title = ClientResources.templateBladesBladeTitle;
-        public subtitle = ClientResources.samples;
+    public viewModel: MenuBlade.ViewModel2;
 
-        public context: MenuBlade.Context<void, BladesArea.DataContext>;
+    public onInitialize() {
+        const { container } = this.context;
 
-        public viewModel: MenuBlade.ViewModel2;
-
-        public onInitialize() {
-            const { container } = this.context;
-
-            this.viewModel = MenuBlade.ViewModel2.create(container, {
-                groups: [
-                    {
-                        id: "default",
-                        displayText: "",
-                        items: [
-                            {
-                                id: "simpleTemplateBlade",
-                                displayText: ClientResources.simpleTemplateBlade,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.SimpleTemplateBladeReference();
-                                }
+        this.viewModel = MenuBlade.ViewModel2.create(container, {
+            groups: [
+                {
+                    id: "default",
+                    displayText: ClientResources.templateBladeSamples,
+                    items: [
+                        {
+                            id: "simpleTemplateBlade",
+                            displayText: ClientResources.simpleTemplateBlade,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("SimpleTemplateBlade").createReference();
                             },
-                            {
-                                id: "templateBladeWithShield",
-                                displayText: ClientResources.templateBladeWithShield,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.TemplateBladeWithShieldReference();
-                                }
+                        },
+                        {
+                            id: "diTemplateBlade",
+                            displayText: ClientResources.diTemplateBlade,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("DiTemplateBlade").createReference();
                             },
-                            {
-                                id: "templateBladeWithCommandBar",
-                                displayText: ClientResources.templateBladeWithCommandBar,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.TemplateBladeWithCommandBarReference();
-                                }
+                        },
+                        {
+                            id: "templateBladeWithShield",
+                            displayText: ClientResources.templateBladeWithShield,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("TemplateBladeWithShield").createReference();
                             },
-                            {
-                                id: "templateBladeReceivingDataFromChildBlade",
-                                displayText: ClientResources.templateBladeReceivingDataFromChildBlade,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.TemplateBladeReceivingDataFromChildBladeReference();
-                                }
+                        },
+                        {
+                            id: "templateBladeReceivingDataFromChildBlade",
+                            displayText: ClientResources.templateBladeReceivingDataFromChildBlade,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("TemplateBladeReceivingDataFromChildBlade").createReference();
                             },
-                            {
-                                id: "templateBladeWithSettings",
-                                displayText: ClientResources.templateBladeWithSettings,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.TemplateBladeWithSettingsReference();
-                                }
+                        },
+                        {
+                            id: "templateBladeWithSettings",
+                            displayText: ClientResources.templateBladeWithSettings,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("TemplateBladeWithSettings").createReference();
                             },
-                            {
-                                id: "templateBladeInMenuBlade",
-                                displayText: ClientResources.templateBladeInMenuBlade,
-                                icon: null,
-                                supplyBladeReference: () => {
-                                    return new BladeReferences.TemplateBladeInMenuBladeReference();
-                                }
+                        },
+                        {
+                            id: "templateBladeWithStatusBar",
+                            displayText: ClientResources.templateBladeWithStatusBar,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("TemplateBladeWithStatusBar").createReference();
                             },
-                        ]
-                    }
-                ],
-                defaultId: "simpleTemplateBlade"
-            });
+                        },
+                        {
+                            id: "shrinkOnOpenChildBladeTemplateBlade",
+                            displayText: ClientResources.shrinkOnOpenChildBladeTemplateBlade,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("ShrinkOnOpenChildBladeTemplateBlade").createReference();
+                            },
+                        },
+                        {
+                            id: "templateBladeInContextPane",
+                            displayText: ClientResources.forContextPaneLauncherTemplateBladeTitle,
+                            icon: null,
+                            supplyBladeReference: () => {
+                                return BladeReferences.forBlade("ForContextPaneLauncherBlade").createReference();
+                            },
+                        },
+                    ],
+                },
+            ],
+            overview: {
+                id: "overview",
+                displayText: ClientResources.templateBladeOverviewBlade,
+                icon: null,
+                supplyBladeReference: () => {
+                    return BladeReferences.forBlade("TemplateBladeOverviewBlade").createReference();
+                },
+            },
+        });
 
-            return Q();  // This sample loads no data.
-        }
+        return Q();  // This sample loads no data.
     }
 }
-```
+
 
 <a name="no-pdl-context-property"></a>
 <a name="defining-blades-and-parts-using-typescript-decorators-a-k-a-no-pdl-the-context-property"></a>
@@ -223,7 +238,7 @@ public context: TemplateBlade.Context<void>;
 
 ```
 
-This is the simplest declaration of the context property.  The framework provided `TemplateBlade.Context` type takes in two generic parameters. The first parameter represents the type of object that represents the parameters to the blade.  This simple blade takes no parameters, hence the value of `void` for the first generic parameter.  The second generic parameter represents the type of your model data, which – today – must be the DataContext object for your Blade/Part. This makes the context property aware of your data context in a strongly typed way.
+This is the simplest declaration of the context property.  The framework provided `TemplateBlade.Context` type takes in two generic parameters (the second one is optional). The first parameter represents the type of object that represents the parameters to the blade.  This simple blade takes no parameters, hence the value of `void` for the first generic parameter. Although the `Context` type accepts a second, optional `TModel` generic parameter, this is in support of a legacy `DataContext` feature that is no longer recommended for new Blades/Parts. To provide dependencies to your Blade/Part, the recommended pattern is to use dependency injection on the constructor.
 
 Note that in this example there is an API on the context called `context.container.closeCurrentBlade()`.  This function takes no parameters.
 
@@ -235,7 +250,7 @@ That will cause a compiler error because that decorator changes the context in a
 
 To fix the error, add `& TemplateBlade.ReturnsData.Context<{ value: string }>` to the declaration like this.
 
-        public context: TemplateBlade.Context<void, BladesArea.DataContext> & TemplateBlade.ReturnsData.Context<{ value: string }>;
+        public context: TemplateBlade.Context<void> & TemplateBlade.ReturnsData.Context<{ value: string }>;
 
 This uses TypeScript [intersection types](https://www.typescriptlang.org/docs/handbook/advanced-types.html) to overload the closeCurrentBlade function to look like this `closeCurrentBlade(data: { value: string })` so that when you use it the compiler will enforce that data is provided to it like this:
 
@@ -245,14 +260,15 @@ This uses TypeScript [intersection types](https://www.typescriptlang.org/docs/ha
 
 Intersection types combine the members of all types that get and'd (&'d) together.
 
-When you build your project, the compiler will also produce an auto generated blade reference file that gives the same level of type safety to the parent blade.  Here is code that the parent blade would have.  Note that the callback that fires when `SimpleTemplateBlade` closes has the type information about the data being returned.
+When you build your project, the compiler will also produce an auto generated blade reference definition file that gives the same level of type safety to the parent blade.  Here is code that the parent blade would have.  Note that the callback that fires when `SimpleTemplateBlade` closes has the type information about the data being returned.
 
-    context.container.openBlade(new BladeReferences.SimpleTemplateBlade((reason: BladeClosedReason, data: {value: string}) => {
+    context.container.openBlade(BladeReferences.forBlade("SimpleTemplateBlade").createReference({
+        onClosed: (reason: BladeClosedReason, data: {value: string}) => {
             if (reason === BladeClosedReason.ChildClosedSelf) {
                 const newValue = data && data.value ? data.value : noValue;
                 this.previouslyReturnedValue(newValue);
             }
-        }));
+        }}));
 
 Each time you add an additional decorator you will need to incorporate it into the context declaration as we did here.  
 

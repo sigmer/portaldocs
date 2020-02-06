@@ -22,7 +22,7 @@ Implementing a parameter collection flow requires two distinct components to be 
 Parameter collectors use the openBlade APIs to open provider blades.  A parameter collector supplies provider configuraton, initial data and receives back the results from a parameter provider blade by configuring the compiler generated blade reference.
 
 To open a parameter provider blade do the following steps -
-1. Import the compiler generated blade reference
+1. Import the Fx/Composition module
 2. Create a new instance of the blade reference
 3. Invoke one of the 4 openBlade APIs (openBlade, openBladeAsync, openContextBlade, openContextBladeAsync)
 
@@ -30,7 +30,7 @@ To open a parameter provider blade do the following steps -
 ### Importing a parameter provider blade reference
 
 ```ts
-import { ParameterProviderAsTemplateBladeReference } from "../../../../_generated/BladeReferences";
+import { BladeReferences } from "Fx/Composition";
 ```
 
 <a name="implementing-a-parametercollector-configuring-the-reference-for-parameter-collection"></a>
@@ -38,28 +38,23 @@ import { ParameterProviderAsTemplateBladeReference } from "../../../../_generate
 
 To send initial data to the provider and optionally receive a result back you can specify callbacks during initialization of the provider blade reference.
 
-```ts
-        const providerReference = new ParameterProviderAsTemplateBladeReference<DataModels.ServerConfig, DataModels.ServerConfig>({
-            supplyInitialData: () => {
-                return {
-                    diskSpaceBytes: ko.observable(108 * 1024 * 1024 * 1024),
-                    serverName: ko.observable(ClientResources.parameterProviderDefaultServerName)
-                };
-            },
-            receiveResult: (result) => {
-                // A realistic parameter collector command would commence some operation on
-                // receiving data. For this sample we have nothing particular to commence,
-                // so we just show a notification to demonstrate that data was received.
-                MsPortalFx.Hubs.Notifications.ClientNotification.publish({
-                    title: ClientResources.parameterCollectorReceivedResultNotificationTitle,
-                    description: ClientResources.parameterCollectorReceivedResultNotificationMessage.format(ko.toJS(result)),
-                    status: MsPortalFx.Hubs.Notifications.NotificationStatus.Success
-                });
-            }
-        });
+```typescript
+
+return BladeReferences.forBlade("ControlBlade").createReference({
+    parameters: {
+        id: resourceInfo.resourceId,
+    },
+    supplyInitialData: () => {
+        return retrieveContainerConfig(resourceInfo.resourceId);
+    },
+    receiveResult: (result: ContainerConfig) => {
+        storeContainerConfig(resourceInfo.resourceId, result);
+    },
+});
+
 ```
 
-The complete list of supported options that can be supplied to the ParameterCollector constructor are defined are defined with the following signatures:
+The complete list of supported options that can be supplied to ParameterCollector are defined with the following signatures:
 
 - **supplyInitialData? (): TResult**
 
@@ -125,74 +120,65 @@ Here the ParameterProvider property indicates that this part is a provider which
 
 Continuing with this example parameterProvider now needs to be defined as a property of type ParameterProvider<TResult, TEditScope> on ParameterProviderFormPartViewModel. To ensure the ParameterProvider and ParameterCollector can exchange data the TResult generic type must match the TResult generic type used on the parameter collector model.  In this scenario we define a simple model called ServerConfig for our TResult and for TEditScope  we use a different model of type ServerFormData. Note for many scenarios TResult and TEditScope may infact be the same type, to demonstrate that they can be structurally different we use different types here.
 
-
-```ts
-export class ParameterProviderFormPartViewModel extends MsPortalFx.ViewModels.Forms.Form.ViewModel<ProviderModels.ServerConfig> {
-
-    public parameterProvider: MsPortalFx.ViewModels.ParameterProvider<ProviderModels.ServerConfig, ProviderModels.ServerFormData>;
-
-    constructor(container: MsPortalFx.ViewModels.PartContainerContract,
-    			initialState: any,
-    			dataContext: ParameterCollectionArea.DataContext) {
-		...
-    }
-	...
-}
-```
-
 When you initialize the ParameterProvider there are two mandatory callbacks that must be specified within the constructor options. These two callbacks are *mapIncomingDataForEditScope* and *mapOutgoingDataForCollector* which allow you to map to and from TResult <> TEditScope.  Continuing with our example the ParameterProvider would be initialized as follows:
 
-```ts
+```typescript
 
-export class ParameterProviderFormPartViewModel extends MsPortalFx.ViewModels.Forms.Form<ProviderModels.ServerConfig> {
+@Di.Class("viewModel")
+export class ParameterProviderFormPartViewModel
+extends MsPortalFx.ViewModels.Forms.Form.ViewModel<ServerConfig>
+implements ParameterProviderForm.Contract {
 
-    public parameterProvider: MsPortalFx.ViewModels.ParameterProvider<ProviderModels.ServerConfig, ProviderModels.ServerFormData>;
+/**
+ * View model for the provider. This is referenced in the corresponding .pdl file.
+ */
+public parameterProvider: MsPortalFx.ViewModels.ParameterProvider<ServerConfig, ProviderModels.ServerFormData>;
 
-    constructor(container: MsPortalFx.ViewModels.PartContainerContract,
-    			initialState: any,
-    			dataContext: ParameterCollectionArea.DataContext) {
+public serverIdentifierTextBox: MsPortalFx.ViewModels.Forms.TextBox.ViewModel;
 
-        super(container);
+public fixedStorageSlider: MsPortalFx.ViewModels.Forms.Slider.ViewModel;
 
-        this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<ProviderModels.ServerConfig, ProviderModels.ServerFormData>(container, {
-            mapIncomingDataForEditScope: (incoming: ProviderModels.ServerConfig): ProviderModels.ServerFormData => {
-                // Collectors are not required to supply complete initial data, so
-                // providers must always fill in anything that is missing with defaults.
-                incoming = incoming || <ProviderModels.ServerConfig>{};
-                incoming.serverName = incoming.serverName || ko.observable("");
-                incoming.diskSpaceBytes = incoming.diskSpaceBytes || ko.observable(defaultDiskSpace);
+/**
+ * Constructs an instance of ParameterProviderFormPartViewModel.
+ */
+constructor(container: MsPortalFx.ViewModels.PartContainerContract) {
+    super(container);
 
-                return {
-                    serverIdentifier: incoming.serverName,
-                    fixedStorageGigabytes: ko.observable(incoming.diskSpaceBytes() / bytesPerGigabyte)
-                };
-            },
+    this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<ServerConfig, ProviderModels.ServerFormData>(container, {
+        mapIncomingDataForEditScope: (incoming: ServerConfig): ProviderModels.ServerFormData => {
+            // Collectors are not required to supply complete initial data, so
+            // providers must always fill in anything that is missing with defaults.
+            incoming = incoming || <ServerConfig>{};
+            incoming.serverName = incoming.serverName || ko.observable("");
+            incoming.diskSpaceBytes = incoming.diskSpaceBytes || ko.observable(defaultDiskSpace);
 
-            mapOutgoingDataForCollector: (outgoing: ProviderModels.ServerFormData): ProviderModels.ServerConfig => {
-                return {
-                    serverName: outgoing.serverIdentifier,
-                    diskSpaceBytes: ko.observable(outgoing.fixedStorageGigabytes() * bytesPerGigabyte)
-                };
-            }
-        });
+            return {
+                serverIdentifier: incoming.serverName,
+                fixedStorageGigabytes: ko.observable(incoming.diskSpaceBytes() / bytesPerGigabyte),
+            };
+        },
 
-        // Use the form to edit the edit scope set up by the provider
-        this.editScope = this.parameterProvider.editScope;
+        mapOutgoingDataForCollector: (outgoing: ProviderModels.ServerFormData): ServerConfig => {
+            return {
+                serverName: outgoing.serverIdentifier,
+                diskSpaceBytes: ko.observable(outgoing.fixedStorageGigabytes() * bytesPerGigabyte),
+            };
+        },
+    });
 
-        this.serverIdentifierTextBox = new MsPortalFx.ViewModels.Forms.TextBox(container, this, "serverIdentifier");
-        this.fixedStorageSlider = new MsPortalFx.ViewModels.Forms.Slider(container, this, "fixedStorageGigabytes", { min: ko.observable(50), max: ko.observable(1000) });
-    }
-
-    public serverIdentifierTextBox: MsPortalFx.ViewModels.Forms.TextBox;
-    public fixedStorageSlider: MsPortalFx.ViewModels.Forms.Slider;
+    // Use the form to edit the edit scope set up by the provider
+    this.editScope = this.parameterProvider.editScope;
+    this.serverIdentifierTextBox = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(container, this, "serverIdentifier");
+    this.fixedStorageSlider = new MsPortalFx.ViewModels.Forms.Slider.ViewModel(container, this, "fixedStorageGigabytes", { min: ko.observable(50), max: ko.observable(1000), showStepMarkers: ko.observable(false) });
 }
 
 ```
+
 Here the data supplied by the collector to this provider of type ServerConfig (TResult) is  mapped to type ServerFormData (TEditScope) for this forms edit scope using callback *mapIncomingDataForEditScope*.  When the provider blade is closed by the user clicking Ok on the Create ActionBar *mapOutgoingDataForCollector* maps the data from the form of type ServerFormData (TEditScope) to ServerConfig(TResult) for the consuming collector which receives this data in its receiveResult callback.
 
 For scenarios where you may want to invoke a provisioning operation that adds a startboard part and collapses the current journey when the provider is dismissed you can specify the *commitResult* callback.
 
-The complete list of supported options that can be supplied to the ParameterProvider constructor are defined are defined with the following signatures:
+The complete list of supported options that can be supplied to ParameterProvider are defined with the following signatures:
 
 - **mapIncomingDataForEditScope?(dataFromCollector: TResult): TEditScope**
 
@@ -259,57 +245,58 @@ Here the ParameterCollector property indicates which model property is responsib
 
 Continuing with this example serverConfigCollector now needs to be defined as a property of type ParameterCollector<TResult> on CollectorButtonViewModel. So that the ParameterCollector and ParameterProvider can exchange data the TResult generic type must match the TResult generic type used on the parameter provider model.  In this scenario we're define a simple model called ServerConfig and declare our property:
 
-
-```ts
-export class CollectorButtonViewModel extends MsPortalFx.ViewModels.ButtonPart {
-
-    public serverConfigCollector: MsPortalFx.ViewModels.ParameterCollector<ProviderModels.ServerConfig>;
-
-    constructor(container: MsPortalFx.ViewModels.PartContainerContract,
-    			initialState: any,
-    			dataContext: ParameterCollectionArea.DataContext) {
-		...
-    }
-}
-
-```
-
 To send initial data to the provider and optionally receive a result back you can specify callbacks during initialization of the ParameterCollector.
 
-```ts
+import * as Di from "Fx/DependencyInjection";
+import ClientResources = require("ClientResources");
+import { ServerConfig } from "_generated/SamplesExtension/DataModels/ServerConfig";
+
+/**
+ * Parameter collector command view model class. The 'serverConfigCollector' property is referenced
+ * in PDL and deals with sending initial data to the provider blade when it opens, and receiving
+ * back a result from the provider blade when it closes.
+ */
+@Di.Class("viewModel")
 export class CollectorButtonViewModel extends MsPortalFx.ViewModels.ButtonPart {
+    /**
+     * View model for the collector. This is referenced in the corresponding .pdl file. Note
+     * that the TResult generic type must match the TResult generic type used on the parameter
+     * provider model, so that the two models may exchange data of that type.
+     */
+    public serverConfigCollector: MsPortalFx.ViewModels.ParameterCollector<ServerConfig>;
 
-    public serverConfigCollector: MsPortalFx.ViewModels.ParameterCollector<ProviderModels.ServerConfig>;
-
-    constructor(container: MsPortalFx.ViewModels.PartContainerContract,
-    			initialState: any,
-    			dataContext: ParameterCollectionArea.DataContext) {
-
+    /**
+     * Constructs the view model.
+     *
+     * @param container The container into which the part is being placed.
+     */
+    constructor(container: MsPortalFx.ViewModels.PartContainerContract) {
         super();
+        this.title(ClientResources.openProviderBlade);
 
-        this.serverConfigCollector = new MsPortalFx.ViewModels.ParameterCollector<ProviderModels.ServerConfig>(container, {
+        this.serverConfigCollector = new MsPortalFx.ViewModels.ParameterCollector<ServerConfig>(container, {
             supplyInitialData: () => {
                 return {
                     diskSpaceBytes: ko.observable(108 * 1024 * 1024 * 1024),
-                    serverName: ko.observable(ClientResources.parameterProviderDefaultServerName)
+                    serverName: ko.observable(ClientResources.parameterProviderDefaultServerName),
                 };
             },
-            receiveResult: (result: ProviderModels.ServerConfig) => {
+            receiveResult: (result: ServerConfig) => {
                 // A realistic parameter collector command would commence some operation on
                 // receiving data. For this sample we have nothing particular to commence,
                 // so we just show a notification to demonstrate that data was received.
-                MsPortalFx.UI.NotificationManager
-                    .create(ExtensionDefinition.NotificationDefinitions.ParameterCollectorReceivedResultNotification.name)
-                    .raise(ExtensionDefinition.NotificationDefinitions.ParameterCollectorReceivedResultNotification.succeeded, null, ko.toJS(result));
-            }
+                MsPortalFx.Hubs.Notifications.ClientNotification.publish({
+                    title: ClientResources.parameterCollectorReceivedResultNotificationTitle,
+                    description: ClientResources.parameterCollectorReceivedResultNotificationMessage.format(ko.toJS(result)),
+                    status: MsPortalFx.Hubs.Notifications.NotificationStatus.Success,
+                });
+            },
         });
-
-        this.title(ClientResources.openProviderBlade);
     }
 }
-```
 
-The complete list of supported options that can be supplied to the ParameterCollector constructor are defined are defined with the following signatures:
+
+The complete list of supported options that can be supplied to ParameterCollector are defined with the following signatures:
 
 - **supplyInitialData? (): TResult**
 

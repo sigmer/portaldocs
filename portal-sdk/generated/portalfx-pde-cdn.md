@@ -43,7 +43,7 @@ In your extension *.csproj file, you will need to add a reference to the Microso
 
 For the CdnIntegrationBlade to show up in your extension, you may reference it in one of the following ways:
 
- - You can add it as an item in your resource menu similar to the code blow: 
+ - You can add it as an item in your resource menu similar to the code below (this approach is fully type-checked, even the strings for the extension name and blade name, which will be available when a corresponding .pde file is imported): 
 ```ts
 {
     id: "cdnIntegration",
@@ -58,17 +58,17 @@ For the CdnIntegrationBlade to show up in your extension, you may reference it i
     ],
     icon: MsPortalFx.Base.Images.Polychromatic.Cdn(),
     supplyBladeReference: () => {
-        return new CdnBladeReferences.CdnIntegrationBladeReference(
-            {
+        return BladeReferences.forExtension("Microsoft_Azure_Cdn").forBlade("CdnIntegrationBlade").createReference({
+            parameters: {
                 resourceId: <your resource Id>,
                 location: <your resource location>,
                 originHostname: <your resource hostname>
-            });
+            }});
     }
 }
 ```
 
- - You can alternatively open the CdnIntegrationBlade as a DynamicBladeSelection, which doesn't require importing the CDN nuget package, as shown in this example:
+ - You can alternatively open the CdnIntegrationBlade as a DynamicBladeSelection, which doesn't require importing the CDN nuget package, as shown in this example (this approach is discouraged if can be avoided, as there is no type safety):
 
 ```ts
 this._container.selectable.selectedValue(<MsPortalFx.ViewModels.DynamicBladeSelection>{

@@ -256,7 +256,7 @@ This means that the `getMenuConfig` method will resemble the following.
 ```ts
 import * as ClientResources from "ClientResources";
 import * as FxMenuBlade from "MsPortalFx/Composition/MenuBlade";
-import * as BladeReferences from "../../../_generated/BladeReferences";
+import { BladeReferences } from "Fx/Composition";
 
 public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPortalFx.Base.PromiseV<MsPortalFx.Assets.ResourceMenuConfig> {
     return Q(
@@ -278,7 +278,9 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
                             keywords: "overview",
                             icon: Images.MyResourceIcon,
                             supplyBladeReference: () => {
-                                return new BladeReferences.MyResourceOverviewBlade({ id: resourceInfo.resourceId });
+                                return BladeReferences.forBlade("MyResourceOverviewBlade").createReference({
+                                    parameters: { id: resourceInfo.resourceId },
+                                });
                             }
                         }
                     ]
