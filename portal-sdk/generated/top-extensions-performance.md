@@ -709,6 +709,7 @@ MsPortalFx.require("Fx/DependencyInjection")
 <a name="dependency-injected-view-models-pull-request-samples"></a>
 ## Pull Request Samples
 
+- **Note:** as of sdk 5.0.302.20501 Program.ts should be removed completely as part of this migration.
 - https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1013125?_a=overview
 - https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1013301?_a=overview
 - https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx/pullrequest/1016472?_a=overview
