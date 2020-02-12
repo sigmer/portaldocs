@@ -45,7 +45,7 @@ Go to the playground site to use the latest control and get source code for your
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/LogStream_create_Playground" target="_blank">LogStream in the interactive controls playground</a>
 
- 
+
 
 
  

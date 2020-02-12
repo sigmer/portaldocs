@@ -11,7 +11,7 @@ Edit scopes provide a standard way of managing edits over a collection of input 
   * Provide a way to discard all changes in a form
   * Persist unsaved changes from the form to the cloud
   * Simplify merging changes from the server into the current edit
- 
+
 This document is organized into the following sections.
 
 * [The EditScope Data Model](#the-editscope-data-model)
@@ -24,7 +24,7 @@ This document is organized into the following sections.
 
 * [EditScope and AJAX](#editscope-and-ajax)
 
-For more information about edit scopes and managing unsaved edits, watch the video located at 
+For more information about edit scopes and managing unsaved edits, watch the video located at
 [https://aka.ms/portalfx/editscopes](https://aka.ms/portalfx/editscopes).
 
 **NOTE**: In this discussion, `<dir>` is the `SamplesExtension\Extension\` directory, and  `<dirParent>`  is the `SamplesExtension\` directory, based on where the samples were installed when the developer set up the SDK.
@@ -43,26 +43,26 @@ After the `EditScope` is instantiated, initialized and loaded, entities can only
 <a name="legacy-editscopes-the-editscope-data-model-editscope-entity-arrays"></a>
 #### EditScope entity arrays
 
-The EditScope entity array is a hierarchy of 'entity' objects.  When the EditScope's `root` is an object, this object is considered an 'entity' by default. The EditScope becomes a hierarchy of entities when the EditScope includes an array of 'entity' objects. The extension supplies metadata for the type of the array items. For example, the  `T` in `KnockoutObservableArray<T>` contains the type.  Therefore, an object is treated by EditScope as an 'entity' when type metadata associated with the object is marked as an 'entity' type, or some EditScope object includes a property that is 'entity'-typed. 
+The EditScope entity array is a hierarchy of 'entity' objects.  When the EditScope's `root` is an object, this object is considered an 'entity' by default. The EditScope becomes a hierarchy of entities when the EditScope includes an array of 'entity' objects. The extension supplies metadata for the type of the array items. For example, the  `T` in `KnockoutObservableArray<T>` contains the type.  Therefore, an object is treated by EditScope as an 'entity' when type metadata associated with the object is marked as an 'entity' type, or some EditScope object includes a property that is 'entity'-typed.
 
-EditScope 'entity' arrays were designed to meet the following requirements. 
+EditScope 'entity' arrays were designed to meet the following requirements.
 
 * User edits are serialized so that journey-switching works with unsaved Form edits. For editing large arrays, the Portal should not serialize array edits by persisting two full copies of the array.
 
-* In the UI, the Portal indicates which array items were created/updated/deleted by the user. 
+* In the UI, the Portal indicates which array items were created/updated/deleted by the user.
 
 * Adding and removing data from an array is revertable for some scenarios. In some cases, data that has been removed from an array is rendered with strike-through styling.
 
 Consequently, EditScope 'entity' arrays behave differently than JavaScript arrays. The most important factors are that 'Creates' are kept out-of-band and that 'Deletes' are non-destructive.
 
-In an `EditScope` entity array, created/updated/deleted items are tracked individually by `EditScope`. Any edits that were made by the user and collected in an `EditScope` are saved in the storage for the browser session, which is managed by the Shell. These managed changes allow the extension to warn customers that they might lose data if they navigate away from the form without saving their changes. 
+In an `EditScope` entity array, created/updated/deleted items are tracked individually by `EditScope`. Any edits that were made by the user and collected in an `EditScope` are saved in the storage for the browser session, which is managed by the Shell. These managed changes allow the extension to warn customers that they might lose data if they navigate away from the form without saving their changes.
 
-Also, rows can be added or removed from an editable grid, but the corresponding adds/removes may not be immediately viewable from the `EditScope` array. 
+Also, rows can be added or removed from an editable grid, but the corresponding adds/removes may not be immediately viewable from the `EditScope` array.
 
- The parameter that specifies the `editScope` object can be attached to an `editScopeId` property, therefore the  `editScopeId`  can be used by the `viewModel`  to load the `editScope` from the cloud, which attaches the modelled data to the view for display. 
+ The parameter that specifies the `editScope` object can be attached to an `editScopeId` property, therefore the  `editScopeId`  can be used by the `viewModel`  to load the `editScope` from the cloud, which attaches the modelled data to the view for display.
 
-The properties that are associated with the entity's 'id' are specified in the following examples. 
- 
+The properties that are associated with the entity's 'id' are specified in the following examples.
+
 The TypeScript sample is located at  `<dir>\Client\V1\Forms\Scenarios\ChangeTracking\Models\EditableFormData.ts`. This code is also included in the following working copy.
 
  ```typescript
@@ -97,8 +97,8 @@ public class Person
     
 ```
 
-  
-The following enumerations simplify the conversation between the `EditScope` and the `EditScopeCache`. 
+
+The following enumerations simplify the conversation between the `EditScope` and the `EditScopeCache`.
 
 * [The AcceptEditScopeChangesAction enum](#the-accepteditscopechangesaction-enum)
 
@@ -134,7 +134,7 @@ For more information about each enum value, see the jsdoc comments around `MsPor
 
  Some properties on the EditScope Form model are only for presentation instead of for editing. In these instances, the extension can opt out of tracking user edits for the specified read-only properties, as in the following example.
 
-In TypeScript:  
+In TypeScript:
 
     MsPortalFx.Data.Metadata.setTypeMetadata("Employee", {
         properties: {
@@ -142,9 +142,9 @@ In TypeScript:
             ...
         },
         ...
-    });  
+    });
 
-In C#:  
+In C#:
 
     [TypeMetadataModel(typeof(Employee))]
     public class Employee
@@ -153,11 +153,11 @@ In C#:
         public int AccruedVacationDays { get; set; }
 
         ...
-    }  
+    }
 
 Extensions can supply type metadata to configure an `EditScope` as follows.
 
-* When using `ParameterProvider`, send the `editScopeMetadataType` option to the `ParameterProvider` constructor. 
+* When using `ParameterProvider`, send the `editScopeMetadataType` option to the `ParameterProvider` constructor.
 
 * When using `EditScopeCache`, send the `entityTypeName` option to `MsPortalFx.Data.EditScopeCache.createNew`.
 
@@ -201,7 +201,7 @@ this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<ServerConfi
 
 ```
 
-In the UI, the FX renders an indication of what array items were created/updated/deleted. 
+In the UI, the FX renders an indication of what array items were created/updated/deleted.
 
 The following example converts an array of strings into an 'entity' array for consumption by an editable grid.  When modeling your data as an 'entity' array, the editable grid can only be bound to an `EditScope` 'entity' array.
 
@@ -311,27 +311,27 @@ this.parameterProvider = new MsPortalFx.ViewModels.ParameterProvider<ServerConfi
 
 ### The EditScope Cache
 
-The `EditScopeCache` class is less commonly used. It loads and manages instances of `EditScope`.  Typically, the blade uses an `EditScopeView`, as specified in  `editScopeCache.createView(...)`, to load or acquire the EditScope,  connect the cache to the view and then display it on the blade.  If the extension uses an `EditScopeCache` component to manage its `EditScope`, the extension should initialize the `EditScope` data in the `supplyNewData` and `supplyExistingData` callbacks that are sent to the `EditScopeCache`. 
+The `EditScopeCache` class is less commonly used. It loads and manages instances of `EditScope`.  Typically, the blade uses an `EditScopeView`, as specified in  `editScopeCache.createView(...)`, to load or acquire the EditScope,  connect the cache to the view and then display it on the blade.  If the extension uses an `EditScopeCache` component to manage its `EditScope`, the extension should initialize the `EditScope` data in the `supplyNewData` and `supplyExistingData` callbacks that are sent to the `EditScopeCache`.
 
  The `EditScopeCache` is  used for the following scenarios.
 
  * **Save/Revert blade**: The  'Save' and 'Revert changes' commands in the CommandBar of the blade typically keep the blade open so the user can perform successive edit and save cycles without closing and reopening the form.
 
  * **Document editing**: In the document-editing scenario, the user can make edits to a single EditScope/Form model across multiple parent-child blades.  The parent blade sends its `inputs.editScopeId` input to any child blade that edits the same model as the parent Blade. The child blade uses this `inputs.editScopeId` in its call to `editScopeView.fetchForExistingData(editScopeId)` to fetch the EditScope of the parent Blade.
- 
+
 #### The saveEditScopeChanges method
 
-When using an EditScopeCache, the `saveEditScopeChanges` callback supplied by the extension is called to push `EditScope` edits to a server. This callback returns a `Promise` that should be resolved when the 'save' **AJAX** call completes. This call completes occurs after the server accepts the user's edits. 
+When using an EditScopeCache, the `saveEditScopeChanges` callback supplied by the extension is called to push `EditScope` edits to a server. This callback returns a `Promise` that should be resolved when the 'save' **AJAX** call completes. This call completes occurs after the server accepts the user's edits.
 
-When the extension resolves this `Promise`, it can supply a value that instructs the EditScope to reset itself to a clean/unedited state. If no such value is returned during `promise` resolution, then the `EditScope` is reset by default.  This means using the user's client-side edits as the new, clean/unedited EditScope state. This works for many scenarios.  
+When the extension resolves this `Promise`, it can supply a value that instructs the EditScope to reset itself to a clean/unedited state. If no such value is returned during `promise` resolution, then the `EditScope` is reset by default.  This means using the user's client-side edits as the new, clean/unedited EditScope state. This works for many scenarios.
 
-There are other scenarios where the default `saveEditScopeChanges` behavior does not work, like the following. 
+There are other scenarios where the default `saveEditScopeChanges` behavior does not work, like the following.
 
 * During 'save', the server produces new data values that need to be merged into the EditScope.
 
 * For "create new record" scenarios, after 'save', the extension should clear the form, so that the user can enter a new record.
 
-For these cases, the extension will resolve the `saveEditScopeChanges` promise with a value from the `AcceptEditScopeChangesAction` enum. 
+For these cases, the extension will resolve the `saveEditScopeChanges` promise with a value from the `AcceptEditScopeChangesAction` enum.
 
  <!--TODO:  The following sample code does not exist by this name.  -->
  For an example of loading an edit scope from a data context, view the sample that is located at `<dir>\Client\Data\MasterDetailEdit\MasterDetailEditData.ts`.
@@ -357,14 +357,14 @@ this.editScopeCache = MsPortalFx.Data.EditScopeCache.create<DataModels.WebsiteMo
     }
 });
 ```
- 
+
 ### EditScope ViewModels
 
-In most cases, editable forms include commands that act upon data that is displayed in those forms. Data is made available to the command by binding a value from a part `ViewModel` to a command `ViewModel`, or the `editScopeId` requested by the blade can be bound to the part and the command. The extension can instantiate an `EditScope` by using a `MsPortalFx.Data.EditScopeView` object. The `EditScopeView` object makes edited data available at `editScopeView.editScope().root` after the `editScope()` observable is populated. When the data to view and edit is already located on the client, an `EditScopeView` can also be obtained from other data cache objects. 
+In most cases, editable forms include commands that act upon data that is displayed in those forms. Data is made available to the command by binding a value from a part `ViewModel` to a command `ViewModel`, or the `editScopeId` requested by the blade can be bound to the part and the command. The extension can instantiate an `EditScope` by using a `MsPortalFx.Data.EditScopeView` object. The `EditScopeView` object makes edited data available at `editScopeView.editScope().root` after the `editScope()` observable is populated. When the data to view and edit is already located on the client, an `EditScopeView` can also be obtained from other data cache objects.
 
 The data in the `editScope` includes original values and saved edits. The method to access inputs on a part is the `onInputsSet` method. In the constructor, a new `MsPortalFx.Data.EditScopeView` object is created from the `dataContext`. The `EditScopeView` provides a stable observable reference to an `EditScope` object. The `editScopeId` will be sent in as a member of the `inputs` object when the part is bound.
 
-An example of loading an edit scope is in the following code. The sample is also located at `<dir>\Client\V1\MasterDetail\MasterDetailEdit\ViewModels\DetailViewModels.ts`. 
+An example of loading an edit scope is in the following code. The sample is also located at `<dir>\Client\V1\MasterDetail\MasterDetailEdit\ViewModels\DetailViewModels.ts`.
 
 <!-- TODO: Determine whether this inline code should be replaced when the samples code is replaced and linked in gitHub, or whether the links to the SDK samples are sufficient. -->
 
@@ -400,16 +400,16 @@ public onInputsSet(inputs: Def.DetailPartViewModel.InputsContract): MsPortalFx.B
 }
 
 ```
- 
+
 ### Loading the EditScope
 
 The code that loads the `EditScope` is largely related to data loading, so the data context is the preferred location for the code.
 
 Form fields require a binding to one or more observables. Consequently, they have two constructor overloads. Extension developers can configure this binding by supplying a path from the root of the `EditScope/Form` model down to the observable to which the form field should bind. They can do this by selecting one of the two form field constructor variations.
 
-* The `EditScopeAccessor` is the preferred methodology because it is verified at compile time. 
+* The `EditScopeAccessor` is the preferred methodology because it is verified at compile time.
 
-* The string-typed path methodology is discouraged because it is not compile-time verified. 
+* The string-typed path methodology is discouraged because it is not compile-time verified.
 
 The `EditScopeAccessor` methodology is preferred for the following reasons.
 
@@ -429,10 +429,10 @@ this.textBoxSimpleAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
     this.createEditScopeAccessor<string>((data) => { return data.state; }),
     textBoxSimpleAccessorOptions);
 
-``` 
+```
 
   There are other forms that demonstrate translating model data for presentation to the user, as in the code located at       `<dir>/Client/V1/Forms/Scenarios/FormFields/ViewModels/FormFieldsFormIntegratedViewModels.ts`. It is also in the following code.
-  
+
  ```typescript
 
 this.textBoxReadWriteAccessor = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(
@@ -458,7 +458,7 @@ The string-typed path methodology can be used instead of the `EditScopeAccessor`
 
 this.textBoxViewModel = new MsPortalFx.ViewModels.Forms.TextBox.ViewModel(container, this, "name", textBoxOptions);
 
-``` 
+```
 
 The following code creates a new set of form field objects and binds them to the `editScope`. The sample is located at  `<dir>\Client\V1\MasterDetail\MasterDetailBrowse\ViewModels\DetailViewModels.ts` and in the following code.
 
@@ -516,7 +516,7 @@ For more information about form fields, see [top-extensions-controls.md](top-ext
 
 An extension can read and write data to the server directly by using **AJAX** calls. It loads and saves data by creating an `EditScopeCache` object and defining two functions. The `supplyExistingData` function reads the data from the server, and the `saveEditScopeChanges` function writes it back.
 
-The code for this example is associated with the basic form sample. It is located at 
+The code for this example is associated with the basic form sample. It is located at
 * `<dir>\Client\V1\Forms\Samples\Basic\FormsSampleBasic.pdl`
 * `<dir>\Client\V1\Forms\Samples\Basic\Templates\FormSampleBasic.html`
 * `<dir>\Client\V1\Forms\Samples\Basic\ViewModels\FormsSampleBasicBlade.ts`
@@ -620,7 +620,7 @@ this.section = new Section.ViewModel(this._ltm, {
 
 The form is rendered using a section. The code loads all the controls that should be displayed into the `children` observable array of the section. This positions the controls sequentially on a blade, by default, so it is an easy way to standardize the look of forms in the Portal. An alternative to the default positioning is to manually author the HTML for the form by binding each control into an HTML template for the blade.
 
-This sample includes two commands at the top of the blade that save or discard data. Commands are used because this blade stays open after a save/discard operation. If the blade were to close after the operation, then there would be an action bar at the bottom of the blade to use instead. 
+This sample includes two commands at the top of the blade that save or discard data. Commands are used because this blade stays open after a save/discard operation. If the blade were to close after the operation, then there would be an action bar at the bottom of the blade to use instead.
 
 The commands check to make sure that the `EditScope` has been populated previous to enabling themselves by using the `canExecute` portion of the `ko.pureComputed` code.
 
@@ -675,7 +675,7 @@ For more information, see [http://knockoutjs.com/documentation/computed-writable
 <a name="legacy-editscopes-editscope-and-ajax-editscope-request"></a>
 #### Editscope request
 
-The following sample PDL file demonstrates requesting an `editScope`.  The sample is also located at `<dir>\Client\V1\MasterDetail\MasterDetailEdit\MasterDetailEdit.pdl`.  The `valid` element is using the `section` object of the form to determine if the form is currently valid. 
+The following sample PDL file demonstrates requesting an `editScope`.  The sample is also located at `<dir>\Client\V1\MasterDetail\MasterDetailEdit\MasterDetailEdit.pdl`.  The `valid` element is using the `section` object of the form to determine if the form is currently valid.
 
 ```xml
 <!-- Display detail blade with an edit scope. Blade consists of a form and commands.-->

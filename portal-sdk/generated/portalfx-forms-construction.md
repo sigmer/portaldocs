@@ -87,7 +87,7 @@ this._form.editScope = this._editScopeView.editScope;
 
 ```
 
-For this form we'll just display one textbox that lets the user edit the name of the 
+For this form we'll just display one textbox that lets the user edit the name of the
 website:
 
 ```typescript
@@ -114,7 +114,7 @@ this.section = new Section.ViewModel(this._ltm, {
 ```
 
 We render the form using a section. If you add a list of controls to the section's children observable array they will be laid out one after the
-other on the blade so it's often an easy way to get the standard look of most forms in the portal. Alternatively you could hand author the HTML 
+other on the blade so it's often an easy way to get the standard look of most forms in the portal. Alternatively you could hand author the HTML
 for the form by binding each control into HTML template for the blade.
 
 This sample also includes two commands at the top of the blade to save/discard. Commands are used since the design for this blade is
@@ -163,5 +163,5 @@ this.commandBar.setItems([saveCommand, discardCommand]);
 
 ```
 
-Since we're using the edit scope the save/disard commands can just call the `saveChanges()` or `revertAll()` methods on edit scope 
+Since we're using the edit scope the save/disard commands can just call the `saveChanges()` or `revertAll()` methods on edit scope
 to trigger the right action.

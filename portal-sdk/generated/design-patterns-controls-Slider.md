@@ -74,7 +74,7 @@ The Slider control offers different create methods and has the following entries
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/Slider_createCustomSlider_Playground" target="_blank">Slider (CustomSlider)</a>
 
- 
+
 
 
  

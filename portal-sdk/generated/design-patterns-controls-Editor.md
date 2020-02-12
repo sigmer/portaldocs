@@ -72,7 +72,7 @@ The Editor control offers different create methods and has the following entries
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/Editor_createTypeScriptEditor_Playground" target="_blank">Editor (TypeScriptEditor)</a>
 
- 
+
 
  
 <a name="related-info"></a>

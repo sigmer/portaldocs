@@ -17,7 +17,7 @@ The Manage a Resource pattern is used to configure and manage a single Azure�
 ### Also known as
 -   Resource blade 
 -   Resource detail
--   Resource menu 
+-   Resource menu
 -   Resource manage 
 
 <a name="examples"></a>
@@ -62,7 +62,7 @@ When a resource is opened in azure the resource menu is loaded and the Overview 
 ### Resource menu
 The resource menu offers a way to navigate to all pages related to the resource. The navigation includes pages that are common to all resources throughout the portal. Your resource will get those "for free," although some common pages require onboarding by the resource provider. You can have additional pages for your resource.  Refer to the table below to make sure each item is grouped properly. Learn more [Resource Menu](top-blades-resourcemenublade.md)
 
-Azure Portal Toolkit: <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3059%3A368196" target="_blank">ResourceMenu design in figma</a> 
+Azure Portal Toolkit: <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3059%3A368196" target="_blank">ResourceMenu design in figma</a>
 
 <table style="width:800px; border-style:none; cellpadding=10px">
 <tr>
@@ -132,7 +132,7 @@ Learn more [Toolbar](portalfx-controls-toolbar.md), [Context pane](top-extensio
 <a name="behavior-overview-page-essentials-panel"></a>
 #### Essentials panel
 The essentials panel surfaces key properties that are common for all Azure resources and important resource specific properties. User feedback has
-shown that they rely heavily on the essentials panel for looking up information.  Properties can contain links, and can open blades containing related resources (for example, resource group, subscription, hosting plan, etc). The links can also point to external sites. 
+shown that they rely heavily on the essentials panel for looking up information.  Properties can contain links, and can open blades containing related resources (for example, resource group, subscription, hosting plan, etc). The links can also point to external sites.
 
 The Essentials sections is divided in two well know parts, the left column contains properties common to all resources and the right column contains properties that are specific to this resource.
 
@@ -168,16 +168,16 @@ Learn more [portalfx-extensions-essentials.md](./portalfx-extensions-essentials.
 <a name="behavior-overview-page-content-area"></a>
 #### Content area
 Display guiding content and key information about the resource
-* *Must* meet the performance bar – the overview page is the most viewed blade for your resource   
-* Content to guide the user to get the most from the resource  
-* Resource properties to indicate important resource configuration  
+* *Must* meet the performance bar – the overview page is the most viewed blade for your resource  
+* Content to guide the user to get the most from the resource 
+* Resource properties to indicate important resource configuration 
 * Resource performance metric graphs to indicate whether resource is functioning properly   
 
 
 <a name="do"></a>
 ## Do
 
-* Open context blades for user input and short summaries 
+* Open context blades for user input and short summaries
 
 * Ensure you have efficient APIs to get data for your overview page  
 
@@ -187,9 +187,9 @@ Display guiding content and key information about the resource
 <a name="don-t"></a>
 ## Don&#39;t
 
-* Don’t create resource-specific menu groups that have only one menu item   
+* Don’t create resource-specific menu groups that have only one menu item  
 
-* Don’t put so much information on your resource overview page that it fails the performance bar. You'll end up removing it to meet the bar.   
+* Don’t put so much information on your resource overview page that it fails the performance bar. You'll end up removing it to meet the bar.  
 
 * Don’t build your overview page as a PDL blade   
 
@@ -214,10 +214,10 @@ Developers can use the following information to get started implementing this pa
 
 <a name="for-developers-tips-and-tricks"></a>
 ## Tips and tricks
-* Use the ResourceMenu SDK building block 
+* Use the ResourceMenu SDK building block
 
-* Opt in to ResourceMenu using the AssetType `UseResourceMenu="true"` option
-    * Assign keywords to your Resource Menu items to help the user find items   
+* Opt in to ResourceMenu using the AssetType `ResourceMenu` entry
+    * Assign keywords to your Resource Menu items to help the user find items  
     * Enable the recommended flags on your resource menu
         * `enableSupportTroubleshootV2`
         * `enableProperties`
@@ -229,7 +229,7 @@ Developers can use the following information to get started implementing this pa
     * Make your resource menu static to help meet the performance bar 
 
 * For you overview page
-    * Build your overview page as a template blade   
+    * Build your overview page as a template blade  
     * To display tags in the Essentials Panel, add this line to the options object
 passed to the essentials control:  `includeTags:true`
     * Make sure you have efficient APIs for overview data 
@@ -245,10 +245,10 @@ diagnose/troubleshooting and resource health menu items 
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
 
-Azure Portal Toolkit: <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3059%3A368196" target="_blank">ResourceMenu design in figma</a> 
+Azure Portal Toolkit: <a href="https://www.figma.com/file/Bwn8rmUOYtnPRwA3JoQTBn/Azure-Portal-Toolkit?node-id=3059%3A368196" target="_blank">ResourceMenu design in figma</a>
 
 * Resource Menu [top-blades-resourcemenublade.md](./top-blades-resourcemenublade.md)
 * Essentials [portalfx-controls-essentials.md](./portalfx-controls-essentials.md)
-* Toolbar control [portalfx-controls-toolbar.md](portalfx-controls-toolbar.md) 
+* Toolbar control [portalfx-controls-toolbar.md](portalfx-controls-toolbar.md)
 * Context Pane [top-extensions-context-panes.md](top-extensions-context-panes.md)
 * Properties page [portalfx-blades-properties.md](portalfx-blades-properties.md)

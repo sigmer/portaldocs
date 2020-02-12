@@ -314,7 +314,7 @@ behaviors you want to override from your asset type and you're done.
 | `MarketplaceItemId` | (Optional) Specifies the Marketplace item id (aka gallery package id) to launch from the "Add" command on the resource type Browse blade, if applicable. |
 | `MarketplaceMenuItemId` | (Optional) Specifies the Marketplace menu item to launch from the "Add" command on the resource type Browse blade, if applicable. |
 | `ServiceDisplayName` | (Optional) Overrides the text to use in the Browse (More services) menu, if applicable. |
-| `UseResourceMenu` | (Optional) Overrides the asset type's `UseResourceMenu` flag. |
+| `UseResourceMenu` | (Optional) Overrides the asset type's ResourceMenu options. |
 | `Visibility` | (Optional) Indicates whether the kind should be hidden from resource lists. Values: `Hidden`. |
 
 If different kinds need to opt in to a static resource menu overview item, add the `<StaticOverview />` node.

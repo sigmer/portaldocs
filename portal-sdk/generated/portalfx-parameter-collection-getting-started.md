@@ -116,7 +116,7 @@ To define a Parameter Provider the 'ParameterProvider' attribute is applied in P
 </Blade>
 ```
 
-Here the ParameterProvider property indicates that this part is a provider which will have a property on the view model named parameterProvider that will receiving initial data from the collector (when provided) and returning back a completed result. 
+Here the ParameterProvider property indicates that this part is a provider which will have a property on the view model named parameterProvider that will receiving initial data from the collector (when provided) and returning back a completed result.
 
 Continuing with this example parameterProvider now needs to be defined as a property of type ParameterProvider<TResult, TEditScope> on ParameterProviderFormPartViewModel. To ensure the ParameterProvider and ParameterCollector can exchange data the TResult generic type must match the TResult generic type used on the parameter collector model.  In this scenario we define a simple model called ServerConfig for our TResult and for TEditScope  we use a different model of type ServerFormData. Note for many scenarios TResult and TEditScope may infact be the same type, to demonstrate that they can be structurally different we use different types here.
 

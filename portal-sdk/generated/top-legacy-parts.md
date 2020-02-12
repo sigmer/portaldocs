@@ -1,7 +1,7 @@
 
 <a name="parts"></a>
 # Parts
-   
+
 <a name="parts-overview"></a>
 ## Overview
 
@@ -43,7 +43,7 @@ The following sections cover these topics.
 
 * [Handling assets that no longer exist](#handling-assets-that-no-longer-exist)
 
-* * * 
+* * *
 
 <a name="parts-overview-traditional-parts-and-template-blades"></a>
 ### Traditional parts and template blades
@@ -244,13 +244,13 @@ To register a part with the gallery, you need to add the `PartGalleryInfo` tag i
 The **Title**, **Category**, and **Thumbnail** parts are reasonably intuitive.
 
 Some tile experiences require that parts are configured when they are dropped from the tile gallery. The **AutoConfigSelectablePath** property performs this task for parts that have this requirement.
- 
+
   <!-- TODO: Determine whether the following sentence is more appropriate.
    The **AutoConfigSelectablePath** property set a requirement to configure parts when they are dropped from the tile gallery.
    for parts that have this requirement.
   -->
- 
- The following is the path to a selectable that is located inside the ViewMmodel and is immediately set to `true` by the Framework when the part is dropped on a dashboard. The selectable can be configured to open a context blade for configuration. The  example located at `<dir>/Client/V1/Parts/TileGallery/ViewModels/GeneralGalleryPart.ts` demonstrates how this type of selectable is configured. The example code is in the following code. 
+
+ The following is the path to a selectable that is located inside the ViewMmodel and is immediately set to `true` by the Framework when the part is dropped on a dashboard. The selectable can be configured to open a context blade for configuration. The  example located at `<dir>/Client/V1/Parts/TileGallery/ViewModels/GeneralGalleryPart.ts` demonstrates how this type of selectable is configured. The example code is in the following code.
 
    ```typescript
 
@@ -296,7 +296,7 @@ container.registerSelectable(
 ```
 
 If the part that is being developed is associated with an Ibiza asset like an ARM resource, then it should be associated with an asset type and have a single input definition whose `IsAssetId` property is `true`.  If this is not the case then the part will appear in the **General** category of the part gallery.
- 
+
 <a name="parts-overview-defining-the-sizing-behavior"></a>
 ### Defining the sizing behavior
 
@@ -350,7 +350,7 @@ A working copy is located at [http://aka.ms/portalfx/samples#blade/SamplesExtens
 
 ```
 
-4. The following part defaults to an arbitrary size, and can be resized programatically.  
+4. The following part defaults to an arbitrary size, and can be resized programatically.
 
 ```xml
 
@@ -584,7 +584,7 @@ The following example populates the part with sample data and set `noDataMessage
 container.noDataMessage("Enable deployments to see your history");
 ```
 
-In this example, the part is grayed-out and is non-interactive. The message is displayed on top of the part. To remove the message, set the `noDataMessage` value back to `null`. 
+In this example, the part is grayed-out and is non-interactive. The message is displayed on top of the part. To remove the message, set the `noDataMessage` value back to `null`.
 
 This feature informs the user that the feature exists, although no data is available yet. If the extension needs to disable a part while the  data is loading, it should return a promise from the  `onInputsSet` method or use the `container.operations` queue.
 
@@ -595,7 +595,7 @@ By default, all blades and parts are 'pinnable'.  Pinning a part creates a copy 
 
 ![alt-text](../media/portalfx-ui-concepts/dashboard.png "Dashboard")
 
-All parts are pinnable by default, at little or no cost to the developer.  Part settings are copied to the new part, and the current size is maintained.  The new part is a complete copy of the original part, and can be independently configured, resized, or moved around on the dashboard. 
+All parts are pinnable by default, at little or no cost to the developer.  Part settings are copied to the new part, and the current size is maintained.  The new part is a complete copy of the original part, and can be independently configured, resized, or moved around on the dashboard.
 
 When a part is pinned or moved to another blade, a new ViewModel for that part is created.  This ViewModel will have the exact same contract.  The inputs to the part are stored in the Portal's cloud settings, and replayed onto the part when the dashboard loads.  For example, the robots part in this sample takes a single input named `id`, which comes from the blade.  When the part is pinned to the dashboard, the blade will obviously not be available, therefore the `id` of the part is stored in persistent storage. The  `id` of the part is in the pdl file located at `<dir>\SamplesExtension\Extension\Client\Hubs\Browse\Browse.pdl`, and it is also in the following code.
 
@@ -652,7 +652,7 @@ When users customize or pin a part, the following states are stored and used the
 
 Because these states are stored, these parts need to be backwards-compatible.
 
-Supporting new functionality may require the modification of the schema of a part's inputs and settings. 
+Supporting new functionality may require the modification of the schema of a part's inputs and settings.
 
 The Azure Portal always calls the most recent edition of an extension, which is specified in the extensions configuration file. However, older versions of inputs and settings that were stored by earlier editions of an extension may still exist, and they may be incompatible with the most recent edition of the extension. Consequently, users may experience unexpected results when the extension or part is called with previous settings.
 
@@ -664,7 +664,7 @@ This example is based on the sample located at `<dir>\Client\V1\Hubs\Browse\Brow
 
  The **CanUseOldInputVersion** attribute can be set to `true` to specify that the part can process older versions of inputs. It should be used in conjunction with the  part property named `version`, as in the following example.
   <!--
-gitdown": "include-file", "file": "../../../src/SDK/AcceptanceTests/Extensions/SamplesExtension/Extension/Client/V1/Hubs/Browse/Browse.pdl
+gitdown": "include-file", "file": "../../../src/SDK/Extensions/SamplesExtension/Extension/Client/V1/Hubs/Browse/Browse.pdl
 -->
 
 ```xml
@@ -750,7 +750,7 @@ Developers occasionally build and ship parts, and later  discontinue their funct
 
 Azure customers have informed the Azure team that parts disappearing automatically from their startboards is an extremely dissatisfactory experience. To address this customer request, Azure has created a process that allows developers to permanently discontinue a part while providing a good user experience that uses customizations.
 
-To discontinue a part, developers delete the majority of the code from the `ViewModel`, but leave the constructor and `onInputsSet`.  in place so that the tile still loads. 
+To discontinue a part, developers delete the majority of the code from the `ViewModel`, but leave the constructor and `onInputsSet`.  in place so that the tile still loads.
 
 Then use the `container.noDataMessage()` in the constructor to inform the user that the part is no longer supported, and return empty promise from `onInputsSet`.
 
@@ -847,10 +847,10 @@ The following procedure to remove a part from a blade  layout.
 
 1. Remove the  `<Part/>` or `<PartReference/>` tag from the extension configuration or pdl file.
 
-1. If the goal was to permanently discontinue a part, including removing support for pinned instances and the tile gallery, then follow the procedure specified in [#permanently-discontinue-a-part](#permanently-discontinue-a-part). Otherwise, to continue supporting instances of the part that have been pinned to user startboards, or to allow new users to  find the part in the tile gallery,  replace the part tag with a  global definition for  a  `<RedirectPart/>` tag, as in the following xml.  
+1. If the goal was to permanently discontinue a part, including removing support for pinned instances and the tile gallery, then follow the procedure specified in [#permanently-discontinue-a-part](#permanently-discontinue-a-part). Otherwise, to continue supporting instances of the part that have been pinned to user startboards, or to allow new users to  find the part in the tile gallery,  replace the part tag with a  global definition for  a  `<RedirectPart/>` tag, as in the following xml.
 
 ```xml
-<RedirectPart Name="SAME EXACT PART NAME THAT IS BEING REDIRECTED FROM" 
+<RedirectPart Name="SAME EXACT PART NAME THAT IS BEING REDIRECTED FROM"
               Blade="EXACT BLADE NAME THAT THE PART WAS DEFINED IN"
               Lens="OPTIONAL - EXACT LENS NAME THE PART WAS DEFINED IN"
               Extension="OPTIONAL - ONLY APPLICABLE IF THE PART IS DEFINED IN A DIFFERENT EXTENSION">
@@ -859,7 +859,7 @@ The following procedure to remove a part from a blade  layout.
 ```
 
 <!-- The following section is used in more than one document. -->
-  
+
  
 <a name="parts-overview-improving-part-responsiveness"></a>
 ### Improving Part responsiveness

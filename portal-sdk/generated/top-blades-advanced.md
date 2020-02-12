@@ -6,7 +6,7 @@ The following sections discuss advanced topics in template blade development.
 
 * [Deep linking](#deep-linking)
 
-* [Displaying notifications using the status bar](#displaying-notifications-using-the-status-bar) 
+* [Displaying notifications using the status bar](#displaying-notifications-using-the-status-bar)
 
 * [Making your blade pinnable to a dashboard](#making-your-blade-pinnable-to-a-dashboard)
 
@@ -29,11 +29,11 @@ The portal lets the user link directly to a particular blade. As long as your bl
     https://portal.azure.com/{directory}#blade/{extension}/{blade}
     ```
 
-    Example: 
+    Example:
 
     [https://portal.azure.com/microsoft.com#blade/HubsExtension/HelpAndSupportBlade](https://portal.azure.com/microsoft.com#blade/HubsExtension/HelpAndSupportBlade)
 
-    Blade parameters are serialized in consecutive name/value pairs. 
+    Blade parameters are serialized in consecutive name/value pairs.
 
     Format:
 
@@ -58,7 +58,7 @@ The portal lets the user link directly to a particular blade. As long as your bl
 
     [https://portal.azure.com/microsoft.com#create/NewRelic.NewRelicAccount](https://portal.azure.com/microsoft.com#create/NewRelic.NewRelicAccount)
 
-    To link to the Marketplace item details blade for your package, add "/preview" to the end of your Create blade link. 
+    To link to the Marketplace item details blade for your package, add "/preview" to the end of your Create blade link.
 
     Format:
 
@@ -99,7 +99,7 @@ The portal lets the user link directly to a particular blade. As long as your bl
 
 A status bar can be displayed at the top of a blade. The status bar supports text, and icon, and multiple severities (e.g. warning,info,error) and supports navigating to a blade or external site when clicked.
 
-There is a sample for the status bar at [https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar](https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar). 
+There is a sample for the status bar at [https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar](https://df.onecloud.azure-test.net/?feature.samplesextension=true#blade/SamplesExtension/TemplateBladeWithStatusBar).
 
 If you have the source code to the samples you can find the source code at this path: `Client/V2/Blades/Template/TemplateBladeWithStatusBar.ts`. It is also included in the following code.
 
@@ -167,7 +167,7 @@ No-pdl blades can be made pinnable by making the following changes to your code.
 
 1. Implement an `onPin' method`.
 
-1. Return a `PartReference` instance to a Part you design.  The Part should open the Blade when clicked. 
+1. Return a `PartReference` instance to a Part you design.  The Part should open the Blade when clicked.
 
 These concepts are illustrated in the sample located at `<dir>/Client/V2/Blades/Pinning/PinnableBlade.ts` and in the working copy located at [https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111](https://df.onecloud.azure-test.net/#blade/SamplesExtension/PinnableBlade/personId/111).
 

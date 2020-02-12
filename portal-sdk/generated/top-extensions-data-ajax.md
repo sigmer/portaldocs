@@ -5,7 +5,7 @@ Extensions typically make AJAX calls to fetch data that is rendered in a blade/p
 
 Note that we no longer recommend using QueryCache/EntityCache as a best practice. They were developed when blades were composed of multiple parts and the parts shared data.
 
-The best practice today is to use the `Fx/Ajax` module directly from your blade/part and if calling ARM, use the batch helpers in that module. For most services, calls will need to be authenticated by setting a  JWT token in the Authorization header. Here is a sample - 
+The best practice today is to use the `Fx/Ajax` module directly from your blade/part and if calling ARM, use the batch helpers in that module. For most services, calls will need to be authenticated by setting a  JWT token in the Authorization header. Here is a sample -
 
 ```typescript
 
@@ -48,7 +48,7 @@ const loadDataFromGraph = ajax<UserDetails>({
 
 Extensions that call ARM should always batch their requests. This results in fewer `options` calls than the api/invoke method, and also reduces the number of concurrent network requests. As many as 20 calls can be batched into a single request. The framework automatically attaches the ARM token for batch requests. Note that the batch helper is tailored to call ARM (and only supports their batch contract).
 
-To batch multiple requests as one, use the batch helpers that are located in the Fx/Ajax module, as in the following code - 
+To batch multiple requests as one, use the batch helpers that are located in the Fx/Ajax module, as in the following code -
 
 ```typescript
 

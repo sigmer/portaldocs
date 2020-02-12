@@ -18,7 +18,7 @@ An example of a context pane is in the following image.
 <a name="context-panes-how-to-author-a-context-pane"></a>
 ### How to author a context pane
 
-A context pane can be authored as a standard blade implementation. The extension can call a variant of the blade-opening APIs that will instruct the Portal to open the context pane at the location at which you want to open the pane. 
+A context pane can be authored as a standard blade implementation. The extension can call a variant of the blade-opening APIs that will instruct the Portal to open the context pane at the location at which you want to open the pane.
 An example of using a context pane is located at `<dir>/Client/V1/Navigation/OpenAndCloseBladeApis/ViewModels/OpenBladeApiSamplesViewModel.ts`. It is also in the following code.
 
 ```
@@ -491,5 +491,5 @@ export class OpenBladeApiSamplesViewModel
 }
 
 ```
-    
+
 For information about blade references, see [top-blades-opening-and-closing.md#open-blade-methods](top-blades-opening-and-closing.md#open-blade-methods).

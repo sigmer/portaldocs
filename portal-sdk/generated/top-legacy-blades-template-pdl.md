@@ -35,7 +35,7 @@ What follows is a walk-through of creating a TemplateBlade.
 
 * [Displaying a loading indicator UX](#displaying-a-loading-indicator-ux)
 
-* * * 
+* * *
 
 <a name="legacy-templateblades-with-pdl-creating-the-templateblade"></a>
 ### Creating the TemplateBlade
@@ -54,23 +54,23 @@ Use the following three steps to create a template blade.
     ```
     The PDL file can contain several options. The following is a list of the most relevant parameters.
 
-    **Name**: Name of the blade. This name is used later to refer to this blade. 
+    **Name**: Name of the blade. This name is used later to refer to this blade.
 
-    **ViewModel**: Required field.  The ViewModel that is associated with this blade. 
+    **ViewModel**: Required field.  The ViewModel that is associated with this blade.
 
-    **Template**: Required field.  The HTML template for the blade. 
+    **Template**: Required field.  The HTML template for the blade.
 
-    **Size**: Optional field. The width of the blade. The default value is `Medium`. 
+    **Size**: Optional field. The width of the blade. The default value is `Medium`.
 
-    **InitialDisplayState**: Optional field.  Specifies whether the blade is opened maximized or not. The default value is `Normal`. 
+    **InitialDisplayState**: Optional field.  Specifies whether the blade is opened maximized or not. The default value is `Normal`.
 
-    **Style**: Optional field. Visual style for the blade. The default value is `Basic`. 
+    **Style**: Optional field. Visual style for the blade. The default value is `Basic`.
 
     **Pinnable**: Optional field. Flag that specifies whether the blade can be pinned or not. The default value is `false`.
 
     **ParameterProvider**: Optional field. Flag that specifies whether the blade provides parameters to other objects. The default value is  `false`.
 
-    **Export**: Optional field.  Flag that specifies whether this blade is exported in the extension so that it can be opened by other extensions. As a result, a strongly typed blade reference is created. 
+    **Export**: Optional field.  Flag that specifies whether this blade is exported in the extension so that it can be opened by other extensions. As a result, a strongly typed blade reference is created.
 
 1. Create a `ViewModel` TypeScript class. The following example demonstrates the `ViewModel` that is associated with the blade from the PDL file in the previous step. This model exposes two observable properties, but more complex behavior can be added as appropriate.
 
@@ -96,7 +96,7 @@ Use the following three steps to create a template blade.
 
     ```
 
-1. Create a template for the blade using regular HTML and **Knockout**. The **Knockout** bindings are bound to the public properties in the `ViewModel` in the previous step. 
+1. Create a template for the blade using regular HTML and **Knockout**. The **Knockout** bindings are bound to the public properties in the `ViewModel` in the previous step.
 
     ```html
     <div>This is an example template blade that shows a link.</div>
@@ -300,7 +300,7 @@ Blades can display buttons that are docked at the base of the blade.  The follow
 
           // initialize the ActionBar
 
-                this.actionBar = new MsPortalFx.ViewModels.ActionBars.GenericActionBar.ViewModel(container);   
+                this.actionBar = new MsPortalFx.ViewModels.ActionBars.GenericActionBar.ViewModel(container);
                 this.actionBar.actionButtonClick = () => {
                     console.log("Clicked!!!");
                 };

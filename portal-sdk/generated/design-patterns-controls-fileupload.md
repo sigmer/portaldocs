@@ -52,7 +52,7 @@ The FileUpload control offers different create methods and has the following ent
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/FileUpload_createBlobStoreUpload_Playground" target="_blank">FileUpload (BlobStoreUpload)</a>
 
- 
+
 
 
  

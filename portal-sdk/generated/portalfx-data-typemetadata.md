@@ -10,12 +10,12 @@
 <a name="type-metadata"></a>
 ## Type metadata
 
-When performing merge operations, the DataSet library will need to know a little bit about the schema of your model objects. For example, in the case of a Computer, we want to know the property which defines the primary key of that object. This information which describes the object, and all of its properties is referred to in the portal as *type metadata*. 
+When performing merge operations, the DataSet library will need to know a little bit about the schema of your model objects. For example, in the case of a Computer, we want to know the property which defines the primary key of that object. This information which describes the object, and all of its properties is referred to in the portal as *type metadata*.
 
 <a name="type-metadata-authored-type-metadata"></a>
 ### Authored type metadata
 
-You may choose to write your own metadata to describe model objects. This is recommended if you have not C# service tier that are called by the client i.e there are not client to server contracts to maintain. 
+You may choose to write your own metadata to describe model objects. This is recommended if you have not C# service tier that are called by the client i.e there are not client to server contracts to maintain.
 
 The follow snippets demonstrate how to author the datamodel, typemetadata and registration of that typemetadata for a Computer that contains a collection of ComputerComponents.
 
@@ -330,7 +330,7 @@ In the samples above, the `[TypeMetadataModel]` data attribute designates this c
 
 - Add a Project reference from Extension.csproj to Extension.DataModels.csproj
 - Build to generate datamodels and typemetadata
-- Include generated models in your csproj if not already done so.  Within the Extension.csproj this is simply 
+- Include generated models in your csproj if not already done so.  Within the Extension.csproj this is simply
 
 ```xml
 <ItemGroup>

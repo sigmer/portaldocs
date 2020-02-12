@@ -42,15 +42,15 @@ Import statements at the top of the file pull in things like the template blade 
 
 Below that is the template blade decorator which is where you supply your HTML template.  The template can include Knockout constructs for data binding as well as referencing Ibiza controls. The document located at [top-extensions-controls.md](top-extensions-controls.md) covers the supported features and recommended patterns in detail. There are other, optional pieces of metadata you can specify in the decorator such as opting in to the feature that lets users pin your blade.
 
-Below the decorator is a TypeScript class that implements the blade logic. The name of the class is used as a unique identifier for a blade within your extension. That name will appear in URLs and will be used to locate the blade when a user clicks on a pinned part. 
+Below the decorator is a TypeScript class that implements the blade logic. The name of the class is used as a unique identifier for a blade within your extension. That name will appear in URLs and will be used to locate the blade when a user clicks on a pinned part.
 
 **WARNING**: Changing these names after shipping will result in broken links.
 
 This class has three public properties.
 
-**Title**:  String which can optionally be observable. It directly maps to what the user will see in the blade header. 
+**Title**:  String which can optionally be observable. It directly maps to what the user will see in the blade header.
 
-**subtitle**:  String which can optionally be observable. It directly maps to what the user will see in the blade header.  
+**subtitle**:  String which can optionally be observable. It directly maps to what the user will see in the blade header.
 
   ```typescript
 
@@ -72,5 +72,5 @@ There are several samples that show more advanced features of template blades.
 
 * Live running sample
 
-    The working copy is located at 
+    The working copy is located at
     [https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/TemplateBladesBlade/overview](https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/TemplateBladesBlade/overview)

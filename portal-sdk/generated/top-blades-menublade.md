@@ -3,14 +3,14 @@
 ## MenuBlade
 
 Menu blades are rendered as a menu on the left side of the screen. The Shell combines this blade with the blade that is immediately to its right. Each item that is referenced from the left menu is rendered using the same header as the menu blade, resulting in the two blades being displayed as one blade.  This is similar to the way that the resource menu blade operates.  A user can click on the double left arrow to collapse the menu pane, as in the following image.
- 
+
 ![alt-text](../media/top-blades-menublade/menuBlade.png "Menu Blade")
 
 The process is as follows.
 
 1. The menu blade is displayed as a menu, or list of items that open blades when clicked
 1. The menu blade is rendered to the left of the screen
-1. The blades that are opened from the menu share the chrome with the menu blade 
+1. The blades that are opened from the menu share the chrome with the menu blade
 
 **NOTE**: In this discussion, `<dir>` is the `SamplesExtension\Extension\` directory, and  `<dirParent>`  is the `SamplesExtension\` directory, based on where the samples were installed when the developer set up the SDK. If there is a working copy of the sample in the Dogfood environment, it is also included.
 
@@ -65,7 +65,7 @@ public onInitialize() {
 }
 
 ```
- 
+
 There are a few things to notice in the preceding code.
 
 * Menus have an overview item. This item is the default selected item when the user loads the menu blade.
@@ -74,7 +74,7 @@ There are a few things to notice in the preceding code.
 * Each menu item opens a blade, and all necessary parameters are provided.
 * The menu blade ideally should not be loading data. That can be done on the child blade after the user opens the blade.
 
-You can view a working copy of the MenuBlade in the Dogfood environment sample located at 
+You can view a working copy of the MenuBlade in the Dogfood environment sample located at
 [https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SampleMenuBlade](https://df.onecloud.azure-test.net/?SamplesExtension=true#blade/SamplesExtension/SampleMenuBlade).
 
 <a name="menublade-optional-functionality"></a>
@@ -94,7 +94,7 @@ You can view a working copy of the MenuBlade in the Dogfood environment sample l
 
 * Menu items can also provide a tooltip
 
-    This can be used to display further information on what the menu item defines, or it can also be used to explain to the user reasons why the menu item is disabled. 
+    This can be used to display further information on what the menu item defines, or it can also be used to explain to the user reasons why the menu item is disabled.
 
 Menu blades also allow the user to collapse the menu pane.  This is not available programmatically to control by developers, as in the preceding image.
 

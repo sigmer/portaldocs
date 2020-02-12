@@ -72,7 +72,7 @@ The RangeSlider control offers different create methods and has the following en
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/RangeSlider_createCustomRangeSlider_Playground" target="_blank">RangeSlider (CustomRangeSlider)</a>
 
- 
+
 
 
  

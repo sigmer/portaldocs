@@ -43,7 +43,7 @@ Plugins are enabled in three ways.
 
 To enable a plugin you need to do two things.
 First, you must set the appropriate bit flag when you construct the grid.
-It is important that you combine the bit flags with the "|" or "+" operator. 
+It is important that you combine the bit flags with the "|" or "+" operator.
 *A common pitfall is to use "&" which results in no plugins.*
 Second, you must provide plugin options.
 
@@ -121,8 +121,8 @@ this.basicGridViewModel.columns = ko.observableArray<MsPortalFx.ViewModels.Contr
 <a name="grid-formatting"></a>
 ### Formatting
 Columns are formatted using three key properties.
-  - ``itemKey``: The property of your data item to display.  
-  - ``format``: Optional format type from the Format enumeration. 
+  - ``itemKey``: The property of your data item to display.
+  - ``format``: Optional format type from the Format enumeration.
   - ``formatOptions``:  Optional formatter specific options.
 
 By default values you specify with the column itemKey will be formated as text.
@@ -138,7 +138,7 @@ The data value of the date can be a number, string, or date.
 The formatters will convert to date and then use the Intl API to convert to text.
 The following formatters can be used for formatting dates:
 - ShortDate: 7/18/2013
-- LongDate: Thursday, July 18, 2013 
+- LongDate: Thursday, July 18, 2013
 - MonthDay: July 18
 - YearMonth: July, 2013
 - ShortTime: 11:20 AM
@@ -190,7 +190,7 @@ It is capable of formatting numbers in many ways including currency.
 There are several formatters for displaying images in cells.
 The preferred formatters are SvgIcon and SvgIconLookup.
 The SvgIcon formatter allows you to display an SVG and optional text where the data value contains the SVG or an object containing the SVG and text.
-The SvgIconLookup allows you to map data values to SVGs for display.  
+The SvgIconLookup allows you to map data values to SVGs for display.
 There are two other similar formatters that use image uris instead of SVGs.
 However, portal SVGs are preferred because they are themed.
 
@@ -297,7 +297,7 @@ When not being edited the cells are formatted with ``format`` specified in the c
 A row remains in the edit state until all the validators on the cells indicate the row is valid.
 
 There are special formatters for editing that create form controls that allow data editing.
-The formatters specifically for editing are 
+The formatters specifically for editing are
 - CheckBox
 - TextBox
 - MultiselectDropDown
@@ -362,7 +362,7 @@ The context menu shortcut plugin is enabled by default.
 To customize the context menu you must supply a ``commandGroup`` property on your grid item containg the command group you wish to display.
 
 [Context Menu Shortcut Grid Sample][ContextMenuSample]
- 
+
 <a name="grid-scrolling"></a>
 ### Scrolling
 The scrollable grid plugin enables scrolling within the grid.

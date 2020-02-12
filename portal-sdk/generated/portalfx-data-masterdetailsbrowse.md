@@ -20,7 +20,7 @@ presented with a consistent view of the data.
 <a name="master-details-browse-scenario-the-masterdetail-area-and-datacontext"></a>
 ### The MasterDetail Area and DataContext
 The portal uses a concept calls an Area to hold the QueryCache and other data objects that will be shared across multiple blades.
-To create an Area create a folder named for the area you're creating (`MasterDetail` in this case) inside your extension's `Client` folder. 
+To create an Area create a folder named for the area you're creating (`MasterDetail` in this case) inside your extension's `Client` folder.
 Inside the folder create a typescript file with the area name that ends in `Area` (so `MasterDetailArea.ts` in our example).
 This file holds a DataContext class. This DataContext is the class that will be passed to all the view models associated with the area.
 The DataContext for the MasterDetail Area contains the following:
@@ -52,7 +52,7 @@ export class DataContext {
 The QueryCache and the EntityCache are the two memebers relevant for the browse scenario we're going over. The DataContext also
 contains an EditScopeCache which is used in the master detail edit scenario.
 
-If you're creating a new Area one more step that needs to be done is to edit your `Program.ts` file to create the DataContext when your 
+If you're creating a new Area one more step that needs to be done is to edit your `Program.ts` file to create the DataContext when your
 extension is loaded. Find the `initializeDataContexts` method and then use the `setDataContextFactory` method to set the DataContext like so:
 
 ```typescript
@@ -64,7 +64,7 @@ extension is loaded. Find the `initializeDataContexts` method and then use the `
 <a name="master-details-browse-scenario-the-websites-querycache-and-entitycache"></a>
 ### The websites QueryCache and EntityCache
 Now that we've gone over the DataContext that is be available to all blades in the Area let's go over the data caches we'll use
-in the master/detail browse scenario. 
+in the master/detail browse scenario.
 
 The first is the QueryCache. We use a QueryCache to cache a list of items as opposed to an EntityCache which caches a single item.
 
@@ -145,7 +145,7 @@ fetch call.
 <a name="master-details-browse-scenario-implementing-the-master-view"></a>
 ### Implementing the master view
 Now let's get in to how to visualize the data in the caches. The first step is to make sure the PDL that defines the blades
-specifies the right Area so your view models receive your DataContext. In the `<Definition>` tag at the top of the PDL file 
+specifies the right Area so your view models receive your DataContext. In the `<Definition>` tag at the top of the PDL file
 include an Area attribute whose value corresponds to the name of your Area:
 
 ```xml
@@ -155,7 +155,7 @@ Area="V1/MasterDetail">
 
 ```
 
-The view model for the websites list is in `\Client\MasterDetail\MasterDetailBrowse\ViewModels\MasterViewModels.ts`. You'll notice 
+The view model for the websites list is in `\Client\MasterDetail\MasterDetailBrowse\ViewModels\MasterViewModels.ts`. You'll notice
 one of the first things the blade does is create a view on the QueryCache:
 
 ```typescript
@@ -170,7 +170,7 @@ visualizing data from the same cache. The advantage of using views is it allows 
 of data for you.
 
 There are two controls on this blade and they both make use of the view we created. The grid visualizes the data in the QueryCache and
-the OptionGroup control that allows the user to pick whether they want to see only websites that are in a running state, websites in 
+the OptionGroup control that allows the user to pick whether they want to see only websites that are in a running state, websites in
 a stopped state or both. We'll start by looking at how the grid is hooked up to the QueryCache then we'll examine how the OptionGroup
 control works.
 

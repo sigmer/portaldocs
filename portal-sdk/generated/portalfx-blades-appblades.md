@@ -15,7 +15,7 @@ When using AppBlade you are responsible for:
 * **Accessibility**: you are reponsible for making your blade accessible up to Microsoft standards
 * **Theming**: you are responsible for responding to theming behavior
 * **Consistent Look & feel**: you are responsible for coming up with a visual design that is consistent with the rest of Ibiza
-* **Controls**: since you can't use Ibiza Fx controls you need to build your own controls or use available alternatives 
+* **Controls**: since you can't use Ibiza Fx controls you need to build your own controls or use available alternatives
 
 <a name="introduction-to-appblades-creating-your-first-appblade"></a>
 #### Creating your first AppBlade
@@ -154,7 +154,7 @@ window.addEventListener("message", receiveMessage, false);
 
 ```
 
-Then, provide a handler for the incoming message. In the example below, the **receiveMessage** method handles three different incoming message types (including reacting to theming changes in the portal) 
+Then, provide a handler for the incoming message. In the example below, the **receiveMessage** method handles three different incoming message types (including reacting to theming changes in the portal)
 
 ```xml
 

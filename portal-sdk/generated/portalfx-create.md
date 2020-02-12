@@ -264,7 +264,7 @@ this._locationsDropDown = LocationDropDown.create(container, {
 <a name="building-custom-create-forms-arm-dropdown-options"></a>
 ### ARM dropdown options
 Each ARM dropdown can disable, hide, group, and sort.
- 
+
 <a name="building-custom-create-forms-arm-dropdown-options-disable"></a>
 #### Disable
 This is the preferred method of disallowing the user to select a value from ARM. The disable callback will run for each fetched value from ARM. The return value of your callback will be a reason for why the value is disabled. If no reason is provided, then the value will not be disabled. This is to ensure the customer has information about why they can’t select an option, and reduces support calls.
@@ -274,7 +274,7 @@ disable: (loc) => { return !!~["5ag", "3bg"].indexOf(loc.property) && "Disabled 
 
 ```
 When disabling, the values will be displayed in groups with the reason they are disabled as the group header. Disabled groups will be placed at the bottom of the dropdown list.
- 
+
 <a name="building-custom-create-forms-arm-dropdown-options-hide"></a>
 #### Hide
 This is an alternative method of disallowing the user to select a value from ARM. The hide callback will run for each fetched value from ARM. The return value of your callback will return a boolean for if the value should be hidden. If you choose to hide, a message telling the user why some values are hidden is required.
@@ -294,9 +294,9 @@ It's recommended to use the `disable` option so you can provide scenario-specifi
 <a name="building-custom-create-forms-arm-dropdown-options-group"></a>
 #### Group
 This is a way for you to group values in the dropdown. The group callback will take a value from the dropdown and return a display string for which group the value should be in. If no display string or an empty string is provided, then the value will default to the top level of the group dropdown.
- 
+
 If you want to sort the groups (not the values within the group), you can supply the 'sort' option, which should be a conventional comparator function that determines the sort order by returning a number greater or less than zero. It defaults to alphabetical sorting.
- 
+
 ```typescript
 
 grouping: {
@@ -307,19 +307,19 @@ grouping: {
 },
 
 ```
- 
+
 If you both disable and group, values which are disabled will be placed under the disabled group rather than the grouping provided in this callback.
- 
+
 <a name="building-custom-create-forms-arm-dropdown-options-sort"></a>
 #### Sort
 If you want to sort values in the dropdown, supply the 'sort' option, which should be a convention comparator function that returns a number greater or less than zero. It defaults to alphabetical based on the display string of the value.
- 
+
 ```typescript
 
 sort: (a: Value, b: Value) => MsPortalFx.compare(b.property, a.property),
 
 ```
- 
+
 If you sort and use disable or group functionality, this will sort inside of the groups provided.
 
 <a name="building-custom-create-forms-edit-scope-based-accessible-dropdowns"></a>

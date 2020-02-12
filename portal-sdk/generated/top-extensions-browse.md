@@ -271,11 +271,11 @@ There are two options you can use group your kinds:
              Icon="{Svg IsLogo=true, File=../../Svg/Watches/generic.svg}"
              BladeName="AppleWatchBlade"
              PartName="AppleWatchTile"
-             UseResourceMenu="true"
              MarketplaceItemId="Microsoft/watch">
     <Browse Type="ResourceType"
             UseCustomConfig="true"
             UseSupplementalData="true" />
+    <ResourceMenu ResourceProvidedBy="NoResource" />
     <ResourceType ResourceTypeName="Microsoft.Test/watches"
                   ApiVersion="2017-04-01">
       <Kind Name="apple"

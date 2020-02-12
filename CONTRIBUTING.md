@@ -5,21 +5,21 @@
 
 1. Install [nodejs LTS ](https://nodejs.org/en/download/)
 1. Install latest version of npm
-   
-   ```ts 
+
+   ```ts
    $> npm install npm@latest -g
    ```
-1. Install [gulp] by running 
+1. Install [gulp] by running
     ```ts
     $> npm install gulp -g
     ```
 
 ## Authoring a document
 
-Author or update the document within the portal-sdk/templates or gallery-sdk/templates folder using [markdown](http://daringfireball.net/projects/markdown/). 
+Author or update the document within the portal-sdk/templates or gallery-sdk/templates folder using [markdown](http://daringfireball.net/projects/markdown/).
 
 ### Where to add the document
-    
+
 Add the document under the path `/[portal-sdk|gallery-sdk]/templates/*.md`
 
 The `/templates` folder for a given SDK contains the articles formatted as markdown files and *.md* extension and makes use of [gitdown](https://www.npmjs.com/package/gitdown) for document composition, code snippet injection, and table of contents generation.
@@ -37,14 +37,14 @@ To ensure all code samples remain up to date and compile successfully when used 
 To reference source code in your document directly from a *.ts, *.cs, *.pdl or *.config file use the include-section extension.
 
     For example,
-    
+
     <!-- gitdown: off -->
-    
+
         ```
         //injects the code snippet in between two comments `//config#configurationsettings` from `../Samples/SamplesExtension/Extension/Configuration/ArmConfiguration.cs` directly inline
-        {"gitdown": "include-section", "file": "../../../src/SDK/AcceptanceTests/Extensions/SamplesExtension/Extension/Configuration/ArmConfiguration.cs", "section": "config#configurationsettings"}
+        {"gitdown": "include-section", "file": "../../../src/SDK/Extensions/SamplesExtension/Extension/Configuration/ArmConfiguration.cs", "section": "config#configurationsettings"}
         ```
-        
+
     <!-- gitdown: on -->
 
 
@@ -54,19 +54,19 @@ Occasionally you will want to include the whole contents of a file into a docume
 - including a full sourcefile within a markdown document
 - to improve maintainability where text needs to appear in multiple documents you can composing a markdown document from other markdown documents.
 
-Using [gitdown](https://www.npmjs.com/package/gitdown) include-file for document composition you can inject the full content of a sourcefile or other markdown document using [gitdown syntax](https://github.com/gajus/gitdown). 
-    
+Using [gitdown](https://www.npmjs.com/package/gitdown) include-file for document composition you can inject the full content of a sourcefile or other markdown document using [gitdown syntax](https://github.com/gajus/gitdown).
+
     <!-- gitdown: off -->
-    
+
         ```
         //inject the entire portalfx-howitworks.md inline where you use the following gitdown include
         {"gitdown": "include-file", "file": "../templates/portalfx-howitworks.md"}
         ```
-        
+
     <!-- gitdown: on -->
 
 
-## Generating documents for Github 
+## Generating documents for Github
 
 ### Portal Team
 

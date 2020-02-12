@@ -71,7 +71,7 @@ The DiffEditor control offers different create methods and has the following ent
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/DiffEditor_createTypeScriptEditor_Playground" target="_blank">DiffEditor (TypeScriptEditor)</a>
 
- 
+
 
 
  

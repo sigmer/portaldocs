@@ -34,9 +34,9 @@ Although this new '`Az`' API is quite rich, only the '`Az.initialized()`' functi
 
 Following this technique, your web UI will be displayed in the browser using a child `<iframe>` element.  The choice of `<iframe>` is key to keeping your site loosely coupled with the Azure Portal site.
 
-Initializing a child `<iframe>` can be costly and **will slow your end-to-end Blade-rendering performance** relative to displaying your web UI on its native site (that is, not rehosted in the Azure Portal).  
+Initializing a child `<iframe>` can be costly and **will slow your end-to-end Blade-rendering performance** relative to displaying your web UI on its native site (that is, not rehosted in the Azure Portal).
 
-All Azure Portal Blades ('`Az`' Blades included) are required to meet performance goals for 'BladeFullReady' rendering time (see [here](./portalfx-performance-overview.md#blade-performance)).  This is particularly difficult for '`Az`' Blades, given the cost of a child `<iframe>`.  
+All Azure Portal Blades ('`Az`' Blades included) are required to meet performance goals for 'BladeFullReady' rendering time (see [here](./portalfx-performance-overview.md#blade-performance)).  This is particularly difficult for '`Az`' Blades, given the cost of a child `<iframe>`.
 
 Some (hopefully helpful) advice to be successful with '`Az`' Blades:
 - **Do not** assume that your web UI will render as fast in the Azure Portal as it does standalone.  Budget for Azure Portal-specific performance analysis/optimization.
@@ -120,7 +120,7 @@ As for the HTML page itself, you'll make simple Ibiza-specific additions to down
 
 ```
 
-Here, query parameters are utilized as follows:  
+Here, query parameters are utilized as follows:
 | Query parameter | '`ejs`' template parameter shown | Usage |
 | --- | --- | --- |
 | `trustedAuthority` | `trustedPortalOrigin` | The origin of the Azure Portal site that is loading this HTML page into a child IFrame.  Only messages from this origin will be intercepted and processed by the '`Az`' library running in your IFrame.  For security, this '`trustedAuthority`' URI value should be validated as described [later](#step-d---secure-your-blade-html-pages). |
@@ -151,7 +151,7 @@ or, alternatively, you can register your site via your browser's debug console, 
         uri: "https://localhost:4409",
         azExtension: true
     });
-    
+
     https://df.onecloud.azure-test.net/?feature.canmodifyextensions=true#blade/SampleAzExtension/SampleBlade
 
 Here, you would replace:
@@ -227,7 +227,7 @@ The Azure Portal requires metadata about your UI and its entry points.  Return t
 This is an optional step that makes your Blades easily debuggable with browser debug tools.  The Azure Portal's '`clientOptimizations`' query parameter can be used to control bundling and minification of JavaScript bundles as they're loaded into the browser.  This functionality can work for the JavaScript bundles used in your Blade HTML pages too.  If you are hosting your own Blade HTML pages, you should sample the '`clientOptimizations`' query parameter passed in the IFrame '`src`' URI and return scripts accordingly:
 
 * '`true`' (default if '`clientOptimizations`' is not supplied) - Scripts should be bundled and minified.
-* '`false`' - Scripts should not be bundled or minified. 
+* '`false`' - Scripts should not be bundled or minified.
 * '`bundle`' - Scripts should only be bundled but not minified.
 
 <a name="step-by-step-integration-round-out-your-blade-for-deployment-step-h-optional-flighting-your-extension-in-the-portal-s-mpac-environment"></a>
@@ -273,7 +273,7 @@ Adapt this Kusto query to analyze the 'BladeFullReady' performace of an '`Az`' B
     | where AzRender_Complete < BladeFullReady_Complete  // I've seen AzRender twice for a given BladeFullReady.  Refreshing the IFrame?
     | project BladeFullReady_Duration, AddIFrameToDOM_Duration = IFrameAddedToDom_Mark - BladeFullReady_Start, IFrameLoading_Duration = AzRender_Start - IFrameAddedToDom_Mark, AzRender_Duration, LostAfter_Duration = IFrameInitializedMessageReceived_Mark - AzRender_Complete, ResolveBladeFullReady_Duration = BladeFullReady_Complete - IFrameInitializedMessageReceived_Mark, fxVersion, openedBy, cold, extensionVersion
     | summarize count(), BladeFullReady = round(percentile(BladeFullReady_Duration, perc)), AddIFrameToDOM = round(percentile(AddIFrameToDOM_Duration, perc)), LoadIFrame = round(percentile(IFrameLoading_Duration, perc)), RenderInIFrame = round(percentile(AzRender_Duration, perc))
-    by extensionVersion 
+    by extensionVersion
     //by fxVersion
 
 Here:

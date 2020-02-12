@@ -57,7 +57,7 @@ The ListView control offers different create methods and has the following entri
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/ListView_createCustomListView_Playground" target="_blank">ListView (CustomListView)</a>
 
- 
+
 
  
 <a name="related-info"></a>

@@ -55,7 +55,7 @@ Go to the playground site to use the latest control and get source code for your
 
 *  <a href="https://ms.portal.azure.com/?Microsoft_Azure_Playground=true#blade/Microsoft_Azure_Playground/ControlsIndexBlade/TriStateCheckBox_create_Playground" target="_blank">TriStateCheckBox in the interactive controls playground</a>
 
- 
+
 
 
  
