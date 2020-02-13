@@ -38,7 +38,7 @@ There are number of framework provided alerts:
 1. Extension SDK age
     - Sev3 IcM incident for an extension when its SDK is older than 60 days
     - Sev2 for over 90 days
-    
+
     Note: You can set the time of the day at which you want to trigger an SDK age alert. Learn more about timezone based alerting [here](#timezone-based-alerting).
 1. Extension Alive
 1. Telemetry Throttled
@@ -128,13 +128,13 @@ Per each of those, you can define a set of criteria like the below.
 <a name="performance-configuration-what-is-environment"></a>
 #### What is environment
 
-"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com 
+"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
 <a name="performance-configuration-what-is-enabled"></a>
 #### What is enabled
 
-"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level 
+"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
 depending on where it's located in customization json. For details, see "enabled" property in json snippet.
 
 You can define N number of criteria like the below.
@@ -189,7 +189,7 @@ This is used to catch any unusual spikes on the weekends/low traffic periods.
 <a name="performance-configuration-what-is-namepath"></a>
 #### What is namePath
 
-This only applies to blades or parts and defines what blades or parts to alert on, you can either use an asterisk("*") sign to include 
+This only applies to blades or parts and defines what blades or parts to alert on, you can either use an asterisk("*") sign to include
 all the blades or parts within your extension or specify a list of full blade or part names to alert on. The percentileDurationThresholdInMilliseconds, minAffectedUserCount and bottomMinAffectedUserCount specified in critiera are for individual blades or parts.
 
 <a name="performance-configuration-what-is-exclusion"></a>
@@ -232,7 +232,7 @@ Currently performance alerts run every 10 minutes assessing the previous 90 minu
 <a name="availability"></a>
 ## Availability
 
-The alerts can be configured for extension availability, blade availability and part availability on different environments including national clouds. 
+The alerts can be configured for extension availability, blade availability and part availability on different environments including national clouds.
 
 <a name="availability-configuration-1"></a>
 ### Configuration
@@ -359,7 +359,7 @@ This only applies to blades or parts and defines what blades or parts you wish t
 #### What is safeDeploymentStage
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
-Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages. 
+Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages.
 
 <a name="availability-configuration-1-what-is-datacentercode-1"></a>
 #### What is datacenterCode
@@ -449,13 +449,13 @@ At a high level you define:
 <a name="client-error-configuration-2-what-is-environment-2"></a>
 #### What is environment
 
-"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com 
+"environment" property is an array. Its supported value is portal.azure.com or ms.portal.azure.com or portal.azure.cn or canary.portal.azure.com
 or any other legit portal domain name, a.k.a., national cloud domain names are supported too. Mutiple values can be set for an "environment" property.
 
 <a name="client-error-configuration-2-what-is-enabled-2"></a>
 #### What is enabled
 
-"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level 
+"enabled" property is used to enable (when "enabled" is true) or disable ("enabled" is false) alerts on various level
 depending on where it's located in customization json. For details, see "enabled" property in json snippet.
 
 > Among "message" and "percentage" types, you can choose to have one type or two types. Per each of those, you can define a set of criteria like the below. You can define N number of criteria.
@@ -577,7 +577,7 @@ Safe deployment stage is optional. If you don't specify the safe deployment stag
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
-Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates affectedUserCount or affectedUserPercentage, it does not take datacenter into consideration. So you won't have affectedUserCount or affectedUserPercentage per datacenter. For such a case, minAffectedUserCount or minAffectedUserPercentage specified in critiera are for all(combined, overall) the datacenters. 
+Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates affectedUserCount or affectedUserPercentage, it does not take datacenter into consideration. So you won't have affectedUserCount or affectedUserPercentage per datacenter. For such a case, minAffectedUserCount or minAffectedUserPercentage specified in critiera are for all(combined, overall) the datacenters.
 For the complete list of datacenter code names, go to [datacenter code list](https://aka.ms/portalfx/alerting/datacenter-code-name)
 
 <a name="client-error-how-often-client-error-alerts-run"></a>
@@ -794,7 +794,7 @@ Alerts are supported in national clouds. Specify the national cloud portal domai
 <a name="timezone-based-alerting"></a>
 ## Timezone based alerting
 
-As Ibiza has extension developers spread across the world, we have a mechanism to trigger alerts in the business hours of the extension team. Currently, the alerts supported for timezone based alerting are - 
+As Ibiza has extension developers spread across the world, we have a mechanism to trigger alerts in the business hours of the extension team. Currently, the alerts supported for timezone based alerting are -
 1. SDK Age alerts.
 
 For all other alerts, the extension owner cannot pick a timezone and will be alerted as soon as the alert trigger conditions are met.
@@ -803,13 +803,13 @@ To configure timezone based alerting, you need to specify a `businessHourStartTi
 
 When an alert is triggered, the Ibiza team guarentees that you will receive it within 6 hours of the hour configured as `businessHourStartTimeUtc`.
 
-Examples - 
+Examples -
 
 1. If your region is 6 hours ahead of UTC (UTC +6), and you want to receive an alert between 10 AM to 4 PM, you can set `businessHourStartTimeUtc` to "4" as 10 AM in your region will be 4 AM in UTC.
 
 1. If your region is 8 hours behind UTC (UTC -8), and you want to receive an alert between 10 AM to 4 PM, you can set `businessHourStartTimeUtc` to "18" as 10 AM in your region will be 6 PM in UTC.
 
-Here is an example of how to specify `businessHourStartTimeUtc` in the config for a team that wants to receive alerts between 4 AM and 10 AM UTC. 
+Here is an example of how to specify `businessHourStartTimeUtc` in the config for a team that wants to receive alerts between 4 AM and 10 AM UTC.
 
 ```json
 {
@@ -827,8 +827,60 @@ If no value is specified for `businessHourStartTimeUtc`, alerts are triggered in
 
 <a name="timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm"></a>
 ### How partners route alerts to another team in IcM
-By default all the alerts are fired against Azure Portal (IbizaFx) team and IbizaFx team maintains an IcM routing table by which alerts are routed to different services and teams.
-Since IcM does not support secondary routing, once extension partners receive an IcM, they can't route it to another service or team in IcM even if they have their own IcM routing table.
-The workaround is to fire alerts directly to partners in IcM, which requires partners to create a custom connector in IcM, onboard a certficate to it and add connector Id into customization JSON.
-For details refer to [TSG: How partners route alerts to another team in IcM](https://aka.ms/IbizaFxTsg_HowPartnerRouteIcm)
+
+By default all the alerts are fired against Azure Portal (IbizaFx) team and IbizaFx team maintains an IcM routing table by which alerts are routed to different services and teams. Since IcM does not support secondary routing, once extension partners receive an IcM, they can't route it to another service or team in IcM even if they have their own IcM routing table. The workaround is to fire alerts directly to you (the extension partner) in IcM, which requires your team to create a custom connector in IcM, onboard a certificate to it and add connector Id into customization JSON.
+
+[*If your extension is comprised of sub-teams*] - With this setup you would also be able to route these alerts to your team's ICM and then you will be able to setup your own routing rules, which can check the blade name, or other properties, and then route to the appropriate sub-team.
+
+<a name="timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm-step-1"></a>
+#### Step 1
+
+Onboard an IcM connector per cloud instance following the IcM doc [Onboard a connector for a Service][1]. Alerting service will use the IcM connector under your service to inject IcM incidents directly to your service in IcM. Only the service admin has the rights to onboard a new or update an existing connector or update the certificate.
+
+Certificate is used by IcM service to authenticate with the alerting service who sends incidents to IcM service. Certificate need to be uploaded on connector on-boarding page. Currently the certificate being used was issued from ssladmin. It's an unmanaged cert. It can be downloaded from [ssladmin site][2].
+
+We're working on auto-rotate the cert before the current unmanaged cert expires on 03/03/2020. If by the time you read this and it's after 03/03/2020, it means this doc should have been updated and has not. Please reach out to azurefxg@microsoft.com for the link to managed cert.
+
+[![enter image description here][3]][3]
+[![enter image description here][4]][4]
+
+<a name="timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm-step-2"></a>
+#### Step 2
+
+Once IcM connectors are created, the next step is to submit and complete a PR of adding **IcM connector info** into alerting customization JSON to let alerting service know what connector is used when sending incidents for that extension. The supported cloud values are Public, BlackForest, Fairfax or Mooncake.
+
+If one or more **clouds** are not specified in customization JSON, the IcM incidents will be created and sent to Azure Portal (IbizaFx) team through IbizaFx's IcM connector for the cloud instance(s) that're not specified in the extension's customization JSON. And IbizaFx's IcM routing rule auto-routes the incidents to the corresponding service and team in IcM
+
+```json
+{
+   "extensionName":"Microsoft_Azure_{MyExtension}",
+   "enabled":true,
+   "**icmConnectors**":[
+      {
+         "connectorId":"12345678-abcd-abcd-abcd-123456789012",
+         "**cloud**":"Public"
+      },
+      {
+         "connectorId":"87654321-dcba-dcba-dcba-210987654321",
+         "**cloud**":"Mooncake"
+      },
+      ...
+   ],
+   "environments":[
+      ...
+   ]
+}
+```
+
+**The alerting service will be sending out IcM through customized connectors once step 2 is complete**
+
+<a name="timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm-step-3"></a>
+#### Step 3
+
+The last step is to create routing rules to route different IcMs to different teams in IcM site.
+
+  [1]: https://icmdocs.azurewebsites.net/developers/Connectors/ConnectorOnboarding.html
+  [2]: https://ssladmin/Details/2849443
+  [3]: https://stackoverflow.microsoft.com/images/a/2b260f70-aa31-4f04-8ccb-862bd64b6519.png
+  [4]: https://stackoverflow.microsoft.com/images/a/9bf653db-719b-466b-bb70-69129708f78b.png
 
