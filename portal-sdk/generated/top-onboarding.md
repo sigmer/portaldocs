@@ -176,17 +176,35 @@ Azure portal onboarding steps listed below assumes that all new services have co
 <a name="steps-to-portal-onboarding-pre-onboarding-checks-must-do-s"></a>
 ## Pre-Onboarding Checks - Must Do&#39;s
 
-1) As a partner team, please take a moment to understand the different branches we have in Azure portal.
+1) Before onboarding to Azure portal, please take a moment to understand the different repositories, branches and environments we have in Azure portal and **[SLAs](top-extensions-svc-lvl-agreements.md)** for onboarding.
 
-2) Portal has Dev, Dogfood and Production Branches. All changes to config files must be raised to Dev branch only.
+1) Azure portal onboarding involves 3 different repositories. Framework, Hosting Services and Alerting.
 
-3) Once a PR completes in Dev branch, the change gets deployed to Dogfood branch automatically and from Dogfood branch, the change is deployed to RC and Mpac stamps.
+2) Portal framework and hosting services have Dev, Dogfood and Production Branches. All changes to config files must be raised to Dev branch only.
 
-4) Partners must validate all changes deployed in RC or Mpac thoroughly before cherry-picking the commit to Production branch.
+2) Dogfood config changes can only be applied to Dogfood environment and endpoints that are accessible only by Microsoft employees.
 
-5) Partners must onboard to all public and sovereign clouds at the same time and update the respective configs. 
+2) Production config changes are applied to RC, Mpac, Preview and Production environments.
+
+3) Once a PR completes in Dev branch, the change gets merged to Dogfood branch automatically.
+
+3) From Dogfood branch, the change is deployed to RC, Mpac and Preview environments.
+
+4) Partners must validate all changes deployed in framework branches of RC or Mpac thoroughly before cherry-picking the commit to Production branch.
+
+4) Partners must cherry-pick Hosting Service changes from Dev Branch to Production of Hosting Service for the hosting service change to be available to use in either Framework environments of RC, Mpac, Preview OR Production.
+
+5) Partners must onboard to all public and sovereign clouds at the same time and update the respective configs.
 
 6) **[Hide all assets](portalfx-assets.md#how-to-hide-your-asset-in-different-environments)** in sovereign clouds if you do not intend to show your experiences in those clouds.
+
+7) By onboarding to Azure portal you agree to keeping your extension up to date regularly with the latest supported SDK. You will recieve IcM alerts ranging from Sev-4 to Sev-2 if you fail to upgrade your SDK before required time limit.
+
+8) Portal SDK has a 120-day backward compatibility and we start firing alerts when the SDK age is 60days. Extension owners are responsible for any outages caused due to an aged SDK that is out of support.
+
+9) IcM Service/Team and feedback email address mentioned in the Portal config must be updated immediately if there is a change in these details or ownership transfer of the service. Failing to update these details will make the service orphaned services.
+
+10) Portal team reserves the right to remove any orphaned services from portal that cause services alerts or failures due to an unsupported SDK version or instability issues for the rest of the portal.
 
 <a name="steps-to-portal-onboarding-service-or-feature-deprecation-checks-must-do-s"></a>
 ## Service or Feature Deprecation Checks - Must Do&#39;s
@@ -196,9 +214,23 @@ Azure portal onboarding steps listed below assumes that all new services have co
 2) Notify users via Azure blog, Azure status updates or email about the intended deprecation plan and provide migration to alternative features or service.
 
 3) Users will continue to see the currently loaded extension version until their browser is refreshed. Hence it is advised that you monitor the telemetry for usage before turning off service or feature.
- 
 
-**NOTE:** *Partner must cherry-pick changes from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for completing the PR and cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
+4) Any alerts configured for you service in the Alerting repository will be removed only after the corresponding configuration changes are fully removed from the extensions config json files and deployed to Production. We also need to wait for stable build before we stop firing the alerts for a deprecated extension.
+
+
+**NOTE:** *Partner must cherry-pick changes made in both Azure portal framework and hosting services from Dev branch to Production branch for the changes to be deployed to Production/Public clouds. Partners are responsible for completing the PR and cherry-picking the changes from Dev Branch to Production Branch. Portal team does NOT merge these changes automatically*
+
+<a name="steps-to-portal-onboarding-how-to-cherry-pick-manually"></a>
+<a name="steps-to-portal-onboarding-how-to-cherry-pick-manually-more-info-on-publishing-top-extensions-publishing-md"></a>
+## How to cherry-pick manually? *<a href="top-extensions-publishing.md">More info on publishing</a>*
+
+1) Open git command prompt and navigate to hosting service folder
+2) Create a new branch from Production branch
+3) Run cherry-pick commit_id_from_devbranch_pullrequest
+4) Resolve any merge conflicts and save changes
+5) Add the file after saving changes
+6) Run cherry-pick --continue
+7) Run git push --set-upstream origin branch_name_created_in_step2
 
 **IMPORTANT** *Partners must ensure PR has the required approvals and all the policies are met and PR is complete. PRs may get delayed due to merge validation expiry or other policy checks. Partners can re-trigger any policy that expired or failed.*
 
@@ -248,6 +280,7 @@ eg: Dogfood, Prod, Mooncake, Fairfax and BlackForest
 6) Commit and Create a pull request to the Dev Branch.
 7) Create a hosting service onboarding [workitem](https://aka.ms/extension-hosting-service/onboarding) and this to the pull request.
 8) Send email to [ibiza-onboarding@microsoft.com](mailTo:ibiza-onboarding@microsoft.com) with the workitem details and pull request id to get the approval.
+9) Once the hosting service PR for Dev branch is completed, parnters MUST cherry-pick this commit from Dev branch to Production branch of hosting services.
 
 Note:  Incorrect or insufficient information in the workitem could delay the onboarding process.
 
@@ -272,19 +305,59 @@ Note:  Incorrect or insufficient information in the workitem could delay the onb
 2) Increment the extension count in [DeploymentSettingsTestConstants.cs](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FStbPortal%2FWebsite.Server.Tests%2FDeploymentSettingsTestConstants.cs&version=GBdev)
 ![storage](./../media/portalfx-extensions-onboarding/extension-count.png)
 3) Always raise the PR to the Dev branch
-4) For Prod config chanages, once the PR is approved, please cherry pick the change to Prod after thoroughly testing the portal in MPAC. Portal team does not auto merge the changes to Production branches
+4) For Prod config chanages, once the PR is approved, please cherry pick the change to Prod after thoroughly testing the portal in MPAC endpoint. Portal team does not auto merge the changes to Production branches
 5) Always cherry-pick the change from Dev to Prod branch. ***This is a new change to the cherry-picking process as we will deploy to Mpac by default from Dev branch.***
 6) Here is a sample PR change for dogfood branch.
 
 Note : Dogfood config does not require creating a CNAME entry for extensions as all extensions use the common DNS endpoint. Onboarding to Production config will require the CNAME created with route prefix.
 
-![storage container](./../media/portalfx-extensions-onboarding/portal-framework-extension-config.png)
+    {
+        "name": "Microsoft_Azure_DemoExtension",
+        "feedbackEmail": "demoextPMDev@microsoft.com",
+        "flags": "SupportsPrewarming",
+        "resourceAccess": [
+            {
+                "name": "",
+                "resource": "https://management.core.windows.net/"
+            },
+            {
+                "name": "self",
+                "resource": "abcd18b0-9c38-48c9-a847-e1ef3af0602d"
+            },
+            {
+                "name": "graph",
+                "resource": "https://graph.windows.net/",
+                "oAuthClientId": "abcd18b0-9c38-48c9-a847-e1ef3af0602d"
+            },
+            {
+                "name": "microsoft.graph",
+                "resource": "https://graph.microsoft.com/",
+                "oAuthClientId": "abcd18b0-9c38-48c9-a847-e1ef3af0602d"
+            }
+        ],
+        "serviceTreeId": "abcdbde1-a1b3-41da-be44-e3fa76a3ffc6",
+        "icm": {
+            "service": "Demo IcM Service",
+            "team": "Azure Demo UX"
+        },
+        "hostingServiceName": "azuredemo"
+    }
 
 7) [Hide all assets](portalfx-assets.md#how-to-hide-your-asset-in-different-environments) in your extension code before updating the framework config. By doing this, you can control when the assets can be shown and when you want to go live in Production.
 
 Note : Extension name cannot be changed once onboarding is complete. It will require a new onboarding and redirecting to the new extension.
 
-![storage container](./../media/portalfx-extensions-onboarding/framework-extension-redirect-config.png)
+    {
+        "name": "Microsoft_Azure_DemoExtension",
+        "feedbackEmail": "demoextPMDev@microsoft.com",
+        "redirectTo": "Microsoft_Azure_DemoOld",
+        "serviceTreeId": "abcdb46d-bf43-4fef-a148-0d740e595d62",
+        "icm": {
+            "service": "Azure Demo IcM",
+            "team": "Demo Team"
+        },
+        "hostingServiceName": "demoextension"
+    }
 
 <a name="steps-to-portal-onboarding-how-to-verify-if-portal-framework-onboarding-is-complete"></a>
 <a name="steps-to-portal-onboarding-how-to-verify-if-portal-framework-onboarding-is-complete"></a>
@@ -307,26 +380,80 @@ Note : Please DO NOT get the pull request approved, bypassed or completed withou
 <a name="steps-to-portal-onboarding-step-3-aad-onboarding"></a>
 ## Step 3 - AAD Onboarding
 
-1) Join the **[Ibiza AAD App Partners](https://aka.ms/portalfx/joinaadapppartners)** security group.
+1) This onboarding process is only meant for extensions in Azure portal that intend to call backend services like msgraph, keyvault or others.
+2) If your service only calls ARM, you do not need a separate 1st party app.
+3) Portal team is required to own the AAD apps if you intend to use them in the extension and need portal to get an OBO(on behalf of) token for the configured audiences in  your extension config.
+4) If you intend to get a self token and exchange with AAD for any audience of your choice, Portal team does not need ownership and this AAD onboarding can be skipped.
+
+NOTE: ARM tokens obtained during portal login are meant only for calling ARM. For all other purposes, please create a 1st party App.
+
+1) Join the **[Ibiza AAD App Partners](https://aka.ms/portalfx/joinaadapppartners)** security group if you want to create or update your 1st party AAD app.
 
 2) Once the request is approved, you should be part of the security group that has access to the public certificate that is required to be added to the AAD apps in 1st party AAD apps in each environment
 
 3) Register your 1st party AAD app from **[First Party Portal](https://firstpartyportal.msidentity.com/RegisterApp)**
 
-4) **[Download the certificate](https://aka.ms/portalfx/aadapps/certs)** required to add in the authentication tab in the 1st party AAD app.
+4) Send email to [ibiza-onboarding@microsoft.com] to add the authentication certificates to the 1st party AAD app along with the Appid.
 
-5) Go to **Credentials** tab and under **Public Keys**, add the certificate downloaded in the previous step.
+5) Go to Provisioning tab and in the **"Provide more detail"** section, add **"This app will be used by Azure portal extension to call graph and other backend services"**.
 
-6) Go to Provisioning tab and in the **"Provide more detail"** section, add **"This app will be used by Azure portal extension to call graph and other backend services"**.
-
-7) Go to the **Owners** tab and use **redmond\ibizaaadapppartners** as the **Owners Security Group**
+6) Go to the **Owners** tab and use **redmond\ibizaaadapppartners** as the **Owners Security Group**
 
 **IMPORTANT NOTE: *Partners are responsible for making sure the AAD app has all the required permissions and pre-authorization to access intended resources.***
 <!--
 TODO - Add an example after the feature is ready (ETA is March or April )
 -->
 
-You can ask developer community questions on Stackoverflow with the tag [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding).
+
+<a name="steps-to-portal-onboarding-useful-links"></a>
+## Useful links
+
+| Link | Description |
+| ----------- | ------- |
+| [Getting Started](https://aka.ms/portalfx/onboarding/gettingstarted)	      | How To: Getting started with Azure portal SDK |
+| [Architecture](https://aka.ms/portalfx/onboarding/architecture)     | Azure portal architecture  |
+| [Authentication in Azure portal](https://aka.ms/portalfx/auth)     | How To: Azure portal authentication  |
+| [Azure portal Release Pipeline](https://dev.azure.com/msazure/One/_dashboards/dashboard/adf2732d-f4a9-476d-a7a7-7ab7aab4a2ad)     | Check Framework Service release pipeline  |
+| [Hosting Service Release Pipeline](https://dev.azure.com/msazure/One/_dashboards/dashboard/25be4cd4-4fbd-45c9-b257-79baf530abbe)     | Check Hosting Service release pipeline   |
+| [Check Framework Commits](https://commits.azurewebsites.net/#repos/AzureUX-PortalFx/commits)     | Check commit status for Framework   |
+| [Check Hosting Service Commits](https://commits.azurewebsites.net/#repos/AzureUX-PortalHostingSvc/commits)     | Check commit status for Hosting Service   |
+| [Simonp-Sites Commits](http://simonp-sites/commits/search)     | Alternative tool for framework commit status   |
+| [Simonp-Sites Pipeline](http://simonp-sites/pipeline)     | Alternative tool for pipeline   |
+| [Simonp-Sites Environments](http://simonp-sites/environments)     | Alternative tool for environments   |
+
+
+You can ask developer community questions on Stackoverflow with the tag [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding) or use the following for specific areas of Ibiza.
+
+
+<a name="steps-to-portal-onboarding-stackoverflow-tags"></a>
+## Stackoverflow Tags
+
+| Link |
+| ----------- |
+| [ibiza-accessibility](https://stackoverflow.microsoft.com/questions/tagged/ibiza-accessibility) |
+| [ibiza-alert](https://stackoverflow.microsoft.com/questions/tagged/ibiza-alert) |
+| [ibiza-az](https://stackoverflow.microsoft.com/questions/tagged/ibiza-az) |
+| [ibiza-blades-parts](https://stackoverflow.microsoft.com/questions/tagged/ibiza-blades-parts) |
+| [ibiza-breaking-changes](https://stackoverflow.microsoft.com/questions/tagged/ibiza-breaking-changes) |
+| [ibiza-browse](https://stackoverflow.microsoft.com/questions/tagged/ibiza-browse) |
+| [ibiza-controls](https://stackoverflow.microsoft.com/questions/tagged/ibiza-controls) |
+| [ibiza-controls-grid](https://stackoverflow.microsoft.com/questions/tagged/ibiza-controls-grid) |
+| [ibiza-create](https://stackoverflow.microsoft.com/questions/tagged/ibiza-create) |
+| [ibiza-data](https://stackoverflow.microsoft.com/questions/tagged/ibiza-data) |
+| [ibiza-development](https://stackoverflow.microsoft.com/questions/tagged/ibiza-development) |
+| [ibiza-forms](https://stackoverflow.microsoft.com/questions/tagged/ibiza-forms) |
+| [ibiza-hosting-service](https://stackoverflow.microsoft.com/questions/tagged/ibiza-hosting-service) |
+| [ibiza-hubs](https://stackoverflow.microsoft.com/questions/tagged/ibiza-hubs) |
+| [ibiza-localization-global](https://stackoverflow.microsoft.com/questions/tagged/ibiza-localization-global) |
+| [ibiza-missing-docs](https://stackoverflow.microsoft.com/questions/tagged/ibiza-missing-docs) |
+| [ibiza-notifications](https://stackoverflow.microsoft.com/questions/tagged/ibiza-notifications) |
+| [ibiza-onboarding](https://stackoverflow.microsoft.com/questions/tagged/ibiza-onboarding) |
+| [ibiza-performance](https://stackoverflow.microsoft.com/questions/tagged/ibiza-performance) |
+| [ibiza-sdkupdate](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate) |
+| [ibiza-security-auth](https://stackoverflow.microsoft.com/questions/tagged/ibiza-security-auth) |
+| [ibiza-telemetry](https://stackoverflow.microsoft.com/questions/tagged/ibiza-telemetry) |
+| [ibiza-test](https://stackoverflow.microsoft.com/questions/tagged/ibiza-test) |
+
 
 <!--
 gitdown": "include-file", "file": "../templates/portalfx-extensions-glossary-onboarding.md"}
