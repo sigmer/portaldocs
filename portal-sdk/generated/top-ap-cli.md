@@ -35,7 +35,7 @@ The following steps detail the one time configuration that must be applied to au
         always-auth=true
         ```
     1. From the command prompt in the same directory:
-        - set the default npm registry 
+        - set the default npm registry
            ```
            npm config set registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
            ```
@@ -44,7 +44,7 @@ The following steps detail the one time configuration that must be applied to au
            vsts-npm-auth -R -config .npmrc
            ```
            Generally the PAT will be written to %USERPROFILE%\.npmrc we strongly recommend not checking your PAT into source control; anyone with access to your PAT can interact with Azure DevOps Services as you.
-        
+
 
  - Path
     Ensure the following are on your path i.e resolve when typed in and run from the command prompt.
@@ -423,6 +423,7 @@ Argument | Alias | Description
 --- | --- | ---
 --nugetRestoreFiles | | optional. The *.sln, *.csproj or packages.config files to perform a NuGet restore upon. If more then one supplied separate using ';'. When supplied the command will not scan directories for files to restore.
 --npmInstallPackageJsonFiles | | optional. The package.json files to perform a npm install upon. If more then one supplied separate using ';'. When supplied the command will not scan directories directories for package.json files to restore.
+--restoreInParallel | | optional. Run npm install and NuGet restore in parallel.
 --help | | Emits help and usage for the command
 
 <a name="cli-overview-command-reference-ap-restore-example-usage-4"></a>
@@ -438,6 +439,7 @@ Examples specifying which files to perform NuGet restore restore against. In thi
 
 ```
 ap restore --nugetRestoreFiles ./SomeDir/Some.sln
+ap restore --nugetRestoreFiles ./SomeDir/Some.sln --restoreInParallel
 ap restore --nugetRestoreFiles ./SomeDir/Some.csproj
 ap restore --nugetRestoreFiles ./SomeDir/Some.sln;./OtherDir/Other.csproj;./AnotherDir/packages.config
 ```
@@ -469,12 +471,14 @@ Property | Description
 --- | ---
 nugetRestoreFiles | Optional. An explicity collection of files e.g ./foo.sln and ./bar.csproj to perform nuget restore against.
 npmInstallPackageJsonFiles | Optional. An explicity collection of package.json *.sln and *.csproj to perform nuget restore against.
+restoreInParallel | Optional. Run npm install and NuGet restore in parallel.
 
 Example apCliConfig.json configuration:
 ```json
 {
     "nugetRestoreFiles": ["./src/proja/Some.sln", "./src/projb/Other.sln", "./other/proj.csproj"],
     "npmInstallPackageJsonFiles": ["src/Default/Extension.UnitTest/package.json", "src/default/Extension.E2ETests/package.json"],
+    "restoreInParallel": true,
 }
 ```
 
