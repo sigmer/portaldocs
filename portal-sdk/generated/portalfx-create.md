@@ -206,18 +206,14 @@ import * as SubscriptionDropDown from "Fx/Controls/SubscriptionDropDown";
 ```
 ```typescript
 
-// The subscriptions drop down.
-this._subscriptionsDropDown = SubscriptionDropDown.create(container, {
-    initialSubscriptionId: ko.observableArray<string>(),
-    validations: ko.observableArray([
-        new MsPortalFx.ViewModels.RequiredValidation(ClientResources.selectSubscription),
-    ]),
-    suppressDirtyBehavior: true,
+const subscriptionDropDown = SubscriptionDropDown.create(this.context.container, {
+    initialSubscriptionId: this.context.provisioning.initialValues.subscriptionIds,
+    validations: [
+        new Validations.Required(),
+    ],
 });
-const subId = ko.pureComputed(() => {
-    const sub = this._subscriptionsDropDown.value();
-    return sub && sub.subscriptionId;
-});
+
+const subscriptionId = ko.pureComputed(() => subscriptionDropDown.value() && subscriptionDropDown.value().subscriptionId);
 
 ```
 
@@ -228,13 +224,13 @@ import * as ResourceGroupDropDown from "Fx/Controls/ResourceGroupDropDown";
 ```
 ```typescript
 
-// The resource group drop down with creator inputs
-this._resourceGroupDropDown = ResourceGroupDropDown.create(container, {
-    subscriptionId: subId,
-    validations: ko.observableArray([
-        new MsPortalFx.ViewModels.RequiredValidation(ClientResources.selectResourceGroup),
-    ]),
-    suppressDirtyBehavior: true,
+const resourceGroupDropDown = ResourceGroupDropDown.create(this.context.container, {
+    subscriptionId: subscriptionId,
+    infoBalloonContent: ClientResources.resourceGroupDropDownInfoBalloon,
+    nested: true,
+    validations: [
+        new Validations.Required(),
+    ],
 });
 
 ```
@@ -245,19 +241,14 @@ import * as LocationDropDown from "Fx/Controls/LocationDropDown";
 ```
 ```typescript
 
-// The locations drop down.
-this._locationsDropDown = LocationDropDown.create(container, {
+const locationDropDown = LocationDropDown.create(this.context.container, {
     initialLocationName: ko.observableArray<string>(),
-    subscriptionId: subId,
-    validations: ko.observableArray([
-        new MsPortalFx.ViewModels.RequiredValidation(ClientResources.selectLocation),
-    ]),
-    // Optional -> Disable locations by returning a reason for why a location is disabled
-    // disable: (location) => ~["centralus", "eastus"].indexOf(location.name) && clientStrings.disabledLegalityIssues
-    suppressDirtyBehavior: true,
+    subscriptionId: subscriptionId,
+    validations: [
+        new Validations.Required(),
+    ],
+    resourceTypes: ["Providers.Test/statefulIbizaEngines"],
 });
-// If setting the dropdown value programmatically, make sure to set it to an existing item in the dropdown
-// e.g. this.locationsDropDown.value(this.locationsDropDown.fetchedValues()[0])
 
 ```
 

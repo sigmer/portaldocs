@@ -163,7 +163,7 @@ Add a CreateBlade test to ./test/CreateBlade.test.ts.  This demonstrates how to 
 
 ```typescript
     
-import { CreateBlade } from "Resource/Create/ViewModels/CreateBlade";
+import { CreateBlade } from "Resource/Create/CreateBlade";
 import * as sinon from "sinon";
 import { TemplateBladeHarness } from "msportalfx-ut/Harness";
 
