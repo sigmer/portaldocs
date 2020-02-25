@@ -1,2 +1,1 @@
-
-The page you requested has moved to [top-extensions-install-software.md](top-extensions-install-software.md).
+The page you requested has moved to [top-ap-cli.md](top-ap-cli.md#setup-and-installation).

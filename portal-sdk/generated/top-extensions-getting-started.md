@@ -15,8 +15,8 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 <a name="getting-started-with-the-portal-sdk-installing-the-azure-portal-sdk"></a>
 ### Installing the Azure Portal SDK
 
-- Install the pre-requisites as documented in [top-extensions-install-software.md](top-extensions-install-software.md)
 - Perform the [one time configuration steps](top-ap-cli.md#one-time-configuration-steps)
+- [Optional] if using Visual Studio 2019 see [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
 
 <a name="getting-started-with-the-portal-sdk-creating-and-running-an-extension"></a>
 ### Creating and running an Extension

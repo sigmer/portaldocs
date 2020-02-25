@@ -75,7 +75,7 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 * [Breaking changes](/portal-sdk/generated/breaking-changes.md)
 
-* [Install the SDK](/portal-sdk/generated/top-extensions-install-software.md)
+* [Install the CLI](/portal-sdk/generated/top-ap-cli.md#setup-and-installation)
 
 * [Get started](/portal-sdk/generated/top-extensions-getting-started.md)
 

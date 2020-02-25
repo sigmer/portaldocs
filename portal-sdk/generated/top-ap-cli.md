@@ -795,3 +795,21 @@ The ap CLI is built by the Azure portal team for the extension developer communi
 - Where can I ask general questions?
 
     [Ask questions here](https://stackoverflow.microsoft.com/questions/ask?tags=ibiza,ibiza-cli&title=apcli:)
+
+- What are the IDE specific installs required for Visual Studio Code?
+    The first time [Setup and Installation](./top-ap-cli.md#setup-and-installation) covers everything required. Visual Studio Code can be installed from [here](https://code.visualstudio.com/download)
+
+- What are the IDE specific installs required for Visual Studio?
+    Insall Visual Studio 2019 Professional or Enterpise from [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
+      
+      * Select the following workloads from the *workloads* tab: 
+        * Node.js development
+        * ASP.NET and web development
+
+      ![alt-text](../media/top-extensions-install-software/vs2019_workloads.png "Selecting VS 2019 workloads")
+
+      * Select .NET Framework 4.7.2 SDK and targeting pack from the *Individual components* tab:
+
+      ![alt-text](../media/top-extensions-install-software/vs2019_components.png "Selecting VS 2019 components")
+
+To validate that your dev machine is ready for Azure Portal Extension development start with the template extension in the [Getting Started Guide](top-extensions-getting-started.md)

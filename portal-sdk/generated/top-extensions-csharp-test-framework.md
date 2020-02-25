@@ -34,9 +34,9 @@ Prerequisites for using the C# test framework are as follows.
 
 * Nuget (https://www.nuget.org/) and [top-extensions-nuget.md](top-extensions-nuget.md)
 
-* .NET Framework 4.5 or higher
+* .NET Framework 4.7.2 or higher
 
-* Visual Studio 2015 or higher, as specified in [top-extensions-install-software.md](top-extensions-install-software.md)
+* Visual Studio 2019 or higher, as specified in [What are the IDE specific installs required for Visual Studio?](top-ap-cli.md#FAQ)
 
 * Understanding of the C# programming language
 
