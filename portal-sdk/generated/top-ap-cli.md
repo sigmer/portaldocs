@@ -84,8 +84,8 @@ With the one time configuration steps complete you can now install the CLI as yo
 1. run following commands
 
 ```
-ap new -n Microsoft_Azure_Compute -o ./compute
-cd ./compute/src/default/extension
+ap new -n Microsoft_Azure_FirstExtension -o ./FirstExtension
+cd ./FirstExtension/src/default/extension
 ap start
 
 ```
@@ -98,18 +98,29 @@ See `ap start` demo in the [Video: A single command for restoring dependencies, 
 1. run following commands
 
 ```
-cd ./compute/src/default/extension.unittest
+cd ./FirstExtension/src/default/extension.unittest
 ap run test
 ```
 
+
 See `ap run test` demo in the [Video: running tests](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=1807)
+<a name="cli-overview-basic-workflows-lint-your-extension"></a>
+### lint your extension
+
+```
+cd ./FirstExtension/src/default/extension
+ap lint
+```
 
 <a name="cli-overview-basic-workflows-updating-your-portal-framework-version"></a>
 ### updating your Portal Framework version
 1. Run the command prompt as Admin
 1. Update the cli to the target version of Portal Framework e.g `npm install -g @microsoft/azureportalcli@5.303.601`
-1. From the root of your enlistment run `ap update`
-1. See all changes with gitk
+1. From the root of your enlistment run `ap update` and see changes with `git status`
+```
+ap update
+git status
+```
 
 See `ap update` demo in the [Video: Updating the CLI, extension SDK version and revoked SDKs](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=2214).
 

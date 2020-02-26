@@ -182,6 +182,8 @@ Azure portal onboarding steps listed below assumes that all new services have co
 
 2) Portal framework and hosting services have Dev, Dogfood and Production Branches. All changes to config files must be raised to Dev branch only.
 
+2) Raise both Framework and Hosting Service PRs together to speed  up onobarding.
+
 2) Dogfood config changes can only be applied to Dogfood environment and endpoints that are accessible only by Microsoft employees.
 
 2) Production config changes are applied to RC, Mpac, Preview and Production environments.
@@ -248,7 +250,7 @@ Azure portal onboarding steps listed below assumes that all new services have co
 
 ![storage container](./../media/portalfx-extensions-onboarding/onboarding-instructions.png)
 
-Note : Step 1 and Step 2 below are sequential and required to complete the Portal onboarding. Step 3 is optional unless the onboarding service requires dedicated tokens.
+*Note : Step 1 and Step 2 below can be done in parallel and required to complete the Portal onboarding. Step 3 is optional unless the onboarding service requires dedicated tokens.*
 
 <a name="steps-to-portal-onboarding-step-1-hosting-service"></a>
 <a name="steps-to-portal-onboarding-step-1-hosting-service"></a>
@@ -301,7 +303,7 @@ Note:  Incorrect or insufficient information in the workitem could delay the onb
 
 <a name="steps-to-portal-onboarding-step-2-portal-framework"></a>
 ## Step 2 - Portal Framework
-1) Register your extension with Azure portal framework by raising a pull request to the appropriate extension config json. eg: [extensions.dogfood.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.dogfood.json&version=GBdev), [extensions.prod.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.prod.json&version=GBdev), [extensions.ff.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ff.json&version=GBdev), [extensions.mc.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.mc.json&version=GBdev), [extensions.bf.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.bf.json&version=GBdev), [extensions.usnat.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.usnat.json&version=GBdev), [extensions.ussec.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ussec.json&version=GBdev) etc,. If you are disabling the extension in the given environment(eg: "flags": "Disabled"), you do not have to increment the extension count.
+1) Register your extension with Azure portal framework by raising a pull request to the appropriate extension config json. eg: [extensions.dogfood.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.dogfood.json&version=GBdev), [extensions.prod.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.prod.json&version=GBdev), [extensions.ff.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ff.json&version=GBdev), [extensions.mc.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.mc.json&version=GBdev), [extensions.bf.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.bf.json&version=GBdev), [extensions.usnat.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.usnat.json&version=GBdev), [extensions.ussec.json](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FRDPackages%2FOneCloud%2FExtensions.ussec.json&version=GBdev) etc,.
 2) Increment the extension count in [DeploymentSettingsTestConstants.cs](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FStbPortal%2FWebsite.Server.Tests%2FDeploymentSettingsTestConstants.cs&version=GBdev)
 ![storage](./../media/portalfx-extensions-onboarding/extension-count.png)
 3) Always raise the PR to the Dev branch
@@ -393,7 +395,24 @@ NOTE: ARM tokens obtained during portal login are meant only for calling ARM. Fo
 
 3) Register your 1st party AAD app from **[First Party Portal](https://firstpartyportal.msidentity.com/RegisterApp)**
 
-4) Send email to [ibiza-onboarding@microsoft.com] to add the authentication certificates to the 1st party AAD app along with the Appid.
+4) Use the following Subject Name Issuer in the authentication tab.
+
+<a name="steps-to-portal-onboarding-subject-name-and-issuer-for-each-cloud"></a>
+## Subject Name and Issuer for each cloud
+
+Note: DO NOT ADD ALL ENTRIES IN ONE ENVIRONMENT. MUST BE ADDED ONLY TO CORRESPONDING ENVIRONMENT
+
+| Cloud | Subject Name | Issuer |
+| ----------- | ------- | -------- |
+| PPE | ext.df.onecloud.azure-test.net | AME |
+| PROD | ext.mgmt.portal.azure.com | AME |
+| Fairfax/Arlington | ext.mgmt.portal.azure.us | AME |
+| Mooncake/Gallatin | extaadame.mgmt.portal.azure.cn | AME |
+| BlackForest | ext.mgmt.portal.microsoftazure.de | DTrust |
+
+*Important : Add both PROD and Fairfax Subject Name and Issuer in Prod App if you need to use the AAD App in Fairfax Extension. As AAD is not approving new apps for AAD Fairfax environment, Prod app is required to be promoted to Arlington environment in AAD to be used in Fairfax cloud. Consider Arlington as Fairfax. As Arlington environment in AAD is a readonly and gets settings from PROD app, we recommend updating required Fairfax settings in the PROD AAD app so that the settings get synced in the background to Arlington app.*
+
+5) Send email to [ibiza-onboarding@microsoft.com] to add the authentication certificates to the 1st party AAD app along with the Appid.
 
 5) Go to Provisioning tab and in the **"Provide more detail"** section, add **"This app will be used by Azure portal extension to call graph and other backend services"**.
 
