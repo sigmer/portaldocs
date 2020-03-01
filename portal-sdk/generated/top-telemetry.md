@@ -1,7 +1,7 @@
 * [Overview](#overview)
     * [Viewing telemetry](#overview-viewing-telemetry)
         * [Permissions](#overview-viewing-telemetry-permissions)
-        * [Power BI reports](#overview-viewing-telemetry-power-bi-reports)
+        * [Telemetry reports and dashboards](#overview-viewing-telemetry-telemetry-reports-and-dashboards)
         * [Custom queries](#overview-viewing-telemetry-custom-queries)
     * [Logging telemetry](#overview-logging-telemetry)
         * [Onboarding to ExtTelemetry/ExtEvents tables](#overview-logging-telemetry-onboarding-to-exttelemetry-extevents-tables)
@@ -57,16 +57,16 @@ However, if you require programmatic access, we're onboarding partners to our de
 
 Kusto.Explorer: [Application](http://kusto-us/ke/Kusto.Explorer.application)
 
-<a name="overview-viewing-telemetry-power-bi-reports"></a>
-### Power BI reports
+<a name="overview-viewing-telemetry-telemetry-reports-and-dashboards"></a>
+### Telemetry reports and dashboards
 
 Following are some of the dashboards that we support. If you do not have access to any of these please follow our [permissions documentation](#permissions).
 
 
-| Name | Power BI Link |
+| Name | Link |
 | ---- | ------------ |
-| Portal Dashboard | [http://aka.ms/portalfx/dashboard](http://aka.ms/portalfx/dashboard) |
-| Portal Performance Dashboard | [https://aka.ms/portalfx/performance/viewer](https://aka.ms/portalfx/performance/viewer) |
+| Portal Extension insights | [https://aka.ms/portalfx/workbooks/extension](http://aka.ms/portalfx/workbooks/extension) |
+| Portal High-usage Performance Dashboard | [https://aka.ms/portalfx/performance/viewer](https://aka.ms/portalfx/performance/viewer) |
 
 
 | Name |  Metrics Docs |
