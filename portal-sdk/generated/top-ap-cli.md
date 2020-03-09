@@ -775,6 +775,10 @@ To override an existing either of the following approaches can be used:
 
 1. In the section above foobar.ts was added to extend the cli. This approach can also be used to override and existing command. Simply ensure the filename, class name and command property all express the same name of the command you wish to override.
 
+<a name="cli-overview-telemetry"></a>
+## Telemetry
+Telemetry is collected to help improve ap and the extension developer experience. Writing remote telemetry can be disabled by setting `disableRemoteTelemetry` to true in apCliConfig.json AND apCliConfig.json exists in the current directory that ap is run within or any parent directory between where ap is run and the root of the drive drive. i.e it will find-up from the process.cwd().
+
 <a name="cli-overview-contributions-and-feedback"></a>
 ## Contributions and feedback
 The ap CLI is built by the Azure portal team for the extension developer community. We welcome your contributions to the CLI and lint infrastructure where those contributions are applicable to all teams. Please reach out to us to discuss ideas. More details in
