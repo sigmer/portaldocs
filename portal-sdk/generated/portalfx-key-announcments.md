@@ -3,7 +3,7 @@
 
 We’re currently in the process of deprecating blade customizations, this process will take roughly a month. The choice to deprecate blade customization is driven by the superseded dashboard functionality, performance benefits and lack of usage.
 
-This has been deployed in PROD since __9/12/16__. 
+This has been deployed in PROD since __9/12/16__.
 
 <a name="deprecating-blade-customizations-eta-for-production"></a>
 ### ETA for production
@@ -11,7 +11,6 @@ This has been deployed in PROD since __9/12/16__.
 We will be removing the code which backs this in production after __10/10/16__.
 
 First we will be enabling a feature flag that disables all this functionality, the ask of you is to verify none of your tests are broken when this functionality is enabled.
-Please use the following feature flag to verify ?feature.disablebladecustomization = true
 
 This will:
 - Stop users adding new tiles to a blade

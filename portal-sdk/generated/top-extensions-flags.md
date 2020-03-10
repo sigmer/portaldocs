@@ -219,9 +219,6 @@ Flags can be enabled for all users in one or more deployments by using an extens
 <a name="feature-flags-extension-flags-other-feature-flag-services"></a>
 ### Other feature flag services
 
-<!--TODO: Determine whether
- ?feature.disablebladecustomization still qualifies as being a feature flag. -->
-
 For more information about extension flags, see [https://docs.microsoft.com/en-us/vsts/articles/phase-features-with-feature-flags](https://docs.microsoft.com/en-us/vsts/articles/phase-features-with-feature-flags).
 
 You can ask questions on Stackoverflow with the tag [ibiza](https://stackoverflow.microsoft.com/questions/tagged/ibiza).
