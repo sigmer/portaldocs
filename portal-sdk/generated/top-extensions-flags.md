@@ -314,8 +314,6 @@ The following are the feature flags that are invoked with the syntax: `feature.<
 
 **feature.forceiris**:  Forces the Portal to query IRIS even if the time limit  has not expired.  The  time limit is 24 hours.
 
-**feature.fullwidth**:  Forces all resource menu blades to be opened maximized.
-
 **feature.hideavatartenant**: Reserved for internal Azure Portal use. <!-- Hides the directory name under the user's name in the avatar menu. -->
 
 **feature.inmemorysettings**:  Uses in-memory user settings.
