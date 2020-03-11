@@ -214,7 +214,6 @@ galleryMetadata: {
     category: ClientResources.partGalleryCategorySample,
     thumbnail: {
         path: "../../../AmdSvg/sample.svg",
-        isLogo: true,
     },
 },
 parameterMetadata: {

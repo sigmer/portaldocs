@@ -19,7 +19,7 @@ The browse experience can use this part for pinning resources.   This simply req
 <AssetType Name="Author"
            ViewModel="{ViewModel Name=AuthorViewModel, Module=./Document/AssetViewModels/AuthorViewModel}"
            CompositeDisplayName="{Resource AssetTypeNames.Author, Module=ClientResources}"
-           Icon="{Svg IsLogo=true, File=../../../Svg/Documents/author.svg}"
+           Icon="{Svg File=../../../Svg/Documents/author.svg}"
            BladeName="AuthorBlade"
            PartName="{ResourcePart}">
 
