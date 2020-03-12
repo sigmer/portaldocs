@@ -869,6 +869,488 @@ To test each variation or to test when side loading you can use:
 
 `https://portal.azure.com/?ExtensionName_argbrowseoptions={"assetName":"OPTION"}`
 
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse"></a>
+## Extensible commanding for ARG browse
+
+Extensible commanding enables you to author and own your resource-specific commands that allow users to manage their resources at scale with minimal efforts.
+Once you have onboarded to ARG browse experience, you can start authoring commands for your browse experience using Typescript. Currently, extension authors can statically define commands associated to their <AssetType>.
+*Extensible commanding is only supported for asset types which are onboarded to ARG browse.* The typescript decorator for command takes metadata required for creation and execution of the commands.
+
+Extension authors can specify two sets of commands for their asset type. The generic commands that do not require resource selection (these will be enabled by default) and selection based commands that require resource selection (These will only be enabled if user has selected resources in the browse grid). The generic commands will be placed between `Add` and `Edit columns` command in the toolbar. The selection based commands will be displayed after `Assign tags` command in the toolbar.
+
+Simply specify a command kind and intellisense will prompt you for all the required properties for that command type.
+These are the currently supported command types:
+
+import { SvgType } from "Fx/Images";
+
+export = MsPortalFxForAsset;
+
+module MsPortalFxForAsset {
+    export module ForAsset {
+        export module Commands {
+            /**
+             * Command kinds.
+             */
+            export const enum CommandKind {
+                /**
+                 * Kind for the open blade commands.
+                 */
+                OpenBladeCommand,
+
+                /**
+                 * Kind for the menu command.
+                 */
+                MenuCommand,
+            }
+
+            /**
+             * Selection Command kinds.
+             */
+            export const enum SelectionCommandKind {
+                /**
+                 * Kind for the open blade commands that require selection.
+                 */
+                OpenBladeSelectionCommand,
+
+                /**
+                 * Kind for the ARM commands.
+                 */
+                ArmCommand,
+
+                /**
+                 * Kind for the selection based menu command.
+                 */
+                MenuSelectionCommand,
+            }
+
+            /**
+             * Defines the options that are passed to the command decorator.
+             */
+            export interface CommandOptions {
+                /**
+                 * The asset type that the commands are associated with.
+                 */
+                readonly assetType: string;
+
+                /**
+                 * The list of commands which do no require resource selection.
+                 */
+                readonly commands?: ReadonlyArray<Command>;
+
+                /**
+                 * The list of commands which require selection.
+                 */
+                readonly selectionCommands?: ReadonlyArray<SelectionCommand>;
+            }
+
+            /**
+             * Constrains the @ForAsset.Commands decorator so that it can be applied only to classes implementing 'Contract'.
+             */
+            export interface Contract {
+            }
+
+            /**
+             * Constrains the @Commands decorator so that it can be applied only to classes implementing 'Contract'.
+             */
+            export interface CommandsClass {
+                new(...args: any[]): Contract;
+            }
+
+            /**
+             * Decorator for Asset commands
+             * @param options command options
+             */
+            export function Decorator(options?: CommandOptions) {
+                return function (commandsClass: CommandsClass) {
+                };
+            }
+
+            /**
+             * The blade reference options for open blade command.
+             */
+            export interface BladeReference {
+                /**
+                 * The blade name.
+                 */
+                readonly blade: string;
+
+                /**
+                 * The extension name for the blade
+                 */
+                readonly extension?: string;
+
+                /**
+                 * The flag indicating whether blade needs to be opened as a context pane.
+                 * Defaults to false.
+                 */
+                readonly inContextPane?: boolean;
+
+                /**
+                 * The blade parameters.
+                 *
+                 * NOTE: Blades that require list of resourceIds in the parameters, should specify {resourceIds} as the parameter value.
+                 * Fx will replace the {resourceIds} value with currently selected resource Ids at runtime.
+                 */
+                readonly parameters?: ReadonlyStringMap<any>;
+            }
+
+            /**
+             * The marketplace blade reference
+             */
+            export interface MarketplaceBladeReference {
+                /**
+                 * The marketplaceItemId to open a create flow.
+                 */
+                readonly marketplaceItemId?: string;
+            }
+
+            /**
+             * Interface for Open blade commands.
+             */
+            export interface OpenBladeCommand extends CommonCommandBase<CommandKind.OpenBladeCommand> {
+                /**
+                 * The blade reference.
+                 * Either a reference to the blade or the marketpkace item id which opens the create flow needs to be specified.
+                 */
+                readonly bladeReference: BladeReference | MarketplaceBladeReference;
+            }
+
+            /**
+             * The interface for resource selection for commands.
+             */
+            export interface RequiresSelection {
+                /**
+                 * The resource selection for commands.
+                 * Default selection is max allowed selection supported by browse grid.
+                 */
+                readonly selection?: Selection;
+            }
+
+            /**
+             * The interface for command execution confirmation options.
+             */
+            export interface ConfirmationOptions {
+                /**
+                 * The confirmation dialog title to show before execution of the command.
+                 */
+                readonly title: string;
+
+                /**
+                 * The confirmation dialog message to show before execution of the bulk command.
+                 */
+                readonly message: string;
+
+                /**
+                 * The confirmation text input.
+                 * User needs to enter this text in order to confirm command execution.
+                 */
+                readonly explicitConfirmationText?: string;
+            }
+
+            /**
+             * The interface for commands that require user confirmation.
+             */
+            export interface ConfirmationCommandBase {
+                /**
+                 * The command execution confirmation options.
+                 */
+                readonly confirmation: ConfirmationOptions;
+            }
+
+            /**
+             * The interface for ARM commands.
+             * These commands honor default selection which is FullPage.
+             */
+            export interface ArmCommand extends CommonCommandBase<SelectionCommandKind.ArmCommand>, ConfirmationCommandBase {
+                /**
+                 * The map of ARM bulk command definitions per resource type.
+                 *
+                 * NOTE: A command may delete multiple types of resources e.g. browse for merged resource types.
+                 * In such cases, ARM command definition can be specified for each resource type.
+                 */
+                readonly definitions: ReadonlyStringMap<ArmCommandDefinition>;
+
+                /**
+                 * The flag indicating whether to launch Fx bulk delete confirmation blade for delete operations.
+                 */
+                readonly isDelete?: boolean;
+            }
+
+            /**
+             * The interface for open blade commands that require resource selection.
+             */
+            export interface OpenBladeSelectionCommand extends CommonCommandBase<SelectionCommandKind.OpenBladeSelectionCommand>, RequiresSelection {
+                /**
+                 * The blade reference.
+                 */
+                readonly bladeReference: BladeReference;
+            }
+
+            /**
+             * The interface for selection based menu command.
+             */
+            export interface MenuSelectionCommand extends CommonCommandBase<SelectionCommandKind.MenuSelectionCommand>, RequiresSelection {
+                /**
+                 * The list of commands.
+                 */
+                readonly commands: ReadonlyArray<OpenBladeSelectionCommand | ArmCommand>; //If a new command type is supported in future, it'll be added to this list depending on whether it needs to be supported in the menu list.
+            }
+
+            /**
+             * The interface for menu command.
+             */
+            export interface MenuCommand extends CommonCommandBase<CommandKind.MenuCommand> {
+                /**
+                 * The list of commands.
+                 */
+                readonly commands: ReadonlyArray<OpenBladeCommand>;
+            }
+
+            /**
+             * The interface for commands that require resource selection.
+             */
+            export type SelectionCommand = OpenBladeSelectionCommand | ArmCommand | MenuSelectionCommand;
+
+            /**
+             * The interface for command.
+             */
+            export type Command = OpenBladeCommand | MenuCommand;
+
+            /**
+             * The interface for ARM command definition.
+             */
+            export interface ArmCommandDefinition {
+                /**
+                 * Http method POST/DELETE/PATCH etc. By default POST will be used.
+                 */
+                readonly httpMethodType?: string;
+
+                /**
+                 * ARM uri for the command operation.
+                 * Uri should be a relative uri with the fixed format - {resourceid}/optionalOperationName?api-version.
+                 * Example: "{resourceid}?api-version=2018-09-01-preview
+                 */
+                readonly uri: string;
+
+                /**
+                 * ARM command operation can be long running operation. asyncOperation property specifies how to poll the status for completion of long running operation.
+                 */
+                readonly asyncOperation?: AsyncOperationOptions;
+            }
+
+            /**
+             * Interface for configs to describe how long running ARM operations needs to be polled and results processed for Arm commands.
+             */
+            export interface AsyncOperationOptions {
+                /**
+                 * By default when http Accepted (202) status code is received, the Location header will be looked up for polling uri to get the status of long running operation.
+                 * A different response header can be specified with the pollingHeaderOverride value.
+                 */
+                readonly pollingHeaderOverride?: string;
+
+                /**
+                 * A property path to look for status in the response body.
+                 * By default 'status' property will be looked up to see if it has "Succeeded", "Failed", "InProgress" or "Canceled".
+                 */
+                readonly statusPath?: string;
+            }
+
+            /**
+             * The interface for command selection.
+             */
+            export interface Selection {
+                /**
+                 * The max number of selected resources supported by the command operation.
+                 */
+                readonly maxSelectedItems?: number;
+
+                /**
+                 * The message shown when user tries to select more than supported items by the command operation.
+                 */
+                readonly disabledMessage?: string;
+            }
+
+            /**
+             * The interface for common command properties.
+             */
+            export interface CommonCommandBase<TKind extends CommandKind | SelectionCommandKind> {
+                /**
+                 * The command kind.
+                 */
+                readonly kind: TKind;
+
+                /**
+                 * The command Id.
+                 */
+                readonly id: string;
+
+                /**
+                 * The command label.
+                 */
+                readonly label: string;
+
+                /**
+                 * The command icon.
+                 */
+                readonly icon: (
+                    {
+                        /**
+                         * URI to the image element.
+                         */
+                        path: string;
+                    } | {
+                        /**
+                         * References a built-in SVG element.
+                         */
+                        image: SvgType;
+                    });
+
+                /**
+                 * The command tooltip.
+                 */
+                readonly tooltip?: string;
+
+                /**
+                 * The command aria label.
+                 */
+                readonly ariaLabel?: string;
+            }
+        }
+    }
+}
+
+Here is a sample of defining various asset commands, represented by a single TypeScript file in your extension project.
+
+import { ForAsset } from "Fx/Assets/Decorators";
+import * as ClientResources from "ClientResources";
+import { AssetTypeNames } from "_generated/ExtensionDefinition";
+import { SvgType } from "Fx/Images";
+
+@ForAsset.Commands.Decorator({
+    assetType: AssetTypeNames.virtualServer, // Asset type name associated with commands
+    commands: [ // Generic commands that do not require resource selection
+        {
+            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+            id: "OpenBladeCommandId",  // Unique identifier used for controlling visibility of commands
+            label: ClientResources.AssetCommands.openBlade,
+            icon: {
+                image: SvgType.AddTile,
+            },
+            bladeReference: {
+                blade: "SimpleTemplateBlade",
+                extension: "SamplesExtension", // An optional extension name, however, must be provided when opening a blade from a different extension
+                inContextPane: true, // An optional property to open the pane in context pane
+            },
+        },
+        {
+            kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
+            id: "OpenCreateCommandId",
+            label: ClientResources.AssetCommands.openCreate,
+            icon: {
+                image: SvgType.Cubes,
+            },
+            bladeReference: {
+                marketplaceItemId: "Microsoft.EngineV3", // Opens marketplace create flow
+            },
+        },
+    ],
+    selectionCommands: [ // Commands that require resource selection
+        {
+            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
+            id: "BulkDelete",
+            label: ClientResources.AssetCommands.delete,
+            icon: {
+                image: SvgType.Delete,
+            },
+            definitions: {
+                "microsoft.test/virtualservers": {
+                    httpMethodType: "DELETE",
+                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                    asyncOperation: {
+                        pollingHeaderOverride: "Azure-AsyncOperation",
+                    },
+                },
+            },
+            isDelete: true,  // Launches the default bulk delete confirmation blade provided by Fx on user click
+            confirmation: {
+                title: ClientResources.AssetCommands.confirmDeleteTitle,
+                message: ClientResources.AssetCommands.confirmDeleteMessage,
+            },
+        },
+        {
+            kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
+            id: "SelectionBasedMenuCommand",
+            label: ClientResources.AssetCommands.menuCommand,
+            icon: {
+                image: SvgType.PolyResourceLinked,
+            },
+            selection: {
+                maxSelectedItems: 2,
+                disabledMessage: ClientResources.AssetCommands.disabledMessage,
+            },
+            commands: [
+                {
+                    kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
+                    id: "SelectionBasedOpenBladeCommand",
+                    label: ClientResources.AssetCommands.openBlade1,
+                    icon: {
+                        image: SvgType.QuickStart,
+                    },
+                    bladeReference: {
+                        blade: "SimpleTemplateBlade",
+                    },
+                },
+                {
+                    kind: ForAsset.Commands.SelectionCommandKind.OpenBladeSelectionCommand,
+                    id: "SelectionBasedOpenBladeCommand",
+                    label: ClientResources.AssetCommands.openBlade2,
+                    icon: {
+                        image: SvgType.QuickStartPoly,
+                    },
+                    bladeReference: {
+                        blade: "DiTemplateBlade",
+                    },
+                },
+            ],
+        },
+    ],
+})
+export class VirtualServerCommands {
+}
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments"></a>
+### How to hide your asset commands in different environments
+
+You can control visibility of individual or all your commands in different environments by setting the hideAssetTypeCommands extension feature flag in your config.
+You can specify a comma seperated list of asset command ids or "*" to hide all the extensible commands on your browse blade
+
+If you’re using the hosting service, you can do this by updating the relevant environment configuration file (e.g. portal.azure.cn.json file)
+
+```json
+    {
+        "hideAssetTypeCommands": {
+          "YOUR_ASSETTYPE_NAME_DEFINED_IN_PDL": ["YOUR_COMMAND_ID_TO_HIDE"],
+          "YOUR_ASSETTYPE_NAME_DEFINED_IN_PDL": ["YOUR_COMMAND_ID1_TO_HIDE", "YOUR_COMMAND_ID2_TO_HIDE"],
+          "YOUR_THIRD_ASSETTYPE_NAME_DEFINED_IN_PDL": ["*"]
+        }
+    }
+```
+
+<a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments-testing-hiding-commands-locally"></a>
+#### Testing hiding commands locally
+
+For the desired environment append the following feature flags.
+
+```txt
+    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["MyCommandId1", "MyCommandId2"]}
+```
+
+If you want to test hiding all your commands, you can specify ["*"].
+
+```txt
+    ?microsoft_azure_myextension_hideassettypecmmands={"MyAsset":["*"]}
+```
+
 <a name="custom-blade"></a>
 # Custom blade
 
