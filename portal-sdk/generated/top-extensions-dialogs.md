@@ -38,7 +38,7 @@ container.openDialog({
     buttons: DialogButtons.OK,
     onClosed: () => {
         // this callback is invoked when the dialog is closed
-        // result.button maybe inspected to see which button was clicked.
+        // result.button may be inspected to see which button was clicked.
     },
 });
 
@@ -157,7 +157,7 @@ container.openDialog({
     buttons: DialogButtons.OK,
     onClosed: () => {
         // this callback is invoked when the dialog is closed
-        // result.button maybe inspected to see which button was clicked.
+        // result.button may be inspected to see which button was clicked.
     },
 });
 
