@@ -6,7 +6,7 @@
     - [Runtime](#runtime)
     - [Build-time](#build-time)
     - [Performance](#performance)
-      - [Why it's performant](#why-its-performant)
+      - [Why it's performant](#why-it's-performant)
       - [How performance is measured](#how-performance-is-measured)
   - [Getting started](#getting-started)
     - [Step 1: tsconfig.json](#step-1-tsconfigjson)
@@ -492,12 +492,7 @@ We understand that most developers coming here will have existing extensions, wi
 
 To ease migration of such complex experiences backed by code that relies heavily on `MsPortalFx` framework functionality, React Views provide a way to run code in your extension's web worker, along will all non-React-View code, that can communicate with your React View. Such code is called React Models. A React Model is an AMD module that will be dynamically required in your web worker's context at the same time as your React View code is injected in the iframe. The way to communicate between the two is via a redux store called the `asyncStore`. An async store is a redux store created in your iframe for which changed are proxied to a copy living in your React model's code and vice versa.
 
-Refer to the following sample for the following explanations;
-
-```typescript
-    /* Migrated sample code here */
-    /* link to migrated sample code here, because we'll refer to file hierarchy */
-```
+Refer to the (Migrated.ReactView)[https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev] and (Migrated.ReactModel)[https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FModels%2FMigrated.ReactModel.ts&version=GBdev] samples for the following explanations.
 
 You'll notice how there is no functional difference between React Views component code weither it uses a model or not. The only difference is that for correctness reasons, store types are split out in a `Common.d.ts` interface file which is built both by the React TypeScript build (from the tsconfig.json file created in a previous section) and the outer Extension build; that's because the React Model file will be built by the outer build.
 
@@ -573,24 +568,24 @@ Az library, meant to provide all APIs needed to communicate with the Portal's Sh
 Root module for React Views containing all decorators used to register blades or connect components. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/Essentials"`
 React version of the Essentials control. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FEssentials.ReactView.tsx&version=GBdev&_a=contents).
-* `"ReactView/BladeCommandBar"`
+* `"ReactView/CommandBar"`
 React version of traditional blades' command bar. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FExtension%2FTypeScript%2FHubsExtension%2FReact%2FViews%2FResourcesWithTag.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/BladeLink"`
 React component allowing you to generate an `<a>` tag with an href pointing to a specified blade. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FExtension%2FTypeScript%2FHubsExtension%2FReact%2FViews%2FReceivesReturnedData.ReactView.tsx&version=GBdev&_a=contents).
-* `"ReactView/BladeStatusBar"`
+* `"ReactView/StatusBar"`
 React version of traditional blades' status bar. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FExtension%2FTypeScript%2FHubsExtension%2FReact%2FViews%2FRStatusBar.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/Dialog"`
 React version of blade dialogs. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FAzSamples.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/FrameworkIcon"`
 React component allowing you to display Portal framework icons. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FExtension%2FTypeScript%2FHubsExtension%2FReact%2FViews%2FResourcesWithTag.ReactView.tsx&version=GBdev&_a=contents).
-* `"ReactView/LocationsDropdown"`
-React version of the LocationsDropDown control. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
+* `"ReactView/LocationDropdown"`
+React version of the LocationDropDown control. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/ResourceGroupDropdown"`
 React version of the ResourceGroupDropdown control. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
 * `"ReactView/SubscriptionDropdown"`
 React version of the SubscriptionDropdown control (single-select, pick an Azure subscription). [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FHubsExtension%2FExtension%2FTypeScript%2FHubsExtension%2FReact%2FViews%2FResourcesWithTag.ReactView.tsx&version=GBdev&_a=contents).
-* `"ReactView/SubscriptionsDropdown"`
-React version of the SubscriptionsDropdown control (multi-select, impacts which subscriptions are used throughout the Portal). [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
+* `"ReactView/SubscriptionFilter"`
+React version of the ResourceFilter control's Subscriptions component (multi-select, impacts which subscriptions are used throughout the Portal). [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev&_a=contents).
 
 * `"ReactView/Resources"`
 Provides two methods, `getContentUri` and `getAbsoluteUri` which mirror `MsPortalFx.getContentUri` and `MsPortalFx.getAbsoluteUri` respectively.
