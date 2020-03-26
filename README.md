@@ -49,12 +49,13 @@ Learn how the framework is structured and how it is designed to run in multiple 
 
 -->
 
-## Design guide  
+## Design guide
 
 Design patterns provide solutions for common Azure scenarios.  By leveraging these patterns, Azure teams will accelerate extension development and provide users with a familiar experience so that users can easily adopt new Azure services.  The design guide covers [design toolkits, style guidance](/portal-sdk/generated/top-design.md#design-toolkits-and-resources), [common page layouts](/portal-sdk/generated/top-design.md#page) and [the resource management pattern](/portal-sdk/generated/top-design.md#resource-management).
 
 * [Design guide](/portal-sdk/generated/top-design.md)
 
+* [Responsive design guide](/portal-sdk/generated/top-design-responsive.md)
 
 ## Development guide
 
@@ -79,6 +80,7 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 [Ask an SDK setup question on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate)
 
 ### Azure Portal Extension Developer CLI
+
 The Azure portal extension developer CLI, namely `ap`, is the foundational tool used for all inner dev/test loop actions during extension development and includes commands such as new, restore, build, serve, start, release, lint, run test, watch and update.
 
 * [CLI Overview](/portal-sdk/generated/top-ap-cli.md#cli-overview)
@@ -104,7 +106,7 @@ The Azure portal extension developer CLI, namely `ap`, is the foundational tool 
 
 ### Samples
 
-Samples show how to do many common development tasks. 
+Samples show how to do many common development tasks.
 
 * [Samples](/portal-sdk/generated/top-extensions-samples.md)
 
@@ -204,7 +206,7 @@ Because your extension is Web code, you can make **AJAX** calls to various servi
 
 ### Advanced development topics
 
-* [Memory management (LifetimeManager)](/portal-sdk/generated/top-extensions-lifetime.md) 
+* [Memory management (LifetimeManager)](/portal-sdk/generated/top-extensions-lifetime.md)
 
 * [Sharing blades and parts across extensions](/portal-sdk/generated/top-extensions-sharing-blades-and-parts.md)
 

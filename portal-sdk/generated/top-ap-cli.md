@@ -334,6 +334,7 @@ Argument | alias | Description
 --- | --- | ---
 --name | -n | Required. The name used in portal registration of the extension e.g Microsoft_Azure_SomeExtension.
 --output | -o | Required. The output directory to place the new project.
+--declarative | -d | Optional. Scaffolds declarative extension. This feature is in preview mode.
 --help | | Optional. Show help for new command.
 
 <a name="cli-overview-command-reference-ap-new-example-usage-2"></a>
@@ -344,6 +345,8 @@ Two examples scaffolding a new extension to the ./dev/newextension folder. The f
 ```
 ap new -n CompanyName_ProductName_ServiceName -o ./dev/someextension
 ap new --name Microsoft_Azure_Storage --output ./dev/storage
+ap new --name Microsoft_Azure_MyExtension --output ./dev/myextension --declarative
+ap new -n Microsoft_Azure_MyExtension -o ./dev/myextension -d
 ```
 
 Emit help for the build command.

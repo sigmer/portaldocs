@@ -60,6 +60,7 @@ Design patterns provide solutions for common Azure scenarios.  By leveraging the
 
 * [Design guide](/portal-sdk/generated/top-design.md)
 
+* [Responsive design guide](/portal-sdk/generated/top-design-responsive.md)
 
 <a name="azure-portal-extension-development-documentation-development-guide"></a>
 ## Development guide
@@ -87,6 +88,7 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 <a name="azure-portal-extension-development-documentation-development-guide-azure-portal-extension-developer-cli"></a>
 ### Azure Portal Extension Developer CLI
+
 The Azure portal extension developer CLI, namely `ap`, is the foundational tool used for all inner dev/test loop actions during extension development and includes commands such as new, restore, build, serve, start, release, lint, run test, watch and update.
 
 * [CLI Overview](/portal-sdk/generated/top-ap-cli.md#cli-overview)
@@ -113,7 +115,7 @@ The Azure portal extension developer CLI, namely `ap`, is the foundational tool 
 <a name="azure-portal-extension-development-documentation-development-guide-samples"></a>
 ### Samples
 
-Samples show how to do many common development tasks. 
+Samples show how to do many common development tasks.
 
 * [Samples](/portal-sdk/generated/top-extensions-samples.md)
 
@@ -222,7 +224,7 @@ Because your extension is Web code, you can make **AJAX** calls to various servi
 <a name="azure-portal-extension-development-documentation-development-guide-advanced-development-topics"></a>
 ### Advanced development topics
 
-* [Memory management (LifetimeManager)](/portal-sdk/generated/top-extensions-lifetime.md) 
+* [Memory management (LifetimeManager)](/portal-sdk/generated/top-extensions-lifetime.md)
 
 * [Sharing blades and parts across extensions](/portal-sdk/generated/top-extensions-sharing-blades-and-parts.md)
 
@@ -390,3 +392,4 @@ These features are supported, but have had no recent investment. No additional i
 1. [Gallery frequently asked questions](/gallery-sdk/generated/index-gallery.md#gallery-frequently-asked-questions)
 
 This is our new index which contains our refreshed docs. If you do not like our new index/docs, you can find the old index [here](old-README.md).
+
