@@ -405,8 +405,8 @@ The following is the TypeScript code that reads and writes settings. It is also 
 
    ```typescript
 
-import ClientResources = require("ClientResources");
-import ExtensionDefinition = require("_generated/ExtensionDefinition");
+import * as ClientResources from "ClientResources";
+import * as ExtensionDefinition from "_generated/ExtensionDefinition";
 
 import Def = ExtensionDefinition.ViewModels.V1$$Parts.GeneralGalleryPart;
 import FxViewModels = MsPortalFx.ViewModels;

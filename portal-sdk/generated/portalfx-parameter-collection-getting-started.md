@@ -248,7 +248,7 @@ Continuing with this example serverConfigCollector now needs to be defined as a 
 To send initial data to the provider and optionally receive a result back you can specify callbacks during initialization of the ParameterCollector.
 
 import * as Di from "Fx/DependencyInjection";
-import ClientResources = require("ClientResources");
+import * as ClientResources from "ClientResources";
 import { ServerConfig } from "_generated/SamplesExtension/DataModels/ServerConfig";
 
 /**
