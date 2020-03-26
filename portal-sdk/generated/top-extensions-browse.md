@@ -1058,6 +1058,71 @@ module MsPortalFxForAsset {
             }
 
             /**
+             * The interface for ARM command definition.
+             */
+            export interface ArmCommandDefinition {
+                /**
+                 * Http method POST/DELETE/PATCH etc. By default POST will be used.
+                 */
+                readonly httpMethodType?: string;
+
+                /**
+                 * ARM uri for the command operation.
+                 * Uri should be a relative uri with the fixed format - {resourceid}/optionalOperationName?api-version.
+                 * Example: "{resourceid}?api-version=2018-09-01-preview
+                 */
+                readonly uri: string;
+
+                /**
+                 * ARM command operation can be long running operation. asyncOperation property specifies how to poll the status for completion of long running operation.
+                 */
+                readonly asyncOperation?: AsyncOperationOptions;
+
+                /**
+                 * Optional list of resource-specific ARM error codes that should be retried for HttpStatusCode.BadRequest(400).
+                 *
+                 * By default, Fx retries below codes:
+                 *     Retry for transient errors with Http status codes: HttpStatusCode.InternalServerError(500), HttpStatusCode.BadGateway(502), HttpStatusCode.ServiceUnavailable(503), HttpStatusCode.GatewayTimeout(504)
+                 *     Retry for ARM conflict/throttle errors with status codes: HttpStatusCode.TooManyRequests(409), HttpStatusCode.Conflict(429)
+                 * In addition to these, there could be resource-specific errors that need to be retried for HttpStatusCode.BadRequest(400).
+                 * If this list is specified, Fx will parse ARM error codes for HttpStatusCode.BadRequest(400) requests and retry in addition to above retries.
+                 *
+                 * Example: ["PublicIpAddressCannotBeDeleted", "InuseNetworkSecurityGroupCannotBeDeleted"]
+                 */
+                readonly retryableArmCodes?: ReadonlyArray<string>;
+
+                /**
+                 * Optional list of resource-specific ARM error codes that shouldn't be retried.
+                 * This helps optimize network calls and improve bulk operation performance.
+                 *
+                 * By default, Fx won't issue retry for below code regardless of HTTP status code:
+                 *    "ScopeLocked"
+                 * In addition to this Arm error code, there could be resource-specific error codes that shouldn't be retried.
+                 * If this list is specified, Fx will ignore the above mentioned list and only honor this list of Arm codes that shouldn't be retried.
+                 *
+                 * Example: ["ScopeLocked"]
+                 */
+                readonly nonRetryableArmCodes?: ReadonlyArray<string>;
+            }
+
+            /**
+             * Optional Arm command configs to describe how long running ARM operations needs to be polled and results processed.
+             */
+            export interface AsyncOperationOptions {
+                /**
+                 * By default when http Accepted (202) status code is received, the Location header will be looked up for polling uri to get the status of long running operation.
+                 * A different response header can be specified with the pollingHeaderOverride value.
+                 */
+                readonly pollingHeaderOverride?: string;
+
+                /**
+                 * A property path to look for status in the response body.
+                 * By default 'status' property will be looked up to see if it has "Succeeded", "Failed", "InProgress" or "Canceled".
+                 */
+                readonly statusPath?: string;
+            }
+
+            /**
              * The interface for ARM commands.
              * These commands honor default selection which is FullPage.
              */
@@ -1115,45 +1180,6 @@ module MsPortalFxForAsset {
              * The interface for command.
              */
             export type Command = OpenBladeCommand | MenuCommand;
-
-            /**
-             * The interface for ARM command definition.
-             */
-            export interface ArmCommandDefinition {
-                /**
-                 * Http method POST/DELETE/PATCH etc. By default POST will be used.
-                 */
-                readonly httpMethodType?: string;
-
-                /**
-                 * ARM uri for the command operation.
-                 * Uri should be a relative uri with the fixed format - {resourceid}/optionalOperationName?api-version.
-                 * Example: "{resourceid}?api-version=2018-09-01-preview
-                 */
-                readonly uri: string;
-
-                /**
-                 * ARM command operation can be long running operation. asyncOperation property specifies how to poll the status for completion of long running operation.
-                 */
-                readonly asyncOperation?: AsyncOperationOptions;
-            }
-
-            /**
-             * Interface for configs to describe how long running ARM operations needs to be polled and results processed for Arm commands.
-             */
-            export interface AsyncOperationOptions {
-                /**
-                 * By default when http Accepted (202) status code is received, the Location header will be looked up for polling uri to get the status of long running operation.
-                 * A different response header can be specified with the pollingHeaderOverride value.
-                 */
-                readonly pollingHeaderOverride?: string;
-
-                /**
-                 * A property path to look for status in the response body.
-                 * By default 'status' property will be looked up to see if it has "Succeeded", "Failed", "InProgress" or "Canceled".
-                 */
-                readonly statusPath?: string;
-            }
 
             /**
              * The interface for command selection.
@@ -1233,6 +1259,7 @@ import { SvgType } from "Fx/Images";
             kind: ForAsset.Commands.CommandKind.OpenBladeCommand,
             id: "OpenBladeCommandId",  // Unique identifier used for controlling visibility of commands
             label: ClientResources.AssetCommands.openBlade,
+            ariaLabel: ClientResources.AssetCommands.openBlade,
             icon: {
                 image: SvgType.AddTile,
             },
