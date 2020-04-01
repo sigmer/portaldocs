@@ -881,6 +881,8 @@ Extension authors can specify two sets of commands for their asset type. The gen
 Simply specify a command kind and intellisense will prompt you for all the required properties for that command type.
 These are the currently supported command types:
 
+```typescript
+
 import { SvgType } from "Fx/Images";
 
 export = MsPortalFxForAsset;
@@ -1245,7 +1247,11 @@ module MsPortalFxForAsset {
     }
 }
 
+```
+
 Here is a sample of defining various asset commands, represented by a single TypeScript file in your extension project.
+
+```typescript
 
 import { ForAsset } from "Fx/Assets/Decorators";
 import * as ClientResources from "ClientResources";
@@ -1344,6 +1350,8 @@ import { SvgType } from "Fx/Images";
 })
 export class VirtualServerCommands {
 }
+
+```
 
 <a name="browse-with-azure-resource-graph-extensible-commanding-for-arg-browse-how-to-hide-your-asset-commands-in-different-environments"></a>
 ### How to hide your asset commands in different environments
