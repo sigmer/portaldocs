@@ -93,6 +93,7 @@ always-auth=true
     "@types/nconf": "0.10.0",
     "@types/sinon": "7.0.5",
     "chai": "4.2.0",
+    "chai-karma-snapshot": "nileshp87/chai-karma-snapshot",
     "gulp": "4.0.0",
     "gulp-concat": "2.6.1",
     "karma": "^4.0.1",
@@ -105,14 +106,19 @@ always-auth=true
     "karma-junit-reporter": "1.2.0",
     "karma-requirejs": "1.1.0",
     "karma-trx-reporter": "0.4.0",
+    "karma-mocha-snapshot": "^0.2.1",
+    "karma-snapshot": "^0.6.0",
     "mocha": "5.2.0",
     "msportalfx-ut": "file:../../packages/Microsoft.Portal.TestFramework.UnitTest.$(CURRENT_BUILD_VERSION)/msportalfx-ut-$(NPM_CURRENT_BUILD_VERSION).tgz",
     "nconf": "0.10.0",
+    "react-test-renderer": "16.8.6",
+    "@testing-library/react": "8.0.0",
     "requirejs": "2.3.6",
     "sinon": "7.2.3",
     "typescript": "3.5.3"
   }
 }
+
 
 ```
 
@@ -299,6 +305,7 @@ describe("Resource Overview Blade Tests", () => {
         "baseUrl": ".",
         "experimentalDecorators": true,
         "module": "amd",
+        "jsx": "react",
         "noImplicitAny": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
@@ -306,10 +313,33 @@ describe("Resource Overview Blade Tests", () => {
         "rootDir": ".",
         "sourceMap": false,
         "strictBindCallApply": true,
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "es2015.promise",
+            "es2015.iterable",
+            "es5",
+            "scripthost"
+        ],
         "target": "es5",
         "paths": {
             "msportalfx-ut/*": [
                 "./node_modules/msportalfx-ut/lib/*"
+            ],
+            "lodash": [
+                "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts"
+            ],
+            "react": [
+                "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts"
+            ],
+            "react-dom": [
+                "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts"
+            ],
+            "redux": [
+                "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts"
+            ],
+            "react-redux": [
+                "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts"
             ],
             "*": [
                 "../Extension/Output/Content/Scripts/*",
@@ -326,9 +356,11 @@ describe("Resource Overview Blade Tests", () => {
     "include": [
         "../Extension/Definitions/*",
         "../Extension/Output/typings/ClientResources.d.ts",
-        "test/**/*"
+        "../Extension/ReactDefinitions/ReactViewUnitTestTypings.d.ts",
+        "test/**/*",
     ]
 }
+
 
     ```
 
@@ -362,41 +394,46 @@ window.fx.environment.armApiVersion = "2014-04-01";
 
 const allTestFiles = []
 if (window.__karma__) {
-  const TEST_REGEXP = /^\/base\/Extension.UnitTests\/Output\/.*(spec|test)\.js$/i;
-  // Get a list of all the test files to include
-  Object.keys(window.__karma__.files).forEach(function (file) {
-    if (TEST_REGEXP.test(file)) {
-      // Normalize paths to RequireJS module names.
-      // If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
-      // then do not normalize the paths
-      const normalizedTestModule = file.replace(/^\/base\/Extension.UnitTests\/|\.js$/g, "")
-      allTestFiles.push(normalizedTestModule)
-    }
-  });
+    const TEST_REGEXP = /^\/base\/Extension.UnitTests\/Output\/.*(spec|test)\.js$/i;
+    // Get a list of all the test files to include
+    Object.keys(window.__karma__.files).forEach(function (file) {
+        if (TEST_REGEXP.test(file)) {
+            // Normalize paths to RequireJS module names.
+            // If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
+            // then do not normalize the paths
+            const normalizedTestModule = file.replace(/^\/base\/Extension.UnitTests\/|\.js$/g, "")
+            allTestFiles.push(normalizedTestModule)
+        }
+    });
 }
 
 mocha.setup({
-  ui: "bdd",
-  timeout: 60000,
-  ignoreLeaks: false,
-  globals: []
+    ui: "bdd",
+    timeout: 60000,
+    ignoreLeaks: false,
+    globals: []
 });
 
 rjs = require.config({
-  // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: window.__karma__ ? "/base/Extension.UnitTests" : "",
-  paths: {
-    "_generated": "../Extension/Output/Content/Scripts/_generated",
-    "Resource": "../Extension/Output/Content/Scripts/Resource",
-    "Shared": "../Extension/Output/Content/Scripts/Shared",
-    "sinon": "node_modules/sinon/pkg/sinon",
-    "chai": "node_modules/chai/chai",
-  },
-  // dynamically load all test files
-  deps: allTestFiles,
+    // Karma serves files under /base, which is the basePath from your config file
+    baseUrl: window.__karma__ ? "/base/Extension.UnitTests" : "",
+    paths: {
+        "_generated": "../Extension/Output/Content/Scripts/_generated",
+        "Resource": "../Extension/Output/Content/Scripts/Resource",
+        "Shared": "../Extension/Output/Content/Scripts/Shared",
+        "sinon": "node_modules/sinon/pkg/sinon",
+        "chai": "node_modules/chai/chai",
+        "chai-karma-snapshot": "node_modules/chai-karma-snapshot/lib/index",
+        "pretty-format": "node_modules/pretty-format/build-es5/index",
+        "@testing-library/react": "node_modules/@testing-library/react/dist/@testing-library/react.umd",
+        "react-test-renderer": "node_modules/react-test-renderer/umd/react-test-renderer.development",
+        "react-test-renderer/shallow": "node_modules/react-test-renderer/umd/react-test-renderer-shallow.development",
+    },
+    // dynamically load all test files
+    deps: allTestFiles,
 
-  // kickoff karma or mocha
-  callback: window.__karma__ ? window.__karma__.start : function () { return mocha.run(); }
+    // kickoff karma or mocha
+    callback: window.__karma__ ? window.__karma__.start : function () { return mocha.run(); }
 });
 
 
@@ -417,121 +454,145 @@ add a file named ./karma.conf.js
 // Generated on Fri Feb 16 2018 15:06:08 GMT-0800 (Pacific Standard Time)
 
 module.exports = function (config) {
-  config.set({
+    let path = require("path");
+    let process = require("process");
+    function snapshotResolver(basePath, suiteName) {
+        return path.join(basePath, "Extension.UnitTests", "__snapshots__", suiteName + ".md");
+    }
+    config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: "../",
+        // base path that will be used to resolve all patterns (eg. files, exclude)
+        basePath: "../",
 
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ["mocha"],
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: ["mocha", "snapshot", "mocha-snapshot"],
 
-    plugins: [
-      require("karma-mocha"),
-      require("karma-mocha-reporter"),
-      require("karma-edge-launcher"),
-      require("karma-coverage"), // Include if you want coverage
-      require("karma-chrome-launcher"),
-      require("karma-junit-reporter"),  // Include if you want junit reporting
-      require("karma-trx-reporter")   // Include if you want trx reporting
-    ],
-    // list of files / patterns to load in the browser
-    files: [
-      // chai assertion framework.
-      { pattern: "Extension.UnitTests/node_modules/chai/**/*.js", included: false },
-      // sinonjs used for mocking xhr.
-      { pattern: "Extension.UnitTests/node_modules/sinon/**/*.js", included: false },
-      // aggregate script of portal bundles required for test.
-      "Extension.UnitTests/node_modules/msportalfx-ut/lib/FxScripts.js",
-      // karma requirejs adapter required to successfully load requirejs in karma.
-      "Extension.UnitTests/node_modules/karma-requirejs/lib/adapter.js",
-      // generated require configs for extension resx files.
-      { pattern: "Extension.UnitTests/_generated/Ext/**/*RequireConfig.js", included: true },
-      // msportalfx-ut test harness and other test scripts you may load within a unit test.
-      { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/*.js", included: false },
-      // portal framework scripts.
-      { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/fx/Content/Scripts/**/*.js", included: false },
-      // reserved directory for generated content for framework.
-      { pattern: "Extension.UnitTests/_generated/Fx/**/*.js", included: false },
-      // generated content for extension.
-      { pattern: "Extension.UnitTests/_generated/Ext/**/*.js", included: false },
-      // make available compiled tests from tsconfig.json outDir
-      { pattern: "Extension.UnitTests/Output/**/*.test.js", included: false },
-      // make available all client extension code that unit tests will use.
-      { pattern: "Extension/Output/Content/Scripts/**/*.js", included: false },
-      // the entrypoint for running unit tests.
-      "Extension.UnitTests/test-main.js",
-    ],
+        plugins: [
+            require("karma-mocha"),
+            require("karma-snapshot"),
+            require("karma-mocha-snapshot"),
+            require("karma-mocha-reporter"),
+            require("karma-edge-launcher"),
+            require("karma-coverage"), // Include if you want coverage
+            require("karma-chrome-launcher"),
+            require("karma-junit-reporter"),  // Include if you want junit reporting
+            require("karma-trx-reporter")   // Include if you want trx reporting
+        ],
+        // list of files / patterns to load in the browser
+        files: [
+            // chai assertion framework.
+            { pattern: "Extension.UnitTests/node_modules/chai/**/*.js", included: false },
+            // sinonjs used for mocking xhr.
+            { pattern: "Extension.UnitTests/node_modules/sinon/**/*.js", included: false },
+            // aggregate script of portal bundles required for test.
+            "Extension.UnitTests/node_modules/msportalfx-ut/lib/FxScripts.js",
+            // karma requirejs adapter required to successfully load requirejs in karma.
+            "Extension.UnitTests/node_modules/karma-requirejs/lib/adapter.js",
+            // generated require configs for extension resx files.
+            { pattern: "Extension.UnitTests/_generated/Ext/**/*RequireConfig.js", included: true },
+            // msportalfx-ut test harness and other test scripts you may load within a unit test.
+            { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/*.js", included: false },
+            // react test renderer & snapshot utilities/data
+            { pattern: "Extension.UnitTests/node_modules/chai-karma-snapshot/lib/index.js", included: false },
+            { pattern: "Extension.UnitTests/node_modules/@testing-library/react/**/*.js", included: false },
+            { pattern: "Extension.UnitTests/node_modules/react-test-renderer/**/*.js", included: false },
+            { pattern: "Extension.UnitTests/node_modules/pretty-format/**/*.js", included: false },
+            { pattern: "Extension.UnitTests/__snapshots__/**/*.md", included: true },
+            // portal framework scripts.
+            { pattern: "Extension.UnitTests/node_modules/msportalfx-ut/lib/fx/Content/Scripts/**/*.js", included: false },
+            // reserved directory for generated content for framework.
+            { pattern: "Extension.UnitTests/_generated/Fx/**/*.js", included: false },
+            // generated content for extension.
+            { pattern: "Extension.UnitTests/_generated/Ext/**/*.js", included: false },
+            // make available compiled tests from tsconfig.json outDir
+            { pattern: "Extension.UnitTests/Output/**/*.js", included: false },
+            // make available all client extension code that unit tests will use.
+            { pattern: "Extension/Output/Content/Scripts/**/*.js", included: false },
+            // the entrypoint for running unit tests.
+            "Extension.UnitTests/test-main.js",
+        ],
 
-    client: {
-      mocha: {
-        reporter: "html",
-        ui: "bdd"
-      }
-    },
+        client: {
+            mocha: {
+                reporter: "html",
+                ui: "bdd"
+            }
+        },
 
-    // list of files / patterns to exclude
-    exclude: [
-    ],
+        // list of files / patterns to exclude
+        exclude: [
+        ],
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      "./Extension/Output/Content/Scripts/**/*.js": "coverage"
-    },
+        // preprocess matching files before serving them to the browser
+        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+        preprocessors: {
+            "./Extension/Output/Content/Scripts/**/*.js": "coverage",
+            "./Extension.UnitTests/__snapshots__/**/*.md": ["snapshot"],
+        },
 
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ["mocha", "trx", "junit", "coverage"],
+        snapshot: {
+            update: process.env.UPDATE === "1",
+            prune: process.env.PRUNE === "1",
+            pathResolver: snapshotResolver,
+        },
 
-    // the default trx configuration
-    trxReporter: { outputFile: "./TestResults/test-results.trx", shortTestName: false },
+        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+        reporters: ["mocha", "trx", "junit", "coverage"],
 
-    junitReporter: {
-      outputDir: "./Extension.UnitTests/TestResults", // results will be saved as $outputDir/$browserName.xml
-      outputFile: "test-results.xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
-      suite: "Extension.UnitTests", // suite will become the package name attribute in xml testsuite element
-      useBrowserName: true, // add browser name to report and classes names
-      nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
-      classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
-      properties: {} // key value pair of properties to add to the <properties> section of the report
-    },
+        // the default trx configuration
+        trxReporter: { outputFile: "./TestResults/test-results.trx", shortTestName: false },
 
-    coverageReporter: {
-      type: "html",
-      dir: "./Extension.UnitTests/TestResults/coverage/"
-    },
+        junitReporter: {
+            outputDir: "./Extension.UnitTests/TestResults", // results will be saved as $outputDir/$browserName.xml
+            outputFile: "test-results.xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
+            suite: "Extension.UnitTests", // suite will become the package name attribute in xml testsuite element
+            useBrowserName: true, // add browser name to report and classes names
+            nameFormatter: undefined, // function (browser, result) to customize the name attribute in xml testcase element
+            classNameFormatter: undefined, // function (browser, result) to customize the classname attribute in xml testcase element
+            properties: {} // key value pair of properties to add to the <properties> section of the report
+        },
 
-    // web server port
-    port: 9876,
+        mochaReporter: {
+            showDiff: true
+        },
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
+        coverageReporter: {
+            type: "html",
+            dir: "./Extension.UnitTests/TestResults/coverage/"
+        },
 
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+        // web server port
+        port: 9876,
 
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ["Chrome_No_Sandbox", "Edge"],
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_INFO,
 
-    customLaunchers: {
-      Chrome_No_Sandbox: {
-          base: 'Chrome',
-          flags: ['--no-sandbox']
-      }
-    },
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatch: true,
 
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity,
-  })
+        // start these browsers
+        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        browsers: ["Chrome_No_Sandbox", "Edge"],
+
+        customLaunchers: {
+            Chrome_No_Sandbox: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        },
+        // Continuous Integration mode
+        // if true, Karma captures browsers, runs the tests and exits
+        singleRun: false,
+
+        // Concurrency level
+        // how many browser should be started simultaneous
+        concurrency: Infinity,
+    })
 }
 
 

@@ -494,7 +494,7 @@ To ease migration of such complex experiences backed by code that relies heavily
 
 Refer to the (Migrated.ReactView)[https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FMigrated.ReactView.tsx&version=GBdev] and (Migrated.ReactModel)[https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FModels%2FMigrated.ReactModel.ts&version=GBdev] samples for the following explanations.
 
-You'll notice how there is no functional difference between React Views component code weither it uses a model or not. The only difference is that for correctness reasons, store types are split out in a `Common.d.ts` interface file which is built both by the React TypeScript build (from the tsconfig.json file created in a previous section) and the outer Extension build; that's because the React Model file will be built by the outer build.
+You'll notice how there is no functional difference between React Views component code whether it uses a model or not. The only difference is that for correctness reasons, store types are split out in a `Common.d.ts` interface file which is built both by the React TypeScript build (from the tsconfig.json file created in a previous section) and the outer Extension build; that's because the React Model file will be built by the outer build.
 
 Here are more details on the model's implementation.
 
