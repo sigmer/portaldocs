@@ -45,8 +45,8 @@ The information associated with each part provides the following information.
 * **Revealed**: The revealed time and all other performance information that is logged by that part, as specified in [top-telemetry.md](top-telemetry#overview-viewing-telemetry-custom-queries-tracked-actions).
 
 * **ViewModel**: Contains the following functionality.
-    * **Dump**: Dumps the view model to the console for debugging purposes. Displays its name, parent extension and load time. Click on the div to log more information such as the part definition, view model name and inputs.
-    * **Track**: Dumps the view model observables.
+  * **Dump**: Dumps the view model to the console for debugging purposes. Displays its name, parent extension and load time. Click on the div to log more information such as the part definition, view model name and inputs.
+  * **Track**: Dumps the view model observables.
 * **Deep link**: Optional. Links to the blade.
 
 <a name="debugging-an-extension-debug-mode-toggle-optimizations"></a>
@@ -158,7 +158,7 @@ One of the most useful commands when debugging knockout user interfaces is in th
 ```ko.dataFor(element)```
 
 This command returns the ViewModel that is bound to the specified element via Knockout (KO). The object can be accessed by the element name that is stored in the Document Object Model (DOM). Also, in most modern browsers, `$0` will return the currently selected element in the elements pane. To access the object that is data bound to the UI, which is often the contents of the ViewModel object, select the element in the elements pane, and then run the following command:
-``` ko.dataFor($0)```.
+```ko.dataFor($0)```.
 
 This allows the developer to observe and examine live data at runtime. For **Intellisense** support you can perform  the same action, but assign it to a variable, as in the following example.
 
@@ -168,17 +168,9 @@ This allows the developer to observe and examine live data at runtime. For **Int
 
 For more information about debugging Knockout, see the following videos.
 
-* ***Using ko.dataFor to get the view model of an element***
-
-  [https://auxdocs.blob.core.windows.net/videos/koDataFor.mp4](https://auxdocs.blob.core.windows.net/videos/koDataFor.mp4)
-
-* ***Using subscribe to figure out what causes observable changes to  view model properties***
-
-  [https://auxdocs.blob.core.windows.net/videos/kosubscribe.mp4](https://auxdocs.blob.core.windows.net/videos/kosubscribe.mp4)
-
-*  ***How to get call stacks from across iframes***
-
-    [https://auxdocs.blob.core.windows.net/videos/messageContext.mp4](https://auxdocs.blob.core.windows.net/videos/messageContext.mp4)
+* [Using ko.dataFor to get the view model of an element](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f06f-f1ea75dd663f)
+* [Using subscribe to figure out what causes observable changes to view model properties](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f077-f1ea75dd663f)
+* [How to get call stacks from across iframes](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f078-f1ea75dd663f)
 
 ### What Causes Data Changes
 
@@ -190,21 +182,21 @@ The JavaScript `debugger` keyword, as described in  [https://developer.mozilla.o
 
 1. Access the ViewModel by using  `ko.dataFor`, as in the following statement.
   
-    ```   var myProperty = ko.dataFor($0).observablePropertyICareAbout;   ```
+    ```var myProperty = ko.dataFor($0).observablePropertyICareAbout;```
 
-1.  Subscribe to the ViewModel, as in the following statement.
+1. Subscribe to the ViewModel, as in the following statement.
   
-    ``` myProperty.subscribe(function (value) { debugger; }) ```
+    ```myProperty.subscribe(function (value) { debugger; })```
 
 This causes the debugger to break whenever the specified property changes, as long as the browser dev tools are open when that happens. After the injected breakpoint is encountered, the call stack can be examined to determine what caused this to trigger. The variable `value` is the new value being set to your observable.
 
-For more information about the Knockout `subscribe` method and observable changes to  view model properties, see   [https://auxdocs.blob.core.windows.net/videos/kosubscribe.mp4](https://auxdocs.blob.core.windows.net/videos/kosubscribe.mp4).
+For more information about the Knockout `subscribe` method and observable changes to view model properties, [watch this video](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f077-f1ea75dd663f).
 
 ### Crossing the iframe boundary
 
 Previously, the perspective was that all of the extension debugging was in a single `iframe`, even though  multiple `iframes` can exist. Actually, both `iframes` can change, and do change, values in response to one another.
 
-This section discusses how to figure out where changes are coming from when they originate from a different iframe. 
+This section discusses how to figure out where changes are coming from when they originate from a different iframe.
 
 **NOTE**:  Unlike debugging extensions that use **Knockout**, or debugging the data stack, `iframe` development is very Portal specific. You may want to review Azure Portal architecture, as specified in   [top-extensions-architecture.md](top-extensions-architecture.md), previous to continuing with `iframe` testing.
 
@@ -222,11 +214,11 @@ This section discusses how to figure out where changes are coming from when they
 MsPortalFx.Base.Rpc.Internal.messageContext.callStack
 ```
 
-**NOTE**: Do not put this line of code in your actual source.  It will not run properly without diagnostics turned on, and it will not work in the production environment. 
+**NOTE**: Do not put this line of code in your actual source.  It will not run properly without diagnostics turned on, and it will not work in the production environment.
 
 **NOTE**: This code  traverses the `iframe` boundary only once.  Also, it is not a real call stack because the call across `iframes` is asynchronous.  To go further back, the test session requires a breakpoint on the other `iframe`, so you can repeat this process until you find the code you are seeking.
 
-For more information about getting call stacks across `iframes`, see [https://auxdocs.blob.core.windows.net/videos/messageContext.mp4](https://auxdocs.blob.core.windows.net/videos/messageContext.mp4).
+For more information about getting call stacks across `iframes`, [watch this video](https://msit.microsoftstream.com/video/ade5a3ff-0400-86e8-f078-f1ea75dd663f).
 
 For more information:
 

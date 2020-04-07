@@ -18,6 +18,8 @@
     - [Dependencies](#dependencies)
       - [Open source](#open-source)
       - [Portal-specific](#portal-specific)
+    - [Styling](#styling)
+      - [View padding](#view-padding)
   - [Known limitations](#known-limitations)
     - [Storage](#storage)
     - [Service Workers](#service-workers)
@@ -596,20 +598,70 @@ Module used for CSS-in-JS component styling. Provides one method, `getClassNames
 * `"ReactView/Provisioning"`
 Provisioning is now done through this module. The API has been built to mirror functionality that used to be provided by `this.context.provisioning` in template blades after using the `TemplateBlade.DoesProvisioning` decorator. Note that the `ReactView.DoesProvisioning` decorator still has to be present on a blade component in addition to the use of the new module. [See sample usage](https://msazure.visualstudio.com/One/_git/AzureUX-PortalFx?path=%2Fsrc%2FSDK%2FExtensions%2FSamplesExtension%2FExtension%2FClient%2FReact%2FViews%2FCreateCustomRobot.ReactView.tsx&version=GBdev&_a=contents).
 
-<a name="react-views-known-limitations"></a>
+<a name="react-views-beyond-getting-started-styling"></a>
+### Styling
+
+You can use your own CSS classes to customize View to your needs. The sample is located at `<dir>\Client\React\Views\Styling.ReactView.tsx`, with essential steps also included below:
+
+1. Import the `getClassNames` facility:
+
+ ```typescript
+
+import { getClassNames } from "ReactView/Styling";
+
+```
+
+2. Define your classes with custom rules:
+
+ ```typescript
+
+const classNames = getClassNames({
+one: {
+    color: "red",
+    border: "1px solid red",
+},
+two: {
+    color: "purple",
+    border: "1px solid purple",
+},
+three: {
+    color: "green",
+    border: "1px solid green",
+},
+});
+
+```
+
+3. Use the defined classes in your `render` method:
+
+ ```typescript
+
+public render() {
+    return <>
+        <Fabric>
+            <Text className={classNames.one}>{ClientResources.reactStyled}</Text>
+            <Text className={classNames.two}>{ClientResources.hello}</Text>
+            <Text className={classNames.three}>{this.state.name}</Text>
+        </Fabric>
+    </>;
+}
+
+```
+
+#### View padding
+
+View has default padding pre-applied for consistency with other portal experiences. You can apply the `reactview-nodefaultpadding` class to not use the standard padding.
+
 ## Known limitations
 
-<a name="react-views-known-limitations-storage"></a>
 ### Storage
 
 Since the framework controls the home page of React Views, every view shares the same origin, so some limitations have to apply to code they can run for security reasons. One of those limitations is browser storage; since every React View shares the same storage, malicious code could pollute storage for everyone, so access to built-in `localStorage` and `sessionStorage` has been blocked and replaced with identical APIs manipulating in-memory storage. This means code relying on such storage will work and won't throw, but any logic relying on data expected to persist past the view's lifetime will not behave as expected. As for `IndexedDB`, access to it has also been blocked and no in-memory replacement is currently available for it.
 
-<a name="react-views-known-limitations-service-workers"></a>
 ### Service Workers
 
 Similarly to storage limitations, since the framework controls the home page of React Views, every view shares the same origin so Service Workers can't work securely in React Views and the API is blocked.
 
-<a name="react-views-known-limitations-blade-inputs-outputs"></a>
 ### Blade inputs / outputs
 
 React Views handle blade inputs via prop typings; simply add a `parameters` member to your blade component's properties interface and blade-opening APIs will now have the appropriate parameter typings. A current limitation of this is that your `parameters` typings must be fully declared inline, meaning you can't just set that to be an interface or an imported type;
