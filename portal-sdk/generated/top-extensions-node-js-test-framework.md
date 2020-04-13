@@ -137,7 +137,7 @@ describe('Cloud Service Tests', function () {
 Remember to replace "mycloudservice" with the dns name of your actual cloud service.
 Also replace the signInEmail and password values with your test account credentials
 
-**NOTE**: `@microsoft.com` accounts are not supported.
+**NOTE**: MFA-enabled `@microsoft.com` accounts are not supported.
 
 In this test we start by importing the MsPortalFx-Test module. Then the credentials are specified for the user that will sign in to the Portal. These should be the credentials of a user that already has an active Azure subscription.
 

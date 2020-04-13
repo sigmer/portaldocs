@@ -172,13 +172,13 @@ This validation is best done on your web server, gating the response to the HTTP
 ```typescript
 
 // Ensure the Az script is loaded only from the Azure Portal (and isn't some untrusted script).
-const azScriptUrl = req.query && req.query["azscript"];
+const azScriptUrl = req.query && (typeof req.query["azscript"] === "string") && req.query["azscript"] as string;
 if (!isUrlOnTrustedAzurePortalDomain(azScriptUrl, isDevelopmentMode)) {
     return renderError();
 }
 
 // Validate that 'trustedAuthority' is an Azure Portal domain.
-const trustedAuthorityParam = req.query && req.query["trustedAuthority"];
+const trustedAuthorityParam = req.query && (typeof req.query["trustedAuthority"] === "string") && req.query["trustedAuthority"] as string;
 if (!isUrlOnTrustedAzurePortalDomain(trustedAuthorityParam, isDevelopmentMode)) {
     return renderError();
 }
