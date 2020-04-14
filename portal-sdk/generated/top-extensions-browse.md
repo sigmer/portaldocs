@@ -1311,6 +1311,23 @@ import { SvgType } from "Fx/Images";
             },
         },
         {
+            kind: ForAsset.Commands.SelectionCommandKind.ArmCommand,  // Executes ARM bulk operations
+            id: "BulkStart",
+            label: ClientResources.AssetCommands.start,
+            icon: {
+                image: SvgType.Start,
+            },
+            definitions: {
+                "microsoft.test/virtualservers": {
+                    uri: "{resourceid}?api-version=2018-09-01-preview", // The fixed format that starts with {resourceid}
+                },
+            },
+            confirmation: {
+                title: ClientResources.AssetCommands.confirmStartTitle,
+                message: ClientResources.AssetCommands.confirmStartMessage,
+            },
+        },
+        {
             kind: ForAsset.Commands.SelectionCommandKind.MenuSelectionCommand,
             id: "SelectionBasedMenuCommand",
             label: ClientResources.AssetCommands.menuCommand,
