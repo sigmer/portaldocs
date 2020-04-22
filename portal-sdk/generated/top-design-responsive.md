@@ -436,15 +436,15 @@ A small addition for the documentation. Despite mentioning that columns should a
 
 >__Internal implementation note:__ Because Ibiza content isn't hosted in the viewport directly, but in containers, the layout grid was adapted to the Ibiza container width instead of the viewport. This abstraction allows content implementers not to worry if the Ibiza container width is influenced by docked sidebars, menu blade table of content, or other elements impacting the container width.
 
-<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-use-container-size-api-when-the-content-cannot-be-fixed-with-css-or-the-layout-grid-alone"></a>
-#### Use <code>container.size</code> API when the content cannot be fixed with CSS or the layout grid alone
+<a name="responsive-design-with-ibiza-sdk-migrating-content-to-be-responsive-fixing-content-for-responsiveness-use-container-contentsize-api-when-the-content-cannot-be-fixed-with-css-or-the-layout-grid-alone"></a>
+#### Use <code>container.contentSize</code> API when the content cannot be fixed with CSS or the layout grid alone
 
-Some content might need code to be fixed. The `container.size` API exists to support those scenarios.
+Some content might need code to be fixed. The `container.contentSize` API exists to support those scenarios.
 
 ```typescript
 // An example usage of container.size API.
 // Note how it is structured so that changes are applied in an additive way from small to large.
-container.size.subscribe(container, (size) => {
+container.contentSize.subscribe(container, (size) => {
     const width = size.width;
     if (size.width >= 640) {
         // Change behavior at 640px
