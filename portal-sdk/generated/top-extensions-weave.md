@@ -459,17 +459,11 @@ Knockout
 
 Weave
 
-Option 1, use `KoFragment`.
+Option 1, create component wrapper. It's TSX style code with strong typing.
 
-```tsx
-<KoFragment skipSanitization={true}
-    content={{
-        htmlTemplate: `<div data-bind="pcControl: vm"></div>`,
-        viewModel: { vm: vm },
-    }} />
-```
+**Recommended** if this control is rendered in most scenarios (e.g. not inside an `If` which is usually `false`), because this approach introduces direct dependency from your code to control widget.
 
-Option 2, create component wrapper for **migrated controls**.
+For **migrated controls** (rendered by Weave).
 
 ```tsx
 // Sample code from MsPortalImpl.Controls/Fields/TextField.ts
@@ -481,11 +475,11 @@ export const TextField = createControlComponent({
     innerComponent: TextFieldInner /* The component function for inner content of TextField */,
 });
 
-// Use this to replace KoFragment in Option 1
+// Use this to replace root element has PcControl.
 <TextField vm={vm} />
 ```
 
-Option 3, create component wrapper for **unmigrated controls**.
+For **unmigrated controls** (rendered by KO).
 
 ```tsx
 // Sample code from MsPortalImpl.Controls/Controls/Lists/Grid1/Grid1.ts
@@ -493,8 +487,50 @@ import { createControlComponentForKO } from "MsPortalImpl/Weave/Util";
 
 export const Grid1 = createControlComponentForKO({ widgetCtor: Widget /* The Grid1 Widget constructor*/ });
 
-// Use this to replace KoFragment in Option 1
+// Use this to replace root element has PcControl.
 <Grid1 vm={vm} />
+```
+
+Option 2, create lazy component wrapper. It's TSX style code with strong typing, plus lazy loading control widget.
+
+**Recommended** if this control is rarely rendered (e.g. inside an `If` which is usually `false`), because this approach lazy loads control widget when it's first time rendered. It may reduce your initial bundle size.
+
+For **migrated controls** (rendered by Weave).
+
+```tsx
+// Sample code from MsPortalImpl/Weave/LazyControls.ts
+import { createControlLazyComponent } from "MsPortalImpl/Weave/Util";
+
+export const LazyTextBox = createControlLazyComponent(() => MsPortalFx.require("MsPortalImpl.Controls/Fields/TextField"));
+
+// Use this to replace root element has PcControl.
+<LazyTextBox vm={vm} />
+```
+
+For **unmigrated controls** (rendered by KO).
+
+```tsx
+// Sample code from MsPortalImpl/Weave/LazyControls.ts
+import { createControlLazyComponentForKO } from "MsPortalImpl/Weave/Util";
+
+export const LazySection = createControlLazyComponentForKO(() => MsPortalFx.require("MsPortalImpl.Controls/Fields/Section"));
+
+// Use this to replace root element has PcControl.
+<LazySection vm={vm} />
+```
+
+**Note** `MsPortalImpl/Weave/LazyControls.ts` currently contains only a few samples, you can add more if the control you need is not there by following same pattern.
+
+Option 3, use `KoFragment`.
+
+**Not recommended** because no strong typing.
+
+```tsx
+<KoFragment skipSanitization={true}
+    content={{
+        htmlTemplate: `<div data-bind="pcControl: vm"></div>`,
+        viewModel: { vm: vm },
+    }} />
 ```
 
 <a name="weave-migration-caveats"></a>
