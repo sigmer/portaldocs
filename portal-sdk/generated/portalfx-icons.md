@@ -75,7 +75,7 @@ Be sure not to check the generated Svg.ts file in source control, as it updates 
   ```xml
      <AssetType Name="Engine"
                 Text="{Resource engineSearchProviderKey, Module=ClientResources}"
-                Icon="{Resource Content.SamplesExtension.Images.engine, Module=./../Generated/SvgDefinitions}"
+                Icon="{Svg IsLogo=true, File=Content\\SamplesExtension\\Images\\robot.svg}"
                 BladeName="EngineBlade"
                 PartName="EnginePart">
   ```
